@@ -108,7 +108,7 @@ export const editarUsuarioAction = (formDatos) => {
         const { formularioDatos, handleReset, Id } = formDatos
         try {
 
-            const { data } = await AxiosPrivado.put(`/app/usuario/update/${Id}`, formularioDatos);
+          const { data } = await AxiosPrivado.put(`/users/edit-user/${Id}`, formularioDatos);
             dispatch(editarUsuarioExito(data.datos));
 
             if (data.code === 200) {
