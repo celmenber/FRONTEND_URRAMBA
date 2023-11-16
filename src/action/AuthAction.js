@@ -19,7 +19,6 @@ export const loginUser = (Loginform) => {
       const { data } = await AxiosPublico.post('auth/login', Loginform);
       if (data.success === true) {
         const { access_token, access_data } = data.data
-        console.log(data.data)
         localStorage.setItem('currentUser', JSON.stringify(access_data))
         localStorage.setItem('token', access_token)
         dispatch(AuthLoginExito(data.data));
