@@ -16,11 +16,13 @@ export const loginUser = (Loginform) => {
 
     try {
       // insertar en la API
-      const { data } = await AxiosPublico.post('app/auth/login', Loginform);
-      if (data.code === 200) {
-        localStorage.setItem('currentUser', JSON.stringify(data))
-        localStorage.setItem('token', data.token)
-        dispatch(AuthLoginExito(data));
+      const { data } = await AxiosPublico.post('auth/login', Loginform);
+      if (data.success === true) {
+        const { access_token, access_data } = data.data
+        console.log(data.data)
+        localStorage.setItem('currentUser', JSON.stringify(access_data))
+        localStorage.setItem('token', access_token)
+        dispatch(AuthLoginExito(data.data));
         return data
       }
     } catch (error) {

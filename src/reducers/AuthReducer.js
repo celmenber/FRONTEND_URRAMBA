@@ -9,7 +9,7 @@ const {
 } = TYPES
 
 const user = localStorage.getItem('currentUser')
-  ? JSON.parse(localStorage.getItem('currentUser')).usuario
+  ? JSON.parse(localStorage.getItem('currentUser'))
   : ''
 
 const token = localStorage.getItem('currentUser')
@@ -33,7 +33,7 @@ export const AuthReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        userDetails: action.payload.usuario,
+        userDetails: action.payload.access_data,
         token: action.payload.token,
         loading: false,
       }

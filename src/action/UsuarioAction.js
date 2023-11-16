@@ -178,7 +178,7 @@ export const obtenerUsuarioAction = () => {
         dispatch(ObtenerUsuario());
 
         try {
-            const { data } = await AxiosPrivado.get('/app/usuario/all');
+          const { data } = await AxiosPrivado.get('/users/view-user');
 
             if (data.code === 200) {
                 dispatch(obtenerUsuarioExitosa(data.datos))

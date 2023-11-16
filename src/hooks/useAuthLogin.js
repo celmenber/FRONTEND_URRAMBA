@@ -19,25 +19,23 @@ export const AuthLogin = () => {
     const [formValues, handleInputChange] = useForm({})
     const { email, password } = formValues
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.currentTarget
-        
+
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
         } else {
           try {
-             let resp = await EnviologinUser({ email, password })
-  
-              if (resp.code === 200) {history.push('/dashboard') }
+            let resp = await EnviologinUser({ users: email, password })
+            if (resp.success === true) {history.push('/dashboard') }
               setEstatus(resp.response)
-             
+
              } catch (Error) {
               console.log(Error)
               setEstatus(Error)
-            }  
+            }
         }
        setValidated(true)
     }

@@ -39,19 +39,15 @@ const AppHeader = () => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
 
-        {/* <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
-        </CHeaderBrand> */}
-
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <strong>Bienvenido </strong>
-            {`${User.NombreUser} - ${User.NombreTipoUsuario}`}
+            {`${User.NOMBRES} - ${User.USER_ROL}`}
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="">
           <CNavItem>
-            <strong>Usuario</strong>({User.Email})
+            <strong>Usuario</strong>({User.USERNAME})
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">

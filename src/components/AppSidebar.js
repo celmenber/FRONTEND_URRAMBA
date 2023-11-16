@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { CCardImage, CSidebar, CSidebarBrand, CSidebarNav } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+// import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
@@ -19,7 +19,7 @@ import { administrador_nav, Concejo_nav } from '../_nav'
 const AppSidebar = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.change.sidebarShow)
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')).usuario
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
   return (
     <CSidebar
       position="fixed"
@@ -36,9 +36,7 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav
-            items={currentUser.CodTipoUsuario === 1 ? administrador_nav : Concejo_nav}
-          />
+          <AppSidebarNav items={currentUser.ID_ROLL === 1 ? administrador_nav : Concejo_nav} />
         </SimpleBar>
       </CSidebarNav>
     </CSidebar>

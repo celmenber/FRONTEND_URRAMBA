@@ -5,10 +5,10 @@ import DashboardConcejos from './DashboardConcejos'
 
 
 const Dashboard = () => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')).usuario
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
   return (
     <>
-      {currentUser.CodTipoUsuario === 1 ? <DashboardAdmin /> : <DashboardConcejos />}
+      {currentUser.ID_ROLL === 1 ? <DashboardAdmin /> : <DashboardConcejos />}
     </>
   )
 }
