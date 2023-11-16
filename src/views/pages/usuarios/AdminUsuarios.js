@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useEffect } from 'react'
-import AdminUsuariosModalCrear from './AdminUsuariosModal'
-import AdminUsuariosModalActuliza from './AdminUsuariosActModal'
+/* import AdminUsuariosModalCrear from './AdminUsuariosModal'
+import AdminUsuariosModalActuliza from './AdminUsuariosActModal' */
 
 import {
   CRow,
@@ -308,7 +308,7 @@ const AdminUsuarios = () => {
         </CCard>
       </CCol>
      
-      <AdminUsuariosModalCrear
+      {/* <AdminUsuariosModalCrear
           visibleNUS={visibleNUS}
           setVisibleNUS={setVisibleNUS}
           setParquesCodigo={setParquesCodigo}
@@ -321,7 +321,7 @@ const AdminUsuarios = () => {
          datoUsuario={datoUsuario}
          setDatoUsuario={setDatoUsuario}
          onChangeFormulario={onChangeFormulario}
-        />
+        /> */}
     </CRow>
   )
 }

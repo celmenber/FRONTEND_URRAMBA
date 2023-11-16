@@ -21,13 +21,13 @@ const administrador_nav = [
   {
     component: CNavGroup,
     name: 'Configuración',
-    to: '/Usuarios',
+    to: '/dashboard',
     icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Admin Usuarios',
-        to: '/usuarios/adminUsuarios',
+        to: '/dashboard',
       },
     ],
   },
