@@ -36,7 +36,7 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={currentUser.ID_ROLL === 1 ? administrador_nav : Concejo_nav} />
+          <AppSidebarNav items={currentUser.ID_ROLL === '1' ? administrador_nav : Concejo_nav} />
         </SimpleBar>
       </CSidebarNav>
     </CSidebar>

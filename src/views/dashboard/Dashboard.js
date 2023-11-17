@@ -8,7 +8,7 @@ const Dashboard = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
   return (
     <>
-      {currentUser.ID_ROLL === 1 ? <DashboardAdmin /> : <DashboardConcejos />}
+      {currentUser.ID_ROLL === '1' ? <DashboardAdmin /> : <DashboardConcejos />}
     </>
   )
 }
