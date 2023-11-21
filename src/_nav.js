@@ -4,14 +4,9 @@ import CIcon from '@coreui/icons-react'
 import {
   cilHome,
   cilCog,
-  cilPuzzle,
-  cilSpeedometer,
-  cilBarChart,
-  cilFactory,
-  cilBuilding,
   cilSpeech,
 } from '@coreui/icons'
-import { CNavItem, CNavGroup, CNavTitle } from '@coreui/react'
+import { CNavItem, CNavGroup } from '@coreui/react'
 
 const administrador_nav = [
   {
@@ -35,7 +30,7 @@ const administrador_nav = [
       {
         component: CNavItem,
         name: 'Jefe de Hogar',
-        to: '/familias/jefe',
+        to: '/familias/jefehogar',
       },
       {
         component: CNavItem,

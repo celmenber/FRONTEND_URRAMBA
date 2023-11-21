@@ -6,7 +6,6 @@ import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 const Asociaciones = () => {
     const [visible, setVisible] = useState(false)
-    const [modal, setModal] = useState(false)
 
     const EliminarUsuarios = id => {
         Swal.fire({
@@ -136,14 +135,14 @@ const Asociaciones = () => {
                         <CListGroup flush>
                             <CListGroupItem>
                                 <CCardTitle className="text-medium-emphasis d-flex justify-content-between align-items-center">
-                                    Nombre de la Asociación
+                                    Asociación de Afrodecendientes de Urramba
                                     <div className="d-flex align-items-center">
                                         <CButton variant='ghost'>Reiniciar Clave</CButton>
                                         <CButton color="primary" variant="ghost">Editar</CButton>
                                         <CButton color="primary" variant="ghost" onClick={EliminarUsuarios}>Eliminar</CButton>
                                     </div>
                                 </CCardTitle>
-                                <CCardSubtitle>Nit: xxxxxxxxxx</CCardSubtitle>
+                                <CCardSubtitle>Nit. 900.812.074-4</CCardSubtitle>
                             </CListGroupItem>
                         </CListGroup>
                     </CCard>
