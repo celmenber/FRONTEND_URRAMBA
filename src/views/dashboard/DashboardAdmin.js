@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { lazy } from 'react'
+import React from 'react'
 import {
     CCard,
     CCardBody
@@ -13,8 +13,10 @@ const DashboardParques = () => {
         <>
             <CCard className="mb-4">
                 <CCardBody>
+                    
                    {/*  <WidgetsParque /> */}
                 </CCardBody>
+                
                 {/* <CCardBody>
                     <WidgetsReserva />
                 </CCardBody> */}

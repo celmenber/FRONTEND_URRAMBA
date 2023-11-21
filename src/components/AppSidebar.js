@@ -14,12 +14,24 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
-import { administrador_nav, Concejo_nav } from '../_nav'
+import { administrador_nav, operadores_nav, encuestadores_nav } from '../_nav'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.change.sidebarShow)
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+  let items
+  switch (currentUser.ID_ROLL) {
+    case '1':
+      items = administrador_nav
+      break
+    case '2':
+      items = operadores_nav
+      break
+    default:
+      items = encuestadores_nav
+      break
+  }
   return (
     <CSidebar
       position="fixed"
@@ -36,7 +48,7 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={currentUser.ID_ROLL === '1' ? administrador_nav : Concejo_nav} />
+          <AppSidebarNav items={items} />
         </SimpleBar>
       </CSidebarNav>
     </CSidebar>
