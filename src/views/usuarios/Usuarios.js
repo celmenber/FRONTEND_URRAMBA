@@ -23,9 +23,7 @@ import {
   CCardTitle,
   CCol,
   CForm,
-  CFormFloating,
   CFormInput,
-  CFormLabel,
   CFormSelect,
   CNav,
   CProgress,
@@ -156,11 +154,16 @@ const Usuarios = () => {
             <CForm sm className="row g-3">
               <CCardBody>
                 <CRow className="mb-0">
-                  <CCol xs={12} sm={7}>
-                    <CFormFloating className="mb-1 p-0">
-                      <CFormInput type="text" id="floatingInput" placeholder="Juan Torres" />
-                      <CFormLabel htmlFor="floatingInput">Nombre</CFormLabel>
-                    </CFormFloating>
+                  <CCol xs={12} sm={6}>
+                    <CForm>
+                      <CFormInput
+                      className='mb-2'
+                        type="text"
+                        id="FormControlInputName"
+                        placeholder="Nombre"
+                        aria-describedby="FormControlInputNameHelpInline"
+                      />
+                    </CForm>
                   </CCol>
                   <CCol xs={12} sm={3}>
                     <CFormSelect aria-label="Default select example">
@@ -170,24 +173,26 @@ const Usuarios = () => {
                     </CFormSelect>
                   </CCol>
                   <CCol xs={12} sm={6}>
-                    <CFormFloating className="mb-2">
-                      <CFormInput
-                        size="md"
+                    <CFormInput
+                      className='mb-2'
                         type="email"
-                        id="floatingInput"
-                        placeholder="name@example.com"
+                        id="exampleFormControlInput1"
+                        placeholder="Correo Electrónico"
+                        aria-describedby="exampleFormControlInputHelpInline"
                       />
-                      <CFormLabel htmlFor="floatingInput">Correo Electrónico</CFormLabel>
-                    </CFormFloating>
                   </CCol>
 
-                  <CCol xs={12} sm={6}>
-                    <CFormFloating>
-                      <CFormInput type="password" id="floatingPassword" placeholder="Password" />
-                      <CFormLabel htmlFor="exampleFormControlTextarea1">Contraseña</CFormLabel>
-                    </CFormFloating>
+                  <CCol xs={12} sm={4}>
+                    
+                  <CFormInput
+                      className='mb-2'
+                        type="password"
+                        id="exampleFormControlInput1"
+                        placeholder="Password"
+                        aria-describedby="exampleFormControlInputHelpInline"
+                      />
                   </CCol>
-                  <CCol xs={12} sm={12} className="p-0">
+                  <CCol xs={12} sm={12} className="p-0 mt-2">
                     <CRow className="justify-content-center g-3">
                       <CCol xs className="text-end">
                         <CButton type="reset" className="mr-1 align-">
@@ -233,9 +238,9 @@ const Usuarios = () => {
                       </div>
                     </CTableDataCell>
                     <CTableDataCell className="text-center">
-                    <div>{item.user.cc}</div>
+                      <div>{item.user.cc}</div>
                     </CTableDataCell>
-                    
+
                     <CTableDataCell className="text-center">
                       <CIcon size="xl" icon={item.payment.icon} />
                     </CTableDataCell>
