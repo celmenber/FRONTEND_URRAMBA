@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useEffect } from 'react'
-/* import AdminUsuariosModalCrear from './AdminUsuariosModal'
-import AdminUsuariosModalActuliza from './AdminUsuariosActModal' */
+import AdminUsuariosModalCrear from './AdminUsuariosModal'
+import AdminUsuariosModalActuliza from './AdminUsuariosActModal'
 
 import {
   CRow,
@@ -82,11 +82,11 @@ const AdminUsuarios = () => {
     obtenerUsuario();
     // eslint-disable-next-line
   }, []);
-  
+
 
   useEffect(() => {
     console.log(parquesone?.ParqueId);
-   
+
     let Data
     if (parquesCodigo === 0) {
       Data = usuariolista?.filter(U => U.ParqueId === parquesone?.ParqueId)
@@ -102,13 +102,13 @@ const AdminUsuarios = () => {
     setSelectActivar(true)
     setSelectServicio(id)
     UpdateUserEstado(id)
-  }); 
+  });
 
   //console.log(parquesCodigo);
-  
+
   return (
     <CRow>
-      <CCol xs={12}>
+      <CCol>
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Gestión</strong> <small>Servicios Parques</small>
@@ -202,7 +202,7 @@ const AdminUsuarios = () => {
                                         color={item.Estado === true ? 'secondary' : 'success'}
                                         style={{ 'width': '100%' }}
                                         timeout={2000}
-                                      > 
+                                      >
                                       </CLoadingButton>
                                     ) : (
                                       <CButton
@@ -260,7 +260,7 @@ const AdminUsuarios = () => {
                                     </CButton></CTooltip>
                                 </div>
                               </CTableDataCell>
-                              
+
                               <CTableDataCell>
                                 <div className="small text-medium-emphasis">
                                   <CTooltip
@@ -277,7 +277,7 @@ const AdminUsuarios = () => {
                                     </CButton></CTooltip>
                                 </div>
                               </CTableDataCell>
-                        
+
                               <CTableDataCell>
                                 <div className="small text-medium-emphasis">
                                   <CTooltip
@@ -307,8 +307,8 @@ const AdminUsuarios = () => {
           </CCardBody>
         </CCard>
       </CCol>
-     
-      {/* <AdminUsuariosModalCrear
+
+      <AdminUsuariosModalCrear
           visibleNUS={visibleNUS}
           setVisibleNUS={setVisibleNUS}
           setParquesCodigo={setParquesCodigo}
@@ -321,7 +321,7 @@ const AdminUsuarios = () => {
          datoUsuario={datoUsuario}
          setDatoUsuario={setDatoUsuario}
          onChangeFormulario={onChangeFormulario}
-        /> */}
+        />
     </CRow>
   )
 }
