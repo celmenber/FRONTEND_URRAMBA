@@ -22,13 +22,13 @@ const WidgetsDropdown = () => {
           color="primary"
           value={
             <>
-              4.4K{' '}
+              2.651{' '}
               <span className="fs-6 fw-normal">
-                (52.1% <CIcon icon={cilArrowBottom} />)
+                (<CIcon icon={cilArrowTop} />)
               </span>
             </>
           }
-          title="Mujeres"
+          title="Familias"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -109,13 +109,13 @@ const WidgetsDropdown = () => {
           color="info"
           value={
             <>
-              4143{' '}
+              4.420{' '}
               <span className="fs-6 fw-normal">
                 (48.9% <CIcon icon={cilArrowTop} />)
               </span>
             </>
           }
-          title="Hombres"
+          title="Mujeres"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -195,13 +195,13 @@ const WidgetsDropdown = () => {
           color="warning"
           value={
             <>
-              2.49{' '}
+              4.143{' '}
               <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
               </span>
             </>
           }
-          title="Conversion Rate"
+          title="Hombres"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -268,13 +268,13 @@ const WidgetsDropdown = () => {
           color="danger"
           value={
             <>
-              44K{' '}
+              8.563{' '}
               <span className="fs-6 fw-normal">
                 (-23.6% <CIcon icon={cilArrowBottom} />)
               </span>
             </>
           }
-          title="Sessions"
+          title="Total de personas"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">

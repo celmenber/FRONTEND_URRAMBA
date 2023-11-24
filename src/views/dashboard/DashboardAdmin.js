@@ -1,35 +1,31 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import {
-    CCard,
-    CCardBody
-    } from '@coreui/react'
+import { CCard, CCardBody } from '@coreui/react'
 import WidgetsDropdown from '../widget/WidgetsDropdown'
-import WidgetsProgress from '../widget/WidgetsProgress'
+import WidgetBarChart from '../widget/WidgetBarChart'
 
 // const WidgetsParque = lazy(() => import('../widgets/WidgetsParques.js'))
 //const WidgetsReserva = lazy(() => import('../widgets/WidgetsReservas.js'))
 
 const DashboardParques = () => {
-    return (
-        <>
-            <CCard className="mb-4">
+  return (
+    <>
+      <CCard className="mb-4">
+        <CCardBody>
+          <WidgetsDropdown />
+        </CCardBody>
 
-                <CCardBody>
-                    <WidgetsDropdown />
-                    <WidgetsProgress/>
-                </CCardBody>
+        <CCardBody>
+          <WidgetBarChart />
+        </CCardBody>
 
-
-                <CCardBody>
-                   {/*  <WidgetsParque /> */}
-                </CCardBody>
-                {/* <CCardBody>
+        <CCardBody>{/*  <WidgetsParque /> */}</CCardBody>
+        {/* <CCardBody>
                     <WidgetsReserva />
                 </CCardBody> */}
-            </CCard>
-        </>
-    )
+      </CCard>
+    </>
+  )
 }
 
 export default DashboardParques

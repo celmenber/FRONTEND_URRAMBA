@@ -12,6 +12,8 @@ import {
   cifIn,
   cifPl,
   cifUs,
+  cilLockLocked,
+  cilLockUnlocked,
   cilPeople,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
@@ -21,13 +23,11 @@ import {
   CCard,
   CCardBody,
   CCardTitle,
-  CCol,
+  CContainer,
   CForm,
   CFormInput,
-  CFormSelect,
   CNav,
-  CProgress,
-  CRow,
+  CNavItem,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -35,17 +35,33 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
+import Modal from '../modals/Modal'
+import FormUsuarios from '../form/FormUsuarios'
+
 const Usuarios = () => {
+  const [estado, setEstado] = useState(true)
+  const [modal, setModal] = useState(false)
+
+  const toggleEstado = () => {
+    setEstado(!estado)
+  }
+
+  const toggleModal = (isOpen) => {
+    setModal(isOpen)
+  }
+
   const tableExample = [
     {
       avatar: { src: avatar, status: 'success' },
       user: {
         name: 'Jose Alvarez',
         cc: '26.589.362',
+        username: 'jalvarez',
+        perfil: 'admin',
         new: true,
-        registered: 'Jan 1, 2021',
+        estado: true,
       },
       country: { name: 'USA', flag: cifUs },
       usage: {
@@ -60,9 +76,12 @@ const Usuarios = () => {
       avatar: { src: avatar, status: 'danger' },
       user: {
         name: 'Leonel Tarantini',
-        cc: '26.589.362',
+        cc: '26.589.363',
+        username: 'Leotar',
+        perfil: 'admin',
         new: false,
         registered: 'Jan 1, 2021',
+        estado: false,
       },
       country: { name: 'Brazil', flag: cifBr },
       usage: {
@@ -75,7 +94,15 @@ const Usuarios = () => {
     },
     {
       avatar: { src: avatar, status: 'warning' },
-      user: { name: 'Eddy Solano', cc: '26.589.362', new: true, registered: 'Jan 1, 2021' },
+      user: {
+        name: 'Eddy Solano',
+        cc: '26.589.364',
+        username: 'eddysol',
+        perfil: 'operador',
+        new: true,
+        registered: 'Jan 1, 2021',
+        estado: true,
+      },
       country: { name: 'India', flag: cifIn },
       usage: {
         value: 74,
@@ -87,7 +114,15 @@ const Usuarios = () => {
     },
     {
       avatar: { src: avatar, status: 'secondary' },
-      user: { name: 'Pedro Fernandez', cc: '26.589.362', new: true, registered: 'Jan 1, 2021' },
+      user: {
+        name: 'Pedro Fernandez',
+        cc: '26.589.366',
+        username: 'PedroF',
+        perfil: 'admin',
+        new: true,
+        registered: 'Jan 1, 2021',
+        estado: true,
+      },
       country: { name: 'France', flag: cifFr },
       usage: {
         value: 98,
@@ -101,9 +136,12 @@ const Usuarios = () => {
       avatar: { src: avatar, status: 'success' },
       user: {
         name: 'Luisa Ceballos',
-        cc: '26.589.362',
+        cc: '26.589.367',
+        username: 'LuCeballos',
+        perfil: 'operador',
         new: true,
         registered: 'Jan 1, 2021',
+        estado: false,
       },
       country: { name: 'Spain', flag: cifEs },
       usage: {
@@ -118,9 +156,12 @@ const Usuarios = () => {
       avatar: { src: avatar, status: 'danger' },
       user: {
         name: 'Federman Pacheco',
-        cc: '26.589.362',
+        cc: '26.589.368',
+        username: 'ferpacheco',
+        perfil: 'operador',
         new: true,
         registered: 'Jan 1, 2021',
+        estado: true,
       },
       country: { name: 'Poland', flag: cifPl },
       usage: {
@@ -134,138 +175,115 @@ const Usuarios = () => {
   ]
   return (
     <>
-      <CCard className="mb-4 p-4">
-        <CCard className="mb-2 p-2">
-          <CCard className="mb-1">
-            <CNav expand="lg" colorScheme="light" className="bg-light">
-              <CCardBody>
-                <div className="d-flex justify-content-between align-items-center">
-                  <CCardTitle>Usuarios</CCardTitle>
-                  <CForm className="d-flex">
-                    <CFormInput type="search" className="me-2" placeholder="Buscar Usuarios" />
-                    <CButton type="submit" color="success" variant="outline">
-                      Buscar
-                    </CButton>
-                  </CForm>
-                </div>
-              </CCardBody>
-            </CNav>
-
-            <CForm sm className="row g-3">
-              <CCardBody>
-                <CRow className="mb-0">
-                  <CCol xs={12} sm={6}>
-                    <CForm>
-                      <CFormInput
-                      className='mb-2'
-                        type="text"
-                        id="FormControlInputName"
-                        placeholder="Nombre"
-                        aria-describedby="FormControlInputNameHelpInline"
-                      />
-                    </CForm>
-                  </CCol>
-                  <CCol xs={12} sm={3}>
-                    <CFormSelect aria-label="Default select example">
-                      <option>Rol</option>
-                      <option value="1">Administrador</option>
-                      <option value="2">Operador</option>
-                    </CFormSelect>
-                  </CCol>
-                  <CCol xs={12} sm={6}>
-                    <CFormInput
-                      className='mb-2'
-                        type="email"
-                        id="exampleFormControlInput1"
-                        placeholder="Correo Electrónico"
-                        aria-describedby="exampleFormControlInputHelpInline"
-                      />
-                  </CCol>
-
-                  <CCol xs={12} sm={4}>
-                    
-                  <CFormInput
-                      className='mb-2'
-                        type="password"
-                        id="exampleFormControlInput1"
-                        placeholder="Password"
-                        aria-describedby="exampleFormControlInputHelpInline"
-                      />
-                  </CCol>
-                  <CCol xs={12} sm={12} className="p-0 mt-2">
-                    <CRow className="justify-content-center g-3">
-                      <CCol xs className="text-end">
-                        <CButton type="reset" className="mr-1 align-">
-                          Limpiar
+      <CContainer>
+        <CCard className="mb-4 p-4">
+          <CCard className="mb-2 p-2">
+            <CCard className="mb-1">
+              <CNav expand="lg" colorScheme="light" className="bg-light">
+                <CCardBody>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <CCardTitle>Usuarios</CCardTitle>
+                    <CNav>
+                      <CNavItem className="d-flex align-items-center">
+                        <CButton
+                          variant=""
+                          color="info"
+                          onClick={toggleModal}
+                          className="d-flex align-items-center"
+                        >
+                          Nuevo Usuario
                         </CButton>
-                      </CCol>
-                      <CCol xs>
-                        <CButton type="submit">Guardar</CButton>
-                      </CCol>
-                    </CRow>
-                  </CCol>
-                </CRow>
-              </CCardBody>
-            </CForm>
-          </CCard>
+                      </CNavItem>
+                    </CNav>
+                    <CForm className="d-flex">
+                      <CFormInput
+                        size="sm"
+                        type="search"
+                        className="me-1"
+                        placeholder="Buscar Usuarios"
+                      />
+                      <CButton
+                        className="mr-2"
+                        size="sm"
+                        type="submit"
+                        color="success"
+                        variant="outline"
+                      >
+                        Buscar
+                      </CButton>
+                    </CForm>
+                  </div>
+                </CCardBody>
+              </CNav>
+            </CCard>
 
-          <CCard className="p-2">
-            <CTable align="middle" className="mb-0 border" hover responsive>
-              <CTableHead color="light">
-                <CTableRow>
-                  <CTableHeaderCell className="text-center">
-                    <CIcon icon={cilPeople} />
-                  </CTableHeaderCell>
-                  <CTableHeaderCell>Usuario</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Edad</CTableHeaderCell>
-                  <CTableHeaderCell>Usage</CTableHeaderCell>
+            <Modal
+              visible={modal}
+              closeModal={() => toggleModal(false)}
+              title="Nuevo Usuario"
+              content={
+                <>
+                  <FormUsuarios />
+                </>
+              }
+              onSave={() => {
+                // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
+              }}
+            />
 
-                  <CTableHeaderCell>Actividad</CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {tableExample.map((item, index) => (
-                  <CTableRow v-for="item in tableItems" key={index}>
-                    <CTableDataCell className="text-center">
-                      <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div>{item.user.name}</div>
-                      <div className="small text-medium-emphasis">
-                        <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
-                        {item.user.registered}
-                      </div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      <div>{item.user.cc}</div>
-                    </CTableDataCell>
+            <CCard className="p-2">
+              <CTable align="middle" className="mb-0 border" hover responsive>
+                <CTableHead color="light">
+                  <CTableRow>
+                    <CTableHeaderCell className="text-center">
+                      <CIcon icon={cilPeople} />
+                    </CTableHeaderCell>
+                    <CTableHeaderCell>Usuario</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Estado</CTableHeaderCell>
+                    <CTableHeaderCell>Nombre Usuario</CTableHeaderCell>
 
-                    <CTableDataCell className="text-center">
-                      <CIcon size="xl" icon={item.payment.icon} />
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div className="clearfix">
-                        <div className="float-start">
-                          <strong>{item.usage.value}%</strong>
-                        </div>
-                        <div className="float-end">
-                          <small className="text-medium-emphasis">{item.usage.period}</small>
-                        </div>
-                      </div>
-                      <CProgress thin color={item.usage.color} value={item.usage.value} />
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div className="small text-medium-emphasis">Last login</div>
-                      <strong>{item.activity}</strong>
-                    </CTableDataCell>
+                    <CTableHeaderCell>Perfil</CTableHeaderCell>
                   </CTableRow>
-                ))}
-              </CTableBody>
-            </CTable>
+                </CTableHead>
+                <CTableBody>
+                  {tableExample.map((item, index) => (
+                    <CTableRow v-for="item in tableItems" key={index}>
+                      <CTableDataCell className="text-center">
+                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <div>{item.user.name}</div>
+                        <div className="small text-medium-emphasis">
+                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
+                          {item.user.registered}
+                        </div>
+                      </CTableDataCell>
+                      <CTableDataCell className="text-center">
+                        <div>{item.user.cc}</div>
+                      </CTableDataCell>
+
+                      <CTableDataCell className="text-center">
+                        {!item.user.estado ? (
+                          <CButton variant="ghost" onClick={toggleEstado}>
+                            <CIcon size="xl" icon={cilLockUnlocked} />
+                          </CButton>
+                        ) : (
+                          <CButton variant="ghost" onClick={toggleEstado}>
+                            <CIcon size="xl" icon={cilLockLocked} />
+                          </CButton>
+                        )}
+                      </CTableDataCell>
+                      <CTableDataCell>{item.user.username}</CTableDataCell>
+                      <CTableDataCell>{item.user.perfil}</CTableDataCell>
+                    </CTableRow>
+                  ))}
+                </CTableBody>
+              </CTable>
+            </CCard>
           </CCard>
         </CCard>
-      </CCard>
+      </CContainer>
     </>
   )
 }

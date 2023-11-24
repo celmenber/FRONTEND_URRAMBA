@@ -1,17 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilHome,
-  cilCog,
-  cilSpeech,
-} from '@coreui/icons'
+import { cilHome, cilCog, cilSpeech } from '@coreui/icons'
 import { CNavItem, CNavGroup } from '@coreui/react'
 
 const administrador_nav = [
   {
     component: CNavItem,
-    name: 'Inicio',
+    name: 'INICIO',
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
@@ -23,7 +19,7 @@ const administrador_nav = [
   },
   {
     component: CNavGroup,
-    name: 'Familias',
+    name: 'FAMILIAS',
     to: '/familias',
     icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
     items: [
@@ -46,7 +42,7 @@ const administrador_nav = [
   },
   {
     component: CNavGroup,
-    name: 'Configuración',
+    name: 'CONFIGURACIÓN',
     to: '/dashboard/admin',
     icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
     items: [
@@ -76,7 +72,6 @@ const operadores_nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
-  
 ]
 
 const encuestadores_nav = [
@@ -86,7 +81,6 @@ const encuestadores_nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
-  
 ]
 
 export { administrador_nav, operadores_nav, encuestadores_nav }
