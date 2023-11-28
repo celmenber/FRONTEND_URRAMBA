@@ -72,7 +72,7 @@ const AdminUsuarios = () => {
   }
 
   //console.log(parquesCodigo);
-  console.log(usuariodetalle)
+  console.log(usuariolista.data)
 
   return (
     <CRow>
@@ -134,7 +134,7 @@ const AdminUsuarios = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-                    usuariodetalle?.Data?.map((item, index) => (
+                      usuariolista?.map((item, index) => (
                       <CTableRow v-for="item in tableItems" key={index}>
                         <CTableDataCell className="text-center">
                           <CAvatar
@@ -150,7 +150,7 @@ const AdminUsuarios = () => {
                               content={item.Estado === true ? 'Desactivar' : 'Activar'}
                               placement="bottom"
                             >
-                              {selectServicio === item.UsuarioId && selectActivar === true ? (
+                                {selectServicio === item.ID_USER && selectActivar === true ? (
                                 <CLoadingButton
                                   variant="outline"
                                   size="lg"
@@ -163,10 +163,10 @@ const AdminUsuarios = () => {
                                   size="lg"
                                   color={item.Estado === true ? 'success' : 'secondary'}
                                   style={{ width: '100%' }}
-                                  id={`estado${item.UsuarioId}`}
-                                  key={item.UsuarioId}
-                                  disabled={item.Perfil.CodigoPerfil === 0 ? true : false}
-                                  onClick={() => handleSelectEst(item.UsuarioId)}
+                                      id={`estado${item.ID_USER}`}
+                                      key={item.ID_USER}
+                                      disabled={item.ID_ROLL === 0 ? true : false}
+                                      onClick={() => handleSelectEst(item.ID_USER)}
                                 >
                                   {item.Estado === true ? (
                                     <CIcon icon={cilLockUnlocked} size="lg" />
@@ -182,20 +182,20 @@ const AdminUsuarios = () => {
                           <div>
                             <span>
                               {' '}
-                              <strong>{item.Email}</strong>
+                                <strong>{item.USERNAME}</strong>
                             </span>
                             <small style={{ marginLeft: '5px' }}>
-                              {item.Nombres} {item.Apellidos}
+                                {item.USERNAME} {'item.USERNAME'}
                             </small>
                           </div>
                           <div className="small text-medium-emphasis">
-                            <span>{item.TipoUsuario.NombreTipoUsuario}</span> |{' '}
-                            <span> C.C {item.Documento}</span>
+                              <span>{item.ID_ROLL}</span> |{' '}
+                            <span> C.C {'item.Documento'}</span>
                           </div>
                         </CTableDataCell>
 
                         <CTableDataCell className="text-center">
-                          <h5>{item.Perfil.NombrePerfil}</h5>
+                          <h5>{'item.Perfil.NombrePerfil'}</h5>
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Último login</div>
@@ -226,7 +226,7 @@ const AdminUsuarios = () => {
                                 color="info"
                                 variant="outline"
                                 size="lg"
-                                onClick={() => EditaUsuarios(item.UsuarioId)}
+                                  onClick={() => EditaUsuarios(item.ID_USER)}
                               >
                                 {'Editar'}
                               </CButton>
@@ -242,8 +242,8 @@ const AdminUsuarios = () => {
                                 color="danger"
                                 variant="outline"
                                 size="lg"
-                                disabled={item.Perfil.CodigoPerfil === 0 ? true : false}
-                                onClick={() => EliminarUsuarios(item.UsuarioId)}
+                                  disabled={item.ESTADO === 0 ? true : false}
+                                  onClick={() => EliminarUsuarios(item.ID_USER)}
                               >
                                 <CIcon icon={cilTrash} size="lg" />
                               </CButton>

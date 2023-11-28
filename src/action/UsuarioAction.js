@@ -162,10 +162,11 @@ export const obtenerUsuarioAction = () => {
 
     try {
       const { data } = await AxiosPrivado.get('/users/view-user')
-      console.log(data.success)
+
 
       if (data.success === true) {
-        dispatch(obtenerUsuarioExitosa(data.datos))
+        console.log(data.data)
+        dispatch(obtenerUsuarioExitosa(data.data))
       }
     } catch (error) {
       console.log(error)
