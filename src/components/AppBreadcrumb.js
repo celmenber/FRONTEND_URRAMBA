@@ -9,6 +9,7 @@ const AppBreadcrumb = () => {
   const currentLocation = useLocation().pathname
 
   const getRouteName = (pathname, routes) => {
+    // eslint-disable-next-line array-callback-return
     const currentRoute = routes.find((route) => {
       //console.log(route.path, '===', pathname)
       // eslint-disable-next-line no-unused-expressions
