@@ -13,7 +13,7 @@ const administrador_nav = [
   },
   {
     component: CNavItem,
-    name: 'Concejos Comunitarios',
+    name: 'CONCEJO COMUNITARIO',
     to: '/concejos',
     icon: <CIcon icon={cilSpeech} customClassName="nav-icon" />,
   },

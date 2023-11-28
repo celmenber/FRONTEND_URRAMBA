@@ -19,9 +19,8 @@ import {
   CButton,
   CCard,
   CCardBody,
-  CCardTitle,
-  CNav,
-  CNavItem,
+  CCardHeader,
+  CContainer,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -33,6 +32,7 @@ import React, { useState } from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import Modal from '../modals/Modal'
 import FormJefeHogar from '../form/FormJefeHogar'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 const JefeHogar = () => {
   const [modal, setModal] = useState(false)
   const tableExample = [
@@ -121,95 +121,87 @@ const JefeHogar = () => {
   }
   return (
     <>
-      <CCard className="mb-4 p-4">
-        <CCard className="mb-2 p-2">
-          <CCard className="mb-1 shadow-sm">
-            <CNav expand="lg" colorScheme="light" className="bg-light">
-              <CCardBody className="d-flex justify-content-between align-items-center">
-                <CCardTitle>Jefes de Hogar</CCardTitle>
-                <CNav>
-                  <CNavItem className="d-flex align-items-center">
-                    <CButton
-                      variant=""
-                      color="info"
-                      onClick={toggleModal}
-                      className="d-flex align-items-center"
-                    >
-                      Nuevo
-                    </CButton>
-                  </CNavItem>
-                </CNav>
-              </CCardBody>
-            </CNav>
-          </CCard>
+      <CContainer fluid>
+        <CCard>
+          <CCardHeader className="d-flex justify-content-between align-items-center">
+            <div className="">
+              <strong>Familias</strong> <small className="align-items-end">Jefes de Hogar</small>
+            </div>
+            <CButton size="sm" className="ml-auto">
+              Nuevo JefeHogar
+            </CButton>
+          </CCardHeader>
+          <CCardBody>
+            <Modal
+              visible={modal}
+              closeModal={() => toggleModal(false)}
+              title="Nuevo Jefe de Hogar"
+              content={
+                <>
+                  <FormJefeHogar />
+                </>
+              }
+              onSave={() => {
+                // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
+              }}
+            />
 
-          <Modal
-            visible={modal}
-            closeModal={() => toggleModal(false)}
-            title="Nuevo Jefe de Hogar"
-            content={
-              <>
-                <FormJefeHogar />
-              </>
-            }
-            onSave={() => {
-              // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
-            }}
-          />
-
-          <CTable align="middle" className="mb-0 border" hover responsive>
-            <CTableHead color="light">
-              <CTableRow>
-                <CTableHeaderCell className="text-center">
-                  <CIcon icon={cilPeople} />
-                </CTableHeaderCell>
-                <CTableHeaderCell>Usuario</CTableHeaderCell>
-                <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
-                <CTableHeaderCell className="text-center">Estado</CTableHeaderCell>
-                <CTableHeaderCell>Nombre Usuario</CTableHeaderCell>
-                <CTableHeaderCell>Perfil</CTableHeaderCell>
-                <CTableHeaderCell></CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody>
-              {tableExample.map((item, index) => (
-                <CTableRow v-for="item in tableItems" key={index}>
-                  <CTableDataCell className="text-center">
-                    <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <div>{item.user.name}</div>
-                    <div className="small text-medium-emphasis">
-                      <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
-                      {item.user.registered}
-                    </div>
-                  </CTableDataCell>
-                  <CTableDataCell className="text-center">
-                    <div>{item.user.cc}</div>
-                  </CTableDataCell>
-
-                  <CTableDataCell className="text-center">
-                    {!item.user.estado ? (
-                      <CButton variant="ghost">
-                        <CIcon size="xl" icon={cilLockUnlocked} />
-                      </CButton>
-                    ) : (
-                      <CButton variant="ghost">
-                        <CIcon size="xl" icon={cilLockLocked} />
-                      </CButton>
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>{item.user.username}</CTableDataCell>
-                  <CTableDataCell>{item.user.perfil}</CTableDataCell>
-                  <CTableDataCell>
-                    <CButton variant="outline">Nucleo</CButton>
-                  </CTableDataCell>
+            <CTable align="middle" className="mb-0 border" hover responsive>
+              <CTableHead color="light">
+                <CTableRow>
+                  <CTableHeaderCell className="text-center">
+                    <CIcon icon={cilPeople} />
+                  </CTableHeaderCell>
+                  <CTableHeaderCell>Usuario</CTableHeaderCell>
+                  <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
+                  <CTableHeaderCell className="text-center">Estado</CTableHeaderCell>
+                  <CTableHeaderCell>Nombre Usuario</CTableHeaderCell>
+                  <CTableHeaderCell>Perfil</CTableHeaderCell>
+                  <CTableHeaderCell></CTableHeaderCell>
                 </CTableRow>
-              ))}
-            </CTableBody>
-          </CTable>
+              </CTableHead>
+              <CTableBody>
+                {tableExample.map((item, index) => (
+                  <CTableRow v-for="item in tableItems" key={index}>
+                    <CTableDataCell className="text-center">
+                      <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div>{item.user.name}</div>
+                      <div className="small text-medium-emphasis">
+                        <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
+                        {item.user.registered}
+                      </div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div>{item.user.cc}</div>
+                    </CTableDataCell>
+
+                    <CTableDataCell className="text-center">
+                      {!item.user.estado ? (
+                        <CButton variant="ghost">
+                          <CIcon size="xl" icon={cilLockUnlocked} />
+                        </CButton>
+                      ) : (
+                        <CButton variant="ghost">
+                          <CIcon size="xl" icon={cilLockLocked} />
+                        </CButton>
+                      )}
+                    </CTableDataCell>
+                    <CTableDataCell>{item.user.username}</CTableDataCell>
+                    <CTableDataCell>{item.user.perfil}</CTableDataCell>
+                    <CTableDataCell>
+                      <Link to="/familias/nucleo" /* to={`/nucleos/${id}`} */>
+                        <CButton variant="outline">Detalles</CButton>
+                      </Link>
+                    </CTableDataCell>
+                  </CTableRow>
+                ))}
+              </CTableBody>
+            </CTable>
+          </CCardBody>
         </CCard>
-      </CCard>
+      </CContainer>
     </>
   )
 }

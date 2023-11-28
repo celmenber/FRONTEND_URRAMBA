@@ -174,7 +174,7 @@ const NucleosFamiliares = () => {
                 <CForm sm className="row g-0">
                   <CCardBody>
                     <CRow>
-                      <CCol xs={12} md={6}>
+                      <CCol xs={12} md={8} className="mx-auto">
                         <CFormInput
                           className="mb-2"
                           size="sm"
@@ -183,16 +183,6 @@ const NucleosFamiliares = () => {
                           placeholder="Cedula de Jefe de Hogar"
                           aria-describedby="FormControlInputNameHelpInline"
                           required
-                        />
-                      </CCol>
-                      <CCol xs={12} md={6}>
-                        <CFormInput
-                          className="mb-2"
-                          size="sm"
-                          type="text"
-                          id="exampleFormControlInput1"
-                          placeholder="Apellidos"
-                          aria-describedby="exampleFormControlInputHelpInline"
                         />
                       </CCol>
                     </CRow>

@@ -1,287 +1,203 @@
 /* eslint-disable prettier/prettier */
-import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cilLockLocked,
-  cilLockUnlocked,
-  cilPeople,
-} from '@coreui/icons'
+import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {
   CAvatar,
   CButton,
   CCard,
   CCardBody,
-  CCardTitle,
+  CCardHeader,
+  CCol,
   CContainer,
   CForm,
-  CFormInput,
-  CNav,
-  CNavItem,
+  CSpinner,
   CTable,
   CTableBody,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CTooltip,
 } from '@coreui/react'
 import React, { useState } from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import Modal from '../modals/Modal'
 import FormUsuarios from '../form/FormUsuarios'
+import Swal from 'sweetalert2'
 
 const Usuarios = () => {
-  const [estado, setEstado] = useState(true)
   const [modal, setModal] = useState(false)
-
-  const toggleEstado = () => {
-    setEstado(!estado)
-  }
 
   const toggleModal = (isOpen) => {
     setModal(isOpen)
   }
 
-  const tableExample = [
-    {
-      avatar: { src: avatar, status: 'success' },
-      user: {
-        name: 'Jose Alvarez',
-        cc: '26.589.362',
-        username: 'jalvarez',
-        perfil: 'admin',
-        new: true,
-        estado: true,
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar, status: 'danger' },
-      user: {
-        name: 'Leonel Tarantini',
-        cc: '26.589.363',
-        username: 'Leotar',
-        perfil: 'admin',
-        new: false,
-        registered: 'Jan 1, 2021',
-        estado: false,
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar, status: 'warning' },
-      user: {
-        name: 'Eddy Solano',
-        cc: '26.589.364',
-        username: 'eddysol',
-        perfil: 'operador',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: true,
-      },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar, status: 'secondary' },
-      user: {
-        name: 'Pedro Fernandez',
-        cc: '26.589.366',
-        username: 'PedroF',
-        perfil: 'admin',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: true,
-      },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar, status: 'success' },
-      user: {
-        name: 'Luisa Ceballos',
-        cc: '26.589.367',
-        username: 'LuCeballos',
-        perfil: 'operador',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: false,
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar, status: 'danger' },
-      user: {
-        name: 'Federman Pacheco',
-        cc: '26.589.368',
-        username: 'ferpacheco',
-        perfil: 'operador',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: true,
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+  const EliminarUsuarios = (id) => {
+    Swal.fire({
+      title: '¿Estas seguro de eliminar este Usuario?',
+      text: 'El Usuario eliminado no se podrá recuperar',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        /* dispatch(borrarUsuarioAction(id)); */
+      }
+    })
+  }
+
   return (
     <>
       <CContainer>
-        <CCard className="mb-4 p-4">
-          <CCard className="mb-2 p-2">
-            <CCard className="mb-1">
-              <CNav expand="lg" colorScheme="light" className="bg-light">
-                <CCardBody>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <CCardTitle>Usuarios</CCardTitle>
-                    <CNav>
-                      <CNavItem className="d-flex align-items-center">
-                        <CButton
-                          variant=""
-                          color="info"
-                          onClick={toggleModal}
-                          className="d-flex align-items-center"
-                        >
-                          Nuevo Usuario
-                        </CButton>
-                      </CNavItem>
-                    </CNav>
-                    <CForm className="d-flex">
-                      <CFormInput
-                        size="sm"
-                        type="search"
-                        className="me-1"
-                        placeholder="Buscar Usuarios"
-                      />
-                      <CButton
-                        className="mr-2"
-                        size="sm"
-                        type="submit"
-                        color="success"
-                        variant="outline"
+        <CCard>
+          <CCardHeader>
+            <strong>Administrar</strong> <small>Usuarios</small>
+          </CCardHeader>
+
+          <CCardBody>
+            <CForm>
+              <CCol xs={12}>
+                <CButton
+                  type="button"
+                  color={'primary'}
+                  variant="outline"
+                  className="px-4"
+                  style={{ width: '100%' }}
+                  onClick={toggleModal}
+                  /* onClick={() => setVisibleNUS(true)} */
+                >
+                  {' '}
+                  {'Agregar Nuevo Usuario'}
+                </CButton>
+              </CCol>
+            </CForm>
+          </CCardBody>
+          <Modal
+            visible={modal}
+            closeModal={() => toggleModal(false)}
+            title="Nuevo Usuario"
+            content={
+              <>
+                <FormUsuarios />
+              </>
+            }
+            onSave={() => {
+              // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
+            }}
+          />
+          <CCardBody>
+            <CTable align="middle" className="mb-0 border" hover responsive>
+              <CTableHead color="light">
+                <CTableRow>
+                  <CTableHeaderCell className="text-center">
+                    <CIcon icon={cilPeople} />
+                  </CTableHeaderCell>
+                  <CTableHeaderCell>Usuarios</CTableHeaderCell>
+                  <CTableHeaderCell className="text-center">Perfil</CTableHeaderCell>
+                  <CTableHeaderCell className="text-center">Teléfono</CTableHeaderCell>
+                  <CTableHeaderCell colSpan={3} className="text-center">
+                    Acciones
+                  </CTableHeaderCell>
+                </CTableRow>
+              </CTableHead>
+              <CTableBody>
+                {false ? (
+                  <CTableRow key={0}>
+                    <CTableHeaderCell colSpan={8} className="text-center">
+                      <CSpinner aria-hidden="true" />
+                      <span
+                        style={{
+                          top: '-10px',
+                          position: 'relative',
+                        }}
                       >
-                        Buscar
-                      </CButton>
-                    </CForm>
-                  </div>
-                </CCardBody>
-              </CNav>
-            </CCard>
-
-            <Modal
-              visible={modal}
-              closeModal={() => toggleModal(false)}
-              title="Nuevo Usuario"
-              content={
-                <>
-                  <FormUsuarios />
-                </>
-              }
-              onSave={() => {
-                // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
-              }}
-            />
-
-            <CCard className="p-2">
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
+                        {' '}
+                        Loading...
+                      </span>
                     </CTableHeaderCell>
-                    <CTableHeaderCell>Usuario</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Estado</CTableHeaderCell>
-                    <CTableHeaderCell>Nombre Usuario</CTableHeaderCell>
-
-                    <CTableHeaderCell>Perfil</CTableHeaderCell>
                   </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-medium-emphasis">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
-                          {item.user.registered}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div>{item.user.cc}</div>
-                      </CTableDataCell>
-
-                      <CTableDataCell className="text-center">
-                        {!item.user.estado ? (
-                          <CButton variant="ghost" onClick={toggleEstado}>
-                            <CIcon size="xl" icon={cilLockUnlocked} />
+                ) : (
+                  <CTableRow v-for="item in tableItems">
+                    <CTableDataCell className="text-center">
+                      <CAvatar size="md" src={avatar} status={false ? 'success' : 'danger'} />
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <div>
+                        <span>
+                          {' '}
+                          <strong>{'Juan Pablo Perez Redondo'}</strong>
+                        </span>
+                      </div>
+                      <div className="small text-medium-emphasis">
+                        <span>{"1.123'406.888"}</span>
+                      </div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div>{'Admin'}</div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div className="small text-medium-emphasis">{'555 55 55'}</div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div className="small text-medium-emphasis">
+                        <CTooltip content="Bloquear Asociación" placement="bottom">
+                          {true ? (
+                            <CButton variant="" color="success" size="sm" className="btn-uniform">
+                              <CIcon size="xl" icon={cilLockLocked} />
+                            </CButton>
+                          ) : (
+                            <CButton
+                              variant="outline"
+                              color="warning"
+                              size="sm"
+                              className="btn-uniform"
+                            >
+                              <CIcon size="md" icon={cilLockUnlocked} />
+                            </CButton>
+                          )}
+                        </CTooltip>
+                      </div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div className="small text-medium-emphasis">
+                        <CTooltip content="Editar Asociación" placement="bottom">
+                          <CButton
+                            /* style={{ width: '100%' }} */
+                            color="info"
+                            variant="outline"
+                            size="xl"
+                            /* onClick={() => EliminarConvenio(item.IdConvenio)} */
+                          >
+                            Editar
                           </CButton>
-                        ) : (
-                          <CButton variant="ghost" onClick={toggleEstado}>
-                            <CIcon size="xl" icon={cilLockLocked} />
+                        </CTooltip>
+                      </div>
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center">
+                      <div className="small text-medium-emphasis">
+                        <CTooltip content="Eliminar Asociación" placement="bottom">
+                          <CButton
+                            /* style={{ width: '100%' }} */
+                            color="danger"
+                            variant="outline"
+                            size="xl"
+                            onClick={() => EliminarUsuarios()}
+                            /* onClick={() => EliminarUsuarios()} */
+                            /* onClick={() => EliminarConvenio(item.IdConvenio)} */
+                          >
+                            <CIcon icon={cilTrash} size="lg" />
                           </CButton>
-                        )}
-                      </CTableDataCell>
-                      <CTableDataCell>{item.user.username}</CTableDataCell>
-                      <CTableDataCell>{item.user.perfil}</CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-            </CCard>
-          </CCard>
+                        </CTooltip>
+                      </div>
+                    </CTableDataCell>
+                  </CTableRow>
+                )}
+              </CTableBody>
+            </CTable>
+          </CCardBody>
         </CCard>
       </CContainer>
     </>
