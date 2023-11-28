@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { lazy } from 'react'
 import Concejos from './views/concejos/Concejos'
-import Usuarios from './views/usuarios/Usuarios'
+import Usuarios from './views/pages/usuarios/AdminUsuarios'
 import Asociaciones from './views/asociaciones/Asociaciones'
 import Parametros from './views/parametros/Parametros'
 import JefeHogar from './views/familias/JefeHogar'

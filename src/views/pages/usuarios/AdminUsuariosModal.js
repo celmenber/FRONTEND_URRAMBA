@@ -2,122 +2,113 @@
 import React, { useState } from 'react'
 import { CLoadingButton, CModalTitle } from '@coreui/react-pro'
 import {
-    CButton,
-    CCol,
-    CForm,
-    CFormFeedback,
-    CFormInput,
-    CFormLabel,
-    CFormSelect,
-    CModal,
-    CModalBody,
-    CModalHeader,
-    CRow
+  CButton,
+  CCol,
+  CForm,
+  CFormFeedback,
+  CFormInput,
+  CFormLabel,
+  CFormSelect,
+  CModal,
+  CModalBody,
+  CModalHeader,
+  CRow,
 } from '@coreui/react'
 import { Usuarios } from 'src/hooks'
 import Swal from 'sweetalert2'
 import { useEffect } from 'react'
 
 const AdminUsuariosModal = (Props) => {
-    const [validated, setValidated] = useState(false);
-    const handleClose = () => setVisibleNUS(false)
+  const [validated, setValidated] = useState(false)
+  const handleClose = () => setVisibleNUS(false)
 
-    const {
-          visibleNUS,
-          setVisibleNUS,
-          parquesone,
-          parquesCodigo
-    } = Props
+  const { visibleNUS, setVisibleNUS, parquesone, parquesCodigo } = Props
 
-    const {
-        onChangeFormulario,
-        crearNuevoUsuario,
-        obtenerPerfil,
-        obtenerTipoUser,
-        perfil,
-        tipouser,
-        datoUsuario, setDatoUsuario,
-        cargando,
-        User,
-    } = Usuarios()
+  const {
+    onChangeFormulario,
+    crearNuevoUsuario,
+    obtenerPerfil,
+    obtenerTipoUser,
+    perfil,
+    tipouser,
+    datoUsuario,
+    setDatoUsuario,
+    cargando,
+    User,
+  } = Usuarios()
 
-    const{
-        usuario,
-        claveuno,
-        estado,
-        codperfil,
-        codtipousuario,
-        documento,
-        nombres,
-        apellidos,
-    } = datoUsuario
+  const { usuario, claveuno, estado, codperfil, codtipousuario, documento, nombres, apellidos } =
+    datoUsuario
 
+  const handleReset = () => {
+    setDatoUsuario({
+      usuario: '',
+      claveuno: '',
+      estado: '',
+      codperfil: '',
+      codtipousuario: '',
+      documento: '',
+      nombres: '',
+      apellidos: '',
+    })
+  }
 
-    const handleReset = () => {
-        setDatoUsuario({
-            usuario: '',
-            claveuno: '',
-            estado: '',
-            codperfil: '',
-            codtipousuario: '',
-            documento: '',
-            nombres: '',
-            apellidos: '',
-        })
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    } else {
+      const formularioDatos = {
+        UsuarioCreacion: User.userDetails.Id,
+        ParqueId: parquesCodigo === 0 ? parquesone?.ParqueId : parquesCodigo,
+        TipoUsuarioId: parseInt(codtipousuario),
+        PerfilId: parseInt(codperfil),
+        Email: usuario,
+        Password: claveuno,
+        Documento: documento,
+        Nombres: nombres,
+        Apellidos: apellidos,
+        Estado: estado,
+      }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const form = event.currentTarget
-        if (form.checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        } else {
-            const formularioDatos = {
-                UsuarioCreacion:User.userDetails.Id,
-                ParqueId: parquesCodigo === 0 ? parquesone?.ParqueId : parquesCodigo,
-                TipoUsuarioId: parseInt(codtipousuario),
-                PerfilId: parseInt(codperfil),
-                Email: usuario,
-                Password: claveuno,
-                Documento: documento,
-                Nombres: nombres,
-                Apellidos: apellidos,
-                Estado: estado,
-              }
-
-            crearNuevoUsuario({
-                formularioDatos,
-                handleReset
-            })
-        }
-        setValidated(true)
+      crearNuevoUsuario({
+        formularioDatos,
+        handleReset,
+      })
     }
+    setValidated(true)
+  }
 
-    useEffect(() => {
-        // Consultar la api un parque
-        obtenerPerfil();
-        // eslint-disable-next-line
-    }, []);
+  /* useEffect(() => {
+    // Consultar la api un parque
+    obtenerPerfil()
+    // eslint-disable-next-line
+  }, []) */
 
-    useEffect(() => {
-        // Consultar la api un parque
-        obtenerTipoUser();
-        // eslint-disable-next-line
-    }, []);
+  /* useEffect(() => {
+    // Consultar la api un parque
+    obtenerTipoUser()
+    // eslint-disable-next-line
+  }, []) */
 
-    return (
-        <>
-            <CModal size="xl" visible={visibleNUS} onClose={handleClose}>
-                <CModalHeader>
-                    <CModalTitle> <strong>Agregar nuevo Usuario</strong></CModalTitle>
-                </CModalHeader>
-                <CForm className="row g-3 needs-validation"
-                    noValidate
-                    validated={validated}
-                    onSubmit={handleSubmit}
-                >
-                    <CModalBody>
+  return (
+    <>
+      <CModal size="xl" visible={visibleNUS} onClose={handleClose}>
+        <CModalHeader>
+          <CModalTitle>
+            {' '}
+            <strong>Agregar nuevo Usuario</strong>
+          </CModalTitle>
+        </CModalHeader>
+        <CForm
+          className="row g-3 needs-validation"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+        >
+          {/* <CModalBody>
                         <CRow className="g-3">
                             <CCol md={7} style={{ marginTop: '15px' }}>
                                     <CFormLabel htmlFor="validationCustom01">Nombre Usuario*</CFormLabel>
@@ -277,10 +268,10 @@ const AdminUsuariosModal = (Props) => {
                                 </CButton>
                             </CCol>
                         </CRow>
-                    </CModalBody>
-                </CForm>
-            </CModal>
-        </>
-    )
+                    </CModalBody> */}
+        </CForm>
+      </CModal>
+    </>
+  )
 }
 export default AdminUsuariosModal
