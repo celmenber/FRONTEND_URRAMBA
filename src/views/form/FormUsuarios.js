@@ -118,11 +118,13 @@ const FormUsuarios = () => {
 
           <CRow className="pt-2">
             <CCol className="d-grid gap-2">
-              <CButton variant="outline">Limpiar Formulario</CButton>
-            </CCol>
-            <CCol className="d-grid gap-2">
-              <CButton type="submit" color="success" className="mr-1 align-">
+              <CButton type="submit" color="success" className="mr-1">
                 Guardar Usuario
+              </CButton>
+            </CCol>
+            <CCol md={3} className="d-grid gap-2">
+              <CButton type="reset" variant="outline">
+                Nuevo Usuario
               </CButton>
             </CCol>
           </CRow>
