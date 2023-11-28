@@ -27,7 +27,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye,faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../../assets/images/avatars/mainIcon.png'
 import logotitulo from '../../../assets/images/avatars/logo.png'
-import background from "../../../assets/images/avatars/placeholder.jpg";
+import background from "../../../assets/images/avatars/placeholder1.jpg";
 //let Message
 
 const Login = () => {
@@ -77,12 +77,6 @@ const Login = () => {
         height: '100%',
       }}
     >
-      {/*
-      backgroundPosition: center center;
-background-repeat: no-repeat;
-backgroundAttachment: fixed;
-background-size: cover;
-      */}
       <CToaster ref={toaster} push={toast} placement="top-end" />
       <CContainer>
         <CRow className="justify-content-center">
@@ -166,7 +160,7 @@ background-size: cover;
                         ) : (
                           <CButton
                             type="submit"
-                              color="primary"
+                            color="primary"
                             variant="outline"
                             className=""
                             style={{ width: '100%', marginLeft: '10px' }}
@@ -180,7 +174,7 @@ background-size: cover;
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-4" style={{ width: '100%' }}>
+              <CCard className="text-white bg-info py-4" style={{ width: '100%' }}>
                 <CCardBody className="text-center">
                   <div>
                     <h3>ASOCIACIÓN AFRODESCENDIENTES URRAMBA</h3>
