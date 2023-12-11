@@ -81,7 +81,7 @@ const AdminUsuarios = () => {
           <CCardHeader>
             <strong>Gestión</strong> <small>Servicios Parques</small>
           </CCardHeader>
-          <CCardBody>
+{/*           <CCardBody>
             <CForm>
               <CCol xs={12}>
                 <CButton
@@ -97,10 +97,10 @@ const AdminUsuarios = () => {
                 </CButton>
               </CCol>
             </CForm>
-          </CCardBody>
+          </CCardBody> */}
           {/* proceso de listar archovos de las normativas */}
           <CCardBody>
-            <hr />
+        {/*     <hr /> */}
             <CForm>
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
@@ -111,7 +111,6 @@ const AdminUsuarios = () => {
                     <CTableHeaderCell className="text-center"></CTableHeaderCell>
                     <CTableHeaderCell colSpan={'1'}>Usuario</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">Perfil</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Actividad</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">
                       Acciones
                     </CTableHeaderCell>
@@ -195,13 +194,8 @@ const AdminUsuarios = () => {
                         </CTableDataCell>
 
                         <CTableDataCell className="text-center">
-                          <h5>{'item.Perfil.NombrePerfil'}</h5>
+                          <h5>{item.ID_ROLL}</h5>
                         </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">Último login</div>
-                          <strong>{'10 sec ago'}</strong>
-                        </CTableDataCell>
-
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip content="Reiniciar Clave Usuario." placement="bottom">

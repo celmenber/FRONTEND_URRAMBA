@@ -2,3 +2,4 @@
 export * from './useAuthLogin';
 export * from './useLoginForm';
 export * from './useUsuarioForm';
+export * from './useAsociacionForm';

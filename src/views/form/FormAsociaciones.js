@@ -1,294 +1,285 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-script-url */
-import React, { useEffect } from 'react'
-import AsociacionModalCrear from './modal/FormAsociacionNuevoModal'
-import AsociacionModalActualiza from './modal/FormAsociacionActModal'
-import FormAsociacionCodigo from './modal/FormAsociacionCodigoModal'
-
+import React, { useEffect, useState } from 'react'
+import { AsociacionForm } from '../../hooks'
+// import { FormatoFecha } from '../../helper/index'
 import {
-  CRow,
-  CCol,
+  CButton,
   CCard,
   CCardBody,
   CCardHeader,
-  CNav,
-  CNavItem,
-  CNavLink,
-  CTabContent,
-  CTabPane,
+  CCol,
   CForm,
-  CButton,
-  CSpinner,
-  CTooltip,
+  CFormInput,
+  CFormLabel,
+  CRow,
   CTable,
-  CTableHead,
-  CTableRow,
-  CTableHeaderCell,
   CTableBody,
   CTableDataCell,
-  CAvatar,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CPagination,
+  CFormSelect,
+  CFormFeedback,
+  CSpinner,
+  CFormCheck,
+  CButtonGroup,
 } from '@coreui/react'
-//import { CLoadingButton } from '@coreui/react-pro'
-import { AsociacionForm, AsociacionCodForm } from 'src/hooks'
-import CIcon from '@coreui/icons-react'
-import avatar from 'src/assets/images/avatars/profile-default.jpg'
-import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
-import { useState } from 'react'
 
-const AdminAsociaciones = () => {
-  const [selectServicio, setSelectServicio] = useState(1)
+ const Contactenos = () => {
+   const { handleSubmit,
+           onChangeFormulario,
+            crearNuevoAsociacion,
+            updateAsociacion,
+            obtenerAsociacion,
+            obtenerMunicipio,
+            EliminarAsociacion,
+            asociacioncodeditar,
+            Municipio,
+            userDetails,
+            asociacioncodigo,
+            cargandolista,
+            cargando,
+            datoAsociacion,
+            validated
+     } = AsociacionForm();
 
-  const {
-    onChangeFormulario,
-    obtenerAsociacion,
-    EliminarAsociacion,
-    EditaAsociacion,
-    BuscaMunicipio,
-    UpdateAsociacionEstado,
-    GeneraCodigo,
-    /* metodos */
-    datoAsociacion,
-    convenio,
-    selectActivar,
-    setSelectActivar,
-    visibleNCV,
-    setVisibleNCV,
-    visibleCV,
-    setVisibleCV,
-    visibleCODCV,
-    setVisibleCODCV,
-    cargandolista,
-  } = AsociacionForm()
 
-  const { obtenerAsociacioncod, conveniocodigo } = AsociacionCodForm()
+ useEffect(() => {
+   // Consultar la api listar Municipio,
+     obtenerMunicipio();
+    // eslint-disable-next-line
+  }, []);
+/*
+  useEffect(() => {
+    // Consultar la api listar detallesparques
+    obtenerContacto();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
-    // Consultar la api listar parques
-    obtenerAsociacion()
+    // Consultar la api listar detallesparques
+    obtenerContactoAsunto();
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  useEffect(() => {
-    // Consultar la api listar parques
-    obtenerAsociacioncod()
-    // eslint-disable-next-line
-  }, [])
+  const count = listacontacto.length;
+  const current = 5
 
-  const handleSelectEst = (id) => {
-    setSelectActivar(true)
-    setSelectServicio(id)
-    UpdateAsociacionEstado(id)
+  const filterContacts = () => {
+    return listacontacto?.slice(currentPage, currentPage + current)
+  }
+  const nextPage = () => {
+
+    if (count > currentPage + current) {
+      setCurrentPage(currentPage + current);
+    }
   }
 
-  //console.log(parquesCodigo);
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - current);
+    }
+  } */
+   console.log(Municipio)
 
   return (
-    <CRow>
+    <><CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Gestión</strong> <small>Asociaciones</small>
+            <strong>Correos</strong> <small>Contactenos</small>
           </CCardHeader>
           <CCardBody>
-            <CForm>
+            <CForm
+              className="row g-3 needs-validation"
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+            >
               <CCol xs={12}>
                 <CButton
-                  type="button"
+                  type="submit"
                   color={'primary'}
                   variant="outline"
                   className="px-4"
                   style={{ width: '100%' }}
-                  onClick={() => setVisibleNCV(true)}
                 >
                   {' '}
-                  {'Agregar Nuevo Asociacion'}
+                  {'Agregar Nueva Asociación'}
                 </CButton>
               </CCol>
-            </CForm>
-          </CCardBody>
-          {/* proceso de listar archovos de las normativas */}
-          <CCardBody>
-            <CForm key={0}>
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="text-center"></CTableHeaderCell>
-                    <CTableHeaderCell colSpan={'1'}>Empresa/Entidad</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">
-                      Representante Empresa
-                    </CTableHeaderCell>
-                    <CTableHeaderCell colSpan={2} className="text-center">
-                      Ubicación
-                    </CTableHeaderCell>
-                    <CTableHeaderCell colSpan={3} className="text-center">
-                      Acciones
-                    </CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {cargandolista === true ? (
-                    <CTableRow key={0}>
-                      <CTableHeaderCell colSpan={8} className="text-center">
-                        <CSpinner aria-hidden="true" />
-                        <span
-                          style={{
-                            top: '-10px',
-                            position: 'relative',
-                          }}
+
+              <CCol md={3}>
+                <CFormLabel htmlFor="validationCustom01">Nit </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom01"
+                  defaultValue=""
+                  name='nitAsociacion'
+                  value={datoAsociacion.nitAsociacion}
+                  onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Nit Requerido!</CFormFeedback>
+              </CCol>
+              <CCol md={9}>
+                <CFormLabel htmlFor="validationCustom02">Nombre Asociacion </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom02"
+                  defaultValue=""
+                  name='nombreAsociacion'
+                  value={datoAsociacion.nombreAsociacion}
+                   onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Nombre Asociacion Requerido!</CFormFeedback>
+              </CCol>
+              <CCol md={3}>
+                <CFormLabel htmlFor="validationCustom03">Dirección </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom03"
+                  defaultValue=""
+                  name='direccionAsociacion'
+                  value={datoAsociacion.direccionAsociacion}
+                   onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Dirección Requerido!</CFormFeedback>
+              </CCol>
+              <CCol md={3}>
+                <CFormLabel htmlFor="validationCustom04">Telefono </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom04"
+                  defaultValue=""
+                  name='telefonoAsociacion'
+                  value={datoAsociacion.telefonoAsociacion}
+                   onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Telefono Requerido!</CFormFeedback>
+              </CCol>
+              <CCol md={6}>
+                <CFormLabel htmlFor="validationCustom05">Correo Electronico </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom05"
+                  defaultValue=""
+                  name='correoAsociacion'
+                  value={datoAsociacion.correoAsociacion}
+                   onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Correo Electronico Requerido!</CFormFeedback>
+              </CCol>
+              <CCol xs={12}>
+                <CFormLabel htmlFor="validationCustom06" value={''}>Municipio</CFormLabel>
+               <CFormSelect
+                  key={'validationCustom06'}
+                  name='idMunicipio'
+                  id="idMunicipio"
+                  value={datoAsociacion.idMunicipio}
+                  onChange={onChangeFormulario}
+                  required
+                >
+                  <option Key={'validationCustom001'} value={''}>Seleccione...</option>
+                  {Municipio?.length === 0
+                    ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
+                    : (
+                      Municipio?.map(item => (
+                        <option
+                          Key={item.ID}
+                          value={item.ID}
                         >
-                          {' '}
-                          Loading...
-                        </span>
-                      </CTableHeaderCell>
-                    </CTableRow>
-                  ) : (
-                    convenio?.map((item, index) => (
-                      <CTableRow v-for="item in tableItems" key={index}>
-                        <CTableDataCell className="text-center">
-                          <CAvatar
-                            size="md"
-                            key={index}
-                            src={avatar}
-                            status={item.Estado === true ? 'success' : 'secondary'}
-                          />
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip
-                              content={item.Estado === true ? 'Desactivar' : 'Activar'}
-                              placement="bottom"
-                            >
-                              {selectServicio === item.IdAsociacion && selectActivar === true ? (
-                                <CLoadingButton
-                                  variant="outline"
-                                  size="lg"
-                                  color={item.Estado === true ? 'secondary' : 'success'}
-                                  style={{ width: '100%' }}
-                                  timeout={2000}
-                                ></CLoadingButton>
-                              ) : (
-                                <CButton
-                                  size="lg"
-                                  color={item.Estado === true ? 'success' : 'secondary'}
-                                  style={{ width: '100%' }}
-                                  id={`estado${item.IdAsociacion}`}
-                                  key={item.IdAsociacion}
-                                  onClick={() => handleSelectEst(item.IdAsociacion)}
-                                >
-                                  {item.Estado === true ? (
-                                    <CIcon icon={cilLockUnlocked} size="lg" />
-                                  ) : (
-                                    <CIcon icon={cilLockLocked} size="lg" />
-                                  )}
-                                </CButton>
-                              )}
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          <div>
-                            <span>
-                              {' '}
-                              <strong>{item.Email}</strong>
-                            </span>
-                            <small style={{ marginLeft: '5px' }}>
-                              {item.NombrEmpresa} NIT {item.NitEmpresa}
-                            </small>
-                          </div>
-                          <div className="small text-medium-emphasis">
-                            <span>{item.CorreoEmpresa}</span> |{' '}
-                            <span> TEL: {item.TelefonoEmpresa}</span>
-                          </div>
-                        </CTableDataCell>
-
-                        <CTableDataCell className="text-center">
-                          <h5>{item.RepresentanteEmpresa}</h5>
-                        </CTableDataCell>
-
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">Municipio/Ciudad</div>
-                          <strong>{BuscaMunicipio(item.IdMunicipio)}</strong>
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">Dirección</div>
-                          <strong>{item.DireccionEmpresa}</strong>
-                        </CTableDataCell>
-
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip content="Reiniciar Clave Usuario." placement="bottom">
-                              <CButton
-                                style={{ width: '100%' }}
-                                color="warning"
-                                variant="outline"
-                                size="lg"
-                                onClick={() => GeneraCodigo(item.IdAsociacion)}
-                              >
-                                {'Generar Codigo'}
-                              </CButton>
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip content="Actulizar Usuario" placement="bottom">
-                              <CButton
-                                style={{ width: '100%' }}
-                                color="info"
-                                variant="outline"
-                                size="lg"
-                                onClick={() => EditaAsociacion(item.IdAsociacion)}
-                              >
-                                {'Editar'}
-                              </CButton>
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip content="Eliminar Usuario" placement="bottom">
-                              <CButton
-                                style={{ width: '100%' }}
-                                color="danger"
-                                variant="outline"
-                                size="lg"
-                                onClick={() => EliminarAsociacion(item.IdAsociacion)}
-                              >
-                                <CIcon icon={cilTrash} size="lg" />
-                              </CButton>
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-                      </CTableRow>
-                    ))
-                  )}
-                </CTableBody>
-              </CTable>
+                          {item.Nombre}
+                        </option>
+                      ))
+                    )}
+                </CFormSelect>
+                <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
+              </CCol>
+              <hr />
+              <CCol xs={12}>
+                <CRow>
+                  <CCol xs={12}>
+                 {/*    {listacontacto.length === 0 ? (
+                      <CTable>
+                        <CTableHead>
+                          <CTableRow>
+                            <CTableHeaderCell colSpan={8} className="text-center">
+                              <h3>No hay datos </h3>
+                            </CTableHeaderCell>
+                          </CTableRow>
+                        </CTableHead>
+                      </CTable>
+                    ) : ( */}
+                      <CTable>
+                      {/*  <CTableHead>
+                          <CTableRow>
+                            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Parques </CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Nombres </CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Teléfono</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Correo</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Asunto</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Mensaje</CTableHeaderCell>
+                            <CTableHeaderCell scope="col">Fecha envio</CTableHeaderCell>
+                            <CTableHeaderCell scope="col" style={{ textAlign: 'center' }}>...</CTableHeaderCell>
+                          </CTableRow>
+                        </CTableHead>
+                      <CTableBody>
+                          {cargandoLista === true ? (
+                            <CTableRow key={0} >
+                              <CTableHeaderCell colSpan={8} className="text-center">
+                                <CSpinner aria-hidden="true" />
+                                <span style={{
+                                  top: '-10px',
+                                  position: 'relative'
+                                }}> Loading...</span>
+                              </CTableHeaderCell>
+                            </CTableRow>
+                          ) : (
+                            filterContacts().map((item, index) => (
+                              <CTableRow key={index}>
+                                <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                                <CTableDataCell >{BuscaParque(item.Idparques)}</CTableDataCell>
+                                <CTableDataCell >{item.Nombres}</CTableDataCell>
+                                <CTableDataCell >{item.Telefono}</CTableDataCell>
+                                <CTableDataCell >{item.Email}</CTableDataCell>
+                                <CTableDataCell >{item.Asuntocontacto.NombreAsunto}</CTableDataCell>
+                                <CTableDataCell >{item.Mensaje}</CTableDataCell>
+                              {/*   <CTableDataCell >
+                                  {FormatoFecha(item.FechaCreacion)}
+                                </CTableDataCell> *
+                                <CTableDataCell>
+                                  <CButton
+                                    style={{ textAlign: 'center' }}
+                                    color="danger"
+                                    variant="outline"
+                                    onClick={() => EliminarContactos(item.Id)}
+                                  > Eliminar</CButton>
+                                </CTableDataCell>
+                              </CTableRow>
+                            ))
+                          )}
+                        </CTableBody> */}
+                      </CTable>
+                  {/*   )} */}
+                  </CCol>
+                </CRow>
+              </CCol>
             </CForm>
+
           </CCardBody>
+
         </CCard>
       </CCol>
 
-      <AsociacionModalCrear visibleNCV={visibleNCV} setVisibleNCV={setVisibleNCV} />
-      <AsociacionModalActualiza
-        visibleCV={visibleCV}
-        setVisibleCV={setVisibleCV}
-        datoAsociacion={datoAsociacion}
-        onChangeFormulario={onChangeFormulario}
-      />
-      <FormAsociacionCodigo
-        visibleCODCV={visibleCODCV}
-        setVisibleCODCV={setVisibleCODCV}
-        datoAsociacion={datoAsociacion}
-        conveniocodigo={conveniocodigo}
-      />
     </CRow>
+    </>
   )
 }
-export default AdminAsociaciones
+export default Contactenos

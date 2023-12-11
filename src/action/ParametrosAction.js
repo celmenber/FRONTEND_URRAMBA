@@ -1,8 +1,12 @@
 /* eslint-disable prettier/prettier */
-import TYPES from '../type/MunicipioType'
+import TYPES from '../type/ParametrosType'
 import { AxiosPrivado } from 'src/config/axios'
 
-const { OBTENER_MUNICIPIO, OBTENER_MUNICIPIO_SUCCESS, OBTENER_MUNICIPIO_ERROR } = TYPES
+const {
+  OBTENER_MUNICIPIO,
+  OBTENER_MUNICIPIO_SUCCESS,
+  OBTENER_MUNICIPIO_ERROR
+} = TYPES
 
 // procedimiento obtener listado dato informate
 export const obtenerMunicipioAction = () => {
@@ -10,10 +14,10 @@ export const obtenerMunicipioAction = () => {
     dispatch(ObtenerMunicipio())
 
     try {
-      const { data } = await AxiosPrivado.get('app/municipios/all')
-
-      if (data.code === 200) {
-        dispatch(obtenerMunicipioExitosa(data.datos))
+      const { data } = await AxiosPrivado.get('parametros/view-municipio')
+      console.log(data)
+      if (data.success === true) {
+        dispatch(obtenerMunicipioExitosa(data.data))
       }
     } catch (error) {
       console.log(error)

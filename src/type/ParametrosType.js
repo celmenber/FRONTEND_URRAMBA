@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-const TYPES = {
+export const TYPES = {
   ADD_MUNICIPIO: 'ADD_MUNICIPIO',
   ADD_MUNICIPIO_SUCCESS: 'ADD_MUNICIPIO_SUCCESS',
   ADD_MUNICIPIO_ERROR: 'ADD_MUNICIPIO_ERROR',
