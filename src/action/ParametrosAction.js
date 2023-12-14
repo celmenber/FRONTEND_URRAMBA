@@ -15,7 +15,7 @@ export const obtenerMunicipioAction = () => {
 
     try {
       const { data } = await AxiosPrivado.get('parametros/view-municipio')
-      console.log(data)
+   //   console.log(data)
       if (data.success === true) {
         dispatch(obtenerMunicipioExitosa(data.data))
       }

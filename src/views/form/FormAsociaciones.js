@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { AsociacionForm } from '../../hooks'
-// import { FormatoFecha } from '../../helper/index'
 import {
   CButton,
   CCard,
@@ -18,26 +17,23 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-  CPagination,
   CFormSelect,
   CFormFeedback,
   CSpinner,
-  CFormCheck,
-  CButtonGroup,
+  CAvatar,
 } from '@coreui/react'
+import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 
  const Contactenos = () => {
    const { handleSubmit,
            onChangeFormulario,
-            crearNuevoAsociacion,
-            updateAsociacion,
             obtenerAsociacion,
             obtenerMunicipio,
             EliminarAsociacion,
             asociacioncodeditar,
             Municipio,
-            userDetails,
-            asociacioncodigo,
+            asociaciones,
             cargandolista,
             cargando,
             datoAsociacion,
@@ -50,13 +46,13 @@ import {
      obtenerMunicipio();
     // eslint-disable-next-line
   }, []);
-/*
+
   useEffect(() => {
     // Consultar la api listar detallesparques
-    obtenerContacto();
+    obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
-
+/*
   useEffect(() => {
     // Consultar la api listar detallesparques
     obtenerContactoAsunto();
@@ -81,14 +77,14 @@ import {
       setCurrentPage(currentPage - current);
     }
   } */
-   console.log(Municipio)
+   console.log(asociaciones)
 
   return (
     <><CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Correos</strong> <small>Contactenos</small>
+            <strong>Asociaciones</strong> <small>Negritudes</small>
           </CCardHeader>
           <CCardBody>
             <CForm
@@ -170,7 +166,7 @@ import {
                   defaultValue=""
                   name='correoAsociacion'
                   value={datoAsociacion.correoAsociacion}
-                   onChange={onChangeFormulario}
+                  onChange={onChangeFormulario}
                   required
                 />
                 <CFormFeedback invalid>El campo Correo Electronico Requerido!</CFormFeedback>
@@ -189,7 +185,7 @@ import {
                   {Municipio?.length === 0
                     ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
                     : (
-                      Municipio?.map(item => (
+                      Municipio?.filter(item => item.Estado !== null).map(item => (
                         <option
                           Key={item.ID}
                           value={item.ID}
@@ -205,7 +201,7 @@ import {
               <CCol xs={12}>
                 <CRow>
                   <CCol xs={12}>
-                 {/*    {listacontacto.length === 0 ? (
+                    {asociaciones.length === 0 ? (
                       <CTable>
                         <CTableHead>
                           <CTableRow>
@@ -215,59 +211,59 @@ import {
                           </CTableRow>
                         </CTableHead>
                       </CTable>
-                    ) : ( */}
-                      <CTable>
-                      {/*  <CTableHead>
+                    ) : (
+                       <CTable align="middle" className="mb-0 border" hover responsive>
+                        <CTableHead color="light">
                           <CTableRow>
-                            <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Parques </CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Nombres </CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Teléfono</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Correo</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Asunto</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Mensaje</CTableHeaderCell>
-                            <CTableHeaderCell scope="col">Fecha envio</CTableHeaderCell>
-                            <CTableHeaderCell scope="col" style={{ textAlign: 'center' }}>...</CTableHeaderCell>
+                            <CTableHeaderCell>Asociacion</CTableHeaderCell>
+                            <CTableHeaderCell className="text-center">Nit</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">Municipio</CTableHeaderCell>
+                            <CTableHeaderCell></CTableHeaderCell>
                           </CTableRow>
                         </CTableHead>
-                      <CTableBody>
-                          {cargandoLista === true ? (
-                            <CTableRow key={0} >
-                              <CTableHeaderCell colSpan={8} className="text-center">
-                                <CSpinner aria-hidden="true" />
-                                <span style={{
-                                  top: '-10px',
-                                  position: 'relative'
-                                }}> Loading...</span>
-                              </CTableHeaderCell>
-                            </CTableRow>
-                          ) : (
-                            filterContacts().map((item, index) => (
-                              <CTableRow key={index}>
-                                <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                                <CTableDataCell >{BuscaParque(item.Idparques)}</CTableDataCell>
-                                <CTableDataCell >{item.Nombres}</CTableDataCell>
-                                <CTableDataCell >{item.Telefono}</CTableDataCell>
-                                <CTableDataCell >{item.Email}</CTableDataCell>
-                                <CTableDataCell >{item.Asuntocontacto.NombreAsunto}</CTableDataCell>
-                                <CTableDataCell >{item.Mensaje}</CTableDataCell>
-                              {/*   <CTableDataCell >
-                                  {FormatoFecha(item.FechaCreacion)}
-                                </CTableDataCell> *
-                                <CTableDataCell>
-                                  <CButton
-                                    style={{ textAlign: 'center' }}
-                                    color="danger"
-                                    variant="outline"
-                                    onClick={() => EliminarContactos(item.Id)}
-                                  > Eliminar</CButton>
-                                </CTableDataCell>
+                        <CTableBody>
+                            {cargandolista === true ? (
+                              <CTableRow key={0}>
+                                <CTableHeaderCell colSpan={8} className="text-center">
+                                  <CSpinner aria-hidden="true" />
+                                  <span
+                                    style={{
+                                      top: '-10px',
+                                      position: 'relative',
+                                    }}
+                                  >
+                                    {' '}
+                                    Loading...
+                                  </span>
+                                </CTableHeaderCell>
                               </CTableRow>
+                            ) : (
+                            asociaciones.map((item, index) => (
+                            <CTableRow v-for="item in tableItems" key={index}>
+                              <CTableDataCell>
+                                  <div>{item.Nombre}</div>
+                                <div className="small text-medium-emphasis">
+                                    <span>{item.Correo}</span> | Telefono: {' '}
+                                    {item.Telefono}
+
+                                </div>
+                                  <div className="small text-medium-emphasis">
+                                    <span>{item.Direccion}</span>
+                                  </div>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center">
+                                  <div>{item.Nit}</div>
+                              </CTableDataCell>
+                                <CTableDataCell>{item.municipio}</CTableDataCell>
+                              <CTableDataCell>
+                                    <CButton variant="outline" style={{ width: '100%' }}>Corregir Asociacion</CButton>
+                              </CTableDataCell>
+                            </CTableRow>
                             ))
                           )}
-                        </CTableBody> */}
+                        </CTableBody>
                       </CTable>
-                  {/*   )} */}
+                     )}
                   </CCol>
                 </CRow>
               </CCol>

@@ -1,17 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useState } from 'react'
 import {
   obtenerAsociacioncodAction,
   editarAsociacioncodAction,
   crearNuevoAsociacioncodAction,
   borrarAsociacioncodAction,
 } from '../action/AsociacionAction'
-
 import { obtenerMunicipioAction } from '../action/ParametrosAction'
-
 import Swal from 'sweetalert2'
-import { useState } from 'react'
 
 export const AsociacionForm = () => {
 
@@ -22,11 +19,10 @@ export const AsociacionForm = () => {
   const updateAsociacion = (Dataform) => dispatch(editarAsociacioncodAction(Dataform))
 
   //selecion del state en el  store
-  // const { userDetails } = useSelector((state) => state.Auth)
   const cargando = useSelector((state) => state.Asociacion.loading)
   const cargandolista = useSelector((state) => state.Asociacion.loadinglista)
   const asociacioncodeditar = useSelector((state) => state.Asociacion.asociacioncodeditar)
-  //const { asociacioncodigo } = useSelector((state) => state.AsociacionCodigo)
+  const asociaciones = useSelector((state) => state.Asociacion.asociacionlista)
   const Municipio = useSelector((state) => state.Parametros.municipios)
 
   const [validated, setValidated] = useState(false)
@@ -64,7 +60,7 @@ export const AsociacionForm = () => {
         Telefono: datoAsociacion.direccionAsociacion,
         Correo: datoAsociacion.correoAsociacion
       }
-
+console.log(formularioDatos)
       if (valedita === false) {
         crearNuevoAsociacion({
           formularioDatos,
@@ -108,6 +104,7 @@ export const AsociacionForm = () => {
     EliminarAsociacion,
     asociacioncodeditar,
     Municipio,
+    asociaciones,
    // userDetails,
   //  asociacioncodigo,
     cargandolista,

@@ -38,12 +38,12 @@ export const asociacionReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        usuariolista: [...state.usuariolista, action.payload]
+        asociacionlista: [...state.asociacionlista, action.payload]
       }
     case OBTENER_ASOCIACION_EDITAR:
       return {
         ...state,
-        usuarioeditar: action.payload
+        asociacioneditar: action.payload
       }
     case EDITAR_ASOCIACION:
       return {
@@ -54,9 +54,9 @@ export const asociacionReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        usuarioeditar: null,
-        usuariolista: state.usuariolista.map(U =>
-          U.UsuarioId === action.payload.UsuarioId ? U = action.payload : U
+        asociacioneditar: null,
+        asociacionlista: state.asociacionlista.map(A =>
+          A.ID === action.payload.ID ? A = action.payload : A
         )
       }
     case OBTENER_ASOCIACION:
@@ -68,18 +68,18 @@ export const asociacionReducer = (state = initialState, action) => {
       return {
         ...state,
         loadinglista: false,
-        usuariolista: action.payload
+        asociacionlista: action.payload
       }
     case DELETE_ASOCIACION:
       return {
         ...state,
-        usuarioeliminar: action.payload,
+        asociacioneliminar: action.payload,
       }
     case DELETE_ASOCIACION_SUCCESS:
       return {
         ...state,
-        usuariolista: state.usuariolista.filter(U => U.UsuarioId !== state.usuarioeliminar),
-        usuarioeliminar: null
+        asociacionlista: state.asociacionlista.filter(A => A.ID !== state.asociacioneliminar),
+        asociacioneliminar: null
       }
     case ADD_ASOCIACION_ERROR:
     case EDITAR_ASOCIACION_ERROR:
