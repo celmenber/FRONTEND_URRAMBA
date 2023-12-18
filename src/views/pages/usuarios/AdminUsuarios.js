@@ -42,7 +42,6 @@ const AdminUsuarios = () => {
     onChangeFormulario,
     obtenerUsuario,
     usuariolista,
-    activeKey,
     UpdateUserEstado,
     EditaUsuarios,
     EliminarUsuarios,
@@ -50,8 +49,6 @@ const AdminUsuarios = () => {
     setDatoUsuario,
     selectActivar,
     setSelectActivar,
-    usuariodetalle,
-    setUsuariodetalle,
     visibleNUS,
     setVisibleNUS,
     visibleUS,
@@ -66,13 +63,11 @@ const AdminUsuarios = () => {
   }, [])
 
   const handleSelectEst = (id) => {
-    setSelectActivar(true)
+   /*  setSelectActivar(true)
     setSelectServicio(id)
-    UpdateUserEstado(id)
+    UpdateUserEstado(id) */
   }
 
-  //console.log(parquesCodigo);
-  console.log(usuariolista.data)
 
   return (
     <CRow>
@@ -81,23 +76,6 @@ const AdminUsuarios = () => {
           <CCardHeader>
             <strong>Gestión</strong> <small>Servicios Parques</small>
           </CCardHeader>
-{/*           <CCardBody>
-            <CForm>
-              <CCol xs={12}>
-                <CButton
-                  type="button"
-                  color={'primary'}
-                  variant="outline"
-                  className="px-4"
-                  style={{ width: '100%' }}
-                  onClick={() => setVisibleNUS(true)}
-                >
-                  {' '}
-                  {'Agregar un Nuevo Usuario'}
-                </CButton>
-              </CCol>
-            </CForm>
-          </CCardBody> */}
           {/* proceso de listar archovos de las normativas */}
           <CCardBody>
         {/*     <hr /> */}
@@ -111,6 +89,7 @@ const AdminUsuarios = () => {
                     <CTableHeaderCell className="text-center"></CTableHeaderCell>
                     <CTableHeaderCell colSpan={'1'}>Usuario</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">Perfil</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Tipo Usuario</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">
                       Acciones
                     </CTableHeaderCell>
@@ -146,28 +125,28 @@ const AdminUsuarios = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
-                              content={item.Estado === true ? 'Desactivar' : 'Activar'}
+                              content={item.ESTADO === '1' ? 'Desactivar' : 'Activar'}
                               placement="bottom"
                             >
                                 {selectServicio === item.ID_USER && selectActivar === true ? (
                                 <CLoadingButton
                                   variant="outline"
                                   size="lg"
-                                  color={item.Estado === true ? 'secondary' : 'success'}
+                                  color={item.ESTADO === '1' ? 'secondary' : 'success'}
                                   style={{ width: '100%' }}
                                   timeout={2000}
                                 ></CLoadingButton>
                               ) : (
                                 <CButton
                                   size="lg"
-                                  color={item.Estado === true ? 'success' : 'secondary'}
+                                  color={item.ESTADO === '1' ? 'success' : 'secondary'}
                                   style={{ width: '100%' }}
                                       id={`estado${item.ID_USER}`}
                                       key={item.ID_USER}
-                                      disabled={item.ID_ROLL === 0 ? true : false}
+                                      disabled={item.ID_ROLL === 1 ? true : false}
                                       onClick={() => handleSelectEst(item.ID_USER)}
                                 >
-                                  {item.Estado === true ? (
+                                    {item.ESTADO === '1' ? (
                                     <CIcon icon={cilLockUnlocked} size="lg" />
                                   ) : (
                                     <CIcon icon={cilLockLocked} size="lg" />
@@ -181,21 +160,29 @@ const AdminUsuarios = () => {
                           <div>
                             <span>
                               {' '}
-                                <strong>{item.USERNAME}</strong>
+                                <strong>{
+                                item.USERNAME}</strong>
                             </span>
                             <small style={{ marginLeft: '5px' }}>
-                                {item.USERNAME} {'item.USERNAME'}
+                                <span>Tel:{item.ID_EMP !== 0 ? item.emp_telefono : item.aut_telefono}</span>
                             </small>
                           </div>
                           <div className="small text-medium-emphasis">
-                              <span>{item.ID_ROLL}</span> |{' '}
-                            <span> C.C {'item.Documento'}</span>
+                              <span>
+
+                                {item.ID_EMP !== 0 ? item.emp_nombres + ' ' + item.emp_apellidos
+                                  : item.aut_nombres + ' ' + item.aut_apellidos}
+                                </span> |{' '}
+                              <span> C.C.{item.ID_EMP !== 0 ? item.emp_documento : item.aut_documentos}</span>
                           </div>
                         </CTableDataCell>
-
                         <CTableDataCell className="text-center">
-                          <h5>{item.ID_ROLL}</h5>
+                            <h5>{item.USER_ROL}</h5>
                         </CTableDataCell>
+                          <CTableDataCell className="text-center">
+                            <h5>
+                              {item.ID_EMP !== 0 ? 'Empleado' : 'Autoridad tradicional'}</h5>
+                          </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip content="Reiniciar Clave Usuario." placement="bottom">

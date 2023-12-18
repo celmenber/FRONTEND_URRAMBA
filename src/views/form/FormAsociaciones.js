@@ -22,6 +22,7 @@ import {
   CSpinner,
   CAvatar,
 } from '@coreui/react'
+import { CLoadingButton } from '@coreui/react-pro';
 import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
@@ -41,17 +42,18 @@ import CIcon from '@coreui/icons-react'
      } = AsociacionForm();
 
 
- useEffect(() => {
-   // Consultar la api listar Municipio,
-     obtenerMunicipio();
-    // eslint-disable-next-line
-  }, []);
+   useEffect(() => {
+     // Consultar la api listar detallesparques
+     obtenerAsociacion();
+     // eslint-disable-next-line
+   }, []);
 
   useEffect(() => {
-    // Consultar la api listar detallesparques
-    obtenerAsociacion();
-    // eslint-disable-next-line
-  }, []);
+    // Consultar la api listar Municipio,
+      obtenerMunicipio();
+      // eslint-disable-next-line
+    }, []);
+
 /*
   useEffect(() => {
     // Consultar la api listar detallesparques
@@ -94,16 +96,28 @@ import CIcon from '@coreui/icons-react'
               onSubmit={handleSubmit}
             >
               <CCol xs={12}>
-                <CButton
-                  type="submit"
-                  color={'primary'}
-                  variant="outline"
-                  className="px-4"
-                  style={{ width: '100%' }}
-                >
-                  {' '}
-                  {'Agregar Nueva Asociación'}
-                </CButton>
+                {cargando === true ? (
+                  <CLoadingButton
+                    color="success"
+                    variant="outline"
+                    style={{ width: '100%' }}
+                    timeout={2000}
+                  >
+                    {' '}
+                    Enviando Asociación
+                  </CLoadingButton>
+                ) : (
+                    <CButton
+                      type="submit"
+                      color={'primary'}
+                      variant="outline"
+                      className="px-4"
+                      style={{ width: '100%' }}
+                    >
+                      {' '}
+                      {'Agregar Nueva Asociación'}
+                    </CButton>
+                   )}
               </CCol>
 
               <CCol md={3}>

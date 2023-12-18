@@ -74,7 +74,7 @@ export const obtenerAsociacioncodAction = () => {
     dispatch(obtenerAsociacioncod())
 
     try {
-      const { data } = await AxiosPrivado.get('asociacion/view-asociacion')
+      const { data } = await AxiosPrivado.get('/asociacion/view-asociacion')
       if (data.success === true) {
         dispatch(obteneAsociacioncodExito(data.data))
       }
