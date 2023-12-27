@@ -14,7 +14,7 @@ export const obtenerMunicipioAction = () => {
     dispatch(ObtenerMunicipio())
 
     try {
-      const { data } = await AxiosPrivado.get('/parametros/view-municipio')
+      const { data } = await AxiosPrivado.get('parametros/view-municipio',{mode:'no-cors'})
    //   console.log(data)
       if (data.success === true) {
         dispatch(obtenerMunicipioExitosa(data.data))

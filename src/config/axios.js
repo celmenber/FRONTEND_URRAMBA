@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -19,11 +20,16 @@ AxiosPrivado.interceptors.request.use(
     config.headers = {
       ...config.headers,
       Authorization: TOKEN,
+      'Access-Control-Allow-Origin': true,
     }
     return config
   },
   (error) => {
-    return Promise.reject(error)
+    if (error.response.status === 401) {
+      useHistory().push('/')
+    } else {
+      return Promise.reject(error)
+    }
   },
 )
 
