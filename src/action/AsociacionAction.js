@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import TYPES from '../type/AsociacionType'
-import { AxiosPrivado } from '../config/axios'
+import { Axios } from '../config/axios'
 import Swal from 'sweetalert2'
 
 const {
@@ -20,19 +20,19 @@ const {
 } = TYPES
 
 // Crear nuevosServicios
-export const crearNuevoAsociacioncodAction = (Dataform) => {
+export const crearNuevoAsociacionAction = (Dataform) => {
   return async (dispatch) => {
-    dispatch(agregarAsociacioncod())
+    dispatch(agregarAsociacion())
 
     const { formularioDatos } = Dataform
 
     try {
       // insertar en la API
-      const { data } = await AxiosPrivado.post('asociacion/create-asociacion', formularioDatos)
+      const { data } = await Axios.post('asociacion/create-asociacion', formularioDatos)
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
-      dispatch(agregarAsociacioncodExito(datos))
+      dispatch(agregarAsociacionExito(datos))
 
       if (data.success === true) {
         Swal.fire('Correcto', 'La  asociacion se agregar correctamente', 'success')
@@ -40,7 +40,7 @@ export const crearNuevoAsociacioncodAction = (Dataform) => {
     } catch (error) {
       console.log(error)
       // si hay un error cambiar el state
-      dispatch(agregarAsociacioncodError(true))
+      dispatch(agregarAsociacionError(true))
       // alerta de error
       Swal.fire({
         icon: 'error',
@@ -51,51 +51,51 @@ export const crearNuevoAsociacioncodAction = (Dataform) => {
   }
 }
 
-const agregarAsociacioncod = () => ({
+const agregarAsociacion = () => ({
   type: ADD_ASOCIACION,
   payload: true,
 })
 
 // si el producto se guarda en la base de datos
-const agregarAsociacioncodExito = (datos) => ({
+const agregarAsociacionExito = (datos) => ({
   type: ADD_ASOCIACION_SUCCESS,
   payload: datos,
 })
 
 // si hubo un error
-const agregarAsociacioncodError = (estado) => ({
+const agregarAsociacionError = (estado) => ({
   type: ADD_ASOCIACION_ERROR,
   payload: estado,
 })
 
 // ***************** Seleccion obtener registros conveniocodigo//****************/
-export const obtenerAsociacioncodAction = () => {
+export const obtenerAsociacionAction = () => {
   return async (dispatch) => {
-    dispatch(obtenerAsociacioncod())
+    dispatch(obtenerAsociacion())
 
     try {
-      const { data } = await AxiosPrivado.get('/asociacion/view-asociacion')
+      const { data } = await Axios.get('/asociacion/view-asociacion')
       if (data.success === true) {
-        dispatch(obteneAsociacioncodExito(data.data))
+        dispatch(obteneAsociacionExito(data.data))
       }
     } catch (error) {
       console.log(error.response)
-      dispatch(obtenerAsociacioncodError())
+      dispatch(obtenerAsociacionError())
     }
   }
 }
 
-const obtenerAsociacioncod = () => ({
+const obtenerAsociacion = () => ({
   type: OBTENER_ASOCIACION,
   payload: true,
 })
 
-const obteneAsociacioncodExito = (datos) => ({
+const obteneAsociacionExito = (datos) => ({
   type: OBTENER_ASOCIACION_SUCCESS,
   payload: datos,
 })
 
-const obtenerAsociacioncodError = () => ({
+const obtenerAsociacionError = () => ({
   type: OBTENER_ASOCIACION_ERROR,
   payload: true,
 })
@@ -103,71 +103,71 @@ const obtenerAsociacioncodError = () => ({
 // ***************** Seleccion editar el obtenerConveniocod //****************/
 
 // Colocar producto en edición
-export const obtenerAsociacioncodEditarAction = (datos) => {
+export const obtenerAsociacionEditarAction = (datos) => {
   return (dispatch) => {
-    dispatch(obtenerAsociacioncodEditar(datos))
+    dispatch(obtenerAsociacionEditar(datos))
   }
 }
 
-const obtenerAsociacioncodEditar = (datos) => ({
+const obtenerAsociacionEditar = (datos) => ({
   type: OBTENER_ASOCIACION_EDITAR,
   payload: datos,
 })
 // ***************** Seleccion editar editar Conveniocod //****************/
 // Edita un registro en la api y state
-export const editarAsociacioncodAction = (dataform) => {
+export const editarAsociacionAction = (dataform) => {
   return async (dispatch) => {
-    dispatch(editarAsociacioncod())
+    dispatch(editarAsociacion())
 
     const { formularioDatos, setVisibleCHKIO, Id } = dataform
 
     try {
-      const { data } = await AxiosPrivado.put(`/app/conveniocodigo/update/${Id}`, formularioDatos)
+      const { data } = await Axios.put(`/app/conveniocodigo/update/${Id}`, formularioDatos)
 
-      dispatch(editarAsociacioncodExito(data.datos))
+      dispatch(editarAsociacionExito(data.datos))
       setVisibleCHKIO(false)
       if (data.code === 200) {
         Swal.fire('Correcto', 'El Cheout se ejecuto correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
-      dispatch(editarAsociacioncodError())
+      dispatch(editarAsociacionError())
     }
   }
 }
 
-const editarAsociacioncod = () => ({
+const editarAsociacion = () => ({
   type: EDITAR_ASOCIACION,
   payload: true,
 })
 
-const editarAsociacioncodExito = (datos) => ({
+const editarAsociacionExito = (datos) => ({
   type: EDITAR_ASOCIACION_SUCCESS,
   payload: datos,
 })
 
-const editarAsociacioncodError = () => ({
+const editarAsociacionError = () => ({
   type: EDITAR_ASOCIACION_ERROR,
   payload: true,
 })
 
 // ***************** Seleccion y elimina el borrarParques //****************/
-export const borrarAsociacioncodAction = (id) => {
+export const borrarAsociacionAction = (id) => {
   return async (dispatch) => {
-    dispatch(eliminarAsociacioncod(id))
+    dispatch(eliminarAsociacion(id))
 
     try {
-      const { data } = await AxiosPrivado.delete(`/app/conveniocodigo/delete/${id}`)
+      const { data } = await Axios.delete(`/app/conveniocodigo/delete/${id}`)
 
       if (data.code === 200) {
-        dispatch(eliminarAsociacioncodExito(id))
+        dispatch(eliminarAsociacionExito(id))
         // Si se elimina, mostrar alerta
         Swal.fire('Eliminado', 'La Reserva se eliminó correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
       //const { data } = error.response
-      dispatch(eliminarAsociacioncodError())
+      dispatch(eliminarAsociacionError())
 
       // alerta de error
       Swal.fire({
@@ -179,15 +179,15 @@ export const borrarAsociacioncodAction = (id) => {
   }
 }
 
-const eliminarAsociacioncod = (Id) => ({
+const eliminarAsociacion = (Id) => ({
   type: DELETE_ASOCIACION,
   payload: Id,
 })
-const eliminarAsociacioncodExito = (Id) => ({
+const eliminarAsociacionExito = (Id) => ({
   type: DELETE_ASOCIACION_SUCCESS,
 })
 
-const eliminarAsociacioncodError = () => ({
+const eliminarAsociacionError = () => ({
   type: DELETE_ASOCIACION_ERROR,
   payload: true,
 })

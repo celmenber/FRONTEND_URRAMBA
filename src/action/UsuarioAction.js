@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { TYPES } from '../type/UsuarioType'
-import { AxiosPrivado } from 'src/config/axios'
+import { Axios } from 'src/config/axios'
 import Swal from 'sweetalert2'
 const {
   ADD_USUARIO,
@@ -27,7 +27,7 @@ export const crearNuevoUsuarioAction = (Dataform) => {
     const { formularioDatos, handleReset } = Dataform
     try {
       // insertar en la API
-      const { data } = await AxiosPrivado.post('/app/usuario/add', formularioDatos)
+      const { data } = await Axios.post('/app/usuario/add', formularioDatos)
 
       // Si todo sale bien, actualizar el state
       dispatch(agregarUsuarioExito(data.datos))
@@ -98,7 +98,7 @@ export const editarUsuarioAction = (formDatos) => {
     console.log(formDatos)
     const { formularioDatos, handleReset, Id } = formDatos
     try {
-      const { data } = await AxiosPrivado.put(`/users/edit-user/${Id}`, formularioDatos)
+      const { data } = await Axios.put(`/users/edit-user/${Id}`, formularioDatos)
       dispatch(editarUsuarioExito(data.datos))
 
       if (data.code === 200) {
@@ -134,7 +134,7 @@ export const editarEstadoUsuarioAction = (Datos) => {
     dispatch(editarEstadoUsuario())
     const { setSelectActivar, estadoDatos, Id } = Datos
     try {
-      const { data } = await AxiosPrivado.patch(`/app/usuario/estadouser/${Id}`, {
+      const { data } = await Axios.patch(`/app/usuario/estadouser/${Id}`, {
         Estado: estadoDatos,
       })
       dispatch(editarEstadoUsuarioExito(data.datos))
@@ -161,7 +161,7 @@ export const obtenerUsuarioAction = () => {
     dispatch(ObtenerUsuario())
 
     try {
-      const { data } = await AxiosPrivado.get('/users/view-user')
+      const { data } = await Axios.get('/users/view-user')
 
       if (data.success === true) {
         dispatch(obtenerUsuarioExitosa(data.data))
@@ -194,7 +194,7 @@ export const borrarUsuarioAction = (id) => {
     dispatch(eliminaUsuario(id))
 
     try {
-      const { data } = await AxiosPrivado.delete(`/app/usuario/delete/${id}`)
+      const { data } = await Axios.delete(`/app/usuario/delete/${id}`)
 
       if (data.code === 200) {
         dispatch(eliminarUsuarioExito(id))

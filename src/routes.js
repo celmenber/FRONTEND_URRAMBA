@@ -3,6 +3,7 @@ import { lazy } from 'react'
 const Dashboard = lazy(() => import('./views/dashboard/Dashboard'))
 const Usuarios = lazy(() => import('./views/pages/usuarios/AdminUsuarios'))
 const Asociaciones = lazy(() => import('./views/form/FormAsociaciones'))
+const Empleados = lazy(() => import('./views/form/FormEmpleados'))
 const Concejos = lazy(() => import('./views/concejos/Concejos'))
 const Parametros = lazy(() => import('./views/parametros/Parametros'))
 const Reportes = lazy(() => import('./views/parametros/Parametros'))
@@ -20,6 +21,7 @@ const routes = [
   { path: '/admin/usuarios', name: 'Usuarios', component: Usuarios },
   { path: '/admin/asociaciones', name: 'Asociaciones', component: Asociaciones },
   { path: '/admin/parametros', name: 'Parametros', component: Parametros },
+  { path: '/admin/empleados', name: 'Empleados', component: Empleados },
 ]
 
 export default routes

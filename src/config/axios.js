@@ -7,20 +7,20 @@ const stringTOKEN = localStorage.getItem('currentUser') ? localStorage.getItem('
 
 const TOKEN = `Bearer ${stringTOKEN}`
 
-const AxiosPublico = axios.create({
+const AxiosLogin = axios.create({
   baseURL: `${API_URL}/api`,
 })
 
-const AxiosPrivado = axios.create({
+const Axios = axios.create({
   baseURL: `${API_URL}/api`,
 })
+//Axios.defaults.headers.common['Authorization'] = TOKEN
 
-AxiosPrivado.interceptors.request.use(
+Axios.interceptors.request.use(
   (config) => {
     config.headers = {
       ...config.headers,
       Authorization: TOKEN,
-      'Access-Control-Allow-Origin': true,
     }
     return config
   },
@@ -33,4 +33,21 @@ AxiosPrivado.interceptors.request.use(
   },
 )
 
-export { AxiosPublico, AxiosPrivado }
+Axios.interceptors.response.use(
+  (config) => {
+    config.headers = {
+      ...config.headers,
+      Authorization: TOKEN,
+    }
+    return config
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      useHistory().push('/')
+    } else {
+      return Promise.reject(error)
+    }
+  },
+)
+
+export { AxiosLogin, Axios }

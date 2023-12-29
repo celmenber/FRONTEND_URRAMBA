@@ -2,10 +2,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import {
-  obtenerAsociacioncodAction,
-  editarAsociacioncodAction,
-  crearNuevoAsociacioncodAction,
-  borrarAsociacioncodAction,
+  obtenerAsociacionAction,
+  editarAsociacionAction,
+  crearNuevoAsociacionAction,
+  borrarAsociacionAction,
 } from '../action/AsociacionAction'
 import { obtenerMunicipioAction } from '../action/ParametrosAction'
 import Swal from 'sweetalert2'
@@ -14,14 +14,14 @@ export const AsociacionForm = () => {
 
   const dispatch = useDispatch()
   const obtenerMunicipio = () => dispatch(obtenerMunicipioAction())
-  const obtenerAsociacion = () => dispatch(obtenerAsociacioncodAction())
-  const crearNuevoAsociacion = (Dataform) => dispatch(crearNuevoAsociacioncodAction(Dataform))
-  const updateAsociacion = (Dataform) => dispatch(editarAsociacioncodAction(Dataform))
+  const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
+  const crearNuevoAsociacion = (Dataform) => dispatch(crearNuevoAsociacionAction(Dataform))
+  const updateAsociacion = (Dataform) => dispatch(editarAsociacionAction(Dataform))
 
   //selecion del state en el  store
   const cargando = useSelector((state) => state.Asociacion.loading)
   const cargandolista = useSelector((state) => state.Asociacion.loadinglista)
-  const asociacioncodeditar = useSelector((state) => state.Asociacion.asociacioncodeditar)
+  const Asociacioneditar = useSelector((state) => state.Asociacion.Asociacioneditar)
   const asociaciones = useSelector((state) => state.Asociacion.asociacionlista)
   const Municipio = useSelector((state) => state.Parametros.municipios)
 
@@ -88,7 +88,7 @@ console.log(formularioDatos)
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        dispatch(borrarAsociacioncodAction(id))
+        dispatch(borrarAsociacionAction(id))
       }
     })
   }
@@ -102,11 +102,11 @@ console.log(formularioDatos)
     obtenerAsociacion,
     obtenerMunicipio,
     EliminarAsociacion,
-    asociacioncodeditar,
+    Asociacioneditar,
     Municipio,
     asociaciones,
    // userDetails,
-  //  asociacioncodigo,
+  //  Asociacionigo,
     cargandolista,
     cargando,
     validated,

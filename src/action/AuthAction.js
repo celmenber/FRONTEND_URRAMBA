@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { TYPES } from '../type/LoginType'
-import { AxiosPublico } from '../config/axios';
+import { AxiosLogin } from '../config/axios';
 
 const {
   LOGIN_REQUEST,
@@ -16,7 +16,7 @@ export const loginUser = (Loginform) => {
 
     try {
       // insertar en la API
-      const { data } = await AxiosPublico.post('auth/login', Loginform);
+      const { data } = await AxiosLogin.post('/auth/login', Loginform);
       if (data.success === true) {
         const { access_token, access_data } = data.data
         localStorage.setItem('currentUser', JSON.stringify(access_data))

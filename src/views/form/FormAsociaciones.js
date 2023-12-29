@@ -20,19 +20,18 @@ import {
   CFormSelect,
   CFormFeedback,
   CSpinner,
-  CAvatar,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
-import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+/* import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
+import CIcon from '@coreui/icons-react' */
 
  const Contactenos = () => {
    const { handleSubmit,
-           onChangeFormulario,
+            onChangeFormulario,
             obtenerAsociacion,
             obtenerMunicipio,
-            EliminarAsociacion,
-            asociacioncodeditar,
+          /*   EliminarAsociacion,
+            asociacioncodeditar, */
             Municipio,
             asociaciones,
             cargandolista,
@@ -42,18 +41,17 @@ import CIcon from '@coreui/icons-react'
      } = AsociacionForm();
 
 
+  useEffect(() => {
+     // Consultar la api listar Municipio,
+       obtenerMunicipio();
+       // eslint-disable-next-line
+     }, []);
+
    useEffect(() => {
      // Consultar la api listar detallesparques
      obtenerAsociacion();
      // eslint-disable-next-line
    }, []);
-
-  useEffect(() => {
-    // Consultar la api listar Municipio,
-      obtenerMunicipio();
-      // eslint-disable-next-line
-    }, []);
-
 /*
   useEffect(() => {
     // Consultar la api listar detallesparques
@@ -257,12 +255,12 @@ import CIcon from '@coreui/icons-react'
                               <CTableDataCell>
                                   <div>{item.Nombre}</div>
                                 <div className="small text-medium-emphasis">
-                                    <span>{item.Correo}</span> | Telefono: {' '}
-                                    {item.Telefono}
+                                    <span>{item.correo}</span> | Telefono: {' '}
+                                    {item.telefono}
 
                                 </div>
                                   <div className="small text-medium-emphasis">
-                                    <span>{item.Direccion}</span>
+                                    <span>{item.direccion}</span>
                                   </div>
                               </CTableDataCell>
                               <CTableDataCell className="text-center">

@@ -25,7 +25,7 @@ const administrador_nav = [
       {
         component: CNavItem,
         name: 'Empleados',
-        to: '/admin/asociaciones',
+        to: '/admin/empleados',
       },
       {
         component: CNavItem,
@@ -77,11 +77,16 @@ const administrador_nav = [
   },
   {
     component: CNavItem,
+    name: 'CARACTERIZACION',
+    to: '/concejos',
+    icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'REPORTES',
     to: '/concejos',
     icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
   },
-
 ]
 
 const operadores_nav = [
@@ -108,6 +113,12 @@ const operadores_nav = [
         to: '/familias/nucleos',
       },
     ],
+  },
+  {
+    component: CNavItem,
+    name: 'CARACTERIZACION',
+    to: '/concejos',
+    icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
   },
 ]
 
