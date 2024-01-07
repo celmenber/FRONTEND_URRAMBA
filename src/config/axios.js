@@ -3,18 +3,25 @@ import { useHistory } from 'react-router-dom'
 
 const API_URL = process.env.REACT_APP_API_URL
 
-const stringTOKEN = localStorage.getItem('currentUser') ? localStorage.getItem('token') : ''
+const stringTOKEN = window.localStorage.getItem('currentUser')
+  ? window.localStorage.getItem('token')
+  : ''
 
 const TOKEN = `Bearer ${stringTOKEN}`
 
-const AxiosLogin = axios.create({
+/* console.log(window.localStorage.getItem('currentUser'))
+console.log(stringTOKEN) */
+
+/* axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.common['Content-Type'] = 'application/json' */
+
+const Login = axios.create({
   baseURL: `${API_URL}/api`,
 })
 
 const Axios = axios.create({
   baseURL: `${API_URL}/api`,
 })
-//Axios.defaults.headers.common['Authorization'] = TOKEN
 
 Axios.interceptors.request.use(
   (config) => {
@@ -33,7 +40,7 @@ Axios.interceptors.request.use(
   },
 )
 
-Axios.interceptors.response.use(
+/* Axios.interceptors.response.use(
   (config) => {
     config.headers = {
       ...config.headers,
@@ -48,6 +55,6 @@ Axios.interceptors.response.use(
       return Promise.reject(error)
     }
   },
-)
+) */
 
-export { AxiosLogin, Axios }
+export { Login, Axios }

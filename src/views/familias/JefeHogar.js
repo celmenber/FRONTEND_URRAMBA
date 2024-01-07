@@ -30,7 +30,7 @@ import {
 } from '@coreui/react'
 import React, { useState } from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
-import Modal from '../modals/Modal'
+// import Modal from '../modals/Modal'
 import FormJefeHogar from '../form/FormJefeHogar'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 const JefeHogar = () => {
@@ -132,7 +132,7 @@ const JefeHogar = () => {
             </CButton>
           </CCardHeader>
           <CCardBody>
-            <Modal
+      {/*       <Modal
               visible={modal}
               closeModal={() => toggleModal(false)}
               title="Nuevo Jefe de Hogar"
@@ -144,7 +144,7 @@ const JefeHogar = () => {
               onSave={() => {
                 // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
               }}
-            />
+            /> */}
 
             <CTable align="middle" className="mb-0 border" hover responsive>
               <CTableHead color="light">

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useEffect } from 'react'
-import EmpleadoModalCrear from './modal/FormEmpleadoNuevoModal'
-import EmpleadoModalActualiza from './modal/FormEmpleadoActModal'
+import AutoridadTNuevoCrear from './modal/FormAutoridadTNuevoModal'
+import AutoridadTActualiza from './modal/FormAutoridadTActModal'
 
 import {
     CRow,
@@ -84,7 +84,7 @@ const AdminConvenios = () => {
             <CCol xs={12}>
                 <CCard className="mb-4">
                     <CCardHeader>
-              <strong>Gestión</strong> <small>Empleado asociación</small>
+              <strong>Gestión</strong> <small>Autoridad Tradicional</small>
                     </CCardHeader>
                     <CCardBody>
                         <CForm>
@@ -97,7 +97,7 @@ const AdminConvenios = () => {
                                     style={{ width: '100%' }}
                                     onClick={() => setVisibleE(true)}
                                 >{' '}
-                                 {'Agregar Nuevo Empleado asociación'}
+                    {'Agregar Nuevo Autoridad Tradicional'}
                                 </CButton>
                             </CCol>
                         </CForm>
@@ -247,16 +247,15 @@ const AdminConvenios = () => {
                         </CCard>
                     </CCol>
 
-       <EmpleadoModalCrear
+      {/*   <AutoridadTNuevoCrear
           visibleE={visibleE}
           setVisibleE={setVisibleE}
             />
-        <EmpleadoModalActualiza
+        <AutoridadTActualiza
                 visibleEM={visibleEM}
                 setVisibleEM={setVisibleEM}
                  datoEmpleado={datoEmpleado}
-                //onChangeFormulario={onChangeFormulario}
-            />
+            /> */}
         </CRow>
     )
 }

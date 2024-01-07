@@ -21,7 +21,7 @@ import {
 } from '@coreui/react'
 import React, { useState } from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
-import Modal from '../modals/Modal'
+//import Modal from '../modals/Modal'
 import FormUsuarios from '../form/FormUsuarios'
 import Swal from 'sweetalert2'
 
@@ -75,7 +75,7 @@ const Usuarios = () => {
               </CCol>
             </CForm>
           </CCardBody>
-          <Modal
+          {/* <Modal
             visible={modal}
             closeModal={() => toggleModal(false)}
             title="Nuevo Usuario"
@@ -87,7 +87,7 @@ const Usuarios = () => {
             onSave={() => {
               // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
             }}
-          />
+          /> */}
           <CCardBody>
             <CTable align="middle" className="mb-0 border" hover responsive>
               <CTableHead color="light">

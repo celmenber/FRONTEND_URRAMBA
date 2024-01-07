@@ -18,7 +18,7 @@ import {
 import { EmpleadoForm } from 'src/hooks'
 import Swal from 'sweetalert2'
 
-const AdminUsuariosModal = (Props) => {
+const EmpleadoNuevoModal = (Props) => {
 
   const {
     visibleE,
@@ -35,12 +35,6 @@ const AdminUsuariosModal = (Props) => {
         handleReset,
         obtenerAsociacion,
         obtenerBarrioVereda,
-      //  obtenerMunicipio,
-        /* metodos */
-       // municipio,
-       // datoConvenio,
-       // validated,
-        //valedita,
         barrios,
         asociacion,
         cargando
@@ -60,7 +54,7 @@ const AdminUsuariosModal = (Props) => {
 
 
 
-    useEffect(() => {
+  useEffect(() => {
         // Consultar la api un asociacion
       obtenerAsociacion();
         // eslint-disable-next-line
@@ -117,8 +111,8 @@ const AdminUsuariosModal = (Props) => {
                               onChange={onChangeFormulario}
                               required>
                               <option value={''}>Seleccione...</option>
-                              <option value={true}>Activar</option>
-                              <option value={false}>Desactivar</option>
+                              <option value={1}>Activado</option>
+                              <option value={0}>Desactivado</option>
                             </CFormSelect>
                             <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
                           </CCol>
@@ -218,17 +212,6 @@ const AdminUsuariosModal = (Props) => {
                                     required />
                              <CFormFeedback invalid>El campo Email Empleado es Requerido!</CFormFeedback>
                             </CCol>
-                            {/* <CCol md={6} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom01">Representante Empresa*</CFormLabel>
-                                <CFormInput
-                                    type="text"
-                                    id="validationCustom002"
-                                    name='representanteEmpresa'
-                                    value={representanteEmpresa}
-                                    onChange={onChangeFormulario}
-                                    required />
-                                <CFormFeedback invalid>El campo Representante Empresa es Requerido!</CFormFeedback>
-                            </CCol> */}
                         </CRow>
                         <CRow>
                             <CCol md={9} style={{ marginTop: '20px', marginBottom: '20px' }}>
@@ -273,4 +256,4 @@ const AdminUsuariosModal = (Props) => {
         </>
     )
 }
-export default AdminUsuariosModal
+export default EmpleadoNuevoModal

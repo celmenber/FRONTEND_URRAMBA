@@ -37,7 +37,7 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <strong>Bienvenido </strong>
-            {`${User.NOMBRES} - ${User.USER_ROL}`}
+            {`${User.emp_documento !== null ? User.emp_nombres + " " + User.emp_apellidos : User.aut_nombres + " " + User.aut_apellidos } - ${User.USER_ROL}`}
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="">

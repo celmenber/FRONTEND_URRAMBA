@@ -6,7 +6,8 @@ import {
   UsuarioReducer,
   parametrosReducer,
   asociacionReducer,
-  EmpleadoReducer
+  EmpleadoReducer,
+  AutoridadTReducer
   } from './reducers'
 
 
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
   Usuario: UsuarioReducer,
   Parametros: parametrosReducer,
   Asociacion: asociacionReducer,
-  Empleado: EmpleadoReducer
+  Empleado: EmpleadoReducer,
+  AutoridadT: AutoridadTReducer
 })

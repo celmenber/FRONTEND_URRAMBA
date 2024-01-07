@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { CButton, CCard, CCardBody, CCardHeader, CCol, CContainer, CForm } from '@coreui/react'
 import React, { useState } from 'react'
-import Modal from '../modals/Modal'
+//import Modal from '../modals/Modal'
 import FormConcejos from '../form/FormConcejos'
 const Concejos = () => {
   const [modal, setModal] = useState(false)
@@ -33,7 +33,7 @@ const Concejos = () => {
               </CCol>
             </CForm>
           </CCardBody>
-          <Modal
+          {/* <Modal
             visible={modal}
             closeModal={() => toggleModal(false)}
             title="Nuevo Concejo Comunitario"
@@ -45,7 +45,7 @@ const Concejos = () => {
             onSave={() => {
               // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
             }}
-          />
+          /> */}
         </CCard>
       </CContainer>
     </>

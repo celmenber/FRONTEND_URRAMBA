@@ -32,7 +32,7 @@ export const EmpleadoForm = () => {
     const [valedita, setValedita] = useState(false)
     const [selectActivar, setSelectActivar] = useState(false);
     const [visibleE, setVisibleE] = useState(false)
-    const [visibleCV, setVisibleCV] = useState(false)
+    const [visibleEM, setVisibleEM] = useState(false)
 
     const [datoEmpleado, setDatoEmpleado] = useState({
           Id_asociacion:'',
@@ -83,7 +83,7 @@ export const EmpleadoForm = () => {
             const formularioDatos = {
               Id_asociacion: datoEmpleado.Id_asociacion,
               Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
-              Id_tipo_documento:datoEmpleado.Id_tipo_documento,
+              Id_tipo_documento:1,
               Documentos:datoEmpleado.Documentos,
               Nombres: datoEmpleado.Nombres,
               Apellidos: datoEmpleado.Apellidos,
@@ -91,7 +91,7 @@ export const EmpleadoForm = () => {
               Telefono:datoEmpleado.Telefono,
               Correo:datoEmpleado.Correo,
               Estado: datoEmpleado.Estado,
-              Fecha_ingreso: datoEmpleado.Fecha_ingreso
+              Fecha_ingreso: '2023-12-30' //datoEmpleado.Fecha_ingreso
             }
 
             if (valedita === false) {
@@ -102,34 +102,34 @@ export const EmpleadoForm = () => {
                 })
             }
 
-            setValedita(false)
-          setVisibleE(false)
+           // setValedita(false)
+            setVisibleE(false)
             event.stopPropagation()
         }
-        event.stopPropagation()
+       // event.stopPropagation()
         setValidated(true)
     }
 
 
 
     // función que redirige Edita ContactoAsunto
-    const EditaConvenio= id => {
-/*         const datos = convenio.filter(C => C.IdConvenio === id)
-        dispatch(obtenerConvenioEditarAction(datos));
-
-        setDatoConvenio({
-            idMunicipio: datos[0].IdMunicipio === null ? '' : datos[0].IdMunicipio,
-            estado: datos[0].Estado === null ? '' : datos[0].Estado,
-            nitEmpresa: datos[0].NitEmpresa === null ? '' : datos[0].NitEmpresa,
-            nombrEmpresa: datos[0].NombrEmpresa === null ? '' : datos[0].NombrEmpresa,
-            correoEmpresa: datos[0].CorreoEmpresa === null ? '' : datos[0].CorreoEmpresa,
-            direccionEmpresa: datos[0].DireccionEmpresa === null ? '' : datos[0].DireccionEmpresa,
-            telefonoEmpresa: datos[0].TelefonoEmpresa === null ? '' : datos[0].TelefonoEmpresa,
-            representanteEmpresa: datos[0].RepresentanteEmpresa === null ? '' : datos[0].RepresentanteEmpresa,
-        })
-
+    const EditaEmpleado= id => {
+      const datos = empleados.filter(C => C.ID === id)
+      // console.log(datos)
+      //  dispatch(obtenerConvenioEditarAction(datos));
+            setDatoEmpleado({
+              Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
+              Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
+              Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
+              Nombres: datos[0].nombres === null ? '' : datos[0].nombres,
+              Apellidos: datos[0].apellidos === null ? '' : datos[0].apellidos,
+              Direccion: datos[0].direccion === null ? '' : datos[0].direccion,
+              Telefono: datos[0].telefono === null ? '' : datos[0].telefono,
+              Correo: datos[0].correo === null ? '' : datos[0].correo,
+              Estado: datos[0].estado === null ? '' : datos[0].estado,
+            })
         setValedita(true)
-        setVisibleCV(true) */
+        setVisibleEM(true)
     }
 
     // función que redirige Editaservicio
@@ -144,10 +144,10 @@ export const EmpleadoForm = () => {
 
 
     // función que redirige Eliminar ContactoConvenio
-    const EliminarConvenio = id => {
-      /*   Swal.fire({
+    const eliminarEmpleado = id => {
+        Swal.fire({
             title: '¿Estas seguro de eliminar?',
-            text: "El Convenio eliminado no se podrá recuperar",
+          text: "El Empleado eliminado no se podrá recuperar",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -156,9 +156,9 @@ export const EmpleadoForm = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                dispatch(borrarConvenioAction(id));
+               // dispatch(borrarConvenioAction(id));
             }
-        }); */
+        });
     }
 
   /*   const BuscaMunicipio = id => {
@@ -174,6 +174,8 @@ export const EmpleadoForm = () => {
       obtenerEmpleado,
       obtenerAsociacion,
       obtenerBarrioVereda,
+      eliminarEmpleado,
+      EditaEmpleado,
    /*   obtenerConvenio,
       crearNuevoConvenio,
       UpdateConvenioEstado,
@@ -191,7 +193,7 @@ export const EmpleadoForm = () => {
       datoEmpleado, setDatoEmpleado,
       selectActivar, setSelectActivar,
       visibleE, setVisibleE,
-      visibleCV, setVisibleCV,
+      visibleEM, setVisibleEM,
       cargandolista,
       cargando
   }

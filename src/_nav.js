@@ -42,18 +42,18 @@ const administrador_nav = [
   {
     component: CNavGroup,
     name: 'CONCEJOS',
-    to: '/concejo',
+    to: '/dashboard/admin',
     icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Autoridad Tradicional',
-        to: '/familias/jefehogar',
+        to: '/admin/autoridadT',
       },
       {
         component: CNavItem,
         name: 'Miembros',
-        to: '/familias/nucleos',
+        to: '/admin/Miembros',
       },
     ],
   },
