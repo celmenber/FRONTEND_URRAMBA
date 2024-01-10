@@ -27,7 +27,7 @@ const initialState = {
   error: null,
 }
 
-export const asociacionReducer = (state = initialState, action) => {
+export const AsociacionReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ASOCIACION:
       return {

@@ -18,7 +18,7 @@ const initialState = {
   error: null,
 }
 
-export const parametrosReducer = (state = initialState, action) => {
+export const ParametrosReducer = (state = initialState, action) => {
   switch (action.type) {
     case OBTENER_MUNICIPIO:
       return {

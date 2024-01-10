@@ -47,6 +47,11 @@ const administrador_nav = [
     items: [
       {
         component: CNavItem,
+        name: 'Admin Concejos',
+        to: '/admin/concejos',
+      },
+      {
+        component: CNavItem,
         name: 'Autoridad Tradicional',
         to: '/admin/autoridadT',
       },

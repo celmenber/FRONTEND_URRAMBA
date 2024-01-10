@@ -38,7 +38,7 @@ export const AutoridadTReducer = (state = initialState, action) => {
         return {
           ...state,
           loading: false,
-          listaAUTORIDADT: [...state.listaAUTORIDADT, action.payload]
+          listautoridad: [...state.listautoridad, action.payload]
         }
         case OBTENER_AUTORIDADT:
             return {
@@ -49,12 +49,12 @@ export const AutoridadTReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadinglista: false,
-                listaAUTORIDADT: action.payload
+              listautoridad: action.payload
             }
       case OBTENER_AUTORIDADT_EDITAR:
           return {
             ...state,
-            AUTORIDADTeditar: action.payload
+            autoridadeditar: action.payload
           }
         case EDITAR_AUTORIDADT:
             return {
@@ -65,21 +65,21 @@ export const AutoridadTReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                AUTORIDADTeditar: null,
-                listaAUTORIDADT: state.listaAUTORIDADT.map(E =>
-                    E.EstadoServicioId === action.payload.EstadoServicioId ? E = action.payload : E
+                autoridadeditar: null,
+                listautoridad: state.listautoridad.map(X =>
+                    X.EstadoServicioId === action.payload.EstadoServicioId ? X = action.payload : X
                 )
             }
         case DELETE_AUTORIDADT:
             return {
                 ...state,
-                AUTORIDADTeliminar: action.payload,
+              autoridadeliminar: action.payload,
             }
         case DELETE_AUTORIDADT_SUCCESS:
             return {
                 ...state,
-                listaAUTORIDADT: state.listaAUTORIDADT.filter(E => E.Id !== state.AUTORIDADTeliminar),
-                AUTORIDADTeliminar: null
+                 listautoridad: state.listautoridad.filter(X => X.Id !== state.autoridadeliminar),
+              autoridadeliminar: null
             }
         case ADD_AUTORIDADT_ERROR:
         case OBTENER_AUTORIDADT_ERROR:

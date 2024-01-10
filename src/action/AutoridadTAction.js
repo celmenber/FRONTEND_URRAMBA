@@ -27,7 +27,7 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
 
     try {
       // insertar en la API
-      const { data } = await Axios.post('AutoridadTs/create-AutoridadT', formularioDatos)
+      const { data } = await Axios.post('/autoridatradicional/create-autoridatradicional', formularioDatos)
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
@@ -75,10 +75,12 @@ export const obtenerAutoridadTAction = () => {
         dispatch(obtenerAutoridadT());
 
         try {
-          const { data } = await Axios.get('/AutoridadTs/view-AutoridadT');
+          const { data } = await Axios.get('autoridatradicional/view-autoridatradicional');
+
             if (data.code === 200) {
+              console.log(data.data)
                 dispatch(obtenerAutoridadTExitosa(data.data))
-            }
+           }
         } catch (error) {
             console.log(error);
             dispatch(obtenerAutoridadTError())
@@ -91,7 +93,7 @@ const obtenerAutoridadT = () => ({
     payload: true
 });
 
-const obtenerAutoridadTExitosa = datos => ({
+const obtenerAutoridadTExitosa = (datos) => ({
     type: OBTENER_AUTORIDADT_SUCCESS,
     payload: datos
 })
@@ -110,7 +112,7 @@ export const editarAutoridadTAction = (Datos) => {
         const { Id } = Datos
         try {
 
-          const { data } = await Axios.patch(`/AutoridadTs/edit-AutoridadT/${Id}`);
+          const { data } = await Axios.patch(`/autoridatradicional/edit-autoridatradicional/${Id}`);
             dispatch(editarAutoridadTExito(data.datos));
 
             if (data.code === 200) {
@@ -152,7 +154,7 @@ export const borrarAutoridadTAction = id => {
         dispatch(eliminaAutoridadT(id));
 
         try {
-            const { data } = await Axios.delete(`app/AutoridadTs/delete/${id}`);
+          const { data } = await Axios.delete(`/autoridatradicional/delete-concejocomunitario/${id}`);
 
             if (data.code === 200) {
                 dispatch(eliminarAutoridadTExito(id));

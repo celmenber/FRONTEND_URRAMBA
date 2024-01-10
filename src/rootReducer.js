@@ -4,10 +4,11 @@ import {
   changeState,
   AuthReducer,
   UsuarioReducer,
-  parametrosReducer,
-  asociacionReducer,
+  ParametrosReducer,
+  AsociacionReducer,
   EmpleadoReducer,
-  AutoridadTReducer
+  AutoridadTReducer,
+  ConcejoReducer,
   } from './reducers'
 
 
@@ -15,8 +16,9 @@ export const rootReducer = combineReducers({
   change: changeState,
   Auth: AuthReducer,
   Usuario: UsuarioReducer,
-  Parametros: parametrosReducer,
-  Asociacion: asociacionReducer,
+  Parametros: ParametrosReducer,
+  Asociacion: AsociacionReducer,
   Empleado: EmpleadoReducer,
-  AutoridadT: AutoridadTReducer
+  AutoridadT: AutoridadTReducer,
+  Concejo: ConcejoReducer
 })

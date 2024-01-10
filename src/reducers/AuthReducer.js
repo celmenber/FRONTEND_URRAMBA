@@ -34,7 +34,7 @@ export const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         userDetails: action.payload.access_data,
-        token: action.payload.token,
+        token: action.payload.access_token,
         loading: false,
       }
     case LOGIN_LOGOUT:
