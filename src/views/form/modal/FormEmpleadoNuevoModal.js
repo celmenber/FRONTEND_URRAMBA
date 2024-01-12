@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { CLoadingButton, CModalTitle } from '@coreui/react-pro'
 import {
     CButton,

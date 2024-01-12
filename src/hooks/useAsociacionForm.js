@@ -60,7 +60,7 @@ export const AsociacionForm = () => {
         Telefono: datoAsociacion.direccionAsociacion,
         Correo: datoAsociacion.correoAsociacion
       }
-console.log(formularioDatos)
+//console.log(formularioDatos)
       if (valedita === false) {
         crearNuevoAsociacion({
           formularioDatos,

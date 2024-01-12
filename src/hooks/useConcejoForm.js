@@ -83,8 +83,8 @@ export const ConcejoForm = () => {
   // función que redirige Eliminar ContactoConvenio
   const EliminarConcejo = (id) => {
     Swal.fire({
-      title: '¿Estas seguro de eliminar el Concejo?',
-      text: 'El Concejo eliminado no se podrá recuperar',
+      title: '¿Estas seguro de eliminar el Concejo Comunitario?',
+      text: 'El Concejo Comunitario eliminado no se podrá recuperar',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

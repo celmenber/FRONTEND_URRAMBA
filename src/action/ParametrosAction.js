@@ -8,7 +8,13 @@ const {
   OBTENER_MUNICIPIO_ERROR,
   OBTENER_BARRIOVEREDA,
   OBTENER_BARRIOVEREDA_SUCCESS,
-  OBTENER_BARRIOVEREDA_ERROR
+  OBTENER_BARRIOVEREDA_ERROR,
+  OBTENER_CORREGIMIENTO,
+  OBTENER_CORREGIMIENTO_SUCCESS,
+  OBTENER_CORREGIMIENTO_ERROR,
+  OBTENER_TIPODOCUMENTO,
+  OBTENER_TIPODOCUMENTO_SUCCESS,
+  OBTENER_TIPODOCUMENTO_ERROR,
 } = TYPES
 
 // procedimiento obtener listado dato municipio
@@ -72,5 +78,69 @@ const obtenerBarrioVeredaExitosa = (datos) => ({
 
 const obtenerBarrioVeredaError = () => ({
   type: OBTENER_BARRIOVEREDA_ERROR,
+  payload: true,
+})
+
+// procedimiento obtener listado dato corregimeinto
+export const obtenercorregimientoAction = () => {
+  return async (dispatch) => {
+    dispatch(Obtenercorregimiento())
+
+    try {
+      const { data } = await Axios.get('/parametros/view-veredas_barrios')
+      if (data.code === 200) {
+        dispatch(obtenercorregimientoExitosa(data.data))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(obtenercorregimientoError())
+    }
+  }
+}
+
+const Obtenercorregimiento = () => ({
+  type: OBTENER_CORREGIMIENTO,
+  payload: true,
+})
+
+const obtenercorregimientoExitosa = (datos) => ({
+  type: OBTENER_CORREGIMIENTO_SUCCESS,
+  payload: datos,
+})
+
+const obtenercorregimientoError = () => ({
+  type: OBTENER_CORREGIMIENTO_ERROR,
+  payload: true,
+})
+
+// procedimiento obtener listado dato TIPO DOCUMENTO
+export const obtenertipodocumentoAction = () => {
+  return async (dispatch) => {
+    dispatch(Obtenertipodocumento())
+
+    try {
+      const { data } = await Axios.get('/parametros/view-veredas_barrios')
+      if (data.code === 200) {
+        dispatch(obtenertipodocumentoExitosa(data.data))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(obtenertipodocumentoError())
+    }
+  }
+}
+
+const Obtenertipodocumento = () => ({
+  type: OBTENER_TIPODOCUMENTO,
+  payload: true,
+})
+
+const obtenertipodocumentoExitosa = (datos) => ({
+  type: OBTENER_TIPODOCUMENTO_SUCCESS,
+  payload: datos,
+})
+
+const obtenertipodocumentoError = () => ({
+  type: OBTENER_TIPODOCUMENTO_ERROR,
   payload: true,
 })

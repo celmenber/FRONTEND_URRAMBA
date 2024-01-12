@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import AutoridadTNuevoCrear from './modal/FormAutoridadTNuevoModal'
 import AutoridadTActualiza from './modal/FormAutoridadTActModal'
 
@@ -28,7 +28,7 @@ import {
     CAvatar,
 } from '@coreui/react'
 //import { CLoadingButton } from '@coreui/react-pro'
-import { EmpleadoForm } from 'src/hooks'
+import { AutoridadTForm } from 'src/hooks'
 import CIcon from '@coreui/icons-react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
@@ -38,29 +38,27 @@ import {
     cilTrash,
 } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
-import { useState } from 'react'
 
-const AdminConvenios = () => {
+const AutoridadT = () => {
     const [selectServicio, setSelectServicio] = useState(1);
 
     const {
-        obtenerEmpleado,
-        UpdateConvenioEstado,
-        eliminarEmpleado,
-        EditaEmpleado,
-        /* metodos */
-        empleados,
-        selectActivar, setSelectActivar,
-        visibleE, setVisibleE,
-        visibleEM, setVisibleEM,
-        datoEmpleado, setDatoEmpleado,
-        cargandolista,
-    } = EmpleadoForm()
+      obtenerAutoridadT,
+      eliminarAutoridadT,
+      editarAutoridadT,
+      autoridadT,
+      datoAutoridad,
+      selectActivar,
+      setSelectActivar,
+      visibleAT, setVisibleAT,
+      visibleEAT, setVisibleEAT,
+      cargandolista,
+    } = AutoridadTForm()
 
 
    useEffect(() => {
-        // Consultar la api listar parques
-     obtenerEmpleado();
+     // Consultar la api listar obtenerAutoridadT
+     obtenerAutoridadT();
         // eslint-disable-next-line
     }, []);
 /*
@@ -77,7 +75,7 @@ const AdminConvenios = () => {
         UpdateConvenioEstado(id)
     }); */
 
-  console.log(empleados);
+ // console.log(empleados);
 
     return (
         <CRow>
@@ -95,7 +93,7 @@ const AdminConvenios = () => {
                                     variant="outline"
                                     className="px-4"
                                     style={{ width: '100%' }}
-                                    onClick={() => setVisibleE(true)}
+                    onClick={() => setVisibleAT(true)}
                                 >{' '}
                     {'Agregar Nuevo Autoridad Tradicional'}
                                 </CButton>
@@ -129,7 +127,7 @@ const AdminConvenios = () => {
                                                             </CTableHeaderCell>
                                                         </CTableRow>
                                                     ) : (
-                                                      empleados?.map((item, index) => (
+                                                   autoridadT?.map((item, index) => (
                                                          <CTableRow v-for="item in tableItems" key={index}>
 
                                                                 <CTableDataCell className="text-center">
@@ -215,7 +213,7 @@ const AdminConvenios = () => {
                                                                                 color="info"
                                                                                 variant="outline"
                                                                                 size="lg"
-                                                                                onClick={() => EditaEmpleado(item.ID)}
+                                                                                onClick={() => editarAutoridadT(item.ID)}
                                                                             >
                                                                                 {'Editar'}
                                                                             </CButton></CTooltip>
@@ -231,7 +229,7 @@ const AdminConvenios = () => {
                                                                                 color="danger"
                                                                                 variant="outline"
                                                                                 size="lg"
-                                                                               onClick={() => eliminarEmpleado(item.ID)}
+                                                                                onClick={() => eliminarAutoridadT(item.ID)}
                                                                             >
                                                                                 <CIcon icon={cilTrash} size="lg" />
                                                                             </CButton></CTooltip>
@@ -247,16 +245,16 @@ const AdminConvenios = () => {
                         </CCard>
                     </CCol>
 
-      {/*   <AutoridadTNuevoCrear
-          visibleE={visibleE}
-          setVisibleE={setVisibleE}
-            />
-        <AutoridadTActualiza
-                visibleEM={visibleEM}
-                setVisibleEM={setVisibleEM}
-                 datoEmpleado={datoEmpleado}
-            /> */}
+                 <AutoridadTNuevoCrear
+                  visibleAT={visibleAT}
+                   setVisibleAT={setVisibleAT}
+                  />
+        {/*   <AutoridadTActualiza
+                  visibleEAT={visibleEAT}
+                  setVisibleEAT={setVisibleEAT}
+                  datoAutoridad={datoAutoridad}
+                  /> */}
         </CRow>
     )
 }
-export default AdminConvenios
+export default AutoridadT

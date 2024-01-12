@@ -8,14 +8,21 @@ import {
   obtenerAutoridadTAction,
   borrarAutoridadTAction
 } from '../action/AutoridadTAction';
-//import { obtenerAsociacionAction } from '../action/AsociacionAction'
-import { obtenerBarrioVeredaAction } from '../action/ParametrosAction'
+
+import {
+  obtenerBarrioVeredaAction,
+  obtenerMunicipioAction,
+  obtenertipodocumentoAction
+} from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 
-export const EmpleadoForm = () => {
+export const AutoridadTForm = () => {
+
   const dispatch = useDispatch()
- // const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
+  const obtenerMunicipio = () => dispatch(obtenerMunicipioAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
+  const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
+
   const obtenerAutoridadT = () => dispatch(obtenerAutoridadTAction());
   const crearNuevoAutoridadT = (Dataform) => dispatch(crearNuevoAutoridadTAction(Dataform));
   const actulizarAutoridadT = (Dataform) => dispatch(editarAutoridadTAction(Dataform));
@@ -24,9 +31,13 @@ export const EmpleadoForm = () => {
    // const { userDetails } = useSelector((state) => state.Auth);
   const cargando = useSelector(state => state.AutoridadT.loading);
   const cargandolista = useSelector(state => state.AutoridadT.loadinglista);
+  const municipio = useSelector(state => state.Parametros.municipios);
   const barrios = useSelector(state => state.Parametros.barriosveredas);
-  // const asociacion = useSelector(state => state.Asociacion.asociacionlista);
+  const corregimiento = useSelector(state => state.Parametros.corregimientos);
+  const tipodocumento = useSelector(state => state.Parametros.tipodocumentos);
   const autoridadT = useSelector(state => state.AutoridadT.listautoridad);
+
+
 
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
@@ -34,40 +45,48 @@ export const EmpleadoForm = () => {
     const [visibleAT, setVisibleAT] = useState(false)
     const [visibleEAT, setVisibleEAT] = useState(false)
 
-    const [datoEmpleado, setDatoEmpleado] = useState({
-          Id_asociacion:'',
-          Id_barrio_vereda:'',
-          Id_tipo_documento:'',
+    const [datoAutoridad, setDatoAutoridad] = useState({
+          Idmunicipio:'',
+          Idbarriovereda:'',
+          Idcorregimiento:'',
+          Idtipodocumento:'',
           Documentos:'',
-          Nombres: '',
-          Apellidos: '',
+          Nombres:'',
+          Apellidos:'',
+          Sexo:'',
+          Genero:'',
           Direccion:'',
           Telefono:'',
-          Correo:'',
-          Estado: '',
-          Fecha_ingreso:'',
+          Correo: '',
+          Estado:'',
+          Fechanacimiento:'',
+          Fechaingreso:''
     })
 
     // Leer los datos del formulario
     const onChangeFormulario = e => {
-      setDatoEmpleado({
-        ...datoEmpleado,
+      setDatoAutoridad({
+        ...datoAutoridad,
             [e.target.name]: e.target.value
         })
     }
     const handleReset = () => {
-      setDatoEmpleado({
-            Id_asociacion: '',
-            Id_barrio_vereda: '',
-            Id_tipo_documento: '',
+      setDatoAutoridad({
+            Idmunicipio: '',
+            Idbarriovereda: '',
+            Idcorregimiento: '',
+            Idtipodocumento: '',
             Documentos: '',
             Nombres: '',
             Apellidos: '',
+            Sexo: '',
+            Genero: '',
             Direccion: '',
             Telefono: '',
             Correo: '',
             Estado: '',
-            Fecha_ingreso: '',
+            Fechanacimiento: '',
+            Fechaingreso: ''
         })
         setValedita(false)
     };
@@ -81,17 +100,21 @@ export const EmpleadoForm = () => {
         } else {
 
             const formularioDatos = {
-              Id_asociacion: datoEmpleado.Id_asociacion,
-              Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
-              Id_tipo_documento:1,
-              Documentos:datoEmpleado.Documentos,
-              Nombres: datoEmpleado.Nombres,
-              Apellidos: datoEmpleado.Apellidos,
-              Direccion: datoEmpleado.Direccion,
-              Telefono:datoEmpleado.Telefono,
-              Correo:datoEmpleado.Correo,
-              Estado: datoEmpleado.Estado,
-              Fecha_ingreso: '2023-12-30' //datoEmpleado.Fecha_ingreso
+                    Id_municipio: datoAutoridad.Idmunicipio,
+                    Id_barrio_vereda:datoAutoridad.Idbarriovereda,
+                    Id_corregimiento:datoAutoridad.Idcorregimiento,
+                    Id_tipo_documento:datoAutoridad.Idtipodocumento,
+                    Documentos:datoAutoridad.Documentos,
+                    Nombres:datoAutoridad.Nombres,
+                    Apellidos:datoAutoridad.Apellidos,
+                    Sexo:datoAutoridad.Sexo,
+                    Genero: datoAutoridad.Genero,
+                    Direccion: datoAutoridad.Direccion,
+                    Telefono: datoAutoridad.Telefono,
+                    Correo: datoAutoridad.Correo,
+                    Estado: datoAutoridad.Estado,
+                    Fecha_nacimiento: datoAutoridad.Fechanacimiento,
+                    Fecha_ingreso: datoAutoridad.Fechaingreso,
             }
 
             if (valedita === false) {
@@ -117,8 +140,8 @@ export const EmpleadoForm = () => {
     const datos = autoridadT.filter(C => C.ID === id)
       // console.log(datos)
       //  dispatch(obtenerConvenioEditarAction(datos));
-            setDatoEmpleado({
-              Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
+    setDatoAutoridad({
+              /* Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
               Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
               Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
               Nombres: datos[0].nombres === null ? '' : datos[0].nombres,
@@ -126,7 +149,7 @@ export const EmpleadoForm = () => {
               Direccion: datos[0].direccion === null ? '' : datos[0].direccion,
               Telefono: datos[0].telefono === null ? '' : datos[0].telefono,
               Correo: datos[0].correo === null ? '' : datos[0].correo,
-              Estado: datos[0].estado === null ? '' : datos[0].estado,
+              Estado: datos[0].estado === null ? '' : datos[0].estado, */
             })
         setValedita(true)
         setVisibleEAT(true)
@@ -174,16 +197,19 @@ export const EmpleadoForm = () => {
       obtenerAutoridadT,
       actulizarAutoridadT,
       obtenerBarrioVereda,
-       eliminarAutoridadT,
-       editarAutoridadT,
+      obtenerMunicipio,
+      obtenertipodocumento,
+      eliminarAutoridadT,
+      editarAutoridadT,
     /* metodos */
-    //  userDetails,
-    //  asociacion,
       autoridadT,
       barrios,
+      municipio,
+      corregimiento,
+      tipodocumento,
       validated,
       valedita,
-      datoEmpleado, setDatoEmpleado,
+      datoAutoridad, setDatoAutoridad,
       selectActivar, setSelectActivar,
       visibleAT, setVisibleAT,
       visibleEAT, setVisibleEAT,

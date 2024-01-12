@@ -35,7 +35,7 @@ export const crearNuevoConcejoAction = (Dataform) => {
       dispatch(agregarConcejoExito(datos))
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'La  Concejo se agregar correctamente', 'success')
+        Swal.fire('Correcto', 'El  Concejo comunitario se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)

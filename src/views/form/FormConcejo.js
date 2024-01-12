@@ -20,10 +20,11 @@ import {
   CFormSelect,
   CFormFeedback,
   CSpinner,
+  CTooltip,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
-/* import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
-import CIcon from '@coreui/icons-react' */
+import CIcon from '@coreui/icons-react'
+import { cilTrash } from '@coreui/icons'
 
 const FormConcejo = () => {
   const {
@@ -46,13 +47,13 @@ const FormConcejo = () => {
 
 
   useEffect(() => {
-    // Consultar la api listar detallesparques
+    // Consultar la api listar obtenerConcejo
     obtenerConcejo();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    // Consultar la api listar detallesparques
+    // Consultar la api listar obtenerAutoridadT
     setTimeout(() => {
       obtenerAutoridadT();
     }, 500);
@@ -69,7 +70,7 @@ const FormConcejo = () => {
   }, []);
 
   useEffect(() => {
-    // Consultar la api listar detallesparques
+    // Consultar la api listar obtenerAsociacion
     setTimeout(() => {
       obtenerAsociacion();
     }, 700);
@@ -237,10 +238,10 @@ const FormConcejo = () => {
                       <CTable align="middle" className="mb-0 border" hover responsive>
                         <CTableHead color="light">
                           <CTableRow>
-                            <CTableHeaderCell>Asociacion</CTableHeaderCell>
-                            <CTableHeaderCell className="text-center">Nit</CTableHeaderCell>
+                            <CTableHeaderCell>Concejos</CTableHeaderCell>
+                            <CTableHeaderCell className="text-center">Asociacion</CTableHeaderCell>
                             <CTableHeaderCell className="text-center">Municipio</CTableHeaderCell>
-                            <CTableHeaderCell></CTableHeaderCell>
+                            <CTableHeaderCell colSpan={2} className="text-center">Acciones</CTableHeaderCell>
                           </CTableRow>
                         </CTableHead>
                         <CTableBody>
@@ -263,23 +264,53 @@ const FormConcejo = () => {
                               Concejo.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell>
-                                  <div>{item.Nombre}</div>
+                                    <div><b>{item.Nombre_concejo_comunitario}</b></div>
                                   <div className="small text-medium-emphasis">
-                                    <span>{item.correo}</span> | Telefono: {' '}
-                                    {item.telefono}
-
+                                    NIT:<span>{item.Nit}</span>  |  Autoridad tradicional: {' '}
+                                      {item.nombres} {item.apellidos}
                                   </div>
                                   <div className="small text-medium-emphasis">
                                     <span>{item.direccion}</span>
                                   </div>
                                 </CTableDataCell>
                                 <CTableDataCell className="text-center">
-                                  <div>{item.Nit}</div>
+                                    <div>{item.Nombre}</div>
                                 </CTableDataCell>
-                                <CTableDataCell>{item.municipio}</CTableDataCell>
-                                <CTableDataCell>
-                                  <CButton variant="outline" style={{ width: '100%' }}>Corregir Concejo Comunitario</CButton>
+                                  <CTableDataCell className="text-center">
+                                  {item.Municipio}
                                 </CTableDataCell>
+                                  <CTableDataCell>
+                                    <div className="small text-medium-emphasis">
+                                      <CTooltip
+                                        content="Actulizar Concejo"
+                                        placement="bottom"
+                                      >
+                                        <CButton style={{ 'width': '100%' }}
+                                          color="info"
+                                          variant="outline"
+                                          size="lg"
+                                        //  onClick={() => EditaEmpleado(item.ID)}
+                                        >
+                                          {'Corregir Concejo Comunitario'}
+                                        </CButton></CTooltip>
+                                    </div>
+                                  </CTableDataCell>
+                                  <CTableDataCell>
+                                    <div className="small text-medium-emphasis">
+                                      <CTooltip
+                                        content="Eliminar Concejo"
+                                        placement="bottom"
+                                      >
+                                        <CButton style={{ 'width': '100%' }}
+                                          color="danger"
+                                          variant="outline"
+                                          size="lg"
+                                          onClick={() => EliminarConcejo(item.ID)}
+                                        >
+                                          <CIcon icon={cilTrash} size="lg" />
+                                        </CButton></CTooltip>
+                                    </div>
+                                  </CTableDataCell>
                               </CTableRow>
                             ))
                           )}

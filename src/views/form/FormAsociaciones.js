@@ -52,32 +52,7 @@ import CIcon from '@coreui/icons-react' */
      obtenerAsociacion();
      // eslint-disable-next-line
    }, []);
-/*
-  useEffect(() => {
-    // Consultar la api listar detallesparques
-    obtenerContactoAsunto();
-    // eslint-disable-next-line
-  }, []);
-
-  const count = listacontacto.length;
-  const current = 5
-
-  const filterContacts = () => {
-    return listacontacto?.slice(currentPage, currentPage + current)
-  }
-  const nextPage = () => {
-
-    if (count > currentPage + current) {
-      setCurrentPage(currentPage + current);
-    }
-  }
-
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - current);
-    }
-  } */
-   console.log(asociaciones)
+ //  console.log(asociaciones)
 
   return (
     <><CRow>
@@ -266,7 +241,7 @@ import CIcon from '@coreui/icons-react' */
                               <CTableDataCell className="text-center">
                                   <div>{item.Nit}</div>
                               </CTableDataCell>
-                                <CTableDataCell>{item.municipio}</CTableDataCell>
+                                <CTableDataCell className="text-center">{item.municipio}</CTableDataCell>
                               <CTableDataCell>
                                     <CButton variant="outline" style={{ width: '100%' }}>Corregir Asociacion</CButton>
                               </CTableDataCell>
