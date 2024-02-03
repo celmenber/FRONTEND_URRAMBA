@@ -12,8 +12,10 @@ import {
 import {
   obtenerBarrioVeredaAction,
   obtenerMunicipioAction,
-  obtenertipodocumentoAction
+  obtenertipodocumentoAction,
+  obtenercorregimientoAction
 } from '../action/ParametrosAction'
+
 import Swal from 'sweetalert2';
 
 export const AutoridadTForm = () => {
@@ -22,7 +24,7 @@ export const AutoridadTForm = () => {
   const obtenerMunicipio = () => dispatch(obtenerMunicipioAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
   const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
-
+  const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
   const obtenerAutoridadT = () => dispatch(obtenerAutoridadTAction());
   const crearNuevoAutoridadT = (Dataform) => dispatch(crearNuevoAutoridadTAction(Dataform));
   const actulizarAutoridadT = (Dataform) => dispatch(editarAutoridadTAction(Dataform));
@@ -54,7 +56,6 @@ export const AutoridadTForm = () => {
           Nombres:'',
           Apellidos:'',
           Sexo:'',
-          Genero:'',
           Direccion:'',
           Telefono:'',
           Correo: '',
@@ -80,7 +81,6 @@ export const AutoridadTForm = () => {
             Nombres: '',
             Apellidos: '',
             Sexo: '',
-            Genero: '',
             Direccion: '',
             Telefono: '',
             Correo: '',
@@ -100,15 +100,14 @@ export const AutoridadTForm = () => {
         } else {
 
             const formularioDatos = {
-                    Id_municipio: datoAutoridad.Idmunicipio,
-                    Id_barrio_vereda:datoAutoridad.Idbarriovereda,
-                    Id_corregimiento:datoAutoridad.Idcorregimiento,
-                    Id_tipo_documento:datoAutoridad.Idtipodocumento,
+                    Id_municipio: parseInt(datoAutoridad.Idmunicipio),
+                    Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
+                    Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
+                    Id_tipo_documento: parseInt(datoAutoridad.Idtipodocumento),
                     Documentos:datoAutoridad.Documentos,
                     Nombres:datoAutoridad.Nombres,
                     Apellidos:datoAutoridad.Apellidos,
                     Sexo:datoAutoridad.Sexo,
-                    Genero: datoAutoridad.Genero,
                     Direccion: datoAutoridad.Direccion,
                     Telefono: datoAutoridad.Telefono,
                     Correo: datoAutoridad.Correo,
@@ -116,6 +115,7 @@ export const AutoridadTForm = () => {
                     Fecha_nacimiento: datoAutoridad.Fechanacimiento,
                     Fecha_ingreso: datoAutoridad.Fechaingreso,
             }
+
 
             if (valedita === false) {
 
@@ -199,6 +199,7 @@ export const AutoridadTForm = () => {
       obtenerBarrioVereda,
       obtenerMunicipio,
       obtenertipodocumento,
+      obtenercorregimiento,
       eliminarAutoridadT,
       editarAutoridadT,
     /* metodos */

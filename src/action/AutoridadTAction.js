@@ -34,7 +34,7 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
       dispatch(agregarAutoridadTExito(datos))
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'El AutoridadT se agregar correctamente', 'success')
+        Swal.fire('Correcto', 'La autorida tradicional se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)

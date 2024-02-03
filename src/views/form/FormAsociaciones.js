@@ -68,32 +68,8 @@ import CIcon from '@coreui/icons-react' */
               validated={validated}
               onSubmit={handleSubmit}
             >
-              <CCol xs={12}>
-                {cargando === true ? (
-                  <CLoadingButton
-                    color="success"
-                    variant="outline"
-                    style={{ width: '100%' }}
-                    timeout={2000}
-                  >
-                    {' '}
-                    Enviando Asociación
-                  </CLoadingButton>
-                ) : (
-                    <CButton
-                      type="submit"
-                      color={'primary'}
-                      variant="outline"
-                      className="px-4"
-                      style={{ width: '100%' }}
-                    >
-                      {' '}
-                      {'Agregar Nueva Asociación'}
-                    </CButton>
-                   )}
-              </CCol>
-
-              <CCol md={3}>
+              <CRow className="mt-4">
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom01">Nit </CFormLabel>
                 <CFormInput
                   type="text"
@@ -106,7 +82,7 @@ import CIcon from '@coreui/icons-react' */
                 />
                 <CFormFeedback invalid>El campo Nit Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={9}>
+              <CCol md={6}>
                 <CFormLabel htmlFor="validationCustom02">Nombre Asociacion </CFormLabel>
                 <CFormInput
                   type="text"
@@ -119,7 +95,48 @@ import CIcon from '@coreui/icons-react' */
                 />
                 <CFormFeedback invalid>El campo Nombre Asociacion Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={3}>
+              <CCol md={4}>
+                <CFormLabel htmlFor="validationCustom05">Correo Electronico </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom05"
+                  defaultValue=""
+                  name='correoAsociacion'
+                  value={datoAsociacion.correoAsociacion}
+                  onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El campo Correo Electronico Requerido!</CFormFeedback>
+              </CCol>
+              </CRow>
+            <CRow>
+              <CCol xs={5}>
+                <CFormLabel htmlFor="validationCustom06" value={''}>Municipio</CFormLabel>
+                <CFormSelect
+                  key={'validationCustom06'}
+                  name='idMunicipio'
+                  id="idMunicipio"
+                  value={datoAsociacion.idMunicipio}
+                  onChange={onChangeFormulario}
+                  required
+                >
+                  <option Key={'validationCustom001'} value={''}>Seleccione...</option>
+                  {Municipio?.length === 0
+                    ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
+                    : (
+                      Municipio?.filter(item => item.Estado !== null).map(item => (
+                        <option
+                          Key={item.ID}
+                          value={item.ID}
+                        >
+                          {item.Nombre}
+                        </option>
+                      ))
+                    )}
+                </CFormSelect>
+                <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
+              </CCol>
+               <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom03">Dirección </CFormLabel>
                 <CFormInput
                   type="text"
@@ -145,44 +162,30 @@ import CIcon from '@coreui/icons-react' */
                 />
                 <CFormFeedback invalid>El campo Telefono Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={6}>
-                <CFormLabel htmlFor="validationCustom05">Correo Electronico </CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="validationCustom05"
-                  defaultValue=""
-                  name='correoAsociacion'
-                  value={datoAsociacion.correoAsociacion}
-                  onChange={onChangeFormulario}
-                  required
-                />
-                <CFormFeedback invalid>El campo Correo Electronico Requerido!</CFormFeedback>
-              </CCol>
+              </CRow>
               <CCol xs={12}>
-                <CFormLabel htmlFor="validationCustom06" value={''}>Municipio</CFormLabel>
-               <CFormSelect
-                  key={'validationCustom06'}
-                  name='idMunicipio'
-                  id="idMunicipio"
-                  value={datoAsociacion.idMunicipio}
-                  onChange={onChangeFormulario}
-                  required
-                >
-                  <option Key={'validationCustom001'} value={''}>Seleccione...</option>
-                  {Municipio?.length === 0
-                    ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
-                    : (
-                      Municipio?.filter(item => item.Estado !== null).map(item => (
-                        <option
-                          Key={item.ID}
-                          value={item.ID}
-                        >
-                          {item.Nombre}
-                        </option>
-                      ))
-                    )}
-                </CFormSelect>
-                <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
+                {cargando === true ? (
+                  <CLoadingButton
+                    color="success"
+                    variant="outline"
+                    style={{ width: '100%' }}
+                    timeout={2000}
+                  >
+                    {' '}
+                    Enviando Asociación
+                  </CLoadingButton>
+                ) : (
+                  <CButton
+                    type="submit"
+                    color={'primary'}
+                    variant="outline"
+                    className="px-4"
+                    style={{ width: '100%' }}
+                  >
+                    {' '}
+                    {'Agregar Nueva Asociación'}
+                  </CButton>
+                )}
               </CCol>
               <hr />
               <CCol xs={12}>

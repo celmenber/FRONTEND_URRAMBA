@@ -87,7 +87,7 @@ export const obtenercorregimientoAction = () => {
     dispatch(Obtenercorregimiento())
 
     try {
-      const { data } = await Axios.get('/parametros/view-veredas_barrios')
+      const { data } = await Axios.get('/parametros/view-corregimiento')
       if (data.code === 200) {
         dispatch(obtenercorregimientoExitosa(data.data))
       }
@@ -119,7 +119,7 @@ export const obtenertipodocumentoAction = () => {
     dispatch(Obtenertipodocumento())
 
     try {
-      const { data } = await Axios.get('/parametros/view-veredas_barrios')
+      const { data } = await Axios.get('/parametros/view-tipodocumento')
       if (data.code === 200) {
         dispatch(obtenertipodocumentoExitosa(data.data))
       }
