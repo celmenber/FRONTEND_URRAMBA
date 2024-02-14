@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import {
   obtenerConcejoAction,
-  editarConcejoAction,
   crearNuevoConcejoAction,
   borrarConcejoAction,
-  obtenerConcejoEditarAction
-} from '../action/ConsejoAction'
+  } from '../action/ConsejoAction'
 import { obtenerMunicipioAction } from '../action/ParametrosAction'
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerAutoridadTAction } from '../action/AutoridadTAction'

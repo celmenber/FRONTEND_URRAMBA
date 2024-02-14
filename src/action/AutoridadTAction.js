@@ -12,7 +12,7 @@ const {
     OBTENER_AUTORIDADT,
     OBTENER_AUTORIDADT_SUCCESS,
     OBTENER_AUTORIDADT_ERROR,
-    OBTENER_AUTORIDADT_EDITAR,
+    // OBTENER_AUTORIDADT_EDITAR,
     DELETE_AUTORIDADT,
     DELETE_AUTORIDADT_SUCCESS,
     DELETE_AUTORIDADT_ERROR,
@@ -20,6 +20,7 @@ const {
 
 // Crear nuevos AutoridadT
 export const crearNuevoAutoridadTAction = (Dataform) => {
+  debugger
   return async (dispatch) => {
     dispatch(agregarAutoridadT())
 
@@ -44,7 +45,7 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Hubo un error al intenar agregar el registro, intenta nuevamente',
+        text: 'Hubo un error al intenar agregar el registro, intenta nuevamentess',
       })
     }
   }
@@ -63,6 +64,7 @@ const agregarAutoridadTExito = (datos) => ({
 
 // si hubo un error
 const agregarAutoridadTError = (estado) => ({
+  
   type: ADD_AUTORIDADT_ERROR,
   payload: estado,
 })

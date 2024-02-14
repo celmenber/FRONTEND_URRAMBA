@@ -6,3 +6,4 @@ export * from './useAsociacionForm';
 export * from './useEmpleadoForm';
 export * from './useConcejoForm';
 export * from './useAutoridadTForm';
+export * from './useMiembroForm';

@@ -10,6 +10,7 @@ const Parametros = lazy(() => import('./views/parametros/Parametros'))
 const Reportes = lazy(() => import('./views/parametros/Parametros'))
 const JefeHogar = lazy(() => import('./views/familias/JefeHogar'))
 const NucleoFamiliar = lazy(() => import('./views/familias/NucleoFamiliar'))
+const Miembros = lazy(() => import('./views/form/FormMiembros'))
 
 const routes = [
   { path: '/', exact: false, name: 'Home' },
@@ -24,6 +25,7 @@ const routes = [
   { path: '/admin/asociaciones', name: 'Asociaciones', component: Asociaciones },
   { path: '/admin/parametros', name: 'Parametros', component: Parametros },
   { path: '/admin/empleados', name: 'Empleados', component: Empleados },
+  { path: '/admin/Miembros', name: 'Miembros', component: Miembros },
 ]
 
 export default routes

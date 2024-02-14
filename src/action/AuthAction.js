@@ -16,8 +16,16 @@ export const loginUser = (Loginform) => {
 
     try {
       // insertar en la API
-      const { data } = await Login.post('/auth/login', Loginform);
+      const { data } = await Login.post('/auth/login', Loginform, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+          'X-Frame-Options': 'sameorigin',
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
       if (data.success === true) {
+       
         const { access_token, access_data } = data.data
         window.localStorage.setItem('token', access_token)
         window.localStorage.setItem('currentUser', JSON.stringify(access_data))

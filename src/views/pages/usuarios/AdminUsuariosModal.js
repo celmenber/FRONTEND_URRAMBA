@@ -1,22 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
-import { CLoadingButton, CModalTitle } from '@coreui/react-pro'
+import {  CModalTitle } from '@coreui/react-pro'
 import {
-  CButton,
-  CCol,
   CForm,
-  CFormFeedback,
-  CFormInput,
-  CFormLabel,
-  CFormSelect,
   CModal,
-  CModalBody,
   CModalHeader,
-  CRow,
 } from '@coreui/react'
 import { Usuarios } from 'src/hooks'
-import Swal from 'sweetalert2'
-import { useEffect } from 'react'
 
 const AdminUsuariosModal = (Props) => {
   const [validated, setValidated] = useState(false)
@@ -25,15 +15,9 @@ const AdminUsuariosModal = (Props) => {
   const { visibleNUS, setVisibleNUS, parquesone, parquesCodigo } = Props
 
   const {
-    onChangeFormulario,
     crearNuevoUsuario,
-    obtenerPerfil,
-    obtenerTipoUser,
-    perfil,
-    tipouser,
     datoUsuario,
     setDatoUsuario,
-    cargando,
     User,
   } = Usuarios()
 

@@ -15,8 +15,7 @@ import {
   CRow,
 } from '@coreui/react'
 import { Usuarios } from 'src/hooks'
-import Swal from 'sweetalert2'
-import { useEffect } from 'react'
+
 
 const AdminUsuariosModalAct = (Props) => {
   const [validated, setValidated] = useState(false)
@@ -29,11 +28,7 @@ const AdminUsuariosModalAct = (Props) => {
 
   const {
     editarUsuario,
-    obtenerPerfil,
-    obtenerTipoUser,
     usuarioeditar,
-    //perfil,
-    //tipouser,
     cargando,
     User,
   } = Usuarios()

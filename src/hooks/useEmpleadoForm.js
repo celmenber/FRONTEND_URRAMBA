@@ -5,20 +5,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   crearNuevoEmpleadoAction,
   obtenerEmpleadoAction,
-  editarEmpleadoAction,
-  borrarEmpleadoAction
+
+  
 } from '../action/EmpleadoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerBarrioVeredaAction } from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 
 export const EmpleadoForm = () => {
+  
   const dispatch = useDispatch()
   const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
   const obtenerEmpleado = () => dispatch(obtenerEmpleadoAction());
   const crearNuevoEmpleado = (Dataform) => dispatch(crearNuevoEmpleadoAction(Dataform));
-  const editarEmpleado = (Dataform) => dispatch(editarEmpleadoAction(Dataform));
+
 
     //selecion del state en el  store
    // const { userDetails } = useSelector((state) => state.Auth);
@@ -133,14 +134,14 @@ export const EmpleadoForm = () => {
     }
 
     // función que redirige Editaservicio
-    const UpdateConvenioEstado = Id => {
-      /*   const datos = convenio.filter(C => C.IdConvenio === Id);
-        dispatch(editarEstadoConvenioAction({
-            Id,
-            setSelectActivar,
-            estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
-        })); */
-    }
+    // const UpdateConvenioEstado = Id => {
+    //   /*   const datos = convenio.filter(C => C.IdConvenio === Id);
+    //     dispatch(editarEstadoConvenioAction({
+    //         Id,
+    //         setSelectActivar,
+    //         estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
+    //     })); */
+    // }
 
 
     // función que redirige Eliminar ContactoConvenio

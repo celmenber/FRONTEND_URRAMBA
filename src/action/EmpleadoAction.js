@@ -12,13 +12,13 @@ const {
     OBTENER_EMPLEADO,
     OBTENER_EMPLEADO_SUCCESS,
     OBTENER_EMPLEADO_ERROR,
-    OBTENER_EMPLEADO_EDITAR,
     DELETE_EMPLEADO,
     DELETE_EMPLEADO_SUCCESS,
     DELETE_EMPLEADO_ERROR,
 } = TYPES
 
 // Crear nuevos Empleado
+
 export const crearNuevoEmpleadoAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(agregarEmpleado())

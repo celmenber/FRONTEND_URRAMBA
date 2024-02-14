@@ -16,7 +16,7 @@ import {
 } from '@coreui/react'
 
 import { AutoridadTForm } from 'src/hooks'
-import Swal from 'sweetalert2'
+
 
 const EmpleadoNuevoModal = (Props) => {
 
@@ -113,13 +113,13 @@ const EmpleadoNuevoModal = (Props) => {
                   value={Idtipodocumento}
                   onChange={onChangeFormulario}
                   required>
-                  <option Key={'0'} value={''}>Seleccione...</option>
+                  <option key={'0'} value={''}>Seleccione...</option>
                   {tipodocumento?.length === 0
-                    ? <option Key={'0'} value={''}>Seleccione...</option>
+                    ? <option key={'0'} value={''}>Seleccione...</option>
                     : (
                       tipodocumento?.filter(item => item.Estado !== null).map(item => (
                         <option
-                          Key={item.ID}
+                          key={item.ID}
                           value={item.ID}
                         >
                           {item.Nombre}
@@ -225,16 +225,16 @@ const EmpleadoNuevoModal = (Props) => {
                   onChange={onChangeFormulario}
                   required
                 >
-                  <option Key={'0'} value={''}>
+                  <option key={'0'} value={''}>
                     Seleccione...
                   </option>
                   {municipio?.length === 0 ? (
-                    <option Key={'0'} value={''}>
+                    <option key={'0'} value={''}>
                       Seleccione...
                         </option>
                       ) : (
                           municipio?.filter(item => item.Estado !== null).map((item) => (
-                          <option Key={item.ID} value={item.ID}>
+                          <option key={item.ID} value={item.ID}>
                             {item.Nombre}
                           </option>
                         ))
@@ -250,13 +250,13 @@ const EmpleadoNuevoModal = (Props) => {
                   value={Idcorregimiento}
                   onChange={onChangeFormulario}
                   required>
-                  <option Key={'0'} value={''}>Seleccione...</option>
+                  <option key={'0'} value={''}>Seleccione...</option>
                   {corregimiento?.length === 0
-                    ? <option Key={'0'} value={''}>Seleccione...</option>
+                    ? <option key={'0'} value={''}>Seleccione...</option>
                     : (
                       corregimiento?.map(item => (
                         <option
-                          Key={item.ID}
+                          key={item.ID}
                           value={item.ID}
                         >
                           {item.Nombre}
@@ -274,13 +274,13 @@ const EmpleadoNuevoModal = (Props) => {
                   value={Idbarriovereda}
                   onChange={onChangeFormulario}
                   >
-                  <option Key={'0'} value={''}>Seleccione...</option>
+                  <option key={'0'} value={''}>Seleccione...</option>
                   {barrios?.length === 0
-                    ? <option Key={'0'} value={''}>Seleccione...</option>
+                    ? <option key={'0'} value={''}>Seleccione...</option>
                     : (
                       barrios?.map(item => (
                         <option
-                          Key={item.ID}
+                          key={item.ID}
                           value={item.ID}
                         >
                           {item.Nombre}

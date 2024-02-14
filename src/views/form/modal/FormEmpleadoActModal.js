@@ -64,17 +64,17 @@ const EmpleadoActModal = (Props) => {
             event.stopPropagation()
         } else {
 
-            const formularioDatos = {
-               /*  UsuarioModificacion: userDetails.Id,
-                IdMunicipio: datoConvenio.idMunicipio,
-                Estado: datoConvenio.estado,
-                NitEmpresa: datoConvenio.nitEmpresa,
-                NombrEmpresa: datoConvenio.nombrEmpresa,
-                CorreoEmpresa: datoConvenio.correoEmpresa,
-                DireccionEmpresa: datoConvenio.direccionEmpresa,
-                TelefonoEmpresa: datoConvenio.telefonoEmpresa,
-                RepresentanteEmpresa: datoConvenio.representanteEmpresa */
-            }
+            // const formularioDatos = {
+            //    /*  UsuarioModificacion: userDetails.Id,
+            //     IdMunicipio: datoConvenio.idMunicipio,
+            //     Estado: datoConvenio.estado,
+            //     NitEmpresa: datoConvenio.nitEmpresa,
+            //     NombrEmpresa: datoConvenio.nombrEmpresa,
+            //     CorreoEmpresa: datoConvenio.correoEmpresa,
+            //     DireccionEmpresa: datoConvenio.direccionEmpresa,
+            //     TelefonoEmpresa: datoConvenio.telefonoEmpresa,
+            //     RepresentanteEmpresa: datoConvenio.representanteEmpresa */
+            // }
 
            /*  updateConvenio({
                 formularioDatos,
@@ -121,13 +121,13 @@ const EmpleadoActModal = (Props) => {
                     value={Id_asociacion}
                     onChange={onChangeFormulario}
                     required>
-                    <option Key={'0'} value={''}>Seleccione...</option>
+                    <option key={0} value={''}>Seleccione...</option>
                     {asociacion?.length === 0
-                      ? <option Key={'0'} value={0}>Seleccione...</option>
+                      ? <option key={'0'} value={0}>Seleccione...</option>
                       : (
                         asociacion?.map(item => (
                           <option
-                            Key={item.ID}
+                            key={item.ID}
                             value={item.ID}
                           >
                             {item.Nombre}
@@ -196,13 +196,13 @@ const EmpleadoActModal = (Props) => {
                     value={Id_barrio_vereda}
                     onChange={onChangeFormulario}
                     required>
-                    <option Key={'0'} value={''}>Seleccione...</option>
+                    <option key={'0'} value={''}>Seleccione...</option>
                     {barrios?.length === 0
-                      ? <option Key={'0'} value={0}>Seleccione...</option>
+                      ? <option key={'0'} value={0}>Seleccione...</option>
                       : (
                         barrios?.map(item => (
                           <option
-                            Key={item.ID}
+                            key={item.ID}
                             value={item.ID}
                           >
                             {item.Nombre}
@@ -346,13 +346,13 @@ const EmpleadoActModal = (Props) => {
                                     value={idMunicipio}
                                     onChange={onChangeFormulario}
                                     required>
-                                    <option Key={'0'} value={''}>Seleccione...</option>
+                                    <option key={'0'} value={''}>Seleccione...</option>
                                     {municipio?.length === 0
-                                        ? <option Key={'0'} value={0}>Seleccione...</option>
+                                        ? <option key={'0'} value={0}>Seleccione...</option>
                                         : (
                                             municipio?.map(item => (
                                                 <option
-                                                    Key={item.MunicipioId}
+                                                    key={item.MunicipioId}
                                                     value={item.MunicipioId}
                                                 >
                                                     {item.NombreMunicipio}

@@ -92,6 +92,7 @@ export const AutoridadTForm = () => {
     };
 
     const handleSubmit = (event) => {
+      debugger
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {
@@ -137,7 +138,7 @@ export const AutoridadTForm = () => {
 
     // función que redirige Edita ContactoAsunto
   const editarAutoridadT = id => {
-    const datos = autoridadT.filter(C => C.ID === id)
+    // const datos = autoridadT.filter(C => C.ID === id)
       // console.log(datos)
       //  dispatch(obtenerConvenioEditarAction(datos));
     setDatoAutoridad({
@@ -156,14 +157,14 @@ export const AutoridadTForm = () => {
     }
 
     // función que redirige Editaservicio
-    const UpdateConvenioEstado = Id => {
-      /*   const datos = convenio.filter(C => C.IdConvenio === Id);
-        dispatch(editarEstadoConvenioAction({
-            Id,
-            setSelectActivar,
-            estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
-        })); */
-    }
+    // const UpdateConvenioEstado = Id => {
+    //   /*   const datos = convenio.filter(C => C.IdConvenio === Id);
+    //     dispatch(editarEstadoConvenioAction({
+    //         Id,
+    //         setSelectActivar,
+    //         estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
+    //     })); */
+    // }
 
 
     // función que redirige Eliminar ContactoConvenio

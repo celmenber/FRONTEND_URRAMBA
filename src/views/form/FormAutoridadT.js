@@ -2,7 +2,6 @@
 /* eslint-disable no-script-url */
 import React, { useState, useEffect } from 'react'
 import AutoridadTNuevoCrear from './modal/FormAutoridadTNuevoModal'
-import AutoridadTActualiza from './modal/FormAutoridadTActModal'
 
 import {
     CRow,
@@ -10,11 +9,6 @@ import {
     CCard,
     CCardBody,
     CCardHeader,
-    CNav,
-    CNavItem,
-    CNavLink,
-    CTabContent,
-    CTabPane,
     CForm,
     CButton,
     CSpinner,
@@ -40,42 +34,22 @@ import {
 import { CLoadingButton } from '@coreui/react-pro'
 
 const AutoridadT = () => {
-    const [selectServicio, setSelectServicio] = useState(1);
+    const [selectServicio] = useState(1);
 
     const {
       obtenerAutoridadT,
       eliminarAutoridadT,
       editarAutoridadT,
       autoridadT,
-      datoAutoridad,
-      selectActivar,
-      setSelectActivar,
       visibleAT, setVisibleAT,
-      visibleEAT, setVisibleEAT,
       cargandolista,
     } = AutoridadTForm()
 
 
    useEffect(() => {
-     // Consultar la api listar obtenerAutoridadT
      obtenerAutoridadT();
         // eslint-disable-next-line
     }, []);
-/*
-    useEffect(() => {
-        // Consultar la api listar parques
-        obtenerConveniocod();
-        // eslint-disable-next-line
-    }, []);
-
-
-    const handleSelectEst = ((id) => {
-        setSelectActivar(true)
-        setSelectServicio(id)
-        UpdateConvenioEstado(id)
-    }); */
-
- // console.log(empleados);
 
     return (
         <CRow>
@@ -127,6 +101,7 @@ const AutoridadT = () => {
                                                             </CTableHeaderCell>
                                                         </CTableRow>
                                                     ) : (
+                                                       
                                                    autoridadT?.map((item, index) => (
                                                          <CTableRow v-for="item in tableItems" key={index}>
 

@@ -15,42 +15,49 @@ import {
     CRow
 } from '@coreui/react'
 
-import { EmpleadoForm } from 'src/hooks'
+
+import { MiembroForm } from 'src/hooks/useMiembroForm'
 
 
-const EmpleadoNuevoModal = (Props) => {
+const FormMiembrosModal = (Props) => {
 
   const {
-    visibleE,
-    setVisibleE,
+    visibleM,
+    setVisibleM,
   } = Props
 
-  const handleClose = () => setVisibleE(false)
+  const handleClose = () => setVisibleM(false)
 
     const {
         handleSubmit,
         onChangeFormulario,
         validated,
-        datoEmpleado,
+        datoMiembro,
         handleReset,
         obtenerAsociacion,
         obtenerBarrioVereda,
         barrios,
         asociacion,
         cargando
-    } = EmpleadoForm()
+    } = MiembroForm()
 
   const {
-        Id_asociacion,
-        Id_barrio_vereda,
-        Documentos,
-        Nombres,
-        Apellidos,
-        Direccion,
-        Telefono,
-        Correo,
-        Estado,
-    } = datoEmpleado
+    Id_conncejo_comunitario,
+    Id_barrio_vereda,
+    Id_corregimiento ,
+    Id_tipo_documento,
+    Documentos,
+    Nombres,
+    Apellidos,
+    Sexo,
+    Genero,
+    Orientacion_sexual,
+    Direccion,
+    Telefono,
+    Estado,
+    Fecha_nacimiento,
+    Fecha_ingreso
+    } = datoMiembro
 
 
 
@@ -67,9 +74,9 @@ const EmpleadoNuevoModal = (Props) => {
 
     return (
         <>
-            <CModal size="xl" visible={visibleE} onClose={handleClose}>
+            <CModal size="xl" visible={visibleM} onClose={handleClose}>
                 <CModalHeader>
-                    <CModalTitle> <strong>Agregar empleado asociación</strong></CModalTitle>
+                    <CModalTitle> <strong>Agregar Miembros asociación</strong></CModalTitle>
                 </CModalHeader>
                 <CForm className="row g-3 needs-validation"
                     noValidate
@@ -256,4 +263,6 @@ const EmpleadoNuevoModal = (Props) => {
         </>
     )
 }
-export default EmpleadoNuevoModal
+export default FormMiembrosModal
+
+

@@ -120,13 +120,13 @@ import CIcon from '@coreui/icons-react' */
                   onChange={onChangeFormulario}
                   required
                 >
-                  <option Key={'validationCustom001'} value={''}>Seleccione...</option>
+                  <option key={'validationCustom001'} value={''}>Seleccione...</option>
                   {Municipio?.length === 0
-                    ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
+                    ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
                     : (
                       Municipio?.filter(item => item.Estado !== null).map(item => (
                         <option
-                          Key={item.ID}
+                          key={item.ID}
                           value={item.ID}
                         >
                           {item.Nombre}

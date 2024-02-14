@@ -129,13 +129,13 @@ const FormConcejo = () => {
                   onChange={onChangeFormulario}
                   required
                 >
-                  <option Key={'validationCustom0010'} value={''}>Seleccione...</option>
+                  <option key={'validationCustom0010'} value={''}>Seleccione...</option>
                     {Asociaciones?.length === 0
-                    ? <option Key={'validationCustom0011'} value={0}>Seleccione...</option>
+                    ? <option key={'validationCustom0011'} value={0}>Seleccione...</option>
                     : (
                       Asociaciones?.map(item => (
                         <option
-                          Key={item.ID}
+                          key={item.ID}
                           value={item.ID}
                         >
                           {item.Nombre}
@@ -155,12 +155,12 @@ const FormConcejo = () => {
                     onChange={onChangeFormulario}
                     required
                   >
-                    <option Key={'validationCustom001'} value={''}>Seleccione...</option>
+                    <option key={'validationCustom001'} value={''}>Seleccione...</option>
                     {Autoridad?.length === 0
-                      ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
+                      ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
                       : (
                         Autoridad?.filter(item => item.Estado !== '0').map(item => (
-                          <option Key={item.ID} value={item.ID}>
+                          <option key={item.ID} value={item.ID}>
                             {item.nombres+" "+item.apellidos}
                           </option>
                         ))
@@ -178,13 +178,13 @@ const FormConcejo = () => {
                     onChange={onChangeFormulario}
                     required
                   >
-                    <option Key={'validationCustom001'} value={''}>Seleccione...</option>
+                    <option key={'validationCustom001'} value={''}>Seleccione...</option>
                     {Municipio?.length === 0
-                      ? <option Key={'validationCustom002'} value={0}>Seleccione...</option>
+                      ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
                       : (
                         Municipio?.filter(item => item.Estado !== null).map(item => (
                           <option
-                            Key={item.ID}
+                            key={item.ID}
                             value={item.ID}
                           >
                             {item.Nombre}

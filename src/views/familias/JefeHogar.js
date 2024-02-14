@@ -28,13 +28,13 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 // import Modal from '../modals/Modal'
-import FormJefeHogar from '../form/FormJefeHogar'
+
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 const JefeHogar = () => {
-  const [modal, setModal] = useState(false)
+ 
   const tableExample = [
     {
       avatar: { src: avatar, status: 'success' },
@@ -116,9 +116,9 @@ const JefeHogar = () => {
       activity: 'Last month',
     },
   ]
-  const toggleModal = (isOpen) => {
-    setModal(isOpen)
-  }
+  // const toggleModal = (isOpen) => {
+  //   setModal(isOpen)
+  // }
   return (
     <>
       <CContainer fluid>

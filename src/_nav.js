@@ -52,12 +52,12 @@ const administrador_nav = [
       },
       {
         component: CNavItem,
-        name: 'Autoridad Tradicional',
+        name: 'Autoridad Afro',
         to: '/admin/autoridadT',
       },
       {
         component: CNavItem,
-        name: 'Miembros',
+        name: 'Miembros Consejo',
         to: '/admin/Miembros',
       },
     ],

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import { CCard, CCardBody } from '@coreui/react'
-import WidgetsDropdown from '../widget/WidgetsDropdown'
-import WidgetBarChart from '../widget/WidgetBarChart'
+// import WidgetsDropdown from '../widget/WidgetsDropdown'
+// import WidgetBarChart from '../widget/WidgetBarChart'
 
 // const WidgetsParque = lazy(() => import('../widgets/WidgetsParques.js'))
 //const WidgetsReserva = lazy(() => import('../widgets/WidgetsReservas.js'))
@@ -11,13 +11,13 @@ const DashboardParques = () => {
   return (
     <>
       <CCard className="mb-4">
-        <CCardBody>
+        {/* <CCardBody>
           <WidgetsDropdown />
-        </CCardBody>
+        </CCardBody> */}
 
-        <CCardBody>
+        {/* <CCardBody>
           <WidgetBarChart />
-        </CCardBody>
+        </CCardBody> */}
 
         <CCardBody>{/*  <WidgetsParque /> */}</CCardBody>
         {/* <CCardBody>

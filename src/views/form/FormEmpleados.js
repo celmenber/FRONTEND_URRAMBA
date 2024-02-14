@@ -10,12 +10,7 @@ import {
     CCard,
     CCardBody,
     CCardHeader,
-    CNav,
-    CNavItem,
-    CNavLink,
-    CTabContent,
-    CTabPane,
-    CForm,
+      CForm,
     CButton,
     CSpinner,
     CTooltip,
@@ -41,19 +36,17 @@ import { CLoadingButton } from '@coreui/react-pro'
 import { useState } from 'react'
 
 const AdminConvenios = () => {
-    const [selectServicio, setSelectServicio] = useState(1);
+    const [selectServicio] = useState(1);
 
     const {
         obtenerEmpleado,
-        UpdateConvenioEstado,
         eliminarEmpleado,
         EditaEmpleado,
         /* metodos */
         empleados,
-        selectActivar, setSelectActivar,
         visibleE, setVisibleE,
         visibleEM, setVisibleEM,
-        datoEmpleado, setDatoEmpleado,
+        datoEmpleado, 
         cargandolista,
     } = EmpleadoForm()
 

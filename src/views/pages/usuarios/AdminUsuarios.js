@@ -10,11 +10,6 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CNav,
-  CNavItem,
-  CNavLink,
-  CTabContent,
-  CTabPane,
   CForm,
   CButton,
   CSpinner,
@@ -36,19 +31,17 @@ import { CLoadingButton } from '@coreui/react-pro'
 import { useState } from 'react'
 
 const AdminUsuarios = () => {
-  const [selectServicio, setSelectServicio] = useState(1)
+  const [selectServicio] = useState(1)
 
   const {
     onChangeFormulario,
     obtenerUsuario,
     usuariolista,
-    UpdateUserEstado,
     EditaUsuarios,
     EliminarUsuarios,
     datoUsuario,
     setDatoUsuario,
     selectActivar,
-    setSelectActivar,
     visibleNUS,
     setVisibleNUS,
     visibleUS,
@@ -63,6 +56,7 @@ const AdminUsuarios = () => {
   }, [])
 
   const handleSelectEst = (id) => {
+    console.log(id)
    /*  setSelectActivar(true)
     setSelectServicio(id)
     UpdateUserEstado(id) */
