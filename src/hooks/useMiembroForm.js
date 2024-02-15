@@ -1,23 +1,31 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { obtenerConcejoAction } from 'src/action/ConsejoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
-import { obtenerBarrioVeredaAction } from '../action/ParametrosAction'
+import { obtenerBarrioVeredaAction,  obtenercorregimientoAction, obtenertipodocumentoAction } from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 import { crearNuevoMiembroAction, obtenerMiembroAction } from 'src/action/MiembroAction';
 
+
 export const MiembroForm = () => {
-    debugger
+    
   const dispatch = useDispatch()
   const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
+  const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
   const obtenerMiembro = () => dispatch(obtenerMiembroAction());
+  const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
+  const obtenerConcejo = () => dispatch(obtenerConcejoAction());
+  
   const crearMiembro = (Dataform) => dispatch(crearNuevoMiembroAction(Dataform));
 
   const cargando = useSelector(state => state.Miembro.loading);
   const cargandolista = useSelector(state => state.Miembro.loadinglista);
   const barrios = useSelector(state => state.Parametros.barriosveredas);
+  const tipodocumento = useSelector(state => state.Parametros.tipodocumentos);
+  const consejos = useSelector((state) => state.Concejo.concejolista)
+  const corregimiento = useSelector(state => state.Parametros.corregimientos);
   const asociacion = useSelector(state => state.Asociacion.asociacionlista);
   const miembro  = useSelector(state => state.Miembro.listaMiembro);
 
@@ -28,17 +36,20 @@ export const MiembroForm = () => {
     const [visibleMI, setVisibleMI] = useState(false)
 
     const [datoMiembro, setDatoMiembro] = useState({
-          Id_asociacion:'',
-          Id_barrio_vereda:'',
-          Id_tipo_documento:'',
-          Documentos:'',
-          Nombres: '',
-          Apellidos: '',
-          Direccion:'',
-          Telefono:'',
-          Correo:'',
-          Estado: '',
-          Fecha_ingreso:'',
+        Id_barrio_vereda:'',
+        Id_corregimiento:'',
+        Id_tipo_documento:'',
+        Documentos:'',
+        Nombres:'',
+        Apellidos:'',
+        Sexo:'',
+        Genero:'',
+        Orientacion_sexual: 0,
+        Direccion:'',
+        Telefono:'',
+        Estado:'',
+        Fecha_nacimiento:'',
+        Fecha_ingreso:''
     })
 
     const onChangeFormulario = e => {
@@ -49,21 +60,25 @@ export const MiembroForm = () => {
     }
     const handleReset = () => {
       setDatoMiembro({
-            Id_asociacion: '',
-            Id_barrio_vereda: '',
-            Id_tipo_documento: '',
-            Documentos: '',
-            Nombres: '',
-            Apellidos: '',
-            Direccion: '',
-            Telefono: '',
-            Correo: '',
-            Estado: '',
-            Fecha_ingreso: '',
+        Id_barrio_vereda:'',
+        Id_corregimiento:'',
+        Id_tipo_documento:'',
+        Documentos:'',
+        Nombres:'',
+        Apellidos:'',
+        Sexo:'',
+        Genero:'',
+        Orientacion_sexual:0,
+        Direccion:'',
+        Telefono:'',
+        Estado:'',
+        Fecha_nacimiento:'',
+        Fecha_ingreso:''
         })
         setValedita(false)
     };
     const handleSubmit = (event) => {
+        
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {
@@ -71,21 +86,21 @@ export const MiembroForm = () => {
             event.stopPropagation()
         } else {
             const formularioDatos = {
-                Id_conncejo_comunitario:"13",
-                Id_barrio_vereda: "1",
-                Id_corregimiento :"1",
-                Id_tipo_documento: "1",
-                Documentos :"10855555",
-                Nombres :"Pedro",
-                Apellidos : "castro",
-                Sexo:"Hombre",
-                Genero:"Femenino",
-                Orientacion_sexual: 1 ,
-                Direccion:"calle 55",
-                Telefono :"3154454454",
-                Estado: "1",
-                Fecha_nacimiento:"1987-06-10",
-                Fecha_ingreso:"1988-06-10" 
+                Id_conncejo_comunitario:datoMiembro.Id_conncejo_comunitario,
+                Id_barrio_vereda:datoMiembro.Id_barrio_vereda,
+                Id_corregimiento :datoMiembro.Id_corregimiento,
+                Id_tipo_documento: datoMiembro.Id_tipo_documento,
+                Documentos : datoMiembro.Documentos,
+                Nombres : datoMiembro.Nombres,
+                Apellidos : datoMiembro.Apellidos,
+                Sexo: datoMiembro.Sexo,
+                Genero: datoMiembro.Genero,
+                Orientacion_sexual: datoMiembro.Orientacion_sexual ,
+                Direccion: datoMiembro.Direccion,
+                Telefono : datoMiembro.Telefono,
+                Estado: datoMiembro.Estado,
+                Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
+                Fecha_ingreso: datoMiembro.Fecha_ingreso
             }
 
             if (valedita === false) {
@@ -103,33 +118,24 @@ export const MiembroForm = () => {
     }
     const EditaMiembro= id => {
       const datos = miembro.filter(C => C.ID === id)
-debugger
-            setDatoMiembro({
 
-                Id_conncejo_comunitario:"13",
-                Id_barrio_vereda: "1",
-                Id_corregimiento :"1",
-                Id_tipo_documento: "1",
-                Documentos :"10855555",
-                Nombres :"Pedro",
-                Apellidos : "castro",
-                Sexo:"Hombre",
-                Genero:"Femenino",
-                Orientacion_sexual: 1 ,
-                Direccion:"calle 55",
-                Telefono :"3154454454",
-                Estado: "1",
-                Fecha_nacimiento:"1987-06-10",
-                Fecha_ingreso:"1988-06-10" 
-            //   Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
-            //   Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
-            //   Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
-            //   Nombres: datos[0].nombres === null ? '' : datos[0].nombres,
-            //   Apellidos: datos[0].apellidos === null ? '' : datos[0].apellidos,
-            //   Direccion: datos[0].direccion === null ? '' : datos[0].direccion,
-            //   Telefono: datos[0].telefono === null ? '' : datos[0].telefono,
-            //   Correo: datos[0].correo === null ? '' : datos[0].correo,
-            //   Estado: datos[0].estado === null ? '' : datos[0].estado,
+console.log('datos',datos[0].nombres)
+            setDatoMiembro({
+                Id_conncejo_comunitario:datos[0].Id_conncejo_comunitario,
+                Id_barrio_vereda: datos[0].Id_barrio_vereda,
+                Id_corregimiento :datos[0].Id_corregimiento,
+                Id_tipo_documento: datos[0].Id_tipo_documento,
+                Documentos :datos[0].Documentos,
+                Nombres :datos[0].nombres,
+                Apellidos : datos[0].Apellidos,
+                Sexo:datos[0].Sexo,
+                Genero:datos[0].Genero,
+                Orientacion_sexual: datos[0].Orientacion_sexual,
+                Direccion:datos[0].Direccion,
+                Telefono :datos[0].Telefono,
+                Estado: datos[0].Estado,
+                Fecha_nacimiento:datos[0].Fecha_nacimiento,
+                Fecha_ingreso:datos[0].Fecha_ingreso 
             })
         setValedita(true)
         setVisibleMI(true)
@@ -158,10 +164,16 @@ debugger
       handleReset,
       obtenerMiembro,
       obtenerAsociacion,
+      obtenerConcejo,
       obtenerBarrioVereda,
+      obtenertipodocumento,
+      obtenercorregimiento,
       eliminarMiembro,
       EditaMiembro,
       asociacion,
+      tipodocumento,
+      corregimiento,
+      consejos,
       miembro,
       barrios,
       validated,

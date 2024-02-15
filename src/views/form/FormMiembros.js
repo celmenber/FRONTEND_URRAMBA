@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useState, useEffect } from 'react'
-import AutoridadTNuevoCrear from './modal/FormAutoridadTNuevoModal'
+import FormMiembrosModal from './modal/FormMiembrosModal'
 
 import {
   CRow,
@@ -34,15 +34,19 @@ import {
 import { CLoadingButton } from '@coreui/react-pro'
 
 
+
 const WidgetBarChart = () => {
 
   const [selectServicio] = useState(1);
 
   const {
     obtenerMiembro,
+    obtenerConcejo,
     eliminarMiembro,
     EditaMiembro,
+    datoMiembro,
     miembro,
+    Consejo,
     visibleMI,
     setVisibleMI,
     cargandolista,
@@ -50,8 +54,10 @@ const WidgetBarChart = () => {
 
 
   useEffect(() => {
+    obtenerConcejo()
     console.log('miembro', miembro)
     obtenerMiembro();
+    console.log('Consejo', Consejo)
       // eslint-disable-next-line
   }, []);
   return (
@@ -86,8 +92,8 @@ const WidgetBarChart = () => {
                     <CTableHeaderCell className="text-center">
                       <CIcon icon={cilPeople} />
                     </CTableHeaderCell>
-                    <CTableHeaderCell colSpan={1}>Datos Empleado</CTableHeaderCell>
-                    <CTableHeaderCell colSpan={1} className="text-center">Asociacion</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={1}>Datos Miembro Consejo</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={1} className="text-center">Consejo</CTableHeaderCell>
                     <CTableHeaderCell colSpan={2} className="text-center">Ubicación</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
                   </CTableRow>
@@ -220,9 +226,10 @@ const WidgetBarChart = () => {
           </CCardBody>
         </CCard>
       </CCol>
-      <AutoridadTNuevoCrear
+      <FormMiembrosModal
         visibleMI={visibleMI}
         setVisibleMI={setVisibleMI}
+                                  datoMiembro={datoMiembro}
       />
     </CRow>
   )

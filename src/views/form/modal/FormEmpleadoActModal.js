@@ -14,7 +14,8 @@ import {
     CModalHeader,
     CRow
 } from '@coreui/react'
-import { EmpleadoForm } from 'src/hooks'
+import { EmpleadoForm } from 'src/hooks';
+
 
 const EmpleadoActModal = (Props) => {
     const [validated, setValidated] = useState(false);
@@ -92,6 +93,7 @@ const EmpleadoActModal = (Props) => {
     useEffect(() => {
       // Consultar la api un asociacion
       obtenerAsociacion();
+    
       // eslint-disable-next-line
     }, []);
     useEffect(() => {

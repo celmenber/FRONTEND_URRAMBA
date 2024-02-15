@@ -17,6 +17,7 @@ export const EmpleadoForm = () => {
   const dispatch = useDispatch()
   const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
+  
   const obtenerEmpleado = () => dispatch(obtenerEmpleadoAction());
   const crearNuevoEmpleado = (Dataform) => dispatch(crearNuevoEmpleadoAction(Dataform));
 
