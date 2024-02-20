@@ -13,6 +13,12 @@ const {
       OBTENER_TIPODOCUMENTO,
       OBTENER_TIPODOCUMENTO_SUCCESS,
       OBTENER_TIPODOCUMENTO_ERROR,
+      OBTENER_ESCOLARIDAD,
+      OBTENER_ESCOLARIDAD_SUCCESS,
+      OBTENER_ESCOLARIDAD_ERROR,
+      OBTENER_ORIENTACION_SEXUAL,
+      OBTENER_ORIENTACION_SEXUAL_SUCCESS,
+      OBTENER_ORIENTACION_SEXUAL_ERROR,
    } = TYPES
 
 // cada reducer tiene su propio state
@@ -73,10 +79,36 @@ export const ParametrosReducer = (state = initialState, action) => {
         corregimientos: action.payload
       }
 
+      case OBTENER_ESCOLARIDAD:
+        return {
+          ...state,
+          loadinglista: action.payload,
+        }
+      case OBTENER_ESCOLARIDAD_SUCCESS:
+        return {
+          ...state,
+          loadinglista: false,
+          escolaridad: action.payload
+        }
+
+        case OBTENER_ORIENTACION_SEXUAL:
+          return {
+            ...state,
+            loadinglista: action.payload,
+          }
+        case OBTENER_ORIENTACION_SEXUAL_SUCCESS:
+          return {
+            ...state,
+            loadinglista: false,
+            orientacionSexual: action.payload
+          }
+
     case OBTENER_MUNICIPIO_ERROR:
     case OBTENER_BARRIOVEREDA_ERROR:
     case OBTENER_TIPODOCUMENTO_ERROR:
     case OBTENER_CORREGIMIENTO_ERROR:
+    case OBTENER_ESCOLARIDAD_ERROR:
+    case OBTENER_ORIENTACION_SEXUAL_ERROR: 
       return {
         ...state,
         loading: false,

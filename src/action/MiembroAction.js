@@ -76,7 +76,7 @@ export const obtenerMiembroAction = () => {
         dispatch(obtenerMiembro());
 
         try {
-            debugger
+            
           const { data } = await Axios.get('/miembrosconcejo/view-miembrosconcejo');
             if (data.code === 200) {
                 dispatch(obtenerMiembroExitosa(data.data))
@@ -106,44 +106,43 @@ const obtenerMiembroError = () => ({
 
 export const editarMiembroAction = (Datos) => {
     return async (dispatch) => {
-        dispatch(editarMiembro());
-        console.log(Datos)
-        const { Id } = Datos
-        try {
-
-          const { data } = await Axios.patch(`/miembrosconcejo/edit-miembrosconcejo/${Id}`);
-            dispatch(editarMiembroExito(data.datos));
-
-            if (data.code === 200) {
-                Swal.fire(
-                    'Correcto',
-                    'El miembro de consejo se actualizó correctamente',
-                    'success'
-                );
-            }
-
-        } catch (error) {
-            console.log(error);
-            dispatch(editarMiembroError());
+      dispatch(editarMiembro());
+  
+      const { ID } = Datos.formularioDatos;
+      try {
+        // Assuming Datos.formularioDatos contains the data to be updated
+        const { data } = await Axios.patch(`/miembrosconcejo/edit-miembrosconcejo/${ID}`, Datos.formularioDatos);
+  
+        dispatch(editarMiembroExito(data.datos));
+  
+        if (data.code === 200) {
+          Swal.fire(
+            'Correcto',
+            'El miembro de consejo se actualizó correctamente',
+            'success'
+          );
         }
-    }
-}
+      } catch (error) {
+        console.log(error);
+        dispatch(editarMiembroError());
+      }
+    };
+  };
 
-
-const editarMiembro = () => ({
+  const editarMiembro = () => ({
     type: EDITAR_MIEMBRO,
-    payload: true
-});
-
-const editarMiembroExito = datos => ({
+    payload: true,
+  });
+  
+  const editarMiembroExito = (datos) => ({
     type: EDITAR_MIEMBRO_SUCCESS,
-    payload: datos
-});
-
-const editarMiembroError = () => ({
+    payload: datos,
+  });
+  
+  const editarMiembroError = () => ({
     type: EDITAR_MIEMBRO_ERROR,
-    payload: true
-});
+    payload: true,
+  });
 
 
 

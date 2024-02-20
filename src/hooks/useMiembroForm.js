@@ -3,9 +3,16 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerConcejoAction } from 'src/action/ConsejoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
-import { obtenerBarrioVeredaAction,  obtenercorregimientoAction, obtenertipodocumentoAction } from '../action/ParametrosAction'
+import {
+    obtenerBarrioVeredaAction,
+    obtenerEscolaridadAction,
+    obtenerOrientacionSexualAction,
+    obtenercorregimientoAction,
+    obtenertipodocumentoAction
+}
+    from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
-import { crearNuevoMiembroAction, obtenerMiembroAction } from 'src/action/MiembroAction';
+import { crearNuevoMiembroAction, editarMiembroAction, obtenerMiembroAction } from 'src/action/MiembroAction';
 
 
 export const MiembroForm = () => {
@@ -17,9 +24,11 @@ export const MiembroForm = () => {
   const obtenerMiembro = () => dispatch(obtenerMiembroAction());
   const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
   const obtenerConcejo = () => dispatch(obtenerConcejoAction());
+  const obtenerEscolaridad = () => dispatch(obtenerEscolaridadAction());
+  const obtenerOrientacionSexual = () => dispatch(obtenerOrientacionSexualAction());
   
   const crearMiembro = (Dataform) => dispatch(crearNuevoMiembroAction(Dataform));
-
+  const actulizarMiembro = (Dataform) => dispatch(editarMiembroAction(Dataform))
   const cargando = useSelector(state => state.Miembro.loading);
   const cargandolista = useSelector(state => state.Miembro.loadinglista);
   const barrios = useSelector(state => state.Parametros.barriosveredas);
@@ -28,6 +37,8 @@ export const MiembroForm = () => {
   const corregimiento = useSelector(state => state.Parametros.corregimientos);
   const asociacion = useSelector(state => state.Asociacion.asociacionlista);
   const miembro  = useSelector(state => state.Miembro.listaMiembro);
+  const escolaridades = useSelector(state => state.Parametros.escolaridad)
+  const orientacion_sexuales =  useSelector(state => state.Parametros.orientacionSexual)
 
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
@@ -43,19 +54,20 @@ export const MiembroForm = () => {
         Nombres:'',
         Apellidos:'',
         Sexo:'',
+        Id_escolaridad:'',
         Genero:'',
         Orientacion_sexual: 0,
         Direccion:'',
         Telefono:'',
-        Estado:'',
+        Estado:0,
         Fecha_nacimiento:'',
         Fecha_ingreso:''
     })
 
     const onChangeFormulario = e => {
+        
       setDatoMiembro({
-        ...datoMiembro,
-            [e.target.name]: e.target.value
+        ...datoMiembro, [e.target.name]: e.target.value
         })
     }
     const handleReset = () => {
@@ -67,11 +79,12 @@ export const MiembroForm = () => {
         Nombres:'',
         Apellidos:'',
         Sexo:'',
+        Id_escolaridad:'',
         Genero:'',
         Orientacion_sexual:0,
         Direccion:'',
         Telefono:'',
-        Estado:'',
+        Estado:0,
         Fecha_nacimiento:'',
         Fecha_ingreso:''
         })
@@ -85,6 +98,7 @@ export const MiembroForm = () => {
             event.preventDefault()
             event.stopPropagation()
         } else {
+            
             const formularioDatos = {
                 Id_conncejo_comunitario:datoMiembro.Id_conncejo_comunitario,
                 Id_barrio_vereda:datoMiembro.Id_barrio_vereda,
@@ -94,11 +108,12 @@ export const MiembroForm = () => {
                 Nombres : datoMiembro.Nombres,
                 Apellidos : datoMiembro.Apellidos,
                 Sexo: datoMiembro.Sexo,
+                Id_escolaridad: datoMiembro.Escolaridad,
                 Genero: datoMiembro.Genero,
-                Orientacion_sexual: datoMiembro.Orientacion_sexual ,
+                Orientacion_sexual: Number(datoMiembro.Orientacion_sexual) ,
                 Direccion: datoMiembro.Direccion,
                 Telefono : datoMiembro.Telefono,
-                Estado: datoMiembro.Estado,
+                Estado: Number(datoMiembro.Estado),
                 Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
                 Fecha_ingreso: datoMiembro.Fecha_ingreso
             }
@@ -116,30 +131,49 @@ export const MiembroForm = () => {
    
         setValidated(true)
     }
-    const EditaMiembro= id => {
-      const datos = miembro.filter(C => C.ID === id)
 
-console.log('datos',datos[0].nombres)
+
+    const EditaMiembro= id => {
+        
+      const datos = miembro.filter(C => C.ID === id)
+      
+      setVisibleMI(true)
+
             setDatoMiembro({
-                Id_conncejo_comunitario:datos[0].Id_conncejo_comunitario,
-                Id_barrio_vereda: datos[0].Id_barrio_vereda,
-                Id_corregimiento :datos[0].Id_corregimiento,
-                Id_tipo_documento: datos[0].Id_tipo_documento,
-                Documentos :datos[0].Documentos,
+                ID: datos[0].ID,
+                Id_conncejo_comunitario:datos[0].id_conncejo_comunitario,
+                Id_barrio_vereda: datos[0].id_barrio_vereda,
+                Id_corregimiento :datos[0].id_corregimiento,
+                Id_tipo_documento: datos[0].id_tipo_documento,
+                Documentos :datos[0].documentos,
                 Nombres :datos[0].nombres,
-                Apellidos : datos[0].Apellidos,
-                Sexo:datos[0].Sexo,
-                Genero:datos[0].Genero,
-                Orientacion_sexual: datos[0].Orientacion_sexual,
-                Direccion:datos[0].Direccion,
-                Telefono :datos[0].Telefono,
-                Estado: datos[0].Estado,
-                Fecha_nacimiento:datos[0].Fecha_nacimiento,
-                Fecha_ingreso:datos[0].Fecha_ingreso 
+                Apellidos : datos[0].apellidos,
+                Sexo:datos[0].sexo,
+                Id_escolaridad: datos[0].escolaridad,
+                Genero:datos[0].genero,
+                Orientacion_sexual: Number(datos[0].orientacion_sexual),
+                Direccion:datos[0].direccion,
+                Telefono :datos[0].telefono,
+                Estado: datos[0].estado,
+                Fecha_nacimiento:datos[0].fecha_nacimiento,
+                Fecha_ingreso:datos[0].fecha_ingreso 
             })
-        setValedita(true)
-        setVisibleMI(true)
+           
+            
     }
+
+
+    const handleSubmitAct = () => {
+        
+        if (valedita === false) {
+            actulizarMiembro({
+                formularioDatos: datoMiembro,  // Use datoMiembro instead of formularioDatos
+                handleReset,
+            });
+        }
+        setVisibleM(false);
+        // No need to use event.stopPropagation() here
+    };
     const eliminarMiembro = id => {
         Swal.fire({
             title: '¿Estas seguro de eliminar?',
@@ -156,10 +190,11 @@ console.log('datos',datos[0].nombres)
             }
         });
     }
-
+console.log({escolaridades})
 
   return {
       handleSubmit,
+      handleSubmitAct,
       onChangeFormulario,
       handleReset,
       obtenerMiembro,
@@ -168,6 +203,8 @@ console.log('datos',datos[0].nombres)
       obtenerBarrioVereda,
       obtenertipodocumento,
       obtenercorregimiento,
+      obtenerEscolaridad,
+      obtenerOrientacionSexual,
       eliminarMiembro,
       EditaMiembro,
       asociacion,
@@ -176,6 +213,8 @@ console.log('datos',datos[0].nombres)
       consejos,
       miembro,
       barrios,
+      escolaridades,
+      orientacion_sexuales,
       validated,
       valedita,
       datoMiembro, setDatoMiembro,

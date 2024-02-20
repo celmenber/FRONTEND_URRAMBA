@@ -32,6 +32,7 @@ import {
   cilTrash,
 } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
+import FormMiembrosActModal from './modal/FormMiembrosActModal'
 
 
 
@@ -40,6 +41,8 @@ const WidgetBarChart = () => {
   const [selectServicio] = useState(1);
 
   const {
+    onChangeFormulario,
+    handleSubmitAct,
     obtenerMiembro,
     obtenerConcejo,
     eliminarMiembro,
@@ -47,6 +50,8 @@ const WidgetBarChart = () => {
     datoMiembro,
     miembro,
     Consejo,
+    visibleM,
+    setVisibleM,
     visibleMI,
     setVisibleMI,
     cargandolista,
@@ -54,10 +59,8 @@ const WidgetBarChart = () => {
 
 
   useEffect(() => {
-    obtenerConcejo()
-    console.log('miembro', miembro)
+    obtenerConcejo();
     obtenerMiembro();
-    console.log('Consejo', Consejo)
       // eslint-disable-next-line
   }, []);
   return (
@@ -76,7 +79,7 @@ const WidgetBarChart = () => {
                   variant="outline"
                   className="px-4"
                   style={{ width: '100%' }}
-                  onClick={() => setVisibleMI(true)}
+                  onClick={() => setVisibleM(true)}
                 >{' '}
                   {'Agregar Nuevo Miembros Consejo'}
                 </CButton>
@@ -227,9 +230,16 @@ const WidgetBarChart = () => {
         </CCard>
       </CCol>
       <FormMiembrosModal
-        visibleMI={visibleMI}
-        setVisibleMI={setVisibleMI}
-                                  datoMiembro={datoMiembro}
+        visibleM={visibleM}
+        setVisibleM={setVisibleM}
+                                  
+      />
+      <FormMiembrosActModal
+       visibleMI={visibleMI}
+       setVisibleMI={setVisibleMI}
+        datoMiembro={datoMiembro}
+        onChangeFormulario={onChangeFormulario}
+        handleSubmitAct = {handleSubmitAct}
       />
     </CRow>
   )

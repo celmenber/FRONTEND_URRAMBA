@@ -92,7 +92,7 @@ export const AutoridadTForm = () => {
     };
 
     const handleSubmit = (event) => {
-      debugger
+      
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {

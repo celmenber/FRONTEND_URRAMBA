@@ -22,5 +22,5 @@ export const rootReducer = combineReducers({
   Empleado: EmpleadoReducer,
   AutoridadT: AutoridadTReducer,
   Concejo: ConcejoReducer,
-  Miembro: MiemboReducer
+  Miembro: MiemboReducer,
 })

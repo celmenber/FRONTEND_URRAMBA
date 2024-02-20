@@ -15,6 +15,12 @@ const {
   OBTENER_TIPODOCUMENTO,
   OBTENER_TIPODOCUMENTO_SUCCESS,
   OBTENER_TIPODOCUMENTO_ERROR,
+  OBTENER_ESCOLARIDAD,
+  OBTENER_ESCOLARIDAD_SUCCESS,
+  OBTENER_ESCOLARIDAD_ERROR,
+  OBTENER_ORIENTACION_SEXUAL,
+  OBTENER_ORIENTACION_SEXUAL_SUCCESS,
+  OBTENER_ORIENTACION_SEXUAL_ERROR
 } = TYPES
 
 // procedimiento obtener listado dato municipio
@@ -144,3 +150,69 @@ const obtenertipodocumentoError = () => ({
   type: OBTENER_TIPODOCUMENTO_ERROR,
   payload: true,
 })
+
+
+export const obtenerEscolaridadAction = () => {
+  return async (dispatch) => {
+    dispatch(ObtenerTipoEscolaridad())
+
+    try {
+      const { data } = await Axios.get('/parametros/view-escolaridad')
+      if (data.code === 200) {
+        dispatch(obtenerTipoEscolaradadExistosa(data.data))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(obtenerTipoEscolaridadError())
+    }
+  }
+}
+
+const ObtenerTipoEscolaridad = () => ({
+  type: OBTENER_ESCOLARIDAD,
+  payload: true,
+})
+
+const obtenerTipoEscolaradadExistosa = (datos) => ({
+  type: OBTENER_ESCOLARIDAD_SUCCESS,
+  payload: datos,
+})
+
+const obtenerTipoEscolaridadError = () => ({
+  type: OBTENER_ESCOLARIDAD_ERROR,
+  payload: true,
+})
+
+export const obtenerOrientacionSexualAction = () => {
+  return async (dispatch) => {
+    dispatch(ObtenerOrientacionSexual())
+
+    try {
+      const { data } = await Axios.get('/parametros/view-orientacion_sexual')
+      if (data.code === 200) {
+        dispatch(obtenerOrientacionSexualExitosa(data.data))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(obtenerOrientacionSexualError())
+    }
+  }
+}
+
+const ObtenerOrientacionSexual = () => ({
+  type: OBTENER_ORIENTACION_SEXUAL,
+  payload: true,
+})
+
+const obtenerOrientacionSexualExitosa = (datos) => ({
+  type: OBTENER_ORIENTACION_SEXUAL_SUCCESS,
+  payload: datos,
+})
+
+const obtenerOrientacionSexualError = () => ({
+  type: OBTENER_ORIENTACION_SEXUAL_ERROR,
+  payload: true,
+})
+
+
+

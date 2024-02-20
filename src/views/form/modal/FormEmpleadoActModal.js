@@ -28,11 +28,12 @@ const EmpleadoActModal = (Props) => {
       visibleEM,
       setVisibleEM,
       datoEmpleado,
-     onChangeFormulario
+     onChangeFormulario,
+     handleSubmitAct
     } = Props
 
   const {
-    /* handleSubmit,
+    /* handleSubmitAct,
     onChangeFormulario,
     validated, */
 
@@ -57,37 +58,37 @@ const EmpleadoActModal = (Props) => {
   } = datoEmpleado
 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const form = event.currentTarget
-        if (form.checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        } else {
+    // const handleSubmitAct = (event) => {
+    //     event.preventDefault();
+    //     const form = event.currentTarget
+    //     if (form.checkValidity() === false) {
+    //         event.preventDefault()
+    //         event.stopPropagation()
+    //     } else {
 
-            // const formularioDatos = {
-            //    /*  UsuarioModificacion: userDetails.Id,
-            //     IdMunicipio: datoConvenio.idMunicipio,
-            //     Estado: datoConvenio.estado,
-            //     NitEmpresa: datoConvenio.nitEmpresa,
-            //     NombrEmpresa: datoConvenio.nombrEmpresa,
-            //     CorreoEmpresa: datoConvenio.correoEmpresa,
-            //     DireccionEmpresa: datoConvenio.direccionEmpresa,
-            //     TelefonoEmpresa: datoConvenio.telefonoEmpresa,
-            //     RepresentanteEmpresa: datoConvenio.representanteEmpresa */
-            // }
+    //         // const formularioDatos = {
+    //         //    /*  UsuarioModificacion: userDetails.Id,
+    //         //     IdMunicipio: datoConvenio.idMunicipio,
+    //         //     Estado: datoConvenio.estado,
+    //         //     NitEmpresa: datoConvenio.nitEmpresa,
+    //         //     NombrEmpresa: datoConvenio.nombrEmpresa,
+    //         //     CorreoEmpresa: datoConvenio.correoEmpresa,
+    //         //     DireccionEmpresa: datoConvenio.direccionEmpresa,
+    //         //     TelefonoEmpresa: datoConvenio.telefonoEmpresa,
+    //         //     RepresentanteEmpresa: datoConvenio.representanteEmpresa */
+    //         // }
 
-           /*  updateConvenio({
-                formularioDatos,
-                handleReset,
-                Id: convenioeditar[0].IdConvenio
-            }) */
+    //        /*  updateConvenio({
+    //             formularioDatos,
+    //             handleReset,
+    //             Id: convenioeditar[0].IdConvenio
+    //         }) */
 
-            setVisibleEM(false)
-        }
+    //         setVisibleEM(false)
+    //     }
 
-        setValidated(true)
-    }
+    //     setValidated(true)
+    // }
 
 
     useEffect(() => {
@@ -111,7 +112,7 @@ const EmpleadoActModal = (Props) => {
           <CForm className="row g-3 needs-validation"
             noValidate
             validated={validated}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitAct}
           >
             <CModalBody>
               <CRow className="g-3">
@@ -297,7 +298,7 @@ const EmpleadoActModal = (Props) => {
                 <CForm className="row g-3 needs-validation"
                     noValidate
                     validated={validated}
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmitAct}
                 >
                     <CModalBody>
                         <CRow className="g-3">

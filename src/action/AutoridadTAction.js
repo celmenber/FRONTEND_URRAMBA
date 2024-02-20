@@ -20,7 +20,7 @@ const {
 
 // Crear nuevos AutoridadT
 export const crearNuevoAutoridadTAction = (Dataform) => {
-  debugger
+  
   return async (dispatch) => {
     dispatch(agregarAutoridadT())
 

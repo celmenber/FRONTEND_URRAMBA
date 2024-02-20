@@ -70,7 +70,7 @@ const AdminConvenios = () => {
         UpdateConvenioEstado(id)
     }); */
 
-  console.log(empleados);
+ 
 
     return (
         <CRow>
