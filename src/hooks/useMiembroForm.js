@@ -55,8 +55,9 @@ export const MiembroForm = () => {
         Apellidos:'',
         Sexo:'',
         Id_escolaridad:'',
+        Estado_escolaridad:'',
         Genero:'',
-        Orientacion_sexual: 0,
+        Id_orientacion_sexual: '',
         Direccion:'',
         Telefono:'',
         Estado:0,
@@ -80,8 +81,9 @@ export const MiembroForm = () => {
         Apellidos:'',
         Sexo:'',
         Id_escolaridad:'',
+        Estado_escolaridad:'',
         Genero:'',
-        Orientacion_sexual:0,
+        Id_orientacion_sexual:'',
         Direccion:'',
         Telefono:'',
         Estado:0,
@@ -108,9 +110,10 @@ export const MiembroForm = () => {
                 Nombres : datoMiembro.Nombres,
                 Apellidos : datoMiembro.Apellidos,
                 Sexo: datoMiembro.Sexo,
-                Id_escolaridad: datoMiembro.Escolaridad,
+                Id_escolaridad: datoMiembro.Id_escolaridad,
+                Estado_escolaridad: datoMiembro.Estado_escolaridad,
                 Genero: datoMiembro.Genero,
-                Orientacion_sexual: Number(datoMiembro.Orientacion_sexual) ,
+                Id_orientacion_sexual: (datoMiembro.Id_orientacion_sexual) ,
                 Direccion: datoMiembro.Direccion,
                 Telefono : datoMiembro.Telefono,
                 Estado: Number(datoMiembro.Estado),
@@ -149,9 +152,10 @@ export const MiembroForm = () => {
                 Nombres :datos[0].nombres,
                 Apellidos : datos[0].apellidos,
                 Sexo:datos[0].sexo,
-                Id_escolaridad: datos[0].escolaridad,
+                Id_escolaridad: datos[0].id_escolaridad,
+                Estado_escolaridad: datos[0].estado_escolaridad,
                 Genero:datos[0].genero,
-                Orientacion_sexual: Number(datos[0].orientacion_sexual),
+                Id_orientacion_sexual: Number(datos[0].id_orientacion_sexual),
                 Direccion:datos[0].direccion,
                 Telefono :datos[0].telefono,
                 Estado: datos[0].estado,
@@ -190,7 +194,7 @@ export const MiembroForm = () => {
             }
         });
     }
-console.log({escolaridades})
+
 
   return {
       handleSubmit,
