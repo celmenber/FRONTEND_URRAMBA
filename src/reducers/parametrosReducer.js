@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import  TYPES  from '../type/ParametrosType'
+
+import TYPES from "src/type/ParametrosType"
+
 const {
       OBTENER_MUNICIPIO,
       OBTENER_MUNICIPIO_SUCCESS,
