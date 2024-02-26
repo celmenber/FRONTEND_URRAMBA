@@ -58,26 +58,28 @@ export const MiemboReducer = (state = initialState, action) => {
                 ...state,
                 loading: action.payload,
             }
-        case EDITAR_MIEMBRO_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                miembroeditar: null,
-                listaMiembro: state.listaMiembro.map(E =>
-                    E.EstadoServicioId === action.payload.EstadoServicioId ? E = action.payload : E
-                )
-            }
+            case EDITAR_MIEMBRO_SUCCESS:
+                const updatedMiembro = action.payload; // Assuming action.payload is the updated member
+                const updatedMiembros = state.listaMiembro.map((miembro) =>
+                  miembro.ID === updatedMiembro.ID ? updatedMiembro : miembro
+                );
+              
+                return {
+                  ...state,
+                  listaMiembro: updatedMiembros,
+                  // other properties...
+                };
         case DELETE_MIEMBRO:
             return {
                 ...state,
                 miembroeliminar: action.payload,
             }
-        case DELETE_MIEMBRO_SUCCESS:
-            return {
-                ...state,
-                listaMiembro: state.listaMiembro.filter(E => E.Id !== state.miembroeliminar),
-                miembroeliminar: null
-            }
+            case DELETE_MIEMBRO_SUCCESS:
+                return {
+                    ...state,
+                    listaMiembro: state.listaMiembro.map(E => E.Id !== state.miembroeliminar ? E : null).filter(Boolean),
+                    miembroeliminar: null
+                }
         case ADD_MIEMBRO_ERROR:
         case OBTENER_MIEMBRO_ERROR:
         case EDITAR_MIEMBRO_ERROR:

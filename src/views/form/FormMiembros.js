@@ -59,13 +59,14 @@ const WidgetBarChart = () => {
     setVisibleM,
     visibleMI,
     setVisibleMI,
+    setValidated,
     cargandolista,
   } = MiembroForm()
 
 
   useEffect(() => {
     obtenerConcejo();
-    obtenerMiembro();
+    obtenerMiembro(); 
     obtenerEscolaridad()
     obtenerOrientacionSexual()
 
@@ -73,15 +74,19 @@ const WidgetBarChart = () => {
   }, []);
 
   useEffect(()=>{
-    obtenerNombre()
+    
    
+    obtenerNombre();
+    setVisibleM(false)
+   // eslint-disable-next-line
   },[miembro])
 
- 
+ console.log({miembro})
 
   const obtenerNombre = () => {
+    
     const miembrosConOrientacionSexual = miembro.map(orientacion => {
-      const orientacionSexuales = orientacion_sexuales.find(item => item.ID === orientacion.id_orientacion_sexual)
+      const orientacionSexuales = orientacion_sexuales?.find(item => item.ID === orientacion.id_orientacion_sexual)
       const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
       return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
   
@@ -95,7 +100,6 @@ const WidgetBarChart = () => {
   
     setNombreEscolaridad(miembrosConEscolaridad);
   }
-
 
 
   return (
@@ -296,6 +300,7 @@ const WidgetBarChart = () => {
         datoMiembro={datoMiembro}
         onChangeFormulario={onChangeFormulario}
         handleSubmitAct = {handleSubmitAct}
+        setValidated = {setValidated}
       />
     </CRow>
   )

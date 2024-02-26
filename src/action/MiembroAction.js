@@ -36,6 +36,7 @@ export const crearNuevoMiembroAction = (Dataform) => {
 
       if (data.success === true) {
         Swal.fire('Correcto', 'El Miembro se agregar correctamente', 'success')
+        
       }
     } catch (error) {
       console.log(error)
@@ -105,29 +106,35 @@ const obtenerMiembroError = () => ({
 });
 
 export const editarMiembroAction = (Datos) => {
-    return async (dispatch) => {
-      dispatch(editarMiembro());
   
-      const { ID } = Datos.formularioDatos;
-      try {
-        // Assuming Datos.formularioDatos contains the data to be updated
-        const { data } = await Axios.patch(`/miembrosconcejo/edit-miembrosconcejo/${ID}`, Datos.formularioDatos);
-  
-        dispatch(editarMiembroExito(data.datos));
-  
-        if (data.code === 200) {
-          Swal.fire(
-            'Correcto',
-            'El miembro de consejo se actualizó correctamente',
-            'success'
-          );
-        }
-      } catch (error) {
-        console.log(error);
-        dispatch(editarMiembroError());
+  return async (dispatch) => {
+    dispatch(editarMiembro());
+
+    const id = Number(Datos.id);
+
+    try {
+                                     
+      const {data} = await Axios.put(`/miembrosconcejo/edit-miembrosconcejo/${id}`, Datos.formularioDatos);
+      
+console.log('data', data)
+      dispatch(editarMiembroExito(data.data.datos));
+
+      if (data.code === 200) {
+        Swal.fire(
+          'Correcto',
+          'El miembro de consejo se actualizó correctamente',
+          'success'
+        );
       }
-    };
+    } catch (error) {
+      console.log(error);
+      dispatch(editarMiembroError());
+    }
   };
+};
+
+
+
 
   const editarMiembro = () => ({
     type: EDITAR_MIEMBRO,
@@ -146,44 +153,59 @@ export const editarMiembroAction = (Datos) => {
 
 
 
-export const borrarMiembroAction = id => {
-    return async (dispatch) => {
-
-        dispatch(eliminaMiembro(id));
-
-        try {
-            const { data } = await Axios.delete(`app/miembrosconcejo/delete/${id}`);
-
-            if (data.code === 200) {
-                dispatch(eliminarMiembroExito(id));
-                // Si se elimina, mostrar alerta
-                Swal.fire(
-                    'Eliminado',
-                    'El registro se eliminó correctamente',
-                    'success'
-                )
-            }
-        } catch (error) {
-            console.log(error);
-            dispatch(eliminarMiembroError());
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Hubo un error al intenar eliminar el registro.'
-            })
-        }
-    }
-}
-
-const eliminaMiembro = Id => ({
+  const eliminaMiembro = ID => ({
     type: DELETE_MIEMBRO,
-    payload: Id
+    payload: ID
 });
+
 const eliminarMiembroExito = () => ({
     type: DELETE_MIEMBRO_SUCCESS,
-})
+});
 
 const eliminarMiembroError = () => ({
     type: DELETE_MIEMBRO_ERROR,
     payload: true
 });
+
+// export const borrarMiembroAction = id => {
+//   return async dispatch => {
+//       try {
+//           const { data } = await Axios.delete(`miembrosconcejo/delete-miembrosconcejo/${id}`);
+
+//           if (data.code === 200) {
+//               dispatch(eliminaMiembro(id));
+//               dispatch(eliminarMiembroExito());
+//           }
+//       } catch (error) {
+//           console.error(error);
+//           dispatch(eliminarMiembroError());
+//       }
+//   }
+// }
+
+
+export const borrarMiembroAction = (id) => {
+  return async (dispatch) => {
+    dispatch(eliminaMiembro(id))
+
+    try {
+      const { data } = await Axios.delete(`miembrosconcejo/delete-miembrosconcejo/${id}`)
+      if (data.code === 200) {
+        dispatch(eliminarMiembroExito(id))
+        // Si se elimina, mostrar alerta
+        Swal.fire('Eliminado', 'Se eliminó correctamente', 'success')
+      }
+    } catch (error) {
+      console.log(error)
+      //const { data } = error.response
+      dispatch(eliminarMiembroError())
+
+      // alerta de error
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al intenar eliminar el registro. ',
+      })
+    }
+  }
+}

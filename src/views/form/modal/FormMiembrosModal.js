@@ -24,14 +24,15 @@ const FormMiembrosModal = (Props) => {
   const {
     visibleM,
     setVisibleM,
-
+  
   } = Props
 
-  const handleClose = () => setVisibleM(false)
+
 
   const {
     handleSubmit,
     onChangeFormulario,
+    setValidated,
     validated,
     datoMiembro,
     handleReset,
@@ -68,10 +69,16 @@ const FormMiembrosModal = (Props) => {
     Telefono,
     Estado,
     Fecha_nacimiento,
-    Fecha_ingreso
+    Fecha_ingreso,
+    Correo
   } = datoMiembro
 
-
+  const handleClose = () =>{
+    
+    setVisibleM(false)
+    setValidated(false)
+    handleReset()
+  } 
 
 
   useEffect(() => {
@@ -111,7 +118,7 @@ const FormMiembrosModal = (Props) => {
         >
           <CModalBody>
             <CRow className="g-3">
-              <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={10} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom01">Consejo Comunitario*</CFormLabel>
                 <CFormSelect
                   id="validationCustom01"
@@ -136,7 +143,7 @@ const FormMiembrosModal = (Props) => {
                 <CFormFeedback invalid>El campo Asociacion es Requerido!</CFormFeedback>
               </CCol>
 
-              <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={2} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom02">Estado*</CFormLabel>
                 <CFormSelect
                   id="validationCustom02"
@@ -151,7 +158,10 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={4} style={{ marginTop: '15px' }}>
+            </CRow>
+
+            <CRow className="g-3">
+            <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom03">Tipo Documento*</CFormLabel>
                 <CFormSelect
                   id="validationCustom03"
@@ -176,12 +186,7 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El campo es Requerido!</CFormFeedback>
               </CCol>
-           
-            </CRow>
-
-            <CRow className="g-3">
-            
-              <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom04">Documento Miembro Consejo*</CFormLabel>
                 <CFormInput
                   type="text"
@@ -192,7 +197,7 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Documentos es Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom05">Nombre Miembro Consejo*</CFormLabel>
                 <CFormInput
                   type="text"
@@ -203,7 +208,7 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Documentos es Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom06">Apellidos*</CFormLabel>
                 <CFormInput
                   type="text"
@@ -214,11 +219,21 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Apellidos es Requerido!</CFormFeedback>
               </CCol>
-      
             </CRow>
 
             <CRow>
-            <CCol md={4} style={{ marginTop: '15px' }}>
+            <CCol md={3} style={{ marginTop: '15px' }}>
+                <CFormLabel htmlFor="validationCustom16">Fecha Nacimiento*</CFormLabel>
+                <CFormInput
+                  type="date"
+                  id="validationCustom16"
+                  name='Fecha_nacimiento'
+                  value={Fecha_nacimiento}
+                  onChange={onChangeFormulario}
+                  required />
+                <CFormFeedback invalid>El campo Fecha Nacimiento es Requerido!</CFormFeedback>
+              </CCol>
+            <CCol md={5} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom07">Escolaridad*</CFormLabel>
                 <CFormSelect
                   id="validationCustom07"
@@ -251,12 +266,15 @@ const FormMiembrosModal = (Props) => {
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Seleccione...</option>
-                  <option value={'1'}>Terminado</option>
-                  <option value={'2'}>En proceso</option>
-                  <option value={'3'}>Retirado</option>
+                  <option value={'Terminado'}>Terminado</option>
+                  <option value={'Cursando'}>Cursando</option>
+                  <option value={'Retirado'}>Retirado</option>
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Genero es Requerido!</CFormFeedback>
               </CCol>
+            </CRow>
+
+            <CRow>
             <CCol md={4} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom09">Genero*</CFormLabel>
                 <CFormSelect
@@ -271,16 +289,6 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Genero es Requerido!</CFormFeedback>
               </CCol>
-         
-            
-          
-              
-
-             
-            
-            </CRow>
-
-            <CRow>
             <CCol md={4} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom10">Orientación Sexual*</CFormLabel>
                 <CFormSelect
@@ -320,6 +328,9 @@ const FormMiembrosModal = (Props) => {
               </CFormSelect>
               <CFormFeedback invalid>El campo Sexo es Requerido!</CFormFeedback>
             </CCol>
+            </CRow>
+
+            <CRow>
             <CCol md={4} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom12">Corregimientos*</CFormLabel>
                 <CFormSelect
@@ -344,14 +355,7 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Corregimientos es Requerido!</CFormFeedback>
               </CCol>
-             
-
-        
-             
-            </CRow>
-
-            <CRow>
-            <CCol md={4} style={{ marginTop: '15px' }}>
+            <CCol md={5} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom13">Barrio Vereda*</CFormLabel>
                 <CFormSelect
                   id="validationCustom13"
@@ -375,7 +379,7 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Barrio Vereda es Requerido!</CFormFeedback>
               </CCol>
-            <CCol md={4} style={{ marginTop: '15px' }}>
+            <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom14">Direccion Miembro Consejo*</CFormLabel>
                 <CFormInput
                   type="text"
@@ -386,7 +390,10 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Direccion Miembro Consejo es Requerido!</CFormFeedback>
               </CCol>
-            <CCol md={4} style={{ marginTop: '15px' }}>
+            </CRow>
+
+            <CRow>
+            <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom15">Telefono Empleado*</CFormLabel>
                 <CFormInput
                   type="text"
@@ -397,24 +404,18 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Telefono Empleado es Requerido!</CFormFeedback>
               </CCol>
-            
-
-            
-            
-            </CRow>
-            <CRow>
-            <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom16">Fecha Nacimiento*</CFormLabel>
+              <CCol md={6} style={{ marginTop: '15px' }}>
+                <CFormLabel htmlFor="validationCustom17">Correo*</CFormLabel>
                 <CFormInput
-                  type="date"
-                  id="validationCustom16"
-                  name='Fecha_nacimiento'
-                  value={Fecha_nacimiento}
+                  type="email"
+                  id="validationCustom17"
+                  name='Correo'
+                  value={Correo}
                   onChange={onChangeFormulario}
                   required />
-                <CFormFeedback invalid>El campo Fecha Nacimiento es Requerido!</CFormFeedback>
+                <CFormFeedback invalid>El campo Correo es Requerido!</CFormFeedback>
               </CCol>
-            <CCol md={4} style={{ marginTop: '15px' }}>
+              <CCol md={3} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom17">Fecha de Ingreso*</CFormLabel>
                 <CFormInput
                   type="date"
@@ -425,12 +426,13 @@ const FormMiembrosModal = (Props) => {
                   required />
                 <CFormFeedback invalid>El campo Fecha Ingresp es Requerido!</CFormFeedback>
               </CCol>
+          
             </CRow>
 
             <CRow>
          
               <CCol md={8} style={{ marginTop: '20px', marginBottom: '20px' }}>
-                {cargando === true ? (
+                {/* {cargando === true ? (
                   <CLoadingButton
                     color="success"
                     variant="outline"
@@ -440,7 +442,7 @@ const FormMiembrosModal = (Props) => {
                     {' '}
                     Enviando Miembro Consejo
                   </CLoadingButton>
-                ) : (
+                ) : ( */}
                   <CButton
                     type="submit"
                     color={'success'}
@@ -450,7 +452,7 @@ const FormMiembrosModal = (Props) => {
                     {' '}
                     {'Enviar Datos Miembro Consejo'}
                   </CButton>
-                )}
+                {/* )} */}
               </CCol>
               <CCol xs={4} style={{ marginTop: '20px', marginBottom: '20px' }}>
                 <CButton
