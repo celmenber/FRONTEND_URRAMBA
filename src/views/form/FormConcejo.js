@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ConcejoForm } from '../../hooks'
 import {
   CButton,
@@ -42,40 +42,55 @@ const FormConcejo = () => {
     cargandolista,
     cargando,
     validated,
-    datoConcejo
+    datoConcejo,
+    setDatoconcejo,
+    handleActualizarConcejo
+    
   } = ConcejoForm();
-
-
-  useEffect(() => {
-    // Consultar la api listar obtenerConcejo
-    obtenerConcejo();
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    // Consultar la api listar obtenerAutoridadT
-    setTimeout(() => {
-      obtenerAutoridadT();
-    }, 500);
-    // eslint-disable-next-line
-  }, []);
-
 
   useEffect(() => {
     // Consultar la api listar Municipio,
-    setTimeout(() => {
+    obtenerConcejo();
+    obtenerAutoridadT();
     obtenerMunicipio();
-    }, 600);
+    obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
+  const [datosAct, setDatosAct] = useState({})
+  const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar ] = useState(('Agregar Nuevo Concejo Comunitario'))
 
-  useEffect(() => {
-    // Consultar la api listar obtenerAsociacion
-    setTimeout(() => {
-      obtenerAsociacion();
-    }, 700);
-    // eslint-disable-next-line
-  }, []);
+
+
+  const EditaConsejo = (event, item) => {
+    
+    event.preventDefault();
+    setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
+  
+    // Llenar el formulario con los datos del Concejo seleccionado
+    setDatoconcejo({
+      ID : item.ID,
+      nitConcejo: item.Nit,
+      nombreAsociacion: item.Nombre_concejo_comunitario,
+      id_asociacion: item.id_asociacion,
+      id_autoridad_tradicional: item.id_autoridad_tradicional,
+      idMunicipio: item.id_municipio,
+      // ... (otros campos)
+    });
+  
+    // Actualizar el estado datosAct con los datos de edición
+    setDatosAct({
+      ID : item.ID,
+      nombreAsociacion: item.nombreAsociacion,
+      id_asociacion: item.id_asociacion,
+      id_autoridad_tradicional: item.id_autoridad_tradicional,
+      idMunicipio: item.id_municipio,
+      // ... (otros campos)
+    });
+    handleActualizarConcejo(event, datosAct)
+  };
+  
+  
+
 
 
   return (
@@ -208,15 +223,15 @@ const FormConcejo = () => {
                   </CLoadingButton>
                 ) : (
                   <CButton
-                    type="submit"
-                    color={'primary'}
-                    variant="outline"
-                    className="px-4"
-                    style={{ width: '100%' }}
-                  >
-                    {' '}
-                    {'Agregar Nuevo Concejo Comunitario'}
-                  </CButton>
+                  type="button"
+                  color={'primary'}
+                  variant="outline"
+                  className="px-4"
+                  style={{ width: '100%' }}
+                  onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Concejo Comunitario' ? handleSubmit : handleActualizarConcejo}
+                >
+                  {nombreBotoGuardarActulizar}
+                </CButton>
                 )}
               </CCol>
 
@@ -289,7 +304,7 @@ const FormConcejo = () => {
                                           color="info"
                                           variant="outline"
                                           size="lg"
-                                        //  onClick={() => EditaEmpleado(item.ID)}
+                                          onClick={(event) => EditaConsejo(event, item)}
                                         >
                                           {'Corregir Concejo Comunitario'}
                                         </CButton></CTooltip>

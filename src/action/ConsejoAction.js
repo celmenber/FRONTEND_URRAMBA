@@ -120,9 +120,11 @@ export const editarConcejoAction = (dataform) => {
     dispatch(editarConcejo())
 
     const { formularioDatos, setVisibleCHKIO, Id } = dataform
+    const id = Number(Id)
 
     try {
-      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${Id}`, formularioDatos)
+      
+      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${id}`, formularioDatos)
 
       dispatch(editarConcejoExito(data.datos))
       setVisibleCHKIO(false)

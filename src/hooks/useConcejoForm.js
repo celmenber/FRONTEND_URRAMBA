@@ -5,6 +5,7 @@ import {
   obtenerConcejoAction,
   crearNuevoConcejoAction,
   borrarConcejoAction,
+  editarConcejoAction,
   } from '../action/ConsejoAction'
 import { obtenerMunicipioAction } from '../action/ParametrosAction'
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
@@ -19,6 +20,7 @@ export const ConcejoForm = () => {
   const obtenerAutoridadT = () => dispatch(obtenerAutoridadTAction())
   const obtenerConcejo = () => dispatch(obtenerConcejoAction())
   const crearNuevoConcejo = (Dataform) => dispatch(crearNuevoConcejoAction(Dataform))
+  const actulizarConcejo = (Dataform) => dispatch(editarConcejoAction(Dataform))
   // const updateConcejo = (Dataform) => dispatch(editarConcejoAction(Dataform))
 
   //selecion del state en el  store
@@ -32,6 +34,7 @@ export const ConcejoForm = () => {
 
   const [validated, setValidated] = useState(false)
   const [valedita, setValedita] = useState(false)
+  
 
   const [datoConcejo, setDatoconcejo] = useState({
     id_asociacion: '',
@@ -39,6 +42,7 @@ export const ConcejoForm = () => {
     idMunicipio: '',
     nitConcejo: '',
     nombreConcejo: '',
+    nombreAsociacion:''
   })
 
   // Leer los datos del formulario
@@ -49,7 +53,21 @@ export const ConcejoForm = () => {
     })
   }
 
+ const  handleReset = () => {
+  setDatoconcejo({
+    id_asociacion: '',
+    id_autoridad_tradicional: '',
+    idMunicipio: '',
+    nitConcejo: '',
+    nombreConcejo: '',
+    nombreAsociacion:''
+  })
+
+
+ }
+
   const handleSubmit = (event) => {
+    
     event.preventDefault()
     const form = event.currentTarget
     if (form.checkValidity() === false) {
@@ -64,11 +82,16 @@ export const ConcejoForm = () => {
         Nombre_concejo_comunitario: datoConcejo.nitConcejo,
       }
 
+
       if (valedita === false) {
         crearNuevoConcejo({
           formularioDatos,
-        //  handleReset,
+         
         })
+
+        handleReset()
+        setValidated(false)
+        return
       }
 
       setValedita(false)
@@ -77,6 +100,38 @@ export const ConcejoForm = () => {
     event.stopPropagation()
     setValidated(true)
   }
+
+const handleActualizarConcejo = (event,param)=> {
+debugger
+  event.preventDefault();
+  const form = event.currentTarget;
+
+  if (form.checkValidity() === false) {
+    event.stopPropagation();
+  } else {
+      const formularioDatos = {
+        Id_asociacion: datoConcejo.id_asociacion,
+        Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
+        Id_municipio: datoConcejo.idMunicipio,
+        Nit: datoConcejo.nitConcejo,
+        Nombre_concejo_comunitario: datoConcejo.nombreAsociacion,
+      };
+
+      // Asumo que actulizarMiembro es una función que realiza la actualización
+      // No tengo su implementación, así que debes ajustarlo según tu código real
+      if (!valedita) {
+          actulizarConcejo({
+              formularioDatos,
+              Id: datoConcejo.ID,
+              handleReset,
+          });
+      }
+  }
+
+ 
+  event.stopPropagation();
+  console.log(param)
+}
 
   // función que redirige Eliminar ContactoConvenio
   const EliminarConcejo = (id) => {
@@ -112,6 +167,9 @@ export const ConcejoForm = () => {
     cargandolista,
     cargando,
     validated,
-    datoConcejo
+    datoConcejo,
+    setDatoconcejo,
+    handleActualizarConcejo
+    
   }
 }

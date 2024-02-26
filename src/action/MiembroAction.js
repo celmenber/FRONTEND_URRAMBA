@@ -100,9 +100,9 @@ const obtenerMiembroExitosa = datos => ({
     payload: datos
 })
 
-const obtenerMiembroError = () => ({
+const obtenerMiembroError = (estado) => ({
     type: OBTENER_MIEMBRO_ERROR,
-    payload: true
+    payload: estado
 });
 
 export const editarMiembroAction = (Datos) => {
@@ -153,37 +153,6 @@ console.log('data', data)
 
 
 
-  const eliminaMiembro = ID => ({
-    type: DELETE_MIEMBRO,
-    payload: ID
-});
-
-const eliminarMiembroExito = () => ({
-    type: DELETE_MIEMBRO_SUCCESS,
-});
-
-const eliminarMiembroError = () => ({
-    type: DELETE_MIEMBRO_ERROR,
-    payload: true
-});
-
-// export const borrarMiembroAction = id => {
-//   return async dispatch => {
-//       try {
-//           const { data } = await Axios.delete(`miembrosconcejo/delete-miembrosconcejo/${id}`);
-
-//           if (data.code === 200) {
-//               dispatch(eliminaMiembro(id));
-//               dispatch(eliminarMiembroExito());
-//           }
-//       } catch (error) {
-//           console.error(error);
-//           dispatch(eliminarMiembroError());
-//       }
-//   }
-// }
-
-
 export const borrarMiembroAction = (id) => {
   return async (dispatch) => {
     dispatch(eliminaMiembro(id))
@@ -209,3 +178,17 @@ export const borrarMiembroAction = (id) => {
     }
   }
 }
+
+const eliminaMiembro = (Id) => ({
+  type: DELETE_MIEMBRO,
+  payload: Id
+});
+
+const eliminarMiembroExito = (Id) => ({
+  type: DELETE_MIEMBRO_SUCCESS,
+});
+
+const eliminarMiembroError = () => ({
+  type: DELETE_MIEMBRO_ERROR,
+  payload: true
+});

@@ -27,7 +27,7 @@ export const MiembroForm = () => {
     const obtenerOrientacionSexual = () => dispatch(obtenerOrientacionSexualAction());
     const crearMiembro = (Dataform) => dispatch(crearNuevoMiembroAction(Dataform));
     const actulizarMiembro = (Dataform) => dispatch(editarMiembroAction(Dataform));
-    const eliminaMiembro = (Id) => dispatch(borrarMiembroAction(Id));
+
 
     const cargando = useSelector(state => state.Miembro.loading);
     const cargandolista = useSelector(state => state.Miembro.loadinglista);
@@ -136,6 +136,7 @@ export const MiembroForm = () => {
         setValidated(true)
     }
     const EditaMiembro = (id) => {
+        debugger
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({
@@ -203,27 +204,21 @@ export const MiembroForm = () => {
         setVisibleMI(false);
         event.stopPropagation();
     };
-    const eliminarMiembro = id => {
+    const eliminarMiembro = (id) => {
         const Id = id
         Swal.fire({
-            title: '¿Estás seguro de eliminar?',
-            text: "El Miembro del consejo eliminado no se podrá recuperar",
+            title: '¿Estas seguro de eliminar el Concejo Comunitario?',
+            text: 'El Concejo Comunitario eliminado no se podrá recuperar',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then(result => {
-            console.log('result', result);
-            
-            return result.value;
-        }).then((confirmed) => {
-            if (confirmed) {
-                eliminaMiembro(Id);
-                obtenerMiembro();
-            }
-            obtenerMiembro();
+            cancelButtonText: 'Cancelar',
+          }).then((result) => {
+            if (result.value) {
+                dispatch(borrarMiembroAction(Id)); 
+            } 
         });
         
     }

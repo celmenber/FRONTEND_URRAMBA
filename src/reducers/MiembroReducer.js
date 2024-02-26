@@ -44,7 +44,7 @@ export const MiemboReducer = (state = initialState, action) => {
         case OBTENER_MIEMBRO:
             return {
                 ...state,
-                loadinglista: true,
+                loadinglista: action.payload,
             }
         case OBTENER_MIEMBRO_SUCCESS:
             return {
@@ -75,11 +75,12 @@ export const MiemboReducer = (state = initialState, action) => {
                 miembroeliminar: action.payload,
             }
             case DELETE_MIEMBRO_SUCCESS:
+           
                 return {
                     ...state,
-                    listaMiembro: state.listaMiembro.map(E => E.Id !== state.miembroeliminar ? E : null).filter(Boolean),
+                    listaMiembro: state.listaMiembro.filter(A => A.ID !== state.miembroeliminar),
                     miembroeliminar: null
-                }
+                  }
         case ADD_MIEMBRO_ERROR:
         case OBTENER_MIEMBRO_ERROR:
         case EDITAR_MIEMBRO_ERROR:
