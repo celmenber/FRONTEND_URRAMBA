@@ -137,7 +137,7 @@ const WidgetBarChart = () => {
                     <CTableHeaderCell colSpan={1} >Datos Miembro Consejo</CTableHeaderCell>
                     {/* <CTableHeaderCell colSpan={2} className="text-center">Consejo</CTableHeaderCell> */}
                     <CTableHeaderCell colSpan={1} className="text-center">Escolaridad</CTableHeaderCell>
-                    <CTableHeaderCell colSpan={1} className="text-center">Estado Escolaridad</CTableHeaderCell>
+                    
                     <CTableHeaderCell colSpan={1} className="text-center">Genero</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Ubicación</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
@@ -164,7 +164,7 @@ const WidgetBarChart = () => {
                           <CAvatar size="md"
                             key={index}
                             src={avatar}
-                            status={item.estado === true ? 'success' : 'secondary'}
+                            status={item.estado === '1' ? 'success' : 'secondary'}
                           />
                         </CTableDataCell>
                         <CTableDataCell>
@@ -216,7 +216,7 @@ const WidgetBarChart = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
-                              content="Actulizar Empleado"
+                              content="Actulizar Miembro"
                               placement="bottom"
                             >
                               <CButton style={{ 'width': '100%' }}
@@ -226,20 +226,23 @@ const WidgetBarChart = () => {
                                 onClick={() => EditaMiembro(item.ID)}
                               >
                                 {'Editar'}
-                              </CButton></CTooltip>
+                              </CButton>
+                              </CTooltip>
                           </div>
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
+                          {console.log({selectServicio})}
                             <CTooltip
-                              content={item.estado === true ? 'Desactivar' : 'Activar'}
+                              content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
                               placement="bottom"
                             >
+                             
                               {selectServicio !== 1 ? (
                                 <CLoadingButton
                                   variant="outline"
                                   size="lg"
-                                  color={item.estado === true ? 'secondary' : 'success'}
+                                  color={item.estado === '1' ? 'secondary' : 'success'}
                                   style={{ 'width': '100%' }}
                                   timeout={2000}
                                 >
@@ -247,13 +250,13 @@ const WidgetBarChart = () => {
                               ) : (
                                 <CButton
                                   size="lg"
-                                  color={item.estado === true ? 'success' : 'secondary'}
+                                  color={item.estado === '1' ? 'success' : 'secondary'}
                                   style={{ 'width': '100%' }}
                                   id={`estado${1}`}
                                 // key={item.IdConvenio}
                                 //onClick={() => handleSelectEst(item.IdConvenio)}
                                 >
-                                  {item.estado === true
+                                  {item.estado === '1'
                                     ? <CIcon icon={cilLockUnlocked} size="lg" />
                                     : <CIcon icon={cilLockLocked} size="lg" />
                                   }
@@ -267,7 +270,7 @@ const WidgetBarChart = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
-                              content="Eliminar Empleado"
+                              content="Eliminar Miembro"
                               placement="bottom"
                             >
                               <CButton style={{ 'width': '100%' }}

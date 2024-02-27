@@ -60,7 +60,7 @@ export const MiembroForm = () => {
         Id_orientacion_sexual: '',
         Direccion: '',
         Telefono: '',
-        Estado: 0,
+        Estado: '',
         Fecha_nacimiento: '',
         Fecha_ingreso: '',
         Correo: ''
@@ -86,7 +86,7 @@ export const MiembroForm = () => {
             Id_orientacion_sexual: '',
             Direccion: '',
             Telefono: '',
-            Estado: 0,
+            Estado: '',
             Fecha_nacimiento: '',
             Fecha_ingreso: '',
             Correo: '',
@@ -118,7 +118,7 @@ export const MiembroForm = () => {
                 Direccion: datoMiembro.Direccion,
                 Telefono: datoMiembro.Telefono,
                 Correo: datoMiembro.Correo,
-                Estado: Number(datoMiembro.Estado),
+                Estado: datoMiembro.Estado,
                 Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
                 Fecha_ingreso: datoMiembro.Fecha_ingreso
             }
@@ -136,7 +136,7 @@ export const MiembroForm = () => {
         setValidated(true)
     }
     const EditaMiembro = (id) => {
-        debugger
+        
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({

@@ -51,13 +51,13 @@ export const ConcejoReducer = (state = initialState, action) => {
         loading: action.payload,
       }
     case EDITAR_CONCEJO_SUCCESS:
+      const updatedConcejo = action.payload;
+      const updatedConcejos = state.concejolista.map((concejo)=>
+      concejo.ID === updatedConcejo.ID? updatedConcejo: concejo
+      );
       return {
-        ...state,
-        loading: false,
-        concejoeditar: null,
-        concejolista: state.concejolista.map(A =>
-          A.ID === action.payload.ID ? A = action.payload : A
-        )
+      ...state,
+      concejolista:updatedConcejos,
       }
     case OBTENER_CONCEJO:
       return {

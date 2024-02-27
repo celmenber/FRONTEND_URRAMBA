@@ -6,7 +6,7 @@ import {
   crearNuevoConcejoAction,
   borrarConcejoAction,
   editarConcejoAction,
-  } from '../action/ConsejoAction'
+} from '../action/ConsejoAction'
 import { obtenerMunicipioAction } from '../action/ParametrosAction'
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerAutoridadTAction } from '../action/AutoridadTAction'
@@ -33,8 +33,9 @@ export const ConcejoForm = () => {
   const Municipio = useSelector((state) => state.Parametros.municipios)
 
   const [validated, setValidated] = useState(false)
-  const [valedita, setValedita] = useState(false)
-  
+  const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Concejo Comunitario'))
+  // const [valedita, setValedita] = useState(false)
+
 
   const [datoConcejo, setDatoconcejo] = useState({
     id_asociacion: '',
@@ -42,7 +43,7 @@ export const ConcejoForm = () => {
     idMunicipio: '',
     nitConcejo: '',
     nombreConcejo: '',
-    nombreAsociacion:''
+    nombreAsociacion: ''
   })
 
   // Leer los datos del formulario
@@ -53,26 +54,26 @@ export const ConcejoForm = () => {
     })
   }
 
- const  handleReset = () => {
-  setDatoconcejo({
-    id_asociacion: '',
-    id_autoridad_tradicional: '',
-    idMunicipio: '',
-    nitConcejo: '',
-    nombreConcejo: '',
-    nombreAsociacion:''
-  })
+  const handleReset = () => {
+    setDatoconcejo({
+      id_asociacion: '',
+      id_autoridad_tradicional: '',
+      idMunicipio: '',
+      nitConcejo: '',
+      nombreConcejo: '',
+      nombreAsociacion: ''
+    })
 
 
- }
+  }
 
   const handleSubmit = (event) => {
-    
-    event.preventDefault()
-    const form = event.currentTarget
+    event.preventDefault();
+    const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
+      event.stopPropagation();
+      setValidated(true); // Si hay campos inválidos, establecer validated a true
     } else {
       const formularioDatos = {
         Id_asociacion: datoConcejo.id_asociacion,
@@ -80,58 +81,76 @@ export const ConcejoForm = () => {
         Id_municipio: datoConcejo.idMunicipio,
         Nit: datoConcejo.nitConcejo,
         Nombre_concejo_comunitario: datoConcejo.nitConcejo,
-      }
-
-
-      if (valedita === false) {
-        crearNuevoConcejo({
-          formularioDatos,
-         
-        })
-
-        handleReset()
-        setValidated(false)
-        return
-      }
-
-      setValedita(false)
-      event.stopPropagation()
-    }
-    event.stopPropagation()
-    setValidated(true)
-  }
-
-const handleActualizarConcejo = (event,param)=> {
-debugger
-  event.preventDefault();
-  const form = event.currentTarget;
-
-  if (form.checkValidity() === false) {
-    event.stopPropagation();
-  } else {
-      const formularioDatos = {
-        Id_asociacion: datoConcejo.id_asociacion,
-        Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
-        Id_municipio: datoConcejo.idMunicipio,
-        Nit: datoConcejo.nitConcejo,
-        Nombre_concejo_comunitario: datoConcejo.nombreAsociacion,
       };
 
-      // Asumo que actulizarMiembro es una función que realiza la actualización
-      // No tengo su implementación, así que debes ajustarlo según tu código real
-      if (!valedita) {
-          actulizarConcejo({
-              formularioDatos,
-              Id: datoConcejo.ID,
-              handleReset,
-          });
-      }
-  }
+      // Verificar si hay campos vacíos antes de intentar guardar
+      if (Object.values(formularioDatos).some(value => !value)) {
+        setValidated(true); // Hay campos vacíos, establecer validated a true
+      } else {
+        setValidated(false); // No hay campos vacíos, establecer validated a false
+        crearNuevoConcejo({
+          formularioDatos,
+        }).then(() => {
+          handleReset();
 
- 
-  event.stopPropagation();
-  console.log(param)
-}
+        });
+      }
+    }
+  };
+
+
+  const handleActualizarConcejo = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    // Obtener los campos del formulario
+    const formularioDatos = {
+      Id_asociacion: datoConcejo.id_asociacion,
+      Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
+      Id_municipio: datoConcejo.idMunicipio,
+      Nit: datoConcejo.nitConcejo,
+      Nombre_concejo_comunitario: datoConcejo.nombreAsociacion,
+    };
+
+    // Verificar si hay campos vacíos o no válidos
+    const camposInvalidos = Object.keys(formularioDatos).some((key) => {
+      const input = form[key];
+      return input && input.required && !input.checkValidity();
+    });
+
+    if (camposInvalidos) {
+      // Hay campos vacíos o no válidos
+      setValidated(true);
+    } else {
+      // No hay campos vacíos o no válidos
+      setValidated(false);
+
+      // Verificar si algún campo está vacío
+      const camposVacios = Object.values(formularioDatos).some(value => value === '');
+
+      if (camposVacios) {
+        // Hay campos vacíos
+        setValidated(true);
+      } else {
+        // No hay campos vacíos
+        setValidated(false);
+
+        // Llamas a la acción de actualizar y esperas a que termine
+        actulizarConcejo({
+          formularioDatos,
+          Id: datoConcejo.ID,
+        }).then(() => {
+          setNombreBotoGuardarActulizar('Agregar Nuevo Concejo Comunitario');
+          dispatch(obtenerConcejoAction());
+          handleReset();
+        });
+      }
+    }
+
+    event.stopPropagation();
+  };
+
+
 
   // función que redirige Eliminar ContactoConvenio
   const EliminarConcejo = (id) => {
@@ -169,7 +188,8 @@ debugger
     validated,
     datoConcejo,
     setDatoconcejo,
-    handleActualizarConcejo
-    
+    handleActualizarConcejo,
+    nombreBotoGuardarActulizar,
+    setNombreBotoGuardarActulizar
   }
 }

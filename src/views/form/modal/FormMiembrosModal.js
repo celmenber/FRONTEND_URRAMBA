@@ -153,8 +153,8 @@ const FormMiembrosModal = (Props) => {
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Seleccione...</option>
-                  <option value={1}>Activado</option>
-                  <option value={0}>Desactivado</option>
+                  <option value={'1'}>Activado</option>
+                  <option value={'0'}>Desactivado</option>
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
               </CCol>

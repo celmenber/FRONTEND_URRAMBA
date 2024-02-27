@@ -105,7 +105,7 @@ const FormMiembrosActModal = (Props) => {
       obtenertipodocumento();
       obtenercorregimiento();
       obtenerEscolaridad();
-    obtenerOrientacionSexual();
+      obtenerOrientacionSexual();
       // eslint-disable-next-line
     }, []);
     useEffect(() => {
@@ -166,8 +166,8 @@ const FormMiembrosActModal = (Props) => {
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Seleccione...</option>
-                  <option value={1}>Activado</option>
-                  <option value={0}>Desactivado</option>
+                  <option value={'1'}>Activado</option>
+                  <option value={'0'}>Desactivado</option>
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
               </CCol>

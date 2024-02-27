@@ -115,21 +115,20 @@ const obtenerConcejoEditar = (datos) => ({
 })
 // ***************** Seleccion editar editar Conveniocod //****************/
 // Edita un registro en la api y state
-export const editarConcejoAction = (dataform) => {
+export const editarConcejoAction = (datos) => {
   return async (dispatch) => {
     dispatch(editarConcejo())
-
-    const { formularioDatos, setVisibleCHKIO, Id } = dataform
-    const id = Number(Id)
-
+    const id = Number(datos.Id)
     try {
       
-      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${id}`, formularioDatos)
+      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${id}`, datos.formularioDatos)
 
       dispatch(editarConcejoExito(data.datos))
-      setVisibleCHKIO(false)
+   
       if (data.code === 200) {
-        Swal.fire('Correcto', 'El Cheout se ejecuto correctamente', 'success')
+        Swal.fire('Correcto', 
+        'El concejo se actualizó correctamente',
+         'success')
       }
     } catch (error) {
       console.log(error)
@@ -137,6 +136,8 @@ export const editarConcejoAction = (dataform) => {
     }
   }
 }
+
+
 
 const editarConcejo = () => ({
   type: EDITAR_CONCEJO,
