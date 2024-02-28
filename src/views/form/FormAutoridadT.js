@@ -32,6 +32,7 @@ import {
     cilTrash,
 } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
+import FormAutoridadActModal from './modal/FormAutoridadTActModal'
 
 const AutoridadT = () => {
     const [selectServicio] = useState(1);
@@ -39,10 +40,15 @@ const AutoridadT = () => {
     const {
       obtenerAutoridadT,
       eliminarAutoridadT,
-      editarAutoridadT,
+      EditarAutoridad,
+      datoAutoridad,
       autoridadT,
       visibleAT, setVisibleAT,
+      visibleEAT, setVisibleEAT,
       cargandolista,
+      handleSubmitAct,
+      onChangeFormulario,
+      setValidated,
     } = AutoridadTForm()
 
 
@@ -74,7 +80,7 @@ const AutoridadT = () => {
                             </CCol>
                         </CForm>
                     </CCardBody>
-                    {/* proceso de listar archovos de las normativas */}
+                 
                     <CCardBody>
                                         <CForm key={0}>
                                             <CTable align="middle" className="mb-0 border" hover responsive>
@@ -109,7 +115,7 @@ const AutoridadT = () => {
                                                                     <CAvatar size="md"
                                                                         key={index}
                                                                         src={avatar}
-                                                                        status={item.estado === true ? 'success' : 'secondary'}
+                                                                        status={item.estado === '1' ? 'success' : 'secondary'}
                                                                     />
                                                                 </CTableDataCell>
                                                                 <CTableDataCell>
@@ -144,40 +150,6 @@ const AutoridadT = () => {
                                                               {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion}
                                                             </span>
                                                               </CTableDataCell>
-                                                          <CTableDataCell>
-                                                            <div className="small text-medium-emphasis">
-                                                              <CTooltip
-                                                                content={item.estado === true ? 'Desactivar' : 'Activar'}
-                                                                placement="bottom"
-                                                              >
-                                                                {selectServicio !== 1 ? (
-                                                                  <CLoadingButton
-                                                                    variant="outline"
-                                                                    size="lg"
-                                                                    color={item.estado === true ? 'secondary' : 'success'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    timeout={2000}
-                                                                  >
-                                                                  </CLoadingButton>
-                                                                ) : (
-                                                                  <CButton
-                                                                    size="lg"
-                                                                    color={item.estado === true ? 'success' : 'secondary'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    id={`estado${1}`}
-                                                                  // key={item.IdConvenio}
-                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
-                                                                  >
-                                                                    {item.estado === true
-                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                                                      : <CIcon icon={cilLockLocked} size="lg" />
-                                                                    }
-                                                                  </CButton>
-                                                                )}
-
-                                                              </CTooltip>
-                                                            </div>
-                                                          </CTableDataCell>
                                                               <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -188,12 +160,47 @@ const AutoridadT = () => {
                                                                                 color="info"
                                                                                 variant="outline"
                                                                                 size="lg"
-                                                                                onClick={() => editarAutoridadT(item.ID)}
+                                                                                onClick={() => EditarAutoridad(item.ID)}
                                                                             >
                                                                                 {'Editar'}
                                                                             </CButton></CTooltip>
                                                                     </div>
                                                                 </CTableDataCell>
+                                                          <CTableDataCell>
+                                                            <div className="small text-medium-emphasis">
+                                                              <CTooltip
+                                                                content={item.estado === '1' ? 'Desactivar' : 'Activar'}
+                                                                placement="bottom"
+                                                              >
+                                                                {selectServicio !== 1 ? (
+                                                                  <CLoadingButton
+                                                                    variant="outline"
+                                                                    size="lg"
+                                                                    color={item.estado === '1' ? 'secondary' : 'success'}
+                                                                    style={{ 'width': '100%' }}
+                                                                    timeout={2000}
+                                                                  >
+                                                                  </CLoadingButton>
+                                                                ) : (
+                                                                  <CButton
+                                                                    size="lg"
+                                                                    color={item.estado === '1' ? 'success' : 'secondary'}
+                                                                    style={{ 'width': '100%' }}
+                                                                    id={`estado${1}`}
+                                                                  // key={item.IdConvenio}
+                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
+                                                                  >
+                                                                    {item.estado === '1'
+                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
+                                                                      : <CIcon icon={cilLockLocked} size="lg" />
+                                                                    }
+                                                                  </CButton>
+                                                                )}
+
+                                                              </CTooltip>
+                                                            </div>
+                                                          </CTableDataCell>
+                                                           
                                                                 <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -224,11 +231,15 @@ const AutoridadT = () => {
                   visibleAT={visibleAT}
                    setVisibleAT={setVisibleAT}
                   />
-        {/*   <AutoridadTActualiza
+          <FormAutoridadActModal
                   visibleEAT={visibleEAT}
                   setVisibleEAT={setVisibleEAT}
                   datoAutoridad={datoAutoridad}
-                  /> */}
+                  handleSubmitAct = {handleSubmitAct}
+                  onChangeFormulario={onChangeFormulario}
+                  setValidated = {setValidated}
+                 
+                  />
         </CRow>
     )
 }

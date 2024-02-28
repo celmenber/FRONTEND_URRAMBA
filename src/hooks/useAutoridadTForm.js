@@ -13,7 +13,8 @@ import {
   obtenerBarrioVeredaAction,
   obtenerMunicipioAction,
   obtenertipodocumentoAction,
-  obtenercorregimientoAction
+  obtenercorregimientoAction,
+
 } from '../action/ParametrosAction'
 
 import Swal from 'sweetalert2';
@@ -41,6 +42,7 @@ export const AutoridadTForm = () => {
 
 
 
+
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
     const [selectActivar, setSelectActivar] = useState(false);
@@ -61,11 +63,14 @@ export const AutoridadTForm = () => {
           Correo: '',
           Estado:'',
           Fechanacimiento:'',
-          Fechaingreso:''
+          Fechaingreso:'',
+          Id_escolaridad: '',
+          Estado_escolaridad: '',
     })
 
     // Leer los datos del formulario
     const onChangeFormulario = e => {
+      
       setDatoAutoridad({
         ...datoAutoridad,
             [e.target.name]: e.target.value
@@ -86,7 +91,9 @@ export const AutoridadTForm = () => {
             Correo: '',
             Estado: '',
             Fechanacimiento: '',
-            Fechaingreso: ''
+            Fechaingreso: '',
+            Id_escolaridad: '',
+            Estado_escolaridad: '',
         })
         setValedita(false)
     };
@@ -101,6 +108,8 @@ export const AutoridadTForm = () => {
         } else {
 
             const formularioDatos = {
+
+         
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
                     Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
                     Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
@@ -115,17 +124,15 @@ export const AutoridadTForm = () => {
                     Estado: datoAutoridad.Estado,
                     Fecha_nacimiento: datoAutoridad.Fechanacimiento,
                     Fecha_ingreso: datoAutoridad.Fechaingreso,
+                    Id_escolaridad: 1,
+                    Estado_escolaridad: 'Terminado',
             }
-
-
             if (valedita === false) {
-
               crearNuevoAutoridadT({
                     formularioDatos,
                     handleReset
                 })
             }
-
            // setValedita(false)
             setVisibleAT(false)
             event.stopPropagation()
@@ -137,35 +144,72 @@ export const AutoridadTForm = () => {
 
 
     // función que redirige Edita ContactoAsunto
-  const editarAutoridadT = id => {
-    // const datos = autoridadT.filter(C => C.ID === id)
-      // console.log(datos)
-      //  dispatch(obtenerConvenioEditarAction(datos));
+  const EditarAutoridad = (id) => {
+    debugger
+    const datos = autoridadT.filter(C => C.ID === id)
+    setVisibleEAT(true)
     setDatoAutoridad({
-              /* Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
-              Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
-              Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
-              Nombres: datos[0].nombres === null ? '' : datos[0].nombres,
-              Apellidos: datos[0].apellidos === null ? '' : datos[0].apellidos,
-              Direccion: datos[0].direccion === null ? '' : datos[0].direccion,
-              Telefono: datos[0].telefono === null ? '' : datos[0].telefono,
-              Correo: datos[0].correo === null ? '' : datos[0].correo,
-              Estado: datos[0].estado === null ? '' : datos[0].estado, */
-            })
-        setValedita(true)
-        setVisibleEAT(true)
+      ID: datos[0].ID,
+      Idmunicipio: Number(datos[0].id_municipio),
+      Idbarriovereda: Number(datos[0].id_barrio_vereda),
+      Idcorregimiento: Number(datos[0].id_corregimiento),
+      Idtipodocumento: Number(datos[0].id_tipo_documento),
+      Documentos: datos[0].documentos,
+      Nombres: datos[0].nombres,
+      Apellidos: datos[0].apellidos,
+      Sexo: datos[0].sexo,
+      Direccion: datos[0].direccion,
+      Telefono: datos[0].telefono,
+      Correo: datos[0].correo,
+      Estado: datos[0].estado,
+      Fechanacimiento: datos[0].fecha_nacimiento,
+      Fechaingreso: datos[0].fecha_ingreso,
+    });
+  }
+
+  const handleSubmitAct = (event) => {
+    
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+        event.stopPropagation();
+       
+    } else {
+        const formularioDatos = {
+          Id_municipio: parseInt(datoAutoridad.Idmunicipio),
+          Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
+          Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
+          Id_tipo_documento: parseInt(datoAutoridad.Idtipodocumento),
+          Documentos: datoAutoridad.Documentos,
+          Nombres: datoAutoridad.Nombres,
+          Apellidos: datoAutoridad.Apellidos,
+          Sexo: datoAutoridad.Sexo,
+          Direccion: datoAutoridad.Direccion,
+          Telefono: datoAutoridad.Telefono,
+          Correo: datoAutoridad.Correo,
+          Estado: datoAutoridad.Estado,
+          Fecha_nacimiento: datoAutoridad.Fechanacimiento,
+          Fecha_ingreso: datoAutoridad.Fechaingreso,
+          Id_escolaridad: 1,
+          Estado_escolaridad: 'Terminado',
+     
+        };
+
+        // Asumo que actulizarMiembro es una función que realiza la actualización
+        // No tengo su implementación, así que debes ajustarlo según tu código real
+        if (!valedita) {
+          actulizarAutoridadT({
+                formularioDatos,
+                id: datoAutoridad.ID,
+                handleReset,
+            });
+        }
     }
 
-    // función que redirige Editaservicio
-    // const UpdateConvenioEstado = Id => {
-    //   /*   const datos = convenio.filter(C => C.IdConvenio === Id);
-    //     dispatch(editarEstadoConvenioAction({
-    //         Id,
-    //         setSelectActivar,
-    //         estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
-    //     })); */
-    // }
-
+    setVisibleEAT(false);
+    event.stopPropagation();
+};
 
     // función que redirige Eliminar ContactoConvenio
   const eliminarAutoridadT = id => {
@@ -184,12 +228,6 @@ export const AutoridadTForm = () => {
             }
         });
     }
-
-  /*   const BuscaMunicipio = id => {
-        const Arraymunicipio = municipio.filter(P => P.MunicipioId === parseInt(id))
-        const Municipio = Arraymunicipio.length !== 0 ? Arraymunicipio[0].NombreMunicipio : ''
-        return Municipio
-    } */
   return {
       /* funciones */
       handleSubmit,
@@ -202,7 +240,7 @@ export const AutoridadTForm = () => {
       obtenertipodocumento,
       obtenercorregimiento,
       eliminarAutoridadT,
-      editarAutoridadT,
+      EditarAutoridad,
     /* metodos */
       autoridadT,
       barrios,
@@ -211,11 +249,15 @@ export const AutoridadTForm = () => {
       tipodocumento,
       validated,
       valedita,
-      datoAutoridad, setDatoAutoridad,
-      selectActivar, setSelectActivar,
+      datoAutoridad,
+       setDatoAutoridad,
+      selectActivar, 
+      setSelectActivar,
       visibleAT, setVisibleAT,
       visibleEAT, setVisibleEAT,
       cargandolista,
-      cargando
+      cargando,
+      setValidated,
+      handleSubmitAct
   }
 }

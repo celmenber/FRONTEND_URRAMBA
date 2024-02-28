@@ -25,7 +25,7 @@ const EmpleadoNuevoModal = (Props) => {
     setVisibleAT,
   } = Props
 
-  const handleClose = () => setVisibleAT(false)
+ 
 
   const {
     handleSubmit,
@@ -35,6 +35,7 @@ const EmpleadoNuevoModal = (Props) => {
     obtenerMunicipio,
     obtenertipodocumento,
     obtenercorregimiento,
+    setValidated,
     /* metodos */
     municipio,
     barrios,
@@ -42,7 +43,8 @@ const EmpleadoNuevoModal = (Props) => {
     tipodocumento,
     datoAutoridad,
     validated,
-    cargando
+    cargando,
+   
   } = AutoridadTForm()
 
   const {
@@ -59,38 +61,27 @@ const EmpleadoNuevoModal = (Props) => {
     Correo,
     Estado,
     Fechanacimiento,
-    Fechaingreso
+    Fechaingreso,
+   
   } = datoAutoridad
 
-  useEffect(() => {
-    // Consultar la api un obtenerMunicipio
-    setTimeout(() => {
-      obtenerMunicipio();
-    }, 500);
-    // eslint-disable-next-line
-  }, []);
+  const handleClose = () =>{
+    
+    setVisibleAT(false)
+    setValidated(false)
+    handleReset()
+   }
 
   useEffect(() => {
     // Consultar la api un obtenerMunicipio
-    setTimeout(() => {
-    obtenercorregimiento();
-    }, 600);
+      obtenerMunicipio();
+      obtenercorregimiento();
+      obtenerBarrioVereda();
+      obtenertipodocumento();
     // eslint-disable-next-line
   }, []);
-  useEffect(() => {
-    // Consultar la api un barrios
-    setTimeout(() => {
-    obtenerBarrioVereda();
-    }, 700);
-    // eslint-disable-next-line
-  }, []);
-  useEffect(() => {
-    // Consultar la api un barrios
-    setTimeout(() => {
-    obtenertipodocumento();
-    }, 800);
-    // eslint-disable-next-line
-  }, []);
+
+ 
 
   return (
     <>
@@ -160,8 +151,8 @@ const EmpleadoNuevoModal = (Props) => {
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Seleccione...</option>
-                  <option value={1}>Activado</option>
-                  <option value={0}>Desactivado</option>
+                  <option value={'1'}>Activado</option>
+                  <option value={'0'}>Desactivado</option>
                 </CFormSelect>
                 <CFormFeedback invalid>El campo Requerido!</CFormFeedback>
               </CCol>

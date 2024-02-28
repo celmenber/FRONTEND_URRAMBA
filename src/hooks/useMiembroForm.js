@@ -136,7 +136,7 @@ export const MiembroForm = () => {
         setValidated(true)
     }
     const EditaMiembro = (id) => {
-        
+        debugger
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({

@@ -78,17 +78,7 @@ const FormMiembrosActModal = (Props) => {
   } = datoMiembro
 
 
-    // const handleSubmitAct = (event) => {
-    //     event.preventDefault();
-    //     const form = event.currentTarget
-    //     if (form.checkValidity() === false) {
-    //         event.preventDefault()
-    //         event.stopPropagation()
-    //     } else {
-    //         setVisibleMI(false)
-    //     }
-    //     setValidated(true)
-    // }
+   
 
     useEffect(() => {
       // Consultar la api un asociacion
@@ -459,7 +449,7 @@ const FormMiembrosActModal = (Props) => {
                       style={{ width: '100%' }}
                     >
                       {' '}
-                        {'Actualizando Datos Empleado'}
+                        {'Actualizando Datos  Miembro Concejo'}
                     </CButton>
                   
                 </CCol>

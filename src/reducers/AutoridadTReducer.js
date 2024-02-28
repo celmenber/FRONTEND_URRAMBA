@@ -43,7 +43,7 @@ export const AutoridadTReducer = (state = initialState, action) => {
         case OBTENER_AUTORIDADT:
             return {
                 ...state,
-                loadinglista: true,
+                loadinglista: action.payload,
             }
         case OBTENER_AUTORIDADT_SUCCESS:
             return {
@@ -61,24 +61,31 @@ export const AutoridadTReducer = (state = initialState, action) => {
                 ...state,
                 loading: action.payload,
             }
+
+         
         case EDITAR_AUTORIDADT_SUCCESS:
+            const updatedAutoridad = action.payload; // Assuming action.payload is the updated member
+            const updatedAutoridades = state.listautoridad.map((autiridad) =>
+            autiridad.ID === updatedAutoridad.ID ? updatedAutoridad : autiridad
+            );
+          
             return {
                 ...state,
-                loading: false,
-                autoridadeditar: null,
-                listautoridad: state.listautoridad.map(X =>
-                    X.EstadoServicioId === action.payload.EstadoServicioId ? X = action.payload : X
-                )
+                listautoridad:updatedAutoridades,
+                loading:false
+
             }
         case DELETE_AUTORIDADT:
             return {
                 ...state,
               autoridadeliminar: action.payload,
             }
+
+           
         case DELETE_AUTORIDADT_SUCCESS:
             return {
                 ...state,
-                 listautoridad: state.listautoridad.filter(X => X.Id !== state.autoridadeliminar),
+                 listautoridad: state.listautoridad.filter(X => X.ID !== state.autoridadeliminar),
               autoridadeliminar: null
             }
         case ADD_AUTORIDADT_ERROR:

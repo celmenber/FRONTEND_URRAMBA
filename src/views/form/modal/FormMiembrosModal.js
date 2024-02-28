@@ -49,7 +49,7 @@ const FormMiembrosModal = (Props) => {
     corregimiento,
     escolaridades,
     orientacion_sexuales,
-    cargando,
+   cargando,
     
   } = MiembroForm()
   const {
@@ -87,23 +87,13 @@ const FormMiembrosModal = (Props) => {
     obtenerAsociacion();
     obtenerEscolaridad();
     obtenerOrientacionSexual();
-
-    // eslint-disable-next-line
-  }, []);
-  useEffect(() => {
-    // Consultar la api un asociacion
-
     obtenerConcejo();
     obtenertipodocumento();
     obtenercorregimiento();
-    // eslint-disable-next-line
-  }, []);
-  useEffect(() => {
-    // Consultar la api un barrios
     obtenerBarrioVereda();
-   
     // eslint-disable-next-line
   }, []);
+
 
   return (
     <>

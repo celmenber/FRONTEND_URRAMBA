@@ -108,14 +108,19 @@ const obtenerAutoridadTError = () => ({
 // ***************** Seleccion editar el AutoridadT //****************/
 
 export const editarAutoridadTAction = (Datos) => {
+  debugger
     return async (dispatch) => {
         dispatch(editarAutoridadT());
         console.log(Datos)
-        const { Id } = Datos
+        const { id } = Datos
         try {
+          debugger
 
-          const { data } = await Axios.patch(`/autoridatradicional/edit-autoridatradicional/${Id}`);
-            dispatch(editarAutoridadTExito(data.datos));
+          const {data} = await Axios.put(`/autoridatradicional/edit-autoridatradicional/${id}`, Datos.formularioDatos);
+      
+          console.log('data', data)
+                dispatch(editarAutoridadTExito(data.data.datos));
+         
 
             if (data.code === 200) {
                 Swal.fire(
@@ -156,7 +161,8 @@ export const borrarAutoridadTAction = id => {
         dispatch(eliminaAutoridadT(id));
 
         try {
-          const { data } = await Axios.delete(`/autoridatradicional/delete-concejocomunitario/${id}`);
+          
+          const { data } = await Axios.delete(`/autoridatradicional/delete-autoridatradicional/${id}`);
 
             if (data.code === 200) {
                 dispatch(eliminarAutoridadTExito(id));
