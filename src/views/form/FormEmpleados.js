@@ -46,29 +46,28 @@ const AdminConvenios = () => {
         empleados,
         visibleE, setVisibleE,
         visibleEM, setVisibleEM,
+        setValidated, 
         datoEmpleado, 
         cargandolista,
+        onChangeFormulario,
+        handleSubmitAct,
+       
     } = EmpleadoForm()
 
 
    useEffect(() => {
         // Consultar la api listar parques
-     obtenerEmpleado();
+    
+        obtenerEmpleado();
         // eslint-disable-next-line
     }, []);
-/*
-    useEffect(() => {
+   useEffect(() => {
         // Consultar la api listar parques
-        obtenerConveniocod();
+     
+     setVisibleE(false)
         // eslint-disable-next-line
-    }, []);
+    }, [empleados]);
 
-
-    const handleSelectEst = ((id) => {
-        setSelectActivar(true)
-        setSelectServicio(id)
-        UpdateConvenioEstado(id)
-    }); */
 
  
 
@@ -244,11 +243,13 @@ const AdminConvenios = () => {
           visibleE={visibleE}
           setVisibleE={setVisibleE}
             />
-        <EmpleadoModalActualiza
+            <EmpleadoModalActualiza
                 visibleEM={visibleEM}
                 setVisibleEM={setVisibleEM}
-                 datoEmpleado={datoEmpleado}
-                //onChangeFormulario={onChangeFormulario}
+                datoEmpleado={datoEmpleado}
+                onChangeFormulario={onChangeFormulario}
+                handleSubmitAct={handleSubmitAct}
+                setValidated={setValidated}
             />
         </CRow>
     )

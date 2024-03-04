@@ -18,7 +18,7 @@ import { EmpleadoForm } from 'src/hooks';
 
 
 const EmpleadoActModal = (Props) => {
-    const [validated, setValidated] = useState(false);
+  
     const handleClose = () => {
         handleReset()
       setVisibleEM(false)
@@ -28,14 +28,14 @@ const EmpleadoActModal = (Props) => {
       visibleEM,
       setVisibleEM,
       datoEmpleado,
-     onChangeFormulario,
-     handleSubmitAct
+      onChangeFormulario,
+      handleSubmitAct,
     } = Props
 
   const {
     /* handleSubmitAct,
-    onChangeFormulario,
-    validated, */
+    onChangeFormulario,*/
+    validated,
 
     handleReset,
     obtenerAsociacion,
@@ -58,50 +58,14 @@ const EmpleadoActModal = (Props) => {
   } = datoEmpleado
 
 
-    // const handleSubmitAct = (event) => {
-    //     event.preventDefault();
-    //     const form = event.currentTarget
-    //     if (form.checkValidity() === false) {
-    //         event.preventDefault()
-    //         event.stopPropagation()
-    //     } else {
-
-    //         // const formularioDatos = {
-    //         //    /*  UsuarioModificacion: userDetails.Id,
-    //         //     IdMunicipio: datoConvenio.idMunicipio,
-    //         //     Estado: datoConvenio.estado,
-    //         //     NitEmpresa: datoConvenio.nitEmpresa,
-    //         //     NombrEmpresa: datoConvenio.nombrEmpresa,
-    //         //     CorreoEmpresa: datoConvenio.correoEmpresa,
-    //         //     DireccionEmpresa: datoConvenio.direccionEmpresa,
-    //         //     TelefonoEmpresa: datoConvenio.telefonoEmpresa,
-    //         //     RepresentanteEmpresa: datoConvenio.representanteEmpresa */
-    //         // }
-
-    //        /*  updateConvenio({
-    //             formularioDatos,
-    //             handleReset,
-    //             Id: convenioeditar[0].IdConvenio
-    //         }) */
-
-    //         setVisibleEM(false)
-    //     }
-
-    //     setValidated(true)
-    // }
-
 
     useEffect(() => {
       // Consultar la api un asociacion
       obtenerAsociacion();
-    
-      // eslint-disable-next-line
-    }, []);
-    useEffect(() => {
-      // Consultar la api un barrios
       obtenerBarrioVereda();
       // eslint-disable-next-line
     }, []);
+ 
 
     return (
         <>
@@ -133,7 +97,7 @@ const EmpleadoActModal = (Props) => {
                             key={item.ID}
                             value={item.ID}
                           >
-                            {item.Nombre}
+                            {item.nombre}
                           </option>
                         ))
                       )}

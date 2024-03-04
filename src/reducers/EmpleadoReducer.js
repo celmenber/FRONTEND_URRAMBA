@@ -43,7 +43,7 @@ export const EmpleadoReducer = (state = initialState, action) => {
         case OBTENER_EMPLEADO:
             return {
                 ...state,
-                loadinglista: true,
+                loadinglista: action.payload,
             }
         case OBTENER_EMPLEADO_SUCCESS:
             return {
@@ -62,23 +62,25 @@ export const EmpleadoReducer = (state = initialState, action) => {
                 loading: action.payload,
             }
         case EDITAR_EMPLEADO_SUCCESS:
+            const updatedEmpleado = action.payload; // Assuming action.payload is the updated member
+            const updatedEmpleados = state.listaempleado.map((empleado) =>
+            empleado.ID === updatedEmpleado.ID ? updatedEmpleado : empleado);
             return {
                 ...state,
                 loading: false,
                 empleadoeditar: null,
-                listaempleado: state.listaempleado.map(E =>
-                    E.EstadoServicioId === action.payload.EstadoServicioId ? E = action.payload : E
-                )
+                listaempleado: updatedEmpleados
             }
         case DELETE_EMPLEADO:
             return {
                 ...state,
                 empleadoeliminar: action.payload,
             }
+
         case DELETE_EMPLEADO_SUCCESS:
             return {
                 ...state,
-                listaempleado: state.listaempleado.filter(E => E.Id !== state.empleadoeliminar),
+                listaempleado: state.listaempleado.filter(E => E.ID !== state.empleadoeliminar),
                 empleadoeliminar: null
             }
         case ADD_EMPLEADO_ERROR:

@@ -3,7 +3,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
+  borrarEmpleadoAction,
   crearNuevoEmpleadoAction,
+  editarEmpleadoAction,
   obtenerEmpleadoAction,
 
   
@@ -19,7 +21,10 @@ export const EmpleadoForm = () => {
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
   
   const obtenerEmpleado = () => dispatch(obtenerEmpleadoAction());
+  
   const crearNuevoEmpleado = (Dataform) => dispatch(crearNuevoEmpleadoAction(Dataform));
+  const actulizarEmpleado = (Dataform) => dispatch(editarEmpleadoAction(Dataform));
+  
 
 
     //selecion del state en el  store
@@ -120,6 +125,7 @@ export const EmpleadoForm = () => {
       // console.log(datos)
       //  dispatch(obtenerConvenioEditarAction(datos));
             setDatoEmpleado({
+              ID: datos[0].ID,
               Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
               Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
               Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
@@ -133,6 +139,44 @@ export const EmpleadoForm = () => {
         setValedita(true)
         setVisibleEM(true)
     }
+
+
+  const   handleSubmitAct = (event) => {
+    debugger
+    event.preventDefault();
+        const form = event.currentTarget;
+    
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+        } else {
+            const formularioDatos = {
+              Id_asociacion: datoEmpleado.Id_asociacion,
+              Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
+              Id_tipo_documento:1,
+              Documentos:datoEmpleado.Documentos,
+              Nombres: datoEmpleado.Nombres,
+              Apellidos: datoEmpleado.Apellidos,
+              Direccion: datoEmpleado.Direccion,
+              Telefono:datoEmpleado.Telefono,
+              Correo:datoEmpleado.Correo,
+              Estado: datoEmpleado.Estado,
+              Fecha_ingreso: '2023-12-30' //datoEmpleado.Fecha_ingreso
+            };
+    
+            // Asumo que actulizarMiembro es una función que realiza la actualización
+            // No tengo su implementación, así que debes ajustarlo según tu código real
+            if (valedita) {
+                actulizarEmpleado({
+                    formularioDatos,
+                    id: datoEmpleado.ID,
+                    handleReset,
+                });
+            }
+        }
+    
+        setVisibleEM(false);
+        event.stopPropagation();
+    };
 
     // función que redirige Editaservicio
     // const UpdateConvenioEstado = Id => {
@@ -158,7 +202,7 @@ export const EmpleadoForm = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-               // dispatch(borrarConvenioAction(id));
+                dispatch(borrarEmpleadoAction(id));
             }
         });
     }
@@ -190,6 +234,7 @@ export const EmpleadoForm = () => {
       asociacion,
       empleados,
       barrios,
+      setValidated,
       validated,
       valedita,
       datoEmpleado, setDatoEmpleado,
@@ -197,6 +242,7 @@ export const EmpleadoForm = () => {
       visibleE, setVisibleE,
       visibleEM, setVisibleEM,
       cargandolista,
-      cargando
+      cargando,
+      handleSubmitAct
   }
 }

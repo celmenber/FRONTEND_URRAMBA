@@ -44,15 +44,12 @@ import CIcon from '@coreui/icons-react' */
   useEffect(() => {
      // Consultar la api listar Municipio,
        obtenerMunicipio();
+       obtenerAsociacion();
        // eslint-disable-next-line
      }, []);
 
-   useEffect(() => {
-     // Consultar la api listar detallesparques
-     obtenerAsociacion();
-     // eslint-disable-next-line
-   }, []);
- //  console.log(asociaciones)
+
+  console.log({asociaciones})
 
   return (
     <><CRow>
