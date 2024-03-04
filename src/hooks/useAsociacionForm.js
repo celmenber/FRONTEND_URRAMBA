@@ -18,6 +18,7 @@ export const AsociacionForm = () => {
   const crearNuevoAsociacion = (Dataform) => dispatch(crearNuevoAsociacionAction(Dataform))
   const updateAsociacion = (Dataform) => dispatch(editarAsociacionAction(Dataform))
 
+
   //selecion del state en el  store
   const cargando = useSelector((state) => state.Asociacion.loading)
   const cargandolista = useSelector((state) => state.Asociacion.loadinglista)
@@ -26,7 +27,7 @@ export const AsociacionForm = () => {
   const Municipio = useSelector((state) => state.Parametros.municipios)
 
   const [validated, setValidated] = useState(false)
-  const [valedita, setValedita] = useState(false)
+  const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nueva Asociación'))
 
   const [datoAsociacion, setDatoAsociacion] = useState({
     idMunicipio: '',
@@ -45,8 +46,22 @@ export const AsociacionForm = () => {
     })
   }
 
+  const handleReset = () => {
+    setDatoAsociacion({
+      idMunicipio: '',
+      nitAsociacion: '',
+      nombreAsociacion: '',
+      correoAsociacion: '',
+      direccionAsociacion: '',
+      telefonoAsociacion: '',
+    })
+
+
+  }
+
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    setValidated(true)
     const form = event.currentTarget
     if (form.checkValidity() === false) {
       event.preventDefault()
@@ -61,19 +76,70 @@ export const AsociacionForm = () => {
         Correo: datoAsociacion.correoAsociacion
       }
 //console.log(formularioDatos)
-      if (valedita === false) {
+      if (Object.values(formularioDatos).some(value => !value)) {
+        setValidated(true)
+       
+      }else{
+        setValidated(false)
         crearNuevoAsociacion({
           formularioDatos,
-        //  handleReset,
+        }).then(() => {
+          handleReset();
         })
       }
-
-      setValedita(false)
-      event.stopPropagation()
     }
-    event.stopPropagation()
-    setValidated(true)
-  }
+   }
+
+   const handleActualizarAsociacion = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formularioDatos ={
+      Id_municipio: datoAsociacion.idMunicipio,
+      Nit: datoAsociacion.nitAsociacion,
+      Nombre: datoAsociacion.nombreAsociacion,
+      Direccion: datoAsociacion.telefonoAsociacion,
+      Telefono: datoAsociacion.direccionAsociacion,
+      Correo: datoAsociacion.correoAsociacion
+
+    };
+    const camposInvalidos = Object.keys(formularioDatos).some((key) => {
+      const input = form[key];
+      return input && input.required && !input.checkValidity();
+    });
+
+    if (camposInvalidos) {
+      // Hay campos vacíos o no válidos
+      setValidated(true);
+    } else {
+      // No hay campos vacíos o no válidos
+      setValidated(false);
+
+      // Verificar si algún campo está vacío
+      const camposVacios = Object.values(formularioDatos).some(value => value === '');
+
+      if (camposVacios) {
+        // Hay campos vacíos
+        setValidated(true);
+      } else {
+        // No hay campos vacíos
+        setValidated(false);
+
+        // Llamas a la acción de actualizar y esperas a que termine
+        updateAsociacion({
+          formularioDatos,
+          Id: datoAsociacion.ID,
+        }).then(() => {
+          setNombreBotoGuardarActulizar('Agregar Nueva Asociación');
+          dispatch(obtenerAsociacion());
+          handleReset();
+        });
+      }
+    }
+
+    event.stopPropagation();
+  };
+  //  nombreBotoGuardarActulizar,
+  //  setNombreBotoGuardarActulizar
 
   // función que redirige Eliminar ContactoConvenio
   const EliminarAsociacion = (id) => {
@@ -110,6 +176,9 @@ export const AsociacionForm = () => {
     cargandolista,
     cargando,
     validated,
-    datoAsociacion
+    datoAsociacion,
+    handleActualizarAsociacion,
+    nombreBotoGuardarActulizar,
+    setNombreBotoGuardarActulizar
   }
 }

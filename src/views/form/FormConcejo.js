@@ -58,7 +58,7 @@ const FormConcejo = () => {
     obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
-  const [datosAct, setDatosAct] = useState({})
+  const [setDatosAct] = useState({})
   
 
 
@@ -301,7 +301,7 @@ const FormConcejo = () => {
                                   <CTableDataCell>
                                     <div className="small text-medium-emphasis">
                                       <CTooltip
-                                        content="Actulizar Concejo"
+                                        content="Actualizar Concejo"
                                         placement="bottom"
                                       >
                                         <CButton style={{ 'width': '100%' }}
