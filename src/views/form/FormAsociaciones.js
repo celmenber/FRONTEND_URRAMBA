@@ -52,7 +52,7 @@ import CIcon from '@coreui/icons-react' */
        obtenerAsociacion();
        // eslint-disable-next-line
      }, []);
-     const [setDatosAct] = useState({})
+   
 
 
      const EditaAsociacion = (event, item) => {
@@ -61,22 +61,14 @@ import CIcon from '@coreui/icons-react' */
  
       setDatoAsociacion({
         ID: item.ID,
-        idMunicipio: item.idMunicipio,
-        nitAsociacion: item.nitAsociacion,
-        nombreAsociacion: item.nombreAsociacion,
-        correoAsociacion: item.correoAsociacion,
-        direccionAsociacion:item.direccionAsociacion,
+        idMunicipio: item.id_municipio,
+        nitAsociacion: item.nit,
+        nombreAsociacion: item.nombre,
+        correoAsociacion: item.correo,
+        direccionAsociacion:item.direccion,
         telefonoAsociacion: item.telefono,
       });
-      setDatosAct({
-        ID: item.ID,
-        idMunicipio: item.idMunicipio,
-        nitAsociacion: item.nitAsociacion,
-        nombreAsociacion: item.nombreAsociacion,
-        correoAsociacion: item.correoAsociacion,
-        direccionAsociacion:item.direccionAsociacion,
-        telefonoAsociacion: item.telefono,
-      });
+    
   
      
     };
@@ -260,7 +252,8 @@ import CIcon from '@coreui/icons-react' */
                             asociaciones.map((item, index) => (
                             <CTableRow v-for="item in tableItems" key={index}>
                               <CTableDataCell>
-                                  <div>{item.Nombre}</div>
+                                  <div>{item.nombre}</div>
+
                                 <div className="small text-medium-emphasis">
                                     <span>{item.correo}</span> | Telefono: {' '}
                                     {item.telefono}
@@ -270,8 +263,14 @@ import CIcon from '@coreui/icons-react' */
                                     <span>{item.direccion}</span>
                                   </div>
                               </CTableDataCell>
+                              <CTableDataCell>
+                              <div>{item.nit}</div>
+                              </CTableDataCell>
+                              <CTableDataCell>
+                              <div>{item.municipio}</div>
+                              </CTableDataCell>
                               <CTableDataCell className="text-center">
-                                  <div>{item.Nit}</div>
+                                  
                                   <CTableDataCell>
                                     <div className="small text-medium-emphasis">
                                       <CTooltip

@@ -162,10 +162,10 @@ const obtenerEmpleadoFiltroError = () => ({
 // ***************** Seleccion editar el Empleado //****************/
 
 export const editarEmpleadoAction = (Datos) => {
-    debugger
+    
     return async (dispatch) => {
         dispatch(editarEmpleado());
-        console.log(Datos)
+      
         const id  = Number(Datos.id)
         try {
 

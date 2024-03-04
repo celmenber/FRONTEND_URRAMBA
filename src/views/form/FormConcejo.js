@@ -58,12 +58,11 @@ const FormConcejo = () => {
     obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
-  const [setDatosAct] = useState({})
-  
 
 
 
  const EditaConsejo = (event, item) => {
+  
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
@@ -78,19 +77,7 @@ const FormConcejo = () => {
       // ... (otros campos)
     });
 
-    // Actualizar el estado datosAct con los datos de edición
-    setDatosAct({
-      ID: item.ID,
-      nitConcejo: item.Nit,
-      nombreAsociacion: item.Nombre_concejo_comunitario,
-      id_asociacion: item.id_asociacion,
-      id_autoridad_tradicional: item.id_autoridad_tradicional,
-      idMunicipio: item.id_municipio,
-      // ... (otros campos)
-    });
-
-    // Note: Don't call handleActualizarConcejo here
-    // handleActualizarConcejo(event, datosAct);
+  
   };
   
   
@@ -157,7 +144,7 @@ const FormConcejo = () => {
                           key={item.ID}
                           value={item.ID}
                         >
-                          {item.Nombre}
+                          {item.nombre}
                         </option>
                       ))
                     )}

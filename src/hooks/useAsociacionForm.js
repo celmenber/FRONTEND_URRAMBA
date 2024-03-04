@@ -130,7 +130,7 @@ export const AsociacionForm = () => {
           Id: datoAsociacion.ID,
         }).then(() => {
           setNombreBotoGuardarActulizar('Agregar Nueva Asociación');
-          dispatch(obtenerAsociacion());
+          dispatch(obtenerAsociacionAction());
           handleReset();
         });
       }
@@ -173,6 +173,7 @@ export const AsociacionForm = () => {
     asociaciones,
    // userDetails,
   //  Asociacionigo,
+    setDatoAsociacion,
     cargandolista,
     cargando,
     validated,
