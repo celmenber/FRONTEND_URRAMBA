@@ -98,7 +98,7 @@ const JefeHogarNuevo = (Props) => {
                     <CModalBody>
                         <CRow className="g-3">
                             <CCol md={10} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom01">Consejo Comunitario*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom01">Concejo Comunitario*</CFormLabel>
                                 <CFormSelect
                                     id="validationCustom01"
                                     name='Id_conncejo_comunitario'
@@ -166,7 +166,7 @@ const JefeHogarNuevo = (Props) => {
                                 <CFormFeedback invalid>El campo es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={3} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom04">Documento Miembro Consejo*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom04">Documento Jefe Hogar*</CFormLabel>
                                 <CFormInput
                                     type="text"
                                     id="validationCustom04"
@@ -177,7 +177,7 @@ const JefeHogarNuevo = (Props) => {
                                 <CFormFeedback invalid>El campo Documentos es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={3} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom05">Nombre Miembro Consejo*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom05">Nombre Jefe Hogar*</CFormLabel>
                                 <CFormInput
                                     type="text"
                                     id="validationCustom05"
@@ -359,7 +359,7 @@ const JefeHogarNuevo = (Props) => {
                                 <CFormFeedback invalid>El campo Barrio Vereda es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={3} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom14">Direccion Miembro Consejo*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom14">Direccion Jefe Hogar*</CFormLabel>
                                 <CFormInput
                                     type="text"
                                     id="validationCustom14"
@@ -367,7 +367,7 @@ const JefeHogarNuevo = (Props) => {
                                     value={Direccion}
                                     onChange={onChangeFormulario}
                                     required />
-                                <CFormFeedback invalid>El campo Direccion Miembro Consejo es Requerido!</CFormFeedback>
+                                <CFormFeedback invalid>El campo Direccion Jefe Hogar es Requerido!</CFormFeedback>
                             </CCol>
                         </CRow>
 
