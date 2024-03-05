@@ -104,24 +104,24 @@ export const JegeHogarForm = () => {
         } else {
 
             const formularioDatos = {
-                Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
-                Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
-                Id_corregimiento: datoMiembro.Id_corregimiento,
-                Id_tipo_documento: datoMiembro.Id_tipo_documento,
-                Documentos: datoMiembro.Documentos,
-                Nombres: datoMiembro.Nombres,
-                Apellidos: datoMiembro.Apellidos,
-                Sexo: datoMiembro.Sexo,
-                Id_escolaridad: datoMiembro.Id_escolaridad,
-                Estado_escolaridad: datoMiembro.Estado_escolaridad,
-                Genero: datoMiembro.Genero,
-                Id_orientacion_sexual: (datoMiembro.Id_orientacion_sexual),
-                Direccion: datoMiembro.Direccion,
-                Telefono: datoMiembro.Telefono,
-                Correo: datoMiembro.Correo,
-                Estado: datoMiembro.Estado,
-                Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
-                Fecha_ingreso: datoMiembro.Fecha_ingreso
+                Id_conncejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
+                Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
+                Id_corregimiento: datoJefeHogar.Id_corregimiento,
+                Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
+                Documentos: datoJefeHogar.Documentos,
+                Nombres: datoJefeHogar.Nombres,
+                Apellidos: datoJefeHogar.Apellidos,
+                Sexo: datoJefeHogar.Sexo,
+                Id_escolaridad: datoJefeHogar.Id_escolaridad,
+                Estado_escolaridad: datoJefeHogar.Estado_escolaridad,
+                Genero: datoJefeHogar.Genero,
+                Id_orientacion_sexual: (datoJefeHogar.Id_orientacion_sexual),
+                Direccion: datoJefeHogar.Direccion,
+                Telefono: datoJefeHogar.Telefono,
+                Correo: datoJefeHogar.Correo,
+                Estado: datoJefeHogar.Estado,
+                Fecha_nacimiento: datoJefeHogar.Fecha_nacimiento,
+                Fecha_ingreso: datoJefeHogar.Fecha_ingreso
             }
 
             if (valedita === false) {
@@ -138,7 +138,7 @@ export const JegeHogarForm = () => {
     }
     const EditarJefeHogar = (id) => {
         debugger
-        const datos = miembro.filter((C) => C.ID === id);
+        const datos = jefeHogar.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoJefeHogar({
             ID: datos[0].ID,
@@ -249,7 +249,7 @@ export const JegeHogarForm = () => {
         validated,
         setValidated,
         valedita,
-        datoMiembro, setDatoMiembro,
+        datoJefeHogar, setDatoJefeHogar,
         selectActivar, setSelectActivar,
         visibleM, setVisibleM,
         visibleMI, setVisibleMI,

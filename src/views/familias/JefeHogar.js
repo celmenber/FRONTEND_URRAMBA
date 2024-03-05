@@ -1,208 +1,314 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-script-url */
+import React, { useState, useEffect } from 'react'
+
 
 import {
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cifBr,
-  cifFr,
-  cifIn,
-  cifUs,
-  cilLockLocked,
-  cilLockUnlocked,
-  cilPeople,
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-import {
-  CAvatar,
-  CButton,
+  CRow,
+  CCol,
   CCard,
   CCardBody,
   CCardHeader,
-  CContainer,
+  CForm,
+  CButton,
+  CSpinner,
+  CTooltip,
   CTable,
+  CTableHead,
+  CTableRow,
+  CTableHeaderCell,
   CTableBody,
   CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+  CAvatar,
 } from '@coreui/react'
-import React from 'react'
-import avatar from 'src/assets/images/avatars/profile-default.jpg'
-// import Modal from '../modals/Modal'
+//import { CLoadingButton } from '@coreui/react-pro'
 
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import CIcon from '@coreui/icons-react'
+import avatar from 'src/assets/images/avatars/profile-default.jpg'
+import {
+  cilLockLocked,
+  cilLockUnlocked,
+  cilPeople,
+  cilTrash,
+} from '@coreui/icons'
+import { CLoadingButton } from '@coreui/react-pro'
+import { JegeHogarForm } from 'src/hooks/useJefeHogarForm'
+import JefeHogarNuevo from './modal/JefeHogarNuevo'
+import JefeHogarAct from './modal/JefeHogarAct'
+
+
+
+
 const JefeHogar = () => {
+  
+
+  const [selectServicio] = useState(1);
+  const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
+
+  const {
+    onChangeFormulario,
+    handleSubmitAct,
+    obtenerJefeHogar,
+    obtenerConcejo,
+    obtenerEscolaridad,
+    eliminarMiembro,
+    EditaMiembro,
+    datoJefeHogar,
+    jefeHogar,
+    escolaridades,
+    obtenerOrientacionSexual,
+    orientacion_sexuales,
+    visibleM,
+    setVisibleM,
+    visibleMI,
+    setVisibleMI,
+    setValidated,
+    cargandolista,
+  } = JegeHogarForm()
+
+
+  useEffect(() => {
+    obtenerConcejo();
+    obtenerJefeHogar(); 
+    obtenerEscolaridad()
+    obtenerOrientacionSexual()
+
+      // eslint-disable-next-line
+  }, []);
+
+  useEffect(()=>{
+    
+   
+    obtenerNombre();
+    setVisibleM(false)
+   // eslint-disable-next-line
+  },[jefeHogar])
+
  
-  const tableExample = [
-    {
-      avatar: { src: avatar, status: 'success' },
-      user: {
-        name: 'Jose Alvarez',
-        cc: '26.589.362',
-        username: 'jalvarez',
-        perfil: 'admin',
-        new: true,
-        estado: true,
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar, status: 'danger' },
-      user: {
-        name: 'Leonel Tarantini',
-        cc: '26.589.363',
-        username: 'Leotar',
-        perfil: 'admin',
-        new: false,
-        registered: 'Jan 1, 2021',
-        estado: false,
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar, status: 'warning' },
-      user: {
-        name: 'Eddy Solano',
-        cc: '26.589.364',
-        username: 'eddysol',
-        perfil: 'operador',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: true,
-      },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar, status: 'secondary' },
-      user: {
-        name: 'Pedro Fernandez',
-        cc: '26.589.366',
-        username: 'PedroF',
-        perfil: 'admin',
-        new: true,
-        registered: 'Jan 1, 2021',
-        estado: true,
-      },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-  ]
-  // const toggleModal = (isOpen) => {
-  //   setModal(isOpen)
-  // }
+
+  const obtenerNombre = () => {
+    
+    const jefeHogarConOrientacionSexual = jefeHogar.map(orientacion => {
+      const orientacionSexuales = orientacion_sexuales?.find(item => item.ID === orientacion.id_orientacion_sexual)
+      const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
+      return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
+  
+    });
+  
+    const jefeHogarConEscolaridad = jefeHogarConOrientacionSexual.map(jefe => {
+      const escolaridad = escolaridades.find(item => item.ID === jefe.id_escolaridad);
+      const escolaridadNombre = escolaridad ? escolaridad.Nombre : "No encontrado";
+      return { ...jefe, nombre_escolaridad: escolaridadNombre };
+    });
+  
+    setNombreEscolaridad(jefeHogarConEscolaridad);
+  }
+
+
   return (
-    <>
-      <CContainer fluid>
-        <CCard>
-          <CCardHeader className="d-flex justify-content-between align-items-center">
-            <div className="">
-              <strong>Familias</strong> <small className="align-items-end">Jefes de Hogar</small>
-            </div>
-            <CButton size="sm" className="ml-auto">
-              Nuevo JefeHogar
-            </CButton>
+    <CRow>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Gestión</strong> <small>Jefe de hogar</small>
           </CCardHeader>
           <CCardBody>
-      {/*       <Modal
-              visible={modal}
-              closeModal={() => toggleModal(false)}
-              title="Nuevo Jefe de Hogar"
-              content={
-                <>
-                  <FormJefeHogar />
-                </>
-              }
-              onSave={() => {
-                // Lógica de guardar cambios (opcional, solo si necesitas botón "Save changes")
-              }}
-            /> */}
-
-            <CTable align="middle" className="mb-0 border" hover responsive>
-              <CTableHead color="light">
-                <CTableRow>
-                  <CTableHeaderCell className="text-center">
-                    <CIcon icon={cilPeople} />
-                  </CTableHeaderCell>
-                  <CTableHeaderCell>Usuario</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Documento</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Estado</CTableHeaderCell>
-                  <CTableHeaderCell>Nombre Usuario</CTableHeaderCell>
-                  <CTableHeaderCell>Perfil</CTableHeaderCell>
-                  <CTableHeaderCell></CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {tableExample.map((item, index) => (
-                  <CTableRow v-for="item in tableItems" key={index}>
-                    <CTableDataCell className="text-center">
-                      <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div>{item.user.name}</div>
-                      <div className="small text-medium-emphasis">
-                        <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registrado:{' '}
-                        {item.user.registered}
-                      </div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      <div>{item.user.cc}</div>
-                    </CTableDataCell>
-
-                    <CTableDataCell className="text-center">
-                      {!item.user.estado ? (
-                        <CButton variant="ghost">
-                          <CIcon size="xl" icon={cilLockUnlocked} />
-                        </CButton>
-                      ) : (
-                        <CButton variant="ghost">
-                          <CIcon size="xl" icon={cilLockLocked} />
-                        </CButton>
-                      )}
-                    </CTableDataCell>
-                    <CTableDataCell>{item.user.username}</CTableDataCell>
-                    <CTableDataCell>{item.user.perfil}</CTableDataCell>
-                    <CTableDataCell>
-                      <Link to="/familias/nucleo" /* to={`/nucleos/${id}`} */>
-                        <CButton variant="outline">Detalles</CButton>
-                      </Link>
-                    </CTableDataCell>
+            <CForm>
+              <CCol xs={12}>
+                <CButton
+                  type="button"
+                  color={'primary'}
+                  variant="outline"
+                  className="px-4"
+                  style={{ width: '100%' }}
+                  onClick={() => setVisibleM(true)}
+                >{' '}
+                  {'Agregar Nuevo Jefe de Hogar'}
+                </CButton>
+              </CCol>
+            </CForm>
+          </CCardBody>
+          {/* proceso de listar archovos de las normativas */}
+          <CCardBody>
+            <CForm key={0}>
+              <CTable align="middle" className="mb-0 border" hover responsive>
+                <CTableHead color="light">
+                  <CTableRow>
+                    <CTableHeaderCell className="text-center">
+                      <CIcon icon={cilPeople} />
+                    </CTableHeaderCell>
+                    <CTableHeaderCell colSpan={1} >Datos Jefe de Hogar</CTableHeaderCell>
+                    {/* <CTableHeaderCell colSpan={2} className="text-center">Consejo</CTableHeaderCell> */}
+                    <CTableHeaderCell colSpan={1} className="text-center">Escolaridad</CTableHeaderCell>
+                    
+                    <CTableHeaderCell colSpan={1} className="text-center">Genero</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={1} className="text-center">Ubicación</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
                   </CTableRow>
-                ))}
-              </CTableBody>
-            </CTable>
+                </CTableHead>
+                <CTableBody>
+                  {cargandolista === true ? (
+                    <CTableRow key={0} >
+                      <CTableHeaderCell colSpan={8} className="text-center">
+                        <CSpinner aria-hidden="true" />
+                        <span style={{
+                          top: '-10px',
+                          position: 'relative'
+                        }}> Loading...</span>
+                      </CTableHeaderCell>
+                    </CTableRow>
+                  ) : (
+                 
+                    nombreEscolaridad?.map((item, index) => (
+
+                      <CTableRow v-for="item in tableItems" key={index}>
+
+                        <CTableDataCell className="text-center">
+                          <CAvatar size="md"
+                            key={index}
+                            src={avatar}
+                            status={item.estado === '1' ? 'success' : 'secondary'}
+                          />
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div>
+                            <span> <strong>
+                              {item.nombres} {item.apellidos}
+                            </strong></span><br></br>
+                            <small style={{ marginLeft: '5px' }}>
+                              {item.Tipo_documento}{item.documentos}
+                            </small>
+                          </div>
+                          <div className="small text-medium-emphasis">
+                            <span>
+                              {item.correo}</span> | <span> TEL: {item.telefono}
+                            </span>
+                          </div>
+                        </CTableDataCell>
+                        {/* <CTableDataCell className="text-center">
+                          <h5>{item.asociacion}</h5>
+                        </CTableDataCell> */}
+                        <CTableDataCell>
+                        <div className="small text-medium-emphasis">Escolaridad/Estado</div>
+                          <strong>{
+                            item.nombre_escolaridad
+                          }</strong> |     <strong>{
+                            item.estado_escolaridad
+                          }</strong>
+                        </CTableDataCell>
+                       
+
+                        {/* <CTableDataCell>
+                          <div className="small text-medium-emphasis">Municipio/Ciudad</div>
+                          <strong>{
+                            item.municipio
+                          }</strong>
+                        </CTableDataCell> */}
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
+                          <span>
+                            {item.sexo}</span> | <span> Gen: {item.genero} | <span>Ori Sex: {item.nombreOrientacionSex}</span>
+                          </span>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">Barrio/Vereda</div>
+                          <span>
+                            {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion} | <span>Corrg: {item.Corregimiento}</span>
+                          </span>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Actulizar Miembro"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="info"
+                                variant="outline"
+                                size="lg"
+                                onClick={() => EditaMiembro(item.ID)}
+                              >
+                                {'Editar'}
+                              </CButton>
+                              </CTooltip>
+                          </div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                          {console.log({selectServicio})}
+                            <CTooltip
+                              content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
+                              placement="bottom"
+                            >
+                             
+                              {selectServicio !== 1 ? (
+                                <CLoadingButton
+                                  variant="outline"
+                                  size="lg"
+                                  color={item.estado === '1' ? 'secondary' : 'success'}
+                                  style={{ 'width': '100%' }}
+                                  timeout={2000}
+                                >
+                                </CLoadingButton>
+                              ) : (
+                                <CButton
+                                  size="lg"
+                                  color={item.estado === '1' ? 'success' : 'secondary'}
+                                  style={{ 'width': '100%' }}
+                                  id={`estado${1}`}
+                                // key={item.IdConvenio}
+                                //onClick={() => handleSelectEst(item.IdConvenio)}
+                                >
+                                  {item.estado === '1'
+                                    ? <CIcon icon={cilLockUnlocked} size="lg" />
+                                    : <CIcon icon={cilLockLocked} size="lg" />
+                                  }
+                                </CButton>
+                              )}
+
+                            </CTooltip>
+                          </div>
+                        </CTableDataCell>
+                       
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Eliminar Miembro"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="danger"
+                                variant="outline"
+                                size="lg"
+                                onClick={() => eliminarMiembro(item.ID)}
+                              >
+                                <CIcon icon={cilTrash} size="lg" />
+                              </CButton></CTooltip>
+                          </div>
+                        </CTableDataCell>
+                      </CTableRow>
+                    ))
+                  )}
+                </CTableBody>
+              </CTable>
+            </CForm>
           </CCardBody>
         </CCard>
-      </CContainer>
-    </>
+      </CCol>
+      <JefeHogarNuevo
+        visibleM={visibleM}
+        setVisibleM={setVisibleM}
+                                  
+      />
+      <JefeHogarAct
+       visibleMI={visibleMI}
+       setVisibleMI={setVisibleMI}
+        datoJefeHogar={datoJefeHogar}
+        onChangeFormulario={onChangeFormulario}
+        handleSubmitAct = {handleSubmitAct}
+        setValidated = {setValidated}
+      />
+    </CRow>
   )
 }
 export default JefeHogar
