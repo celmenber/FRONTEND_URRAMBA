@@ -10,6 +10,7 @@ import {
   AutoridadTReducer,
   ConcejoReducer,
   MiemboReducer,
+  JefeHogarReducer,
   } from './reducers'
 
 
@@ -23,4 +24,5 @@ export const rootReducer = combineReducers({
   AutoridadT: AutoridadTReducer,
   Concejo: ConcejoReducer,
   Miembro: MiemboReducer,
+  JefeHogar: JefeHogarReducer,
 })
