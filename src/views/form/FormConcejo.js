@@ -58,12 +58,16 @@ const FormConcejo = () => {
     obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
+<<<<<<< HEAD
   const [datosAct, setDatosAct] = useState({})
 
+=======
+>>>>>>> 13bf924b8eacc618a5d9950d307d7ff3f09d7151
 
 
 
  const EditaConsejo = (event, item) => {
+  
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
@@ -78,19 +82,7 @@ const FormConcejo = () => {
       // ... (otros campos)
     });
 
-    // Actualizar el estado datosAct con los datos de edición
-    setDatosAct({
-      ID: item.ID,
-      nitConcejo: item.Nit,
-      nombreAsociacion: item.Nombre_concejo_comunitario,
-      id_asociacion: item.id_asociacion,
-      id_autoridad_tradicional: item.id_autoridad_tradicional,
-      idMunicipio: item.id_municipio,
-      // ... (otros campos)
-    });
-
-    // Note: Don't call handleActualizarConcejo here
-    // handleActualizarConcejo(event, datosAct);
+  
   };
 
 
@@ -301,7 +293,7 @@ const FormConcejo = () => {
                                   <CTableDataCell>
                                     <div className="small text-medium-emphasis">
                                       <CTooltip
-                                        content="Actulizar Concejo"
+                                        content="Actualizar Concejo"
                                         placement="bottom"
                                       >
                                         <CButton style={{ 'width': '100%' }}

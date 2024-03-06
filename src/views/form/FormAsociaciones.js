@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AsociacionForm } from '../../hooks'
 import {
   CButton,
@@ -20,6 +20,7 @@ import {
   CFormSelect,
   CFormFeedback,
   CSpinner,
+  CTooltip,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
 /* import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
@@ -37,22 +38,42 @@ import CIcon from '@coreui/icons-react' */
             cargandolista,
             cargando,
             datoAsociacion,
-            validated
+            setDatoAsociacion,
+            validated,
+            handleActualizarAsociacion,
+            nombreBotoGuardarActulizar,
+            setNombreBotoGuardarActulizar
      } = AsociacionForm();
 
 
   useEffect(() => {
      // Consultar la api listar Municipio,
        obtenerMunicipio();
+       obtenerAsociacion();
        // eslint-disable-next-line
      }, []);
+   
 
-   useEffect(() => {
-     // Consultar la api listar detallesparques
-     obtenerAsociacion();
-     // eslint-disable-next-line
-   }, []);
- //  console.log(asociaciones)
+
+     const EditaAsociacion = (event, item) => {
+      event.preventDefault();
+      setNombreBotoGuardarActulizar('Actualizar asociación');
+ 
+      setDatoAsociacion({
+        ID: item.ID,
+        idMunicipio: item.id_municipio,
+        nitAsociacion: item.nit,
+        nombreAsociacion: item.nombre,
+        correoAsociacion: item.correo,
+        direccionAsociacion:item.direccion,
+        telefonoAsociacion: item.telefono,
+      });
+    
+  
+     
+    };
+
+  console.log({asociaciones})
 
   return (
     <><CRow>
@@ -172,19 +193,19 @@ import CIcon from '@coreui/icons-react' */
                     timeout={2000}
                   >
                     {' '}
-                    Enviando Asociación
+                    Enviando Concejo Comunitario
                   </CLoadingButton>
                 ) : (
                   <CButton
-                    type="submit"
-                    color={'primary'}
-                    variant="outline"
-                    className="px-4"
-                    style={{ width: '100%' }}
-                  >
-                    {' '}
-                    {'Agregar Nueva Asociación'}
-                  </CButton>
+                  type="button"
+                  color={'primary'}
+                  variant="outline"
+                  className="px-4"
+                  style={{ width: '100%' }}
+                  onClick={nombreBotoGuardarActulizar === 'Agregar Nueva Asociación' ? handleSubmit : handleActualizarAsociacion}
+                >
+                  {nombreBotoGuardarActulizar}
+                </CButton>
                 )}
               </CCol>
               <hr />
@@ -231,7 +252,8 @@ import CIcon from '@coreui/icons-react' */
                             asociaciones.map((item, index) => (
                             <CTableRow v-for="item in tableItems" key={index}>
                               <CTableDataCell>
-                                  <div>{item.Nombre}</div>
+                                  <div>{item.nombre}</div>
+
                                 <div className="small text-medium-emphasis">
                                     <span>{item.correo}</span> | Telefono: {' '}
                                     {item.telefono}
@@ -241,12 +263,31 @@ import CIcon from '@coreui/icons-react' */
                                     <span>{item.direccion}</span>
                                   </div>
                               </CTableDataCell>
-                              <CTableDataCell className="text-center">
-                                  <div>{item.Nit}</div>
-                              </CTableDataCell>
-                                <CTableDataCell className="text-center">{item.municipio}</CTableDataCell>
                               <CTableDataCell>
-                                    <CButton variant="outline" style={{ width: '100%' }}>Corregir Asociacion</CButton>
+                              <div>{item.nit}</div>
+                              </CTableDataCell>
+                              <CTableDataCell>
+                              <div>{item.municipio}</div>
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center">
+                                  
+                                  <CTableDataCell>
+                                    <div className="small text-medium-emphasis">
+                                      <CTooltip
+                                        content="Actualizar Asociación"
+                                        placement="bottom"
+                                      >
+                                        <CButton style={{ 'width': '100%' }}
+                                          color="info"
+                                          variant="outline"
+                                          size="lg"
+                                          onClick={(event) => EditaAsociacion(event, item)}
+                                        >
+                                          {'Corregir Asociación'}
+                                        </CButton></CTooltip>
+                                    </div>
+                                  </CTableDataCell>
+                                  
                               </CTableDataCell>
                             </CTableRow>
                             ))

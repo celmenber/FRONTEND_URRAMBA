@@ -81,7 +81,7 @@ const WidgetBarChart = () => {
    // eslint-disable-next-line
   },[miembro])
 
- console.log({miembro})
+ 
 
   const obtenerNombre = () => {
     

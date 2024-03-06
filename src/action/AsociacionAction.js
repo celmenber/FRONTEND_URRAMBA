@@ -115,19 +115,21 @@ const obtenerAsociacionEditar = (datos) => ({
 })
 // ***************** Seleccion editar editar Conveniocod //****************/
 // Edita un registro en la api y state
-export const editarAsociacionAction = (dataform) => {
+export const editarAsociacionAction = (Datos) => {
+  
   return async (dispatch) => {
     dispatch(editarAsociacion())
-
-    const { formularioDatos, setVisibleCHKIO, Id } = dataform
+    const id = Number(Datos.Id)
+ 
+		
 
     try {
-      const { data } = await Axios.put(`/app/conveniocodigo/update/${Id}`, formularioDatos)
+      const { data } = await Axios.put(`/asociacion/edit-asociacion/${id}`, Datos.formularioDatos)
 
-      dispatch(editarAsociacionExito(data.datos))
-      setVisibleCHKIO(false)
+      dispatch(editarAsociacionExito(data.data))
+      
       if (data.code === 200) {
-        Swal.fire('Correcto', 'El Cheout se ejecuto correctamente', 'success')
+        Swal.fire( 'La asociación se actualizo correctamente', 'success')
       }
     } catch (error) {
       console.log(error)

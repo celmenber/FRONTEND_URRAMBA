@@ -25,11 +25,11 @@ const EmpleadoNuevoModal = (Props) => {
     setVisibleE,
   } = Props
 
-  const handleClose = () => setVisibleE(false)
 
     const {
         handleSubmit,
         onChangeFormulario,
+        setValidated,
         validated,
         datoEmpleado,
         handleReset,
@@ -52,17 +52,18 @@ const EmpleadoNuevoModal = (Props) => {
         Estado,
     } = datoEmpleado
 
+    const handleClose = () => {
+        handleReset()
+        setValidated(false)
+        setVisibleE(false)
+    }
 
 
   useEffect(() => {
         // Consultar la api un asociacion
       obtenerAsociacion();
+      obtenerBarrioVereda();
         // eslint-disable-next-line
-    }, []);
-  useEffect(() => {
-  // Consultar la api un barrios
-     obtenerBarrioVereda();
-    // eslint-disable-next-line
     }, []);
 
     return (
@@ -95,7 +96,7 @@ const EmpleadoNuevoModal = (Props) => {
                                       key={item.ID}
                                       value={item.ID}
                                     >
-                            {item.Nombre}
+                            {item.nombre}
                                     </option>
                                   ))
                                 )}

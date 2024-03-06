@@ -46,29 +46,28 @@ const AdminConvenios = () => {
         empleados,
         visibleE, setVisibleE,
         visibleEM, setVisibleEM,
+        setValidated, 
         datoEmpleado, 
         cargandolista,
+        onChangeFormulario,
+        handleSubmitAct,
+       
     } = EmpleadoForm()
 
 
    useEffect(() => {
         // Consultar la api listar parques
-     obtenerEmpleado();
+    
+        obtenerEmpleado();
         // eslint-disable-next-line
     }, []);
-/*
-    useEffect(() => {
+   useEffect(() => {
         // Consultar la api listar parques
-        obtenerConveniocod();
+     
+     setVisibleE(false)
         // eslint-disable-next-line
-    }, []);
+    }, [empleados]);
 
-
-    const handleSelectEst = ((id) => {
-        setSelectActivar(true)
-        setSelectServicio(id)
-        UpdateConvenioEstado(id)
-    }); */
 
  
 
@@ -164,40 +163,6 @@ const AdminConvenios = () => {
                                                               {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion}
                                                             </span>
                                                               </CTableDataCell>
-                                                          <CTableDataCell>
-                                                            <div className="small text-medium-emphasis">
-                                                              <CTooltip
-                                                                content={item.estado === true ? 'Desactivar' : 'Activar'}
-                                                                placement="bottom"
-                                                              >
-                                                                {selectServicio !== 1 ? (
-                                                                  <CLoadingButton
-                                                                    variant="outline"
-                                                                    size="lg"
-                                                                    color={item.estado === true ? 'secondary' : 'success'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    timeout={2000}
-                                                                  >
-                                                                  </CLoadingButton>
-                                                                ) : (
-                                                                  <CButton
-                                                                    size="lg"
-                                                                    color={item.estado === true ? 'success' : 'secondary'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    id={`estado${1}`}
-                                                                  // key={item.IdConvenio}
-                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
-                                                                  >
-                                                                    {item.estado === true
-                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                                                      : <CIcon icon={cilLockLocked} size="lg" />
-                                                                    }
-                                                                  </CButton>
-                                                                )}
-
-                                                              </CTooltip>
-                                                            </div>
-                                                          </CTableDataCell>
                                                               <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -214,6 +179,41 @@ const AdminConvenios = () => {
                                                                             </CButton></CTooltip>
                                                                     </div>
                                                                 </CTableDataCell>
+                                                          <CTableDataCell>
+                                                            <div className="small text-medium-emphasis">
+                                                              <CTooltip
+                                                                content={item.estado === '1' ? 'Desactivar' : 'Activar'}
+                                                                placement="bottom"
+                                                              >
+                                                                {selectServicio !== 1 ? (
+                                                                  <CLoadingButton
+                                                                    variant="outline"
+                                                                    size="lg"
+                                                                    color={item.estado === '1' ? 'secondary' : 'success'}
+                                                                    style={{ 'width': '100%' }}
+                                                                    timeout={2000}
+                                                                  >
+                                                                  </CLoadingButton>
+                                                                ) : (
+                                                                  <CButton
+                                                                    size="lg"
+                                                                    color={item.estado === '1' ? 'success' : 'secondary'}
+                                                                    style={{ 'width': '100%' }}
+                                                                    id={`estado${1}`}
+                                                                  // key={item.IdConvenio}
+                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
+                                                                  >
+                                                                    {item.estado === '1'
+                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
+                                                                      : <CIcon icon={cilLockLocked} size="lg" />
+                                                                    }
+                                                                  </CButton>
+                                                                )}
+
+                                                              </CTooltip>
+                                                            </div>
+                                                          </CTableDataCell>
+                                                        
                                                                 <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -244,11 +244,13 @@ const AdminConvenios = () => {
           visibleE={visibleE}
           setVisibleE={setVisibleE}
             />
-        <EmpleadoModalActualiza
+            <EmpleadoModalActualiza
                 visibleEM={visibleEM}
                 setVisibleEM={setVisibleEM}
-                 datoEmpleado={datoEmpleado}
-                //onChangeFormulario={onChangeFormulario}
+                datoEmpleado={datoEmpleado}
+                onChangeFormulario={onChangeFormulario}
+                handleSubmitAct={handleSubmitAct}
+                setValidated={setValidated}
             />
         </CRow>
     )

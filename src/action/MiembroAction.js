@@ -116,7 +116,7 @@ export const editarMiembroAction = (Datos) => {
                                      
       const {data} = await Axios.put(`/miembrosconcejo/edit-miembrosconcejo/${id}`, Datos.formularioDatos);
       
-console.log('data', data)
+
       dispatch(editarMiembroExito(data.data.datos));
 
       if (data.code === 200) {

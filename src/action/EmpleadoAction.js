@@ -162,14 +162,15 @@ const obtenerEmpleadoFiltroError = () => ({
 // ***************** Seleccion editar el Empleado //****************/
 
 export const editarEmpleadoAction = (Datos) => {
+    
     return async (dispatch) => {
         dispatch(editarEmpleado());
-        console.log(Datos)
-        const { Id } = Datos
+      
+        const id  = Number(Datos.id)
         try {
 
-          const { data } = await Axios.patch(`/empleados/edit-empleado/${Id}`);
-            dispatch(editarEmpleadoExito(data.datos));
+          const {data} = await Axios.put(`/empleados/edit-empleado/${id}`, Datos.formularioDatos);
+            dispatch(editarEmpleadoExito(data.data.datos));
 
             if (data.code === 200) {
                 Swal.fire(
@@ -192,7 +193,7 @@ const editarEmpleado = () => ({
     payload: true
 });
 
-const editarEmpleadoExito = datos => ({
+const editarEmpleadoExito = (datos) => ({
     type: EDITAR_EMPLEADO_SUCCESS,
     payload: datos
 });
@@ -204,16 +205,16 @@ const editarEmpleadoError = () => ({
 
 
 // ***************** Seleccion y elimina el registro  Normativida//****************/
-export const borrarEmpleadoAction = id => {
+export const borrarEmpleadoAction = Id => {
     return async (dispatch) => {
 
-        dispatch(eliminaEmpleado(id));
+        dispatch(eliminaEmpleado(Id));
 
         try {
-            const { data } = await Axios.delete(`app/empleados/delete/${id}`);
+            const { data } = await Axios.delete(`/empleados/delete-empleado/${Id}`);
 
             if (data.code === 200) {
-                dispatch(eliminarEmpleadoExito(id));
+                dispatch(eliminarEmpleadoExito(Id));
                 // Si se elimina, mostrar alerta
                 Swal.fire(
                     'Eliminado',
