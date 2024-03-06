@@ -47,7 +47,7 @@ const FormConcejo = () => {
     handleActualizarConcejo,
     nombreBotoGuardarActulizar,
     setNombreBotoGuardarActulizar
-    
+
   } = ConcejoForm();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const FormConcejo = () => {
     // eslint-disable-next-line
   }, []);
   const [datosAct, setDatosAct] = useState({})
-  
+
 
 
 
@@ -92,8 +92,8 @@ const FormConcejo = () => {
     // Note: Don't call handleActualizarConcejo here
     // handleActualizarConcejo(event, datosAct);
   };
-  
-  
+
+
 
 
 
@@ -157,7 +157,7 @@ const FormConcejo = () => {
                           key={item.ID}
                           value={item.ID}
                         >
-                          {item.Nombre}
+                          {item.nombre}
                         </option>
                       ))
                     )}
