@@ -58,16 +58,9 @@ const FormConcejo = () => {
     obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
-<<<<<<< HEAD
-  const [datosAct, setDatosAct] = useState({})
-
-=======
->>>>>>> 13bf924b8eacc618a5d9950d307d7ff3f09d7151
-
-
 
  const EditaConsejo = (event, item) => {
-  
+
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
@@ -82,7 +75,7 @@ const FormConcejo = () => {
       // ... (otros campos)
     });
 
-  
+
   };
 
 
