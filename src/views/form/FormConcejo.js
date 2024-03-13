@@ -47,7 +47,7 @@ const FormConcejo = () => {
     handleActualizarConcejo,
     nombreBotoGuardarActulizar,
     setNombreBotoGuardarActulizar
-    
+
   } = ConcejoForm();
 
   useEffect(() => {
@@ -59,10 +59,8 @@ const FormConcejo = () => {
     // eslint-disable-next-line
   }, []);
 
-
-
  const EditaConsejo = (event, item) => {
-  
+
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
@@ -77,10 +75,10 @@ const FormConcejo = () => {
       // ... (otros campos)
     });
 
-  
+
   };
-  
-  
+
+
 
 
 
