@@ -14,8 +14,9 @@ import {
     CModalHeader,
     CRow
 } from '@coreui/react'
+import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 
-import { JegeHogarForm } from 'src/hooks/useJefeHogarForm'
+
 
 const JefeHogarNuevo = (Props) => {
     const {
@@ -45,7 +46,7 @@ const JefeHogarNuevo = (Props) => {
         orientacion_sexuales,
         cargando,
 
-    } = JegeHogarForm()
+    } = JefeHogarForm()
 
     const {
         Id_conncejo_comunitario,
@@ -114,7 +115,7 @@ const JefeHogarNuevo = (Props) => {
                                                     key={item.ID}
                                                     value={item.ID}
                                                 >
-                                                    {item.Nombre_concejo_comunitario}
+                                                    {item.nombre_concejo_comunitario}
                                                 </option>
                                             ))
                                         )}
@@ -411,17 +412,7 @@ const JefeHogarNuevo = (Props) => {
                         <CRow>
 
                             <CCol md={8} style={{ marginTop: '20px', marginBottom: '20px' }}>
-                                {cargando === true ? (
-                                    <CLoadingButton
-                                        color="success"
-                                        variant="outline"
-                                        style={{ width: '100%' }}
-                                        timeout={2000}
-                                    >
-                                        {' '}
-                                        Enviando Jefe Hogar
-                                    </CLoadingButton>
-                                ) : (
+                           
                                     <CButton
                                         type="submit"
                                         color={'success'}
@@ -431,7 +422,7 @@ const JefeHogarNuevo = (Props) => {
                                         {' '}
                                         {'Enviar Datos Jefe Hogar'}
                                     </CButton>
-                                )}
+                              
                             </CCol>
                             <CCol xs={4} style={{ marginTop: '20px', marginBottom: '20px' }}>
                                 <CButton

@@ -138,7 +138,7 @@ const FormMiembrosActModal = (Props) => {
                           key={item.ID}
                           value={item.ID}
                         >
-                          {item.Nombre_concejo_comunitario}
+                          {item.nombre_concejo_comunitario}
                         </option>
                       ))
                     )}

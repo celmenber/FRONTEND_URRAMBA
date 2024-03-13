@@ -47,6 +47,7 @@ export const MiembroForm = () => {
     const [visibleMI, setVisibleMI] = useState(false)
 
     const [datoMiembro, setDatoMiembro] = useState({
+        Id_usuario:'',
         Id_barrio_vereda: '',
         Id_corregimiento: '',
         Id_tipo_documento: '',
@@ -73,6 +74,7 @@ export const MiembroForm = () => {
     }
     const handleReset = () => {
         setDatoMiembro({
+            Id_usuario:'',
             Id_barrio_vereda: '',
             Id_corregimiento: '',
             Id_tipo_documento: '',
@@ -103,6 +105,7 @@ export const MiembroForm = () => {
         } else {
 
             const formularioDatos = {
+                Id_usuario:"1",
                 Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
                 Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
                 Id_corregimiento: datoMiembro.Id_corregimiento,
@@ -140,6 +143,7 @@ export const MiembroForm = () => {
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({
+            Id_usuario:'1',
             ID: datos[0].ID,
             Id_conncejo_comunitario: datos[0].id_conncejo_comunitario,
             Id_barrio_vereda: datos[0].id_barrio_vereda,
@@ -170,6 +174,7 @@ export const MiembroForm = () => {
             event.stopPropagation();
         } else {
             const formularioDatos = {
+                Id_usuario:"1",
                 Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
                 Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
                 Id_corregimiento: datoMiembro.Id_corregimiento,

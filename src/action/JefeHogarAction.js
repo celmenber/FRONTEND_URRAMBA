@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
-import TYPES from 'src/type/MiembroType';
+
+import TYPES from 'src/type/JefeHogarType';
 import { Axios } from '../config/axios';
 import Swal from 'sweetalert2';
 const {
@@ -28,7 +29,9 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
 
     try {
       // insertar en la API
-      const { data } = await Axios.post('create-jefeHogar', formularioDatos)
+    
+
+      const { data } = await Axios.post('/jefehogar/create-jefehogar', formularioDatos)
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
@@ -77,8 +80,7 @@ export const obtenerJefeHogarAction = () => {
         dispatch(obtenerJefeHogar());
 
         try {
-            
-          const { data } = await Axios.get('/view-jefeHogar');
+          const { data } = await Axios.get('/jefehogar/view-jefehogar');
             if (data.code === 200) {
                 dispatch(obtenerJefeHogarExitosa(data.data))
                 
@@ -113,8 +115,9 @@ export const editarJefeHogarAction = (Datos) => {
     const id = Number(Datos.id);
 
     try {
-                                     
-      const {data} = await Axios.put(`/edit-jefeHogar/${id}`, Datos.formularioDatos);
+     debugger	
+                          
+      const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
       
 
       dispatch(editarJefeHogarExito(data.data.datos));
@@ -154,11 +157,12 @@ export const editarJefeHogarAction = (Datos) => {
 
 
 export const borrarJefeHogarAction = (id) => {
+  debugger
   return async (dispatch) => {
     dispatch(eliminaJefeHogar(id))
 
     try {
-      const { data } = await Axios.delete(`delete-jefeHogar/${id}`)
+       const { data } = await Axios.delete(`/jefehogar/delete-jefehogar/${id}`)
       if (data.code === 200) {
         dispatch(eliminarJefeHogarExito(id))
         // Si se elimina, mostrar alerta
@@ -184,7 +188,7 @@ const eliminaJefeHogar = (Id) => ({
   payload: Id
 });
 
-const eliminarJefeHogarExito = (Id) => ({
+const eliminarJefeHogarExito = () => ({
   type: DELETE_JEFE_HOGAR_SUCCESS,
 });
 

@@ -32,9 +32,10 @@ import {
   cilTrash,
 } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
-import { JegeHogarForm } from 'src/hooks/useJefeHogarForm'
+
 import JefeHogarNuevo from './modal/JefeHogarNuevo'
 import JefeHogarAct from './modal/JefeHogarAct'
+import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 
 
 
@@ -51,8 +52,8 @@ const JefeHogar = () => {
     obtenerJefeHogar,
     obtenerConcejo,
     obtenerEscolaridad,
-    eliminarMiembro,
-    EditaMiembro,
+    eliminarJefeHogar,
+    EditarJefeHogar,
     datoJefeHogar,
     jefeHogar,
     escolaridades,
@@ -64,7 +65,7 @@ const JefeHogar = () => {
     setVisibleMI,
     setValidated,
     cargandolista,
-  } = JegeHogarForm()
+  } = JefeHogarForm()
 
 
   useEffect(() => {
@@ -226,7 +227,7 @@ const JefeHogar = () => {
                                 color="info"
                                 variant="outline"
                                 size="lg"
-                                onClick={() => EditaMiembro(item.ID)}
+                                onClick={() => EditarJefeHogar(item.ID)}
                               >
                                 {'Editar'}
                               </CButton>
@@ -280,7 +281,7 @@ const JefeHogar = () => {
                                 color="danger"
                                 variant="outline"
                                 size="lg"
-                                onClick={() => eliminarMiembro(item.ID)}
+                                onClick={() => eliminarJefeHogar(item.ID)}
                               >
                                 <CIcon icon={cilTrash} size="lg" />
                               </CButton></CTooltip>

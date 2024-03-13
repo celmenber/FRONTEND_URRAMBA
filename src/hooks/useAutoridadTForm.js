@@ -109,7 +109,7 @@ export const AutoridadTForm = () => {
 
             const formularioDatos = {
 
-         
+                    Id_usuario:"1",
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
                     Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
                     Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
@@ -149,6 +149,7 @@ export const AutoridadTForm = () => {
     const datos = autoridadT.filter(C => C.ID === id)
     setVisibleEAT(true)
     setDatoAutoridad({
+      Id_usuario:"1",
       ID: datos[0].ID,
       Idmunicipio: Number(datos[0].id_municipio),
       Idbarriovereda: Number(datos[0].id_barrio_vereda),
@@ -177,6 +178,7 @@ export const AutoridadTForm = () => {
        
     } else {
         const formularioDatos = {
+          Id_usuario:"1",
           Id_municipio: parseInt(datoAutoridad.Idmunicipio),
           Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
           Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),

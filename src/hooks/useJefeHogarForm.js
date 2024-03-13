@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 import { borrarMiembroAction,  obtenerMiembroAction } from 'src/action/MiembroAction';
 import { borrarJefeHogarAction, crearNuevoJefeHogarAction, editarJefeHogarAction, obtenerJefeHogarAction } from 'src/action/JefeHogarAction';
 
-export const JegeHogarForm = () => {
+export const JefeHogarForm = () => {
 
     const dispatch = useDispatch()
     const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
@@ -104,9 +104,11 @@ export const JegeHogarForm = () => {
         } else {
 
             const formularioDatos = {
-                Id_conncejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
+                Id_usuario:"1",
+                Id_concejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
+                Id_municipio:'1',
                 Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
                 Documentos: datoJefeHogar.Documentos,
                 Nombres: datoJefeHogar.Nombres,
@@ -137,13 +139,15 @@ export const JegeHogarForm = () => {
         setValidated(true)
     }
     const EditarJefeHogar = (id) => {
-        debugger
+        
         const datos = jefeHogar.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoJefeHogar({
+            Id_usuario:"1",
             ID: datos[0].ID,
-            Id_conncejo_comunitario: datos[0].id_conncejo_comunitario,
+            Id_concejo_comunitario: datos[0].id_conncejo_comunitario,
             Id_barrio_vereda: datos[0].id_barrio_vereda,
+            Id_municipio:'1',
             Id_corregimiento: datos[0].id_corregimiento,
             Id_tipo_documento: datos[0].id_tipo_documento,
             Documentos: datos[0].documentos,
@@ -164,16 +168,20 @@ export const JegeHogarForm = () => {
     };
     
     const handleSubmitAct = (event) => {
+        
         event.preventDefault();
         const form = event.currentTarget;
     
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
+
             const formularioDatos = {
-                Id_conncejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
+                Id_usuario:"1",
+                Id_concejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
+                Id_municipio:'1',
                 Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
                 Documentos: datoJefeHogar.Documentos,
                 Nombres: datoJefeHogar.Nombres,
