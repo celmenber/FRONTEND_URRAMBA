@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { useState } from 'react'
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerConcejoAction } from 'src/action/ConsejoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
@@ -12,16 +12,23 @@ import {
 }
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
-import { borrarMiembroAction,  obtenerMiembroAction } from 'src/action/MiembroAction';
-import { borrarJefeHogarAction, crearNuevoJefeHogarAction, editarJefeHogarAction, obtenerJefeHogarAction } from 'src/action/JefeHogarAction';
+import { borrarJefeHogarAction,
+     crearNuevoJefeHogarAction, 
+     editarJefeHogarAction, 
+     obtenerJefeHogarAction, 
+     obtenerJefeHogarByIdAction} from 'src/action/JefeHogarAction';
+
 
 export const JefeHogarForm = () => {
+
+    
 
     const dispatch = useDispatch()
     const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
     const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
     const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
     const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction());
+   
     const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
     const obtenerConcejo = () => dispatch(obtenerConcejoAction());
     const obtenerEscolaridad = () => dispatch(obtenerEscolaridadAction());
@@ -38,6 +45,7 @@ export const JefeHogarForm = () => {
     const corregimiento = useSelector(state => state.Parametros.corregimientos);
     const asociacion = useSelector(state => state.Asociacion.asociacionlista);
     const jefeHogar = useSelector(state => state.JefeHogar.listaJefeHogar);
+    const jefeHogarById = useSelector(state => state.JefeHogar.jefeHogar);
     const escolaridades = useSelector(state => state.Parametros.escolaridad)
     const orientacion_sexuales = useSelector(state => state.Parametros.orientacionSexual)
 
@@ -213,6 +221,13 @@ export const JefeHogarForm = () => {
         setVisibleMI(false);
         event.stopPropagation();
     };
+
+    const jefeHogarByID = (id) => {
+        if(id !== null || id !== undefined){
+            dispatch(obtenerJefeHogarByIdAction(id))
+        }
+
+    }
     const eliminarJefeHogar = (id) => {
         const Id = id
         Swal.fire({
@@ -252,6 +267,7 @@ export const JefeHogarForm = () => {
         consejos,
         jefeHogar,
         barrios,
+        jefeHogarByID,
         escolaridades,
         orientacion_sexuales,
         validated,
@@ -262,6 +278,7 @@ export const JefeHogarForm = () => {
         visibleM, setVisibleM,
         visibleMI, setVisibleMI,
         cargandolista,
+        jefeHogarById,
         cargando
     }
 }

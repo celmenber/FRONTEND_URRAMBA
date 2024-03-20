@@ -14,6 +14,9 @@ const {
     OBTENER_JEFE_HOGAR,
     OBTENER_JEFE_HOGAR_SUCCESS,
     OBTENER_JEFE_HOGAR_ERROR,
+    OBTENER_JEFE_HOGAR_BY_ID,
+    OBTENER_JEFE_HOGAR_BY_ID_SUCCESS,
+    OBTENER_JEFE_HOGAR_BY_ID_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
@@ -107,6 +110,37 @@ const obtenerJefeHogarError = (estado) => ({
     payload: estado
 });
 
+
+export const obtenerJefeHogarByIdAction = (id) => {
+  return async (dispatch) => {
+      dispatch(obtenerJefeHogarById());
+      try {
+        const { data } = await Axios.get(`/jefehogar/view-jefehogar/${id}`);
+          if (data.code === 200) {
+              dispatch(obtenerJefeHogarByIdExitosa(data.data))    
+          }
+      } catch (error) {
+          console.log(error);
+          dispatch(obtenerJefeHogarByIdError())
+      }
+  }
+}
+
+const obtenerJefeHogarById = () => ({
+  type: OBTENER_JEFE_HOGAR_BY_ID,
+  payload: true
+});
+
+const obtenerJefeHogarByIdExitosa = id => ({
+  type: OBTENER_JEFE_HOGAR_BY_ID_SUCCESS,
+  payload: id
+})
+
+const obtenerJefeHogarByIdError = (estado) => ({
+  type: OBTENER_JEFE_HOGAR_BY_ID_ERROR,
+  payload: estado
+});
+
 export const editarJefeHogarAction = (Datos) => {
   
   return async (dispatch) => {
@@ -115,7 +149,7 @@ export const editarJefeHogarAction = (Datos) => {
     const id = Number(Datos.id);
 
     try {
-     debugger	
+     	
                           
       const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
       
@@ -157,7 +191,7 @@ export const editarJefeHogarAction = (Datos) => {
 
 
 export const borrarJefeHogarAction = (id) => {
-  debugger
+  
   return async (dispatch) => {
     dispatch(eliminaJefeHogar(id))
 

@@ -15,6 +15,9 @@ const {
     OBTENER_JEFE_HOGAR,
     OBTENER_JEFE_HOGAR_SUCCESS,
     OBTENER_JEFE_HOGAR_ERROR,
+    OBTENER_JEFE_HOGAR_BY_ID,
+    OBTENER_JEFE_HOGAR_BY_ID_SUCCESS,
+    OBTENER_JEFE_HOGAR_BY_ID_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
@@ -23,6 +26,7 @@ const {
 
 const initialState = {
     listaJefeHogar: [],
+    jefeHogar:[],
     loading: false,
     loadinglista: false,
     jefehogareditar: null,
@@ -53,6 +57,17 @@ export const JefeHogarReducer = (state = initialState, action) => {
                 ...state,
                 loadinglista: false,
                 listaJefeHogar: action.payload
+            }
+        case OBTENER_JEFE_HOGAR_BY_ID:
+            return {
+                ...state,
+                loadinglista: action.payload,
+            }
+        case OBTENER_JEFE_HOGAR_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loadinglista: false,
+                jefeHogar: action.payload
             }
     
         case EDITAR_JEFE_HOGAR:
@@ -85,6 +100,7 @@ export const JefeHogarReducer = (state = initialState, action) => {
                   }
         case ADD_JEFE_HOGAR_ERROR:
         case OBTENER_JEFE_HOGAR_ERROR:
+        case OBTENER_JEFE_HOGAR_BY_ID_ERROR:
         case EDITAR_JEFE_HOGAR_ERROR:
         case DELETE_JEFE_HOGAR_ERROR:
             return {

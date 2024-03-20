@@ -1,35 +1,66 @@
 /* eslint-disable prettier/prettier */
-import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+/* eslint-disable no-script-url */
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
+import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
-  CAvatar,
   CButton,
   CCard,
   CCardBody,
   CCardHeader,
   CCardTitle,
   CContainer,
-  CSpinner,
+  CForm,
+  CFormInput,
   CTable,
   CTableBody,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-  CTooltip,
+  CTableDataCell,
+  CAvatar,
 } from '@coreui/react'
-import React from 'react'
-import avatar from 'src/assets/images/avatars/profile-default.jpg'
 
 const NucleoFamiliar = () => {
+  const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
+  const [habilitarAgregar, setHabilitarAgregar] = useState(false)
+  const [tableItems, setTableItems] = useState([])
+  const [formData, setFormData] = useState({ name: '', profile: '', phone: '' })
+
+  const { jefeHogarByID, jefeHogarById } = JefeHogarForm()
+  const { id } = useParams()
+
+  useEffect(() => {
+    if (id) {
+      setMostrarJefeHByID(true)
+      setHabilitarAgregar(false)
+      jefeHogarByID(id)
+    } else {
+      setMostrarJefeHByID(false)
+      setHabilitarAgregar(true)
+    }
+  }, [id])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setTableItems([...tableItems, formData])
+    setFormData({ name: '', profile: '', phone: '' })
+  }
+
   return (
-    <>
-      <CContainer>
-        <CCard>
-          <CCardHeader>
-            <strong>Nucleo Familiar</strong> <small>Miembros</small>
-          </CCardHeader>
-          <CCardHeader>
+    <CContainer>
+      <CCard>
+        <CCardHeader>
+          <strong>Nucleo Familiar</strong> <small>Miembros</small>
+        </CCardHeader>
+        <CCardHeader>
+          {mostrarJefeHByID ? (
             <CCardTitle>
               <div className="d-flex align-items-center">
                 <CAvatar
@@ -39,129 +70,90 @@ const NucleoFamiliar = () => {
                   status={true ? 'success' : 'danger'}
                 />
                 <div className="ml-2">
-                  <strong> {'Jose Pablo Perez Redondo'}</strong>
+                  <strong>
+                    {jefeHogarById?.nombres} {jefeHogarById?.apellidos}
+                  </strong>
                   <div className="small text-medium-emphasis">
-                    <span>{"1.123'406.888"}</span>
+                    <span> Identidad: {jefeHogarById?.documentos}</span>
                   </div>
                 </div>
               </div>
             </CCardTitle>
-          </CCardHeader>
-          <CCardBody>
-            <CCardTitle>Miebros del nucleo Familiar</CCardTitle>
-            <CCardBody>
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>Usuarios</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Perfil</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Teléfono</CTableHeaderCell>
-                    <CTableHeaderCell colSpan={3} className="text-center">
-                      Acciones
-                    </CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {false ? (
-                    <CTableRow key={0}>
-                      <CTableHeaderCell colSpan={8} className="text-center">
-                        <CSpinner aria-hidden="true" />
-                        <span
-                          style={{
-                            top: '-10px',
-                            position: 'relative',
-                          }}
-                        >
-                          {' '}
-                          Loading...
-                        </span>
-                      </CTableHeaderCell>
-                    </CTableRow>
-                  ) : (
-                    <CTableRow v-for="item in tableItems">
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={avatar} status={false ? 'success' : 'danger'} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>
-                          <span>
-                            {' '}
-                            <strong>{'Juan Pablo Perez Redondo'}</strong>
-                          </span>
-                        </div>
-                        <div className="small text-medium-emphasis">
-                          <span>{"1.123'406.888"}</span>
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div>{'Admin'}</div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div className="small text-medium-emphasis">{'555 55 55'}</div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div className="small text-medium-emphasis">
-                          <CTooltip content="Bloquear Asociación" placement="bottom">
-                            {true ? (
-                              <CButton variant="" color="success" size="sm" className="btn-uniform">
-                                <CIcon size="xl" icon={cilLockLocked} />
-                              </CButton>
-                            ) : (
-                              <CButton
-                                variant="outline"
-                                color="warning"
-                                size="sm"
-                                className="btn-uniform"
-                              >
-                                <CIcon size="md" icon={cilLockUnlocked} />
-                              </CButton>
-                            )}
-                          </CTooltip>
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div className="small text-medium-emphasis">
-                          <CTooltip content="Editar Asociación" placement="bottom">
-                            <CButton
-                              /* style={{ width: '100%' }} */
-                              color="info"
-                              variant="outline"
-                              size="xl"
-                              /* onClick={() => EliminarConvenio(item.IdConvenio)} */
-                            >
-                              Editar
-                            </CButton>
-                          </CTooltip>
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <div className="small text-medium-emphasis">
-                          <CTooltip content="Eliminar Asociación" placement="bottom">
-                            <CButton
-                              /* style={{ width: '100%' }} */
-                              color="danger"
-                              variant="outline"
-                              size="xl"
-                              /* onClick={() => EliminarUsuarios()} */
-                              /* onClick={() => EliminarConvenio(item.IdConvenio)} */
-                            >
-                              <CIcon icon={cilTrash} size="lg" />
-                            </CButton>
-                          </CTooltip>
-                        </div>
-                      </CTableDataCell>
-                    </CTableRow>
-                  )}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCardBody>
-        </CCard>
-      </CContainer>
-    </>
+          ) : (
+            <CCardTitle>
+              <div className="ml-2">
+                <CButton>BUSCAR JEFE HOGAR</CButton>
+              </div>
+            </CCardTitle>
+          )}
+        </CCardHeader>
+        <CCardBody>
+          <CCardTitle>Miembros del núcleo Familiar</CCardTitle>
+          <CForm onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-md-4">
+                <CFormInput
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Nombre"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="col-md-4">
+                <CFormInput
+                  type="text"
+                  id="profile"
+                  name="profile"
+                  placeholder="Perfil"
+                  value={formData.profile}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="col-md-4">
+                <CFormInput
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  placeholder="Teléfono"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+            <br/>
+            <CButton type="submit"   color={'primary'}
+                  variant="outline"
+                  className="px-4"
+                  disabled ={habilitarAgregar}
+                  style={{ width: '100%' }}>Agregar</CButton>
+          </CForm>
+          <CTable>
+            <CTableHead>
+              <CTableRow>
+                <CTableHeaderCell>Nombre</CTableHeaderCell>
+                <CTableHeaderCell>Perfil</CTableHeaderCell>
+                <CTableHeaderCell>Teléfono</CTableHeaderCell>
+              </CTableRow>
+            </CTableHead>
+            <CTableBody>
+              {tableItems.map((item, index) => (
+                <CTableRow key={index}>
+                  <CTableDataCell>{item.name}</CTableDataCell>
+                  <CTableDataCell>{item.profile}</CTableDataCell>
+                  <CTableDataCell>{item.phone}</CTableDataCell>
+                </CTableRow>
+              ))}
+            </CTableBody>
+          </CTable>
+        </CCardBody>
+      </CCard>
+    </CContainer>
   )
 }
+
 export default NucleoFamiliar

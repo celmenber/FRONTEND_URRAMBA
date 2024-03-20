@@ -30,21 +30,19 @@ import {
   cilLockUnlocked,
   cilPeople,
   cilTrash,
+  cilArrowThickFromLeft,
 } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
 
 import JefeHogarNuevo from './modal/JefeHogarNuevo'
 import JefeHogarAct from './modal/JefeHogarAct'
 import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
-
-
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const JefeHogar = () => {
-  
-
-  const [selectServicio] = useState(1);
+   const [selectServicio] = useState(1);
   const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
+  const history = useHistory();
 
   const {
     onChangeFormulario,
@@ -67,7 +65,6 @@ const JefeHogar = () => {
     cargandolista,
   } = JefeHogarForm()
 
-
   useEffect(() => {
     obtenerConcejo();
     obtenerJefeHogar(); 
@@ -77,20 +74,16 @@ const JefeHogar = () => {
       // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{
-    
-   
+  useEffect(()=>{  
     obtenerNombre();
     setVisibleM(false)
    // eslint-disable-next-line
   },[jefeHogar])
 
- 
-
   const obtenerNombre = () => {
     
-    const jefeHogarConOrientacionSexual = jefeHogar.map(orientacion => {
-      const orientacionSexuales = orientacion_sexuales?.find(item => item.ID === orientacion.id_orientacion_sexual)
+    const jefeHogarConOrientacionSexual = jefeHogar?.map(orientacion => {
+      const orientacionSexuales = orientacion_sexuales?.find(item => item?.ID === orientacion?.id_orientacion_sexual)
       const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
       return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
   
@@ -105,6 +98,10 @@ const JefeHogar = () => {
     setNombreEscolaridad(jefeHogarConEscolaridad);
   }
 
+  const idJefeHogar = (id) => {
+
+    history.push(`/familias/nucleos/${id}`);
+  }
 
   return (
     <CRow>
@@ -139,9 +136,7 @@ const JefeHogar = () => {
                       <CIcon icon={cilPeople} />
                     </CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} >Datos Jefe de Hogar</CTableHeaderCell>
-                    {/* <CTableHeaderCell colSpan={2} className="text-center">Consejo</CTableHeaderCell> */}
                     <CTableHeaderCell colSpan={1} className="text-center">Escolaridad</CTableHeaderCell>
-                    
                     <CTableHeaderCell colSpan={1} className="text-center">Genero</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Ubicación</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
@@ -199,12 +194,6 @@ const JefeHogar = () => {
                         </CTableDataCell>
                        
 
-                        {/* <CTableDataCell>
-                          <div className="small text-medium-emphasis">Municipio/Ciudad</div>
-                          <strong>{
-                            item.municipio
-                          }</strong>
-                        </CTableDataCell> */}
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
                           <span>
@@ -257,9 +246,7 @@ const JefeHogar = () => {
                                   color={item.estado === '1' ? 'success' : 'secondary'}
                                   style={{ 'width': '100%' }}
                                   id={`estado${1}`}
-                                // key={item.IdConvenio}
-                                //onClick={() => handleSelectEst(item.IdConvenio)}
-                                >
+                                 >
                                   {item.estado === '1'
                                     ? <CIcon icon={cilLockUnlocked} size="lg" />
                                     : <CIcon icon={cilLockLocked} size="lg" />
@@ -284,6 +271,22 @@ const JefeHogar = () => {
                                 onClick={() => eliminarJefeHogar(item.ID)}
                               >
                                 <CIcon icon={cilTrash} size="lg" />
+                              </CButton></CTooltip>
+                          </div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Ir Nucleo Filia"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="primary"
+                                variant="outline"
+                                size="lg"
+                                onClick={() => idJefeHogar(item.ID)}
+                              >
+                                <CIcon icon={cilArrowThickFromLeft} size="lg" />
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>

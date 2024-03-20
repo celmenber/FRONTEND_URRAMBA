@@ -18,7 +18,7 @@ const routes = [
   { path: '/reportes', name: 'Reportes', component: Reportes },
   { path: '/admin/autoridadT', name: 'AutoridadT', component: AutoridadT },
   { path: '/familias/jefehogar', name: 'JefeHogar', component: JefeHogar },
-  { path: '/familias/nucleos', name: 'Nucleo', component: NucleoFamiliar },
+  { path: '/familias/nucleos/:id?', name: 'Nucleo', component: NucleoFamiliar },
   { path: '/familias/nucleo', name: 'Nucleo', component: NucleoFamiliar },
   { path: '/admin/usuarios', name: 'Usuarios', component: Usuarios },
   { path: '/admin/concejos', name: 'Concejos', component: Concejos },

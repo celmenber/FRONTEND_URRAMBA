@@ -34,7 +34,10 @@ import {
   cilPeople,
 } from '@coreui/icons'
 
+
 const NucleosFamiliares = () => {
+
+
   const tableExample = [
     {
       avatar: { src: avatar, status: 'success' },
