@@ -56,6 +56,7 @@ export const JefeHogarForm = () => {
     const [visibleMI, setVisibleMI] = useState(false)
 
     const [datoJefeHogar, setDatoJefeHogar] = useState({
+        Id_concejo_comunitario:'',
         Id_barrio_vereda: '',
         Id_corregimiento: '',
         Id_tipo_documento: '',
@@ -82,6 +83,7 @@ export const JefeHogarForm = () => {
     }
     const handleReset = () => {
         setDatoJefeHogar({
+            Id_concejo_comunitario:'',
             Id_barrio_vereda: '',
             Id_corregimiento: '',
             Id_tipo_documento: '',
@@ -113,7 +115,7 @@ export const JefeHogarForm = () => {
 
             const formularioDatos = {
                 Id_usuario:"1",
-                Id_concejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
+                Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
                 Id_municipio:'1',
@@ -153,7 +155,7 @@ export const JefeHogarForm = () => {
         setDatoJefeHogar({
             Id_usuario:"1",
             ID: datos[0].ID,
-            Id_concejo_comunitario: datos[0].id_conncejo_comunitario,
+            Id_concejo_comunitario: datos[0].id_concejo_comunitario,
             Id_barrio_vereda: datos[0].id_barrio_vereda,
             Id_municipio:'1',
             Id_corregimiento: datos[0].id_corregimiento,
@@ -186,7 +188,7 @@ export const JefeHogarForm = () => {
 
             const formularioDatos = {
                 Id_usuario:"1",
-                Id_concejo_comunitario: datoJefeHogar.Id_conncejo_comunitario,
+                Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
                 Id_municipio:'1',

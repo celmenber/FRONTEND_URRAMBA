@@ -11,6 +11,7 @@ import {
   ConcejoReducer,
   MiemboReducer,
   JefeHogarReducer,
+  NucleoFamiliarReducer,
   } from './reducers'
 
 
@@ -25,4 +26,5 @@ export const rootReducer = combineReducers({
   Concejo: ConcejoReducer,
   Miembro: MiemboReducer,
   JefeHogar: JefeHogarReducer,
+  NucleoFamiliar: NucleoFamiliarReducer,
 })

@@ -108,13 +108,13 @@ const obtenerAutoridadTError = () => ({
 // ***************** Seleccion editar el AutoridadT //****************/
 
 export const editarAutoridadTAction = (Datos) => {
-  debugger
+  
     return async (dispatch) => {
         dispatch(editarAutoridadT());
         console.log(Datos)
         const { id } = Datos
         try {
-          debugger
+          
 
           const {data} = await Axios.put(`/autoridatradicional/edit-autoridatradicional/${id}`, Datos.formularioDatos);
       

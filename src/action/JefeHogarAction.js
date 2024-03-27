@@ -154,7 +154,7 @@ export const editarJefeHogarAction = (Datos) => {
       const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
       
 
-      dispatch(editarJefeHogarExito(data.data.datos));
+      dispatch(editarJefeHogarExito(data.data.datos[0]));
 
       if (data.code === 200) {
         Swal.fire(

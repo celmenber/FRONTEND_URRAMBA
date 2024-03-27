@@ -51,7 +51,7 @@ const {
   } = JefeHogarForm()
 
 const {
-  Id_conncejo_comunitario,
+  Id_concejo_comunitario,
   Id_barrio_vereda,
   Id_corregimiento,
   Id_tipo_documento,
@@ -100,8 +100,8 @@ return (
           <CFormLabel htmlFor="validationCustom01">Consejo Comunitario*</CFormLabel>
           <CFormSelect
             id="validationCustom01"
-            name='Id_conncejo_comunitario'
-            value={Id_conncejo_comunitario}
+            name='Id_concejo_comunitario'
+            value={Id_concejo_comunitario}
             onChange={onChangeFormulario}
             required>
             <option key={'0'} value={''}>Seleccione...</option>

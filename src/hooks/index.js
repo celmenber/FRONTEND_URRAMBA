@@ -7,3 +7,6 @@ export * from './useEmpleadoForm';
 export * from './useConcejoForm';
 export * from './useAutoridadTForm';
 export * from './useMiembroForm';
+export * from './useJefeHogarForm';
+export * from './useNucleoFamiliarForm';
+

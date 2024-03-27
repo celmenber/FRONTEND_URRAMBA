@@ -142,7 +142,7 @@ export const EmpleadoForm = () => {
 
 
   const   handleSubmitAct = (event) => {
-    debugger
+    
     event.preventDefault();
         const form = event.currentTarget;
     

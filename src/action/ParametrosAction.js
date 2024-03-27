@@ -20,7 +20,10 @@ const {
   OBTENER_ESCOLARIDAD_ERROR,
   OBTENER_ORIENTACION_SEXUAL,
   OBTENER_ORIENTACION_SEXUAL_SUCCESS,
-  OBTENER_ORIENTACION_SEXUAL_ERROR
+  OBTENER_ORIENTACION_SEXUAL_ERROR,
+  OBTENER_PARENTESCO,
+  OBTENER_PARENTESCO_SUCCESS,
+  OBTENER_PARENTESCO_ERROR,
 } = TYPES
 
 // procedimiento obtener listado dato municipio
@@ -213,6 +216,38 @@ const obtenerOrientacionSexualError = () => ({
   type: OBTENER_ORIENTACION_SEXUAL_ERROR,
   payload: true,
 })
+
+
+  export const obtenerParentescoAction = () => {
+    return async (dispatch) => {
+      dispatch(ObtenerParentesco())
+
+      try {
+        const { data } = await Axios.get('/parametros/view-parentesco')
+        if (data.code === 200) {
+          dispatch(obtenerParentescoExitosa(data.data))
+        }
+      } catch (error) {
+        console.log(error)
+        dispatch(obtenerParentescoError())
+      }
+    }
+  }
+
+  const ObtenerParentesco = () => ({
+    type: OBTENER_PARENTESCO,
+    payload: true,
+  })
+
+  const obtenerParentescoExitosa = (datos) => ({
+    type: OBTENER_PARENTESCO_SUCCESS,
+    payload: datos,
+  })
+
+  const obtenerParentescoError = () => ({
+    type: OBTENER_PARENTESCO_ERROR,
+    payload: true,
+  })
 
 
 

@@ -145,7 +145,7 @@ export const AutoridadTForm = () => {
 
     // función que redirige Edita ContactoAsunto
   const EditarAutoridad = (id) => {
-    debugger
+    
     const datos = autoridadT.filter(C => C.ID === id)
     setVisibleEAT(true)
     setDatoAutoridad({

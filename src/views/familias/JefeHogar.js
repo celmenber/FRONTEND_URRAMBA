@@ -77,6 +77,7 @@ const JefeHogar = () => {
   useEffect(()=>{  
     obtenerNombre();
     setVisibleM(false)
+    console.log({jefeHogar})
    // eslint-disable-next-line
   },[jefeHogar])
 
@@ -139,7 +140,7 @@ const JefeHogar = () => {
                     <CTableHeaderCell colSpan={1} className="text-center">Escolaridad</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Genero</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Ubicación</CTableHeaderCell>
-                    <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={4} className="text-center">Acciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -274,22 +275,25 @@ const JefeHogar = () => {
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip
-                              content="Ir Nucleo Filia"
-                              placement="bottom"
-                            >
-                              <CButton style={{ 'width': '100%' }}
-                                color="primary"
-                                variant="outline"
-                                size="lg"
-                                onClick={() => idJefeHogar(item.ID)}
+                        {
+                          item.estado === "0" ? '' : <CTableDataCell>
+                            <div className="small text-medium-emphasis">
+                              <CTooltip
+                                content="Ir Nucleo Filia"
+                                placement="bottom"
                               >
-                                <CIcon icon={cilArrowThickFromLeft} size="lg" />
-                              </CButton></CTooltip>
-                          </div>
-                        </CTableDataCell>
+                                <CButton style={{ 'width': '100%' }}
+                                  color="primary"
+                                  variant="outline"
+                                  size="lg"
+                                  onClick={() => idJefeHogar(item.ID)}
+                                >
+                                  <CIcon icon={cilArrowThickFromLeft} size="lg" />
+                                </CButton></CTooltip>
+                            </div>
+                          </CTableDataCell>
+                        }
+                        
                       </CTableRow>
                     ))
                   )}

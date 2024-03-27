@@ -21,6 +21,9 @@ const {
       OBTENER_ORIENTACION_SEXUAL,
       OBTENER_ORIENTACION_SEXUAL_SUCCESS,
       OBTENER_ORIENTACION_SEXUAL_ERROR,
+      OBTENER_PARENTESCO,
+      OBTENER_PARENTESCO_SUCCESS,
+      OBTENER_PARENTESCO_ERROR,
    } = TYPES
 
 // cada reducer tiene su propio state
@@ -104,6 +107,19 @@ export const ParametrosReducer = (state = initialState, action) => {
             loadinglista: false,
             orientacionSexual: action.payload
           }
+        case OBTENER_PARENTESCO:{
+          return {
+            ...state,
+            loadinglista: action.payload,
+          }
+        }
+        case OBTENER_PARENTESCO_SUCCESS:{
+          return {
+            ...state,
+            loadinglista: false,
+            parentesco: action.payload
+          }
+        }
 
     case OBTENER_MUNICIPIO_ERROR:
     case OBTENER_BARRIOVEREDA_ERROR:
@@ -111,6 +127,7 @@ export const ParametrosReducer = (state = initialState, action) => {
     case OBTENER_CORREGIMIENTO_ERROR:
     case OBTENER_ESCOLARIDAD_ERROR:
     case OBTENER_ORIENTACION_SEXUAL_ERROR: 
+    case OBTENER_PARENTESCO_ERROR:
       return {
         ...state,
         loading: false,
