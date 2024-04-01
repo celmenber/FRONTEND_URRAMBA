@@ -81,8 +81,8 @@ export const obtenerNucleoFamiliarAction = () => {
         dispatch(obtenerNucleoFamiliar());
 
         try {
-            // https://urramba.cehim.co/api/nucleofamiiar/view-nucleofamiiar			
-          const { data } = await Axios.get('/jefehogar/view-jefehogar');
+          		
+          const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar');
             if (data.code === 200) {
                 dispatch(obtenerNucleoFamiliarExistosa(data.data))
                 

@@ -75,11 +75,12 @@ const JefeHogar = () => {
   }, []);
 
   useEffect(()=>{  
+    
     obtenerNombre();
     setVisibleM(false)
     console.log({jefeHogar})
    // eslint-disable-next-line
-  },[jefeHogar])
+  },[jefeHogar,  ])
 
   const obtenerNombre = () => {
     
@@ -275,8 +276,10 @@ const JefeHogar = () => {
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>
+                        {console.log('ver estado',item.estado)}
                         {
-                          item.estado === "0" ? '' : <CTableDataCell>
+                          item.estado === "0" ||  item.estado === undefined  ? '' : 
+                          <CTableDataCell>
                             <div className="small text-medium-emphasis">
                               <CTooltip
                                 content="Ir Nucleo Filia"

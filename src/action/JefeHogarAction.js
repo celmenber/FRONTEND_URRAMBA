@@ -38,7 +38,7 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
-      dispatch(agregarJefeHogarExito(datos))
+      dispatch(agregarJefeHogarExito(datos[0]))
 
       if (data.success === true) {
         Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
