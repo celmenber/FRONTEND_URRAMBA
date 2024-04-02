@@ -183,7 +183,9 @@ export const JefeHogarForm = () => {
         const form = event.currentTarget;
     
         if (form.checkValidity() === false) {
-            event.stopPropagation();
+            event.preventDefault()
+            event.stopPropagation()
+           
         } else {
 
             const formularioDatos = {
@@ -211,17 +213,21 @@ export const JefeHogarForm = () => {
     
             // Asumo que actulizarMiembro es una función que realiza la actualización
             // No tengo su implementación, así que debes ajustarlo según tu código real
-            if (!valedita) {
+            if (valedita === false) {
                 actulizarJefeHogar({
                     formularioDatos,
                     id: datoJefeHogar.ID,
                     handleReset,
                 });
             }
+            setVisibleMI(false)
+            event.stopPropagation()
+
+         
+           
         }
+     setValidated(true)
     
-        setVisibleMI(false);
-        event.stopPropagation();
     };
 
     const jefeHogarByID = (id) => {

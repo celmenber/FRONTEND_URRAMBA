@@ -35,10 +35,10 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
     
 
       const { data } = await Axios.post('/jefehogar/create-jefehogar', formularioDatos)
-
+      
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
-      dispatch(agregarJefeHogarExito(datos[0]))
+      dispatch(agregarJefeHogarExito(datos))
 
       if (data.success === true) {
         Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
@@ -154,7 +154,7 @@ export const editarJefeHogarAction = (Datos) => {
       const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
       
 
-      dispatch(editarJefeHogarExito(data.data.datos[0]));
+      dispatch(editarJefeHogarExito(data.data.datos));
 
       if (data.code === 200) {
         Swal.fire(

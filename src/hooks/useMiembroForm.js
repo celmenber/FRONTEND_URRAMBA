@@ -96,7 +96,7 @@ export const MiembroForm = () => {
         setValedita(false)
     };
     const handleSubmit = (event) => {
-      
+      debugger
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {

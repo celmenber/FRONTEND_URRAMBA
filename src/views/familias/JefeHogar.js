@@ -63,6 +63,7 @@ const JefeHogar = () => {
     setVisibleMI,
     setValidated,
     cargandolista,
+    validated,
   } = JefeHogarForm()
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const JefeHogar = () => {
     
     obtenerNombre();
     setVisibleM(false)
-    console.log({jefeHogar})
+   
    // eslint-disable-next-line
   },[jefeHogar,  ])
 
@@ -227,7 +228,7 @@ const JefeHogar = () => {
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
-                          {console.log({selectServicio})}
+                         
                             <CTooltip
                               content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
                               placement="bottom"
@@ -276,7 +277,7 @@ const JefeHogar = () => {
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>
-                        {console.log('ver estado',item.estado)}
+                      
                         {
                           item.estado === "0" ||  item.estado === undefined  ? '' : 
                           <CTableDataCell>
@@ -318,6 +319,7 @@ const JefeHogar = () => {
         onChangeFormulario={onChangeFormulario}
         handleSubmitAct = {handleSubmitAct}
         setValidated = {setValidated}
+        validated = {validated}
       />
     </CRow>
   )

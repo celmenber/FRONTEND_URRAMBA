@@ -31,9 +31,10 @@ const {
   datoJefeHogar,
   onChangeFormulario,
   handleSubmitAct,
+  validated,
 } = Props
 const {
-  validated,
+
   handleReset,
   obtenerAsociacion,
   obtenerEscolaridad,
@@ -80,8 +81,11 @@ useEffect(() => {
   obtenerEscolaridad();
   obtenerOrientacionSexual();
   obtenerBarrioVereda();
+  
   // eslint-disable-next-line
 }, []);
+
+console.log({validated})
 
 return (
   <>

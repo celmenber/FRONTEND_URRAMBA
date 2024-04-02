@@ -33,6 +33,7 @@ const NucleoFamiliar = () => {
   const [selectServicio] = useState(1);
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [habilitarAgregar, setHabilitarAgregar] = useState(false)
+  const [nuevoJefeDeHogar, setNuevoJefeDeHogar] = useState([])
   
   const [formData, setFormData] = useState({  
     Id_jefe_hogar:'',
@@ -101,17 +102,21 @@ const NucleoFamiliar = () => {
   }, []);
 
   useEffect(() => {
+    debugger
     if (id) {
       
       setMostrarJefeHByID(true)
       setHabilitarAgregar(false)
       jefeHogarByID(id)
       console.log({jefeHogarById})
+      setNuevoJefeDeHogar([jefeHogarById])
     } else {
       setMostrarJefeHByID(false)
       setHabilitarAgregar(true)
     }
   }, [id])
+
+  
 
   // const onChangeFormulario = (e) => {
   //   const { Id_tipo_documento, value } = e.target
@@ -149,7 +154,7 @@ const NucleoFamiliar = () => {
                 />
                 <div className="ml-2">
                   {
-                    jefeHogarById?.map(option => (
+                    nuevoJefeDeHogar?.map(option => (
                     <>
                     <strong>
                         {option?.nombres} {option?.apellidos}
