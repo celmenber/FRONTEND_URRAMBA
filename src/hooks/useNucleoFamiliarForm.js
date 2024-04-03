@@ -13,7 +13,10 @@ import {
 }
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
-import { borrarNucleoFamiliarAction, crearNuevoNucleoFamiliarAction, editarNucleoFamiliarAction, obtenerNucleoFamiliarAction } from 'src/action/NucleoFamiliarAction';
+import { borrarNucleoFamiliarAction, 
+    crearNuevoNucleoFamiliarAction, 
+    editarNucleoFamiliarAction, 
+    obtenerNucleoFamiliarAction } from 'src/action/NucleoFamiliarAction';
 
 
 export const NucleoFamiliarForm = () => {
@@ -40,7 +43,7 @@ export const NucleoFamiliarForm = () => {
     const parentesco = useSelector((state) => state.Parametros.parentesco)
     const corregimiento = useSelector(state => state.Parametros.corregimientos);
     const asociacion = useSelector(state => state.Asociacion.asociacionlista);
-    const nucleoFamiliar = useSelector(state => state.NucleoFamiliar.listaMiembro);
+    const nucleoFamiliar = useSelector(state => state.NucleoFamiliar.listarNucleoFamiliar);
     const escolaridades = useSelector(state => state.Parametros.escolaridad)
     const orientacion_sexuales = useSelector(state => state.Parametros.orientacionSexual)
 
@@ -49,6 +52,9 @@ export const NucleoFamiliarForm = () => {
     const [selectActivar, setSelectActivar] = useState(false);
     const [visibleM, setVisibleM] = useState(false)
     const [visibleMI, setVisibleMI] = useState(false)
+    const [idJefeHogar, setIdJefeHogar] = useState('')
+    const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Nucleo Familiar'))
+    
 
     const [datoNucleoFamiliar, setDatoNucleoFamiliar] = useState({
         Id_jefe_hogar: '',
@@ -65,7 +71,7 @@ export const NucleoFamiliarForm = () => {
         Fecha_nacimiento: new Date()
     })
 
-    const onChangeFormulario = e => {
+    const onChangeFormulario = (e) => {
         setDatoNucleoFamiliar({
             ...datoNucleoFamiliar, [e.target.name]: e.target.value
         })
@@ -88,137 +94,102 @@ export const NucleoFamiliarForm = () => {
         setValedita(false)
     };
     const handleSubmit = (event) => {
-      
+
         event.preventDefault();
+        setValidated(true)
         const form = event.currentTarget
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
         } else {
-
             const formularioDatos = {
-                Id_usuario:"1",
-                Id_jefe_hogar: '',
-                Id_parentesco: '',
-                Id_tipo_documento:'',
-                Id_escolaridad:'',
-                Id_orientacion_sexual: '',
-                Documentos:'',
-                Nombres:'',
-                Apellidos:'',
-                Estado_escolaridad:'',
-                Sexo:'',
-                Genero:'',
-                Fecha_nacimiento: new Date()
+                Id_usuario: "1",
+                Id_jefe_hogar: idJefeHogar,
+                Id_parentesco: datoNucleoFamiliar.Id_parentesco,
+                Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
+                Id_escolaridad: datoNucleoFamiliar.Id_escolaridad,
+                Id_orientacion_sexual: datoNucleoFamiliar.Id_orientacion_sexual,
+                Documentos: datoNucleoFamiliar.Documentos,
+                Nombres: datoNucleoFamiliar.Nombres,
+                Apellidos: datoNucleoFamiliar.Apellidos,
+                Estado_escolaridad: datoNucleoFamiliar.Estado_escolaridad,
+                Sexo: datoNucleoFamiliar.Sexo,
+                Genero: datoNucleoFamiliar.Genero,
+                Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento
             }
+            if (Object.values(formularioDatos).some(value => !value)) {
+                setValidated(true)
 
-            if (valedita === false) {
-                crearNucleoFamiliar({
-                    formularioDatos,
-                    handleReset
-                })
+            } else{
+                    setValidated(false)
+                    crearNucleoFamiliar({
+                        formularioDatos,
+                    }).then(() => {
+                        handleReset();
+                    })
+                    obtenerNucleoFamiliar()
+                }
+
             }
-            setVisibleM(false)
-            event.stopPropagation()
         }
-   
-        setValidated(true)
-    }
-    const EditaMiembro = (id) => {
-        
-        const datos = nucleoFamiliar.filter((C) => C.ID === id);
-        setVisibleMI(true);
-        setDatoNucleoFamiliar({
-            Id_usuario:'1',
-            Id_jefe_hogar: '',
-            Id_parentesco: '',
-            Id_tipo_documento:'',
-            Id_escolaridad:'',
-            Id_orientacion_sexual: '',
-            Documentos:'',
-            Nombres:'',
-            Apellidos:'',
-            Estado_escolaridad:'',
-            Sexo:'',
-            Genero:'',
-            Fecha_nacimiento: new Date()
 
-
-            // ID: datos[0].ID,
-            // Id_conncejo_comunitario: datos[0].id_conncejo_comunitario,
-            // Id_barrio_vereda: datos[0].id_barrio_vereda,
-            // Id_corregimiento: datos[0].id_corregimiento,
-            // Id_tipo_documento: datos[0].id_tipo_documento,
-            // Documentos: datos[0].documentos,
-            // Nombres: datos[0].nombres,
-            // Apellidos: datos[0].apellidos,
-            // Sexo: datos[0].sexo,
-            // Id_escolaridad: datos[0].id_escolaridad,
-            // Estado_escolaridad: datos[0].estado_escolaridad,
-            // Genero: datos[0].genero,
-            // Id_orientacion_sexual: Number(datos[0].id_orientacion_sexual),
-            // Direccion: datos[0].direccion,
-            // Telefono: datos[0].telefono,
-            // Correo: datos[0].correo,
-            // Estado: datos[0].estado,
-            // Fecha_nacimiento: datos[0].fecha_nacimiento,
-            // Fecha_ingreso: datos[0].fecha_ingreso,
-        });
-    };
     
     const handleSubmitAct = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
     
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-        } else {
-            const formularioDatos = {
-                Id_usuario:"1",
-                Id_jefe_hogar: '',
-                Id_parentesco: '',
-                Id_tipo_documento:'',
-                Id_escolaridad:'',
-                Id_orientacion_sexual: '',
-                Documentos:'',
-                Nombres:'',
-                Apellidos:'',
-                Estado_escolaridad:'',
-                Sexo:'',
-                Genero:'',
-                Fecha_nacimiento: new Date()
-                // Id_conncejo_comunitario: datoNucleoFamiliar.Id_conncejo_comunitario,
-                // Id_barrio_vereda: datoNucleoFamiliar.Id_barrio_vereda,
-                // Id_corregimiento: datoNucleoFamiliar.Id_corregimiento,
-                // Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
-                // Documentos: datoNucleoFamiliar.Documentos,
-                // Nombres: datoNucleoFamiliar.Nombres,
-                // Apellidos: datoNucleoFamiliar.Apellidos,
-                // Sexo: datoNucleoFamiliar.Sexo,
-                // Id_escolaridad: datoNucleoFamiliar.Id_escolaridad,
-                // Estado_escolaridad: datoNucleoFamiliar.Estado_escolaridad,
-                // Genero: datoNucleoFamiliar.Genero,
-                // Id_orientacion_sexual: datoNucleoFamiliar.Id_orientacion_sexual,
-                // Direccion: datoNucleoFamiliar.Direccion,
-                // Telefono: datoNucleoFamiliar.Telefono,
-                // Correo: datoNucleoFamiliar.Correo,
-                // Estado: Number(datoNucleoFamiliar.Estado),
-                // Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento,
-                // Fecha_ingreso: datoNucleoFamiliar.Fecha_ingreso,
-            };
+        // Obtener los campos del formulario
+        const formularioDatos = {
+            Id_usuario: "1",
+            Id_jefe_hogar: idJefeHogar,
+            Id_parentesco: datoNucleoFamiliar.Id_parentesco,
+            Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
+            Id_escolaridad: datoNucleoFamiliar.Id_escolaridad,
+            Id_orientacion_sexual: datoNucleoFamiliar.Id_orientacion_sexual,
+            Documentos: datoNucleoFamiliar.Documentos,
+            Nombres: datoNucleoFamiliar.Nombres,
+            Apellidos: datoNucleoFamiliar.Apellidos,
+            Estado_escolaridad: datoNucleoFamiliar.Estado_escolaridad,
+            Sexo: datoNucleoFamiliar.Sexo,
+            Genero: datoNucleoFamiliar.Genero,
+            Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento
+        };
     
-            // Asumo que actualizarNucleoFamiliar es una función que realiza la actualización
-            // No tengo su implementación, así que debes ajustarlo según tu código real
-            if (!valedita) {
-                actualizarNucleoFamiliar({
-                    formularioDatos,
-                    id: datoNucleoFamiliar.ID,
-                    handleReset,
-                });
-            }
+        // Verificar si hay campos vacíos o no válidos
+        const camposInvalidos = Object.keys(formularioDatos).some((key) => {
+          const input = form[key];
+          return input && input.required && !input.checkValidity();
+        });
+    
+        if (camposInvalidos) {
+          // Hay campos vacíos o no válidos
+          setValidated(true);
+        } else {
+          // No hay campos vacíos o no válidos
+          setValidated(false);
+    
+          // Verificar si algún campo está vacío
+          const camposVacios = Object.values(formularioDatos).some(value => value === '');
+    
+          if (camposVacios) {
+            // Hay campos vacíos
+            setValidated(true);
+          } else {
+            // No hay campos vacíos
+            setValidated(false);
+    
+            // Llamas a la acción de actualizar y esperas a que termine
+            actualizarNucleoFamiliar({
+              formularioDatos,
+             
+            }).then(() => {
+              setNombreBotoGuardarActulizar('Agregar Nuevo Nucleo Familiar');
+              dispatch(obtenerNucleoFamiliar());
+              handleReset();
+            });
+          }
         }
     
-        setVisibleMI(false);
         event.stopPropagation();
     };
     const eliminarMiembro = (id) => {
@@ -254,7 +225,6 @@ export const NucleoFamiliarForm = () => {
         obtenerEscolaridad,
         obtenerOrientacionSexual,
         eliminarMiembro,
-        EditaMiembro,
         asociacion,
         tipodocumento,
         corregimiento,
@@ -272,6 +242,9 @@ export const NucleoFamiliarForm = () => {
         visibleM, setVisibleM,
         visibleMI, setVisibleMI,
         cargandolista,
-        cargando
+        cargando,
+        setIdJefeHogar,
+        setNombreBotoGuardarActulizar,
+        nombreBotoGuardarActulizar
     }
 }

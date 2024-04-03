@@ -30,16 +30,15 @@ export const crearNuevoNucleoFamiliarAction = (Dataform) => {
 
     try {
       // insertar en la API
-    
-
-      const { data } = await Axios.post('/jefehogar/create-jefehogar', formularioDatos)
+      
+      const { data } = await Axios.post('/nucleofamiiar/create-nucleofamiiar', formularioDatos)
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
       dispatch(agregarNucleoFamiliarExito(datos))
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
+        Swal.fire('Correcto', 'El Familiar se agrego correctamente', 'success')
         
       }
     } catch (error) {
@@ -81,8 +80,10 @@ export const obtenerNucleoFamiliarAction = () => {
         dispatch(obtenerNucleoFamiliar());
 
         try {
-          		
+        		
+
           const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar');
+          
             if (data.code === 200) {
                 dispatch(obtenerNucleoFamiliarExistosa(data.data))
                 
@@ -99,14 +100,14 @@ const obtenerNucleoFamiliar = () => ({
     payload: true
 });
 
-const obtenerNucleoFamiliarExistosa = datos => ({
+const obtenerNucleoFamiliarExistosa = (datos) => ({
     type: OBTENER_NUCLEO_FAMILIAR_SUCCESS,
     payload: datos
 })
 
-const obtenerNucleoFamiliarError = (estado) => ({
+const obtenerNucleoFamiliarError = () => ({
     type: OBTENER_NUCLEO_FAMILIAR_ERROR,
-    payload: estado
+    payload: true
 });
 
 

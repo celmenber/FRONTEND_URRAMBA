@@ -33,29 +33,13 @@ const NucleoFamiliar = () => {
   const [selectServicio] = useState(1);
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [habilitarAgregar, setHabilitarAgregar] = useState(false)
-  const [nuevoJefeDeHogar, setNuevoJefeDeHogar] = useState([])
-  
-  const [formData, setFormData] = useState({  
-    Id_jefe_hogar:'',
-    Id_parentesco: '',
-    Id_tipo_documento:'',
-    Id_escolaridad:'',
-    Id_orientacion_sexual: '',
-    Documentos:'',
-    Nombres:'',
-    Apellidos:'',
-    Estado_escolaridad:'',
-    Sexo:'',
-    Genero:'',
-    Fecha_nacimiento: new Date()
-   })
-
+  const [nuevaListaHogar, setNuevaListaHogar] = useState([])
+ 
+ 
   const { 
     jefeHogarByID, 
     jefeHogarById
    } = JefeHogarForm()
-
-
 
    const {
     obtenerNucleoFamiliar,
@@ -71,24 +55,13 @@ const NucleoFamiliar = () => {
     escolaridades,
     orientacion_sexuales,
     cargandolista,
-    // obtenerConcejo,
-    // obtenerMunicipio,
-    // obtenerAutoridadT,
-    // obtenerAsociacion,
-    // EliminarConcejo,
-    // Concejo,
-    // Municipio,
-    // Asociaciones,
-    // Autoridad,
-    // cargandolista,
-    // cargando,
-    // validated,
-    // datoConcejo,
-    // setDatoconcejo,
-    // handleActualizarConcejo,
-    // nombreBotoGuardarActulizar,
-    // setNombreBotoGuardarActulizar
-
+    setDatoNucleoFamiliar,
+    datoNucleoFamiliar,
+    setIdJefeHogar,
+    setNombreBotoGuardarActulizar,
+    handleSubmitAct,
+    nombreBotoGuardarActulizar
+  
   } = NucleoFamiliarForm();
   const { id } = useParams()
 
@@ -101,40 +74,51 @@ const NucleoFamiliar = () => {
 
   }, []);
 
+
   useEffect(() => {
-    debugger
     if (id) {
-      
       setMostrarJefeHByID(true)
       setHabilitarAgregar(false)
       jefeHogarByID(id)
-      console.log({jefeHogarById})
-      setNuevoJefeDeHogar([jefeHogarById])
-    } else {
+      setIdJefeHogar(id)
+     } else {
       setMostrarJefeHByID(false)
       setHabilitarAgregar(true)
     }
+    
   }, [id])
+  useEffect(() => {
+    setNuevaListaHogar(nucleoFamiliar?.filter(item => item?.ID_jefehogar === id));
+  }, [nucleoFamiliar, id]);
 
-  
+  const EditarFamiliar = (event, item) => {
+datoNucleoFamiliar
+    event.preventDefault();
+    setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
-  // const onChangeFormulario = (e) => {
-  //   const { Id_tipo_documento, value } = e.target
-  //   setFormData({ ...formData, [Id_tipo_documento]: value })
-  // }
+    setDatoNucleoFamiliar({
+      ID: item.ID,
+      Id_jefe_hogar: item.ID_jefehogar,
+      Id_parentesco: item.Id_parentesco,
+      Id_tipo_documento:item.Id_tipo_documento,
+      Id_escolaridad:item.Id_escolaridad,
+      Id_orientacion_sexual: item.Id_orientacion_sexual,
+      Documentos:item.Documentos,
+      Nombres:item.Nombres,
+      Apellidos:item.Apellidos,
+      Estado_escolaridad:item.Estado_escolaridad,
+      Sexo:item.Sexo,
+      Genero:item.Genero,
+      Fecha_nacimiento: item.Fecha_nacimiento
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   setTableItems([...tableItems, formData])
- 
-  // }
+    })
+  };
+
 
   const eliminarFamiliar = (item) => {
     console.log(item)
   }
-  const EditarFamiliar = (item) => {
-    console.log(item)
-  }
+ 
 
   return (
     <CContainer>
@@ -154,18 +138,18 @@ const NucleoFamiliar = () => {
                 />
                 <div className="ml-2">
                   {
-                    nuevoJefeDeHogar?.map(option => (
+                  
                     <>
                     <strong>
-                        {option?.nombres} {option?.apellidos}
+                        {jefeHogarById?.nombres} {jefeHogarById?.apellidos}
                       </strong>
                       <div className="small text-medium-emphasis">
-                        <span> Identidad: {option?.documentos}</span>
+                        <span> Identidad: {jefeHogarById?.documentos}</span>
                       </div>
                       
                     </>
                         
-                    ))
+                    
                   }
                 
                 </div>
@@ -189,7 +173,7 @@ const NucleoFamiliar = () => {
                   id="Id_tipo_documento"
                   name="Id_tipo_documento"
                   placeholder="Tipo Documento"
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Id_tipo_documento}
                   onChange={onChangeFormulario}
                   required>
                   <option key={'0'} value={''}>Tipo Documento</option>
@@ -213,7 +197,7 @@ const NucleoFamiliar = () => {
                   id="Documentos"
                   name="Documentos"
                   placeholder="Documento"
-                  value={formData.phone}
+                  value={datoNucleoFamiliar.Documentos}
                   onChange={onChangeFormulario}
                   required
                 />
@@ -224,7 +208,7 @@ const NucleoFamiliar = () => {
                   id="Id_parentesco"
                   name="Id_parentesco"
                   placeholder="Parentesco"
-                  value={formData.profile}
+                  value={datoNucleoFamiliar.Parentesco}
                   onChange={onChangeFormulario}
                   required>
                     <option key={'0'} value={''}>Tipo Parentesco</option>
@@ -252,7 +236,7 @@ const NucleoFamiliar = () => {
                   id="Nombres"
                   name="Nombres"
                   placeholder="Nombres"
-                  value={formData.phone}
+                  value={datoNucleoFamiliar.Nombres}
                   onChange={onChangeFormulario}
                   required
                 />
@@ -263,7 +247,7 @@ const NucleoFamiliar = () => {
                   id="Apellidos"
                   name="Apellidos"
                   placeholder="Apellidos"
-                  value={formData.phone}
+                  value={datoNucleoFamiliar.Apellidos}
                   onChange={onChangeFormulario}
                   required
                 />
@@ -277,7 +261,7 @@ const NucleoFamiliar = () => {
                   type="Date"
                   id="Fecha_nacimiento"
                   name='Fecha_nacimiento'
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Fecha_nacimiento}
                   placeholder="Fecha de Nacimiento"
                   onChange={onChangeFormulario}
                   required />
@@ -288,7 +272,7 @@ const NucleoFamiliar = () => {
                   id="Id_escolaridad"
                   name="Id_escolaridad"
                   placeholder="Escolaridad"
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Id_escolaridad}
                   onChange={onChangeFormulario}
                   required>
                   <option key={'0'} value={''}>Escolaridad</option>
@@ -311,7 +295,7 @@ const NucleoFamiliar = () => {
                 <CFormSelect
                   id="Estado_escolaridad"
                   name='Estado_escolaridad'
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Estado_escolaridad}
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Estado Escolaridad...</option>
@@ -330,7 +314,7 @@ const NucleoFamiliar = () => {
                 <CFormSelect
                   id="Genero"
                   name='Genero'
-                  value={formData.name}
+                  value={datoNucleoFamiliar.name}
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Genero...</option>
@@ -342,7 +326,7 @@ const NucleoFamiliar = () => {
                 <CFormSelect
                   id="Id_orientacion_sexual"
                   name='Id_orientacion_sexual'
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Id_orientacion_sexual}
                   onChange={onChangeFormulario}
                   required>
                   <option key={''} value={''}>Orientación Sexual...</option>
@@ -364,7 +348,7 @@ const NucleoFamiliar = () => {
                 <CFormSelect
                   id="validationCustom11"
                   name='Sexo'
-                  value={formData.name}
+                  value={datoNucleoFamiliar.Sexo}
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Sexo...</option>
@@ -377,11 +361,16 @@ const NucleoFamiliar = () => {
             </div>
             
             <br/>
-            <CButton type="submit"   color={'primary'}
+            <CButton
+                  type="button"
+                  color={'primary'}
                   variant="outline"
                   className="px-4"
-                  disabled ={habilitarAgregar}
-                  style={{ width: '100%' }}>Agregar</CButton>
+                  style={{ width: '100%' }}
+                  onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Nucleo Familiar' ? handleSubmit : handleSubmitAct}
+                >
+                  {nombreBotoGuardarActulizar}
+                </CButton>
           </CForm>
           <br/>
           <CTable align="middle" className="mb-0 border" hover responsive>
@@ -410,7 +399,7 @@ const NucleoFamiliar = () => {
                     </CTableRow>
                   ) : (
                  
-                    nucleoFamiliar?.map((item, index) => (
+                    nuevaListaHogar?.map((item, index) => (
 
                       <CTableRow v-for="item in tableItems" key={index}>
 
@@ -471,7 +460,7 @@ const NucleoFamiliar = () => {
                                 color="info"
                                 variant="outline"
                                 size="lg"
-                                onClick={() => EditarFamiliar(item.ID)}
+                                onClick={(event) => EditarFamiliar(event, item)}
                               >
                                 {'Editar'}
                               </CButton>

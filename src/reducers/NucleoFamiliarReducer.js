@@ -34,16 +34,17 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 ...state,
                 loading: action.payload,
             }
-        case ADD_NUCLEO_FAMILIAR_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                listarNucleoFamiliar: [...state.listarNucleoFamiliar, action.payload]
-            }
+            case ADD_NUCLEO_FAMILIAR_SUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    listarNucleoFamiliar: [...state.listarNucleoFamiliar, action.payload]
+                }
         case OBTENER_NUCLEO_FAMILIAR:
             return {
                 ...state,
                 loadinglista: action.payload,
+                loadinglista: true,
             }
         case OBTENER_NUCLEO_FAMILIAR_SUCCESS:
             return {
@@ -51,6 +52,8 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 loadinglista: false,
                 listarNucleoFamiliar: action.payload
             }
+
+            
 
         case EDITAR_NUCLEO_FAMILIAR:
             return {
