@@ -92,7 +92,7 @@ const NucleoFamiliar = () => {
   }, [nucleoFamiliar, id]);
 
   const EditarFamiliar = (event, item) => {
-datoNucleoFamiliar
+
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
