@@ -60,7 +60,8 @@ const NucleoFamiliar = () => {
     setIdJefeHogar,
     setNombreBotoGuardarActulizar,
     handleSubmitAct,
-    nombreBotoGuardarActulizar
+    nombreBotoGuardarActulizar,
+    validated
   
   } = NucleoFamiliarForm();
   const { id } = useParams()
@@ -99,17 +100,17 @@ const NucleoFamiliar = () => {
     setDatoNucleoFamiliar({
       ID: item.ID,
       Id_jefe_hogar: item.ID_jefehogar,
-      Id_parentesco: item.Id_parentesco,
-      Id_tipo_documento:item.Id_tipo_documento,
-      Id_escolaridad:item.Id_escolaridad,
-      Id_orientacion_sexual: item.Id_orientacion_sexual,
-      Documentos:item.Documentos,
-      Nombres:item.Nombres,
-      Apellidos:item.Apellidos,
-      Estado_escolaridad:item.Estado_escolaridad,
-      Sexo:item.Sexo,
-      Genero:item.Genero,
-      Fecha_nacimiento: item.Fecha_nacimiento
+      Id_parentesco: item.id_parentesco,
+      Id_tipo_documento:item.id_tipo_documento,
+      Id_escolaridad:item.id_escolaridad,
+      Id_orientacion_sexual: item.id_orientacion_sexual,
+      Documentos:item.documentos,
+      Nombres:item.nombres,
+      Apellidos:item.apellidos,
+      Estado_escolaridad:item.estado_escolaridad,
+      Sexo:item.sexo,
+      Genero:item.genero,
+      Fecha_nacimiento: item.fecha_nacimiento
 
     })
   };
@@ -165,7 +166,9 @@ const NucleoFamiliar = () => {
         </CCardHeader>
         <CCardBody>
           <CCardTitle>Miembros del núcleo Familiar</CCardTitle>
-          <CForm onSubmit={handleSubmit}>
+          <CForm onSubmit={handleSubmit}
+            noValidate
+            validated={validated}>
             <div className="row">
               <div className="col-md-4">
                 <CFormSelect

@@ -119,22 +119,20 @@ export const editarNucleoFamiliarAction = (Datos) => {
   return async (dispatch) => {
     dispatch(editarNucleoFamiliar());
 
-    const id = Number(Datos.id);
+    const id = Number(Datos.Id);
 
     try {
      	
-                          
-      const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
+      	
+                
+      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${id}`, Datos.formularioDatos);
       
 
       dispatch(editarNucleoFamiliarExito(data.data.datos));
 
       if (data.code === 200) {
-        Swal.fire(
-          'Correcto',
-          'El miembro de consejo se actualizó correctamente',
-          'success'
-        );
+       
+        Swal.fire('Correcto', 'El Usuario se actualizó correctamente', 'success')
       }
     } catch (error) {
       console.log(error);
