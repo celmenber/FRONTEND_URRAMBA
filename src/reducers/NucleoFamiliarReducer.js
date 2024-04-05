@@ -44,7 +44,7 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadinglista: action.payload,
-                loadinglista: true,
+               
             }
         case OBTENER_NUCLEO_FAMILIAR_SUCCESS:
             return {

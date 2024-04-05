@@ -94,7 +94,7 @@ export const NucleoFamiliarForm = () => {
         setValedita(false)
     };
     const handleSubmit = (event) => {
-        
+        debugger
         event.preventDefault();
         setValidated(true)
         const form = event.currentTarget
@@ -129,13 +129,13 @@ export const NucleoFamiliarForm = () => {
                     })
                     obtenerNucleoFamiliar()
                 }
-                obtenerNucleoFamiliar()
+              
             }
         }
 
     
-    const handleSubmitAct = (event) => {
-        
+    const handleActualizarNucleoFamiliar = (event) => {
+        debugger
         event.preventDefault();
         const form = event.currentTarget;
     
@@ -185,7 +185,7 @@ export const NucleoFamiliarForm = () => {
               Id: datoNucleoFamiliar.ID,
             }).then(() => {
               setNombreBotoGuardarActulizar('Agregar Nuevo Nucleo Familiar');
-              dispatch(obtenerNucleoFamiliar());
+              dispatch(obtenerNucleoFamiliarAction());
               handleReset();
             });
           }
@@ -213,7 +213,7 @@ export const NucleoFamiliarForm = () => {
     }
     return {
         handleSubmit,
-        handleSubmitAct,
+        handleActualizarNucleoFamiliar,
         onChangeFormulario,
         handleReset,
         obtenerNucleoFamiliar,

@@ -59,7 +59,7 @@ const NucleoFamiliar = () => {
     datoNucleoFamiliar,
     setIdJefeHogar,
     setNombreBotoGuardarActulizar,
-    handleSubmitAct,
+    handleActualizarNucleoFamiliar,
     nombreBotoGuardarActulizar,
     validated
   
@@ -93,7 +93,7 @@ const NucleoFamiliar = () => {
   }, [nucleoFamiliar, id]);
 
   const EditarFamiliar = (event, item) => {
-
+debugger
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
 
@@ -119,7 +119,7 @@ const NucleoFamiliar = () => {
   const eliminarFamiliar = (item) => {
     console.log(item)
   }
- 
+ // acciones editar , eliminar, trasladar
 
   return (
     <CContainer>
@@ -211,7 +211,7 @@ const NucleoFamiliar = () => {
                   id="Id_parentesco"
                   name="Id_parentesco"
                   placeholder="Parentesco"
-                  value={datoNucleoFamiliar.Parentesco}
+                  value={datoNucleoFamiliar.Id_parentesco}
                   onChange={onChangeFormulario}
                   required>
                     <option key={'0'} value={''}>Tipo Parentesco</option>
@@ -321,8 +321,8 @@ const NucleoFamiliar = () => {
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Genero...</option>
-                  <option value={'Mujer'}>Mujer</option>
-                  <option value={'Hombre'}>Hombre</option>
+                  <option value={'Masculino'}>Masculino</option>
+                  <option value={'Femenino'}>Femenino</option>
                 </CFormSelect>
               </div>
               <div className="col-md-4">
@@ -349,14 +349,14 @@ const NucleoFamiliar = () => {
               </div>
               <div className="col-md-4">
                 <CFormSelect
-                  id="validationCustom11"
+                  id="Sexo"
                   name='Sexo'
                   value={datoNucleoFamiliar.Sexo}
                   onChange={onChangeFormulario}
                   required>
                   <option value={''}>Sexo...</option>
-                  <option value={'Femenino'}>Femenino</option>
-                  <option value={'Masculino'}>Masculino</option>
+                  <option value={'Hombre'}>Hombre</option>
+                  <option value={'Mujer'}>Mujer</option>
                 </CFormSelect>
               </div>
          
@@ -370,7 +370,7 @@ const NucleoFamiliar = () => {
                   variant="outline"
                   className="px-4"
                   style={{ width: '100%' }}
-                  onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Nucleo Familiar' ? handleSubmit : handleSubmitAct}
+                  onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Nucleo Familiar' ? handleSubmit : handleActualizarNucleoFamiliar}
                 >
                   {nombreBotoGuardarActulizar}
                 </CButton>

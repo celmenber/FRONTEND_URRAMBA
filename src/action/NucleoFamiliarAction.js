@@ -76,14 +76,11 @@ const agregarNucleoFamiliarError = (estado) => ({
 export const obtenerNucleoFamiliarAction = () => {
 
     return async (dispatch) => {
-
-        dispatch(obtenerNucleoFamiliar());
+        dispatch(obtenerNucleoFamiliar())
 
         try {
-        		
-
-          const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar');
-          
+            const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar')
+            debugger
             if (data.code === 200) {
                 dispatch(obtenerNucleoFamiliarExistosa(data.data))
                 
@@ -114,25 +111,27 @@ const obtenerNucleoFamiliarError = () => ({
 
 
 
-export const editarNucleoFamiliarAction = (Datos) => {
+export const editarNucleoFamiliarAction = (datos) => {
   
   return async (dispatch) => {
     dispatch(editarNucleoFamiliar());
 
-    const id = Number(Datos.Id);
+    const id = Number(datos.Id);
 
     try {
      	
-      	
+      debugger
                 
-      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${id}`, Datos.formularioDatos);
+      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${id}`, datos.formularioDatos);
       
 
       dispatch(editarNucleoFamiliarExito(data.data.datos));
 
       if (data.code === 200) {
        
-        Swal.fire('Correcto', 'El Usuario se actualizó correctamente', 'success')
+        Swal.fire('Correcto',
+         'El Usuario se actualizó correctamente', 
+         'success')
       }
     } catch (error) {
       console.log(error);
