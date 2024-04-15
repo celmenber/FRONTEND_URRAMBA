@@ -25,7 +25,7 @@ const EmpleadoNuevoModal = (Props) => {
     setVisibleAT,
   } = Props
 
- 
+
 
   const {
     handleSubmit,
@@ -44,7 +44,7 @@ const EmpleadoNuevoModal = (Props) => {
     datoAutoridad,
     validated,
     cargando,
-   
+
   } = AutoridadTForm()
 
   const {
@@ -62,11 +62,11 @@ const EmpleadoNuevoModal = (Props) => {
     Estado,
     Fechanacimiento,
     Fechaingreso,
-   
+
   } = datoAutoridad
 
   const handleClose = () =>{
-    
+
     setVisibleAT(false)
     setValidated(false)
     handleReset()
@@ -81,13 +81,13 @@ const EmpleadoNuevoModal = (Props) => {
     // eslint-disable-next-line
   }, []);
 
- 
+
 
   return (
     <>
       <CModal size="xl" visible={visibleAT} onClose={handleClose}>
         <CModalHeader>
-          <CModalTitle> <strong>Agregar Autoridad Tradicional</strong></CModalTitle>
+          <CModalTitle> <strong>Agregar Autoridad Afrodescediente</strong></CModalTitle>
         </CModalHeader>
         <CForm className="row g-3 needs-validation"
           noValidate
@@ -121,7 +121,7 @@ const EmpleadoNuevoModal = (Props) => {
                 <CFormFeedback invalid>El campo es Requerido!</CFormFeedback>
               </CCol>
               <CCol md={3} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Documento Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom01">Documento Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom01"
@@ -132,7 +132,7 @@ const EmpleadoNuevoModal = (Props) => {
                 <CFormFeedback invalid>El campo Documentos Requerido!</CFormFeedback>
               </CCol>
               <CCol md={5} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Email Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom01">Email Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom001"
@@ -159,7 +159,7 @@ const EmpleadoNuevoModal = (Props) => {
             </CRow>
             <CRow className="g-3">
               <CCol md={3} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom02">Nombres Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom02">Nombres Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom002"
@@ -170,7 +170,7 @@ const EmpleadoNuevoModal = (Props) => {
                 <CFormFeedback invalid>El campo Nombres es Requerido!</CFormFeedback>
               </CCol>
               <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom02">Apellidos Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom02">Apellidos Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom002"
@@ -318,7 +318,7 @@ const EmpleadoNuevoModal = (Props) => {
               </CCol>
             </CRow>
             <CRow>
-              <CCol md={9} style={{ marginTop: '20px', marginBottom: '20px' }}>
+              <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
                 {cargando === true ? (
                   <CLoadingButton
                     color="success"
@@ -327,7 +327,7 @@ const EmpleadoNuevoModal = (Props) => {
                     timeout={2000}
                   >
                     {' '}
-                    Enviando Datos Autoridad Tradicional
+                    Enviando Datos Autoridad Afrodescediente
                   </CLoadingButton>
                 ) : (
                   <CButton
@@ -337,11 +337,11 @@ const EmpleadoNuevoModal = (Props) => {
                     style={{ width: '100%' }}
                   >
                     {' '}
-                      {'Enviar Datos Autoridad Tradicional'}
+                      {'Enviar Datos Autoridad Afrodescediente'}
                   </CButton>
                 )}
               </CCol>
-              <CCol xs={3} style={{ marginTop: '20px', marginBottom: '20px' }}>
+              <CCol xs={2} style={{ marginTop: '20px', marginBottom: '20px' }}>
                 <CButton
                   type="button"
                   color={'light'}
@@ -350,7 +350,7 @@ const EmpleadoNuevoModal = (Props) => {
                   onClick={() => handleReset()}
                 >
                   {' '}
-                  {'Nuevo Autoridad Tradicional'}
+                  {'Nuevo Registro'}
                 </CButton>
               </CCol>
             </CRow>

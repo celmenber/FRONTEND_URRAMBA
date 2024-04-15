@@ -62,7 +62,7 @@ const AutoridadT = () => {
             <CCol xs={12}>
                 <CCard className="mb-4">
                     <CCardHeader>
-              <strong>Gestión</strong> <small>Autoridad Tradicional</small>
+              <strong>Gestión</strong> <small>Autoridad Afro</small>
                     </CCardHeader>
                     <CCardBody>
                         <CForm>
@@ -75,12 +75,12 @@ const AutoridadT = () => {
                                     style={{ width: '100%' }}
                     onClick={() => setVisibleAT(true)}
                                 >{' '}
-                    {'Agregar Nuevo Autoridad Tradicional'}
+                    {'Agregar Nueva Autoridad Afro'}
                                 </CButton>
                             </CCol>
                         </CForm>
                     </CCardBody>
-                 
+
                     <CCardBody>
                                         <CForm key={0}>
                                             <CTable align="middle" className="mb-0 border" hover responsive>
@@ -89,7 +89,7 @@ const AutoridadT = () => {
                                                         <CTableHeaderCell className="text-center">
                                                         <CIcon icon={cilPeople} />
                                                         </CTableHeaderCell>
-                                                        <CTableHeaderCell colSpan={1}>Datos Empleado</CTableHeaderCell>
+                                                        <CTableHeaderCell colSpan={1}>Datos Autoridad Afro</CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={1}  className="text-center">Asociacion</CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={2}  className="text-center">Ubicación</CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
@@ -107,7 +107,7 @@ const AutoridadT = () => {
                                                             </CTableHeaderCell>
                                                         </CTableRow>
                                                     ) : (
-                                                       
+
                                                    autoridadT?.map((item, index) => (
                                                          <CTableRow v-for="item in tableItems" key={index}>
 
@@ -200,7 +200,7 @@ const AutoridadT = () => {
                                                               </CTooltip>
                                                             </div>
                                                           </CTableDataCell>
-                                                           
+
                                                                 <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -238,7 +238,7 @@ const AutoridadT = () => {
                   handleSubmitAct = {handleSubmitAct}
                   onChangeFormulario={onChangeFormulario}
                   setValidated = {setValidated}
-                 
+
                   />
         </CRow>
     )

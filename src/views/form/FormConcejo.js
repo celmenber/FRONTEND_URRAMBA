@@ -59,22 +59,22 @@ const FormConcejo = () => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(Concejo);
+
  const EditaConsejo = (event, item) => {
 
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
-
     // Llenar el formulario con los datos del Concejo seleccionado
     setDatoconcejo({
       ID: item.ID,
-      nitConcejo: item.Nit,
-      nombreAsociacion: item.Nombre_concejo_comunitario,
+      nitConcejo: item.nit,
+      nombreAsociacion: item.nombre_concejo_comunitario,
       id_asociacion: item.id_asociacion,
       id_autoridad_tradicional: item.id_autoridad_tradicional,
       idMunicipio: item.id_municipio,
       // ... (otros campos)
     });
-
 
   };
 
@@ -150,7 +150,7 @@ const FormConcejo = () => {
                   <CFormFeedback invalid>Seleccione Asociación por favor.</CFormFeedback>
                 </CCol>
                 <CCol xs={4}>
-                  <CFormLabel htmlFor="validationCustom04" value={''}>Autoridad tradicional</CFormLabel>
+                  <CFormLabel htmlFor="validationCustom04" value={''}>Autoridad Afro</CFormLabel>
                   <CFormSelect
                     key={'validationCustom04'}
                     name='id_autoridad_tradicional'
@@ -268,9 +268,9 @@ const FormConcejo = () => {
                               Concejo.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell>
-                                    <div><b>{item.Nombre_concejo_comunitario}</b></div>
+                                    <div><b>{item.nombre_concejo_comunitario}</b></div>
                                   <div className="small text-medium-emphasis">
-                                    NIT:<span>{item.Nit}</span>  |  Autoridad tradicional: {' '}
+                                    NIT:<span>{item.nit}</span>  |  Autoridad tradicional: {' '}
                                       {item.nombres} {item.apellidos}
                                   </div>
                                   <div className="small text-medium-emphasis">

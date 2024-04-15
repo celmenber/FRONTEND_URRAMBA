@@ -22,7 +22,7 @@ import {
   CAvatar,
   CFormSelect,
   CSpinner,
-  CTooltip, 
+  CTooltip,
 } from '@coreui/react'
 import { NucleoFamiliarForm } from 'src/hooks/useNucleoFamiliarForm'
 import CIcon from '@coreui/icons-react'
@@ -34,10 +34,10 @@ const NucleoFamiliar = () => {
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [habilitarAgregar, setHabilitarAgregar] = useState(false)
   const [nuevaListaHogar, setNuevaListaHogar] = useState([])
- 
- 
-  const { 
-    jefeHogarByID, 
+
+
+  const {
+    jefeHogarByID,
     jefeHogarById
    } = JefeHogarForm()
 
@@ -62,7 +62,7 @@ const NucleoFamiliar = () => {
     handleActualizarNucleoFamiliar,
     nombreBotoGuardarActulizar,
     validated
-  
+
   } = NucleoFamiliarForm();
   const { id } = useParams()
 
@@ -86,7 +86,7 @@ const NucleoFamiliar = () => {
       setMostrarJefeHByID(false)
       setHabilitarAgregar(true)
     }
-    
+
   }, [id])
   useEffect(() => {
     setNuevaListaHogar(nucleoFamiliar?.filter(item => item?.ID_jefehogar === id));
@@ -139,7 +139,7 @@ debugger
                 />
                 <div className="ml-2">
                   {
-                  
+
                     <>
                     <strong>
                         {jefeHogarById?.nombres} {jefeHogarById?.apellidos}
@@ -147,12 +147,9 @@ debugger
                       <div className="small text-medium-emphasis">
                         <span> Identidad: {jefeHogarById?.documentos}</span>
                       </div>
-                      
                     </>
-                        
-                    
                   }
-                
+
                 </div>
               </div>
             </CCardTitle>
@@ -229,7 +226,7 @@ debugger
                     )}
                 </CFormSelect>
               </div>
-           
+
             </div>
             <br/>
             <div className='row'>
@@ -307,8 +304,8 @@ debugger
                   <option value={'Retirado'}>Retirado</option>
                 </CFormSelect>
               </div>
-         
-           
+
+
             </div>
             {/* otro */}
             <br/>
@@ -359,10 +356,10 @@ debugger
                   <option value={'Mujer'}>Mujer</option>
                 </CFormSelect>
               </div>
-         
-           
+
+
             </div>
-            
+
             <br/>
             <CButton
                   type="button"
@@ -401,7 +398,7 @@ debugger
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-                 
+
                     nuevaListaHogar?.map((item, index) => (
 
                       <CTableRow v-for="item in tableItems" key={index}>
@@ -439,7 +436,7 @@ debugger
                             item.estado_escolaridad
                           }</strong>
                         </CTableDataCell>
-                       
+
 
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
@@ -472,12 +469,12 @@ debugger
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
-                         
+
                             <CTooltip
                               content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
                               placement="bottom"
                             >
-                             
+
                               {selectServicio !== 1 ? (
                                 <CLoadingButton
                                   variant="outline"
@@ -504,7 +501,7 @@ debugger
                             </CTooltip>
                           </div>
                         </CTableDataCell>
-                       
+
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
@@ -521,7 +518,7 @@ debugger
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>
-                       
+
                       </CTableRow>
                     ))
                   )}

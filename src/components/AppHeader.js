@@ -18,7 +18,7 @@ const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.change.sidebarShow)
   const User = useSelector((state) => state.Auth.userDetails)
-
+  console.log(User)
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
@@ -36,7 +36,7 @@ const AppHeader = () => {
 
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <strong>Bienvenido </strong>
+            <strong>Bienvenido: </strong>
             {`${User.emp_documento !== null ? User.emp_nombres + " " + User.emp_apellidos : User.aut_nombres + " " + User.aut_apellidos } - ${User.USER_ROL}`}
           </CNavItem>
         </CHeaderNav>

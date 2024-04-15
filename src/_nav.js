@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilHome, cilCog, cilGroup, cilQrCode, cilInstitution } from '@coreui/icons'
+import { cilHome, cilCog, cilGroup, cilQrCode, cilInstitution, cilPrint, cilDescription } from '@coreui/icons'
 import { CNavItem, CNavGroup } from '@coreui/react'
 
 const administrador_nav = [
@@ -83,14 +83,14 @@ const administrador_nav = [
   {
     component: CNavItem,
     name: 'CARACTERIZACION',
-    to: '/concejos',
+    to: '/caracterizacion/caracterizacion',
     icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'REPORTES',
     to: '/concejos',
-    icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
   },
 ]
 
@@ -122,7 +122,7 @@ const operadores_nav = [
   {
     component: CNavItem,
     name: 'CARACTERIZACION',
-    to: '/concejos',
+    to: '/caracterizacion/caracterizacion',
     icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
   },
 ]

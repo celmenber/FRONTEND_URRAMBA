@@ -7,7 +7,7 @@ import { CCard, CCardBody } from '@coreui/react'
 // const WidgetsParque = lazy(() => import('../widgets/WidgetsParques.js'))
 //const WidgetsReserva = lazy(() => import('../widgets/WidgetsReservas.js'))
 
-const DashboardParques = () => {
+const DashboardUrramba = () => {
   return (
     <>
       <CCard className="mb-4">
@@ -28,4 +28,4 @@ const DashboardParques = () => {
   )
 }
 
-export default DashboardParques
+export default DashboardUrramba

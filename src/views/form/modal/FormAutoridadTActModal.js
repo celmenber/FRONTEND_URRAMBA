@@ -31,7 +31,7 @@ const FormAutoridadActModal = (Props) => {
     datoAutoridad,
   } = Props
 
- 
+
 
   const {
     handleReset,
@@ -39,16 +39,16 @@ const FormAutoridadActModal = (Props) => {
     obtenerMunicipio,
     obtenertipodocumento,
     obtenercorregimiento,
- 
+
     /* metodos */
     municipio,
     barrios,
     corregimiento,
     tipodocumento,
-    
+
     validated,
     cargando,
-   
+
   } = AutoridadTForm()
 
   const {
@@ -66,7 +66,7 @@ const FormAutoridadActModal = (Props) => {
     Estado,
     Fechanacimiento,
     Fechaingreso,
-   
+
   } = datoAutoridad
 
 
@@ -81,13 +81,13 @@ const FormAutoridadActModal = (Props) => {
 
   }, []);
 
- 
+
 
   return (
     <>
       <CModal size="xl" visible={visibleEAT} onClose={handleClose}>
         <CModalHeader>
-          <CModalTitle> <strong>Editar Autoridad Tradicional</strong></CModalTitle>
+          <CModalTitle> <strong>Editar Autoridad Afrodescediente</strong></CModalTitle>
         </CModalHeader>
         <CForm className="row g-3 needs-validation"
           noValidate
@@ -121,7 +121,7 @@ const FormAutoridadActModal = (Props) => {
                 <CFormFeedback invalid>El campo es Requerido!</CFormFeedback>
               </CCol>
               <CCol md={3} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Documento Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom01">Documento Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom01"
@@ -132,7 +132,7 @@ const FormAutoridadActModal = (Props) => {
                 <CFormFeedback invalid>El campo Documentos Requerido!</CFormFeedback>
               </CCol>
               <CCol md={5} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Email Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom01">Email Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom001"
@@ -159,7 +159,7 @@ const FormAutoridadActModal = (Props) => {
             </CRow>
             <CRow className="g-3">
               <CCol md={3} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom02">Nombres Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom02">Nombres Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom002"
@@ -170,7 +170,7 @@ const FormAutoridadActModal = (Props) => {
                 <CFormFeedback invalid>El campo Nombres es Requerido!</CFormFeedback>
               </CCol>
               <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom02">Apellidos Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom02">Apellidos Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom002"
@@ -284,7 +284,7 @@ const FormAutoridadActModal = (Props) => {
             </CRow>
             <CRow className="g-3">
               <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom07">Direccion Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom07">Direccion Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom07"
@@ -295,7 +295,7 @@ const FormAutoridadActModal = (Props) => {
                 <CFormFeedback invalid>El campo Direccion es Requerido!</CFormFeedback>
               </CCol>
               <CCol md={3} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom07">Telefono Autoridad Tradicional*</CFormLabel>
+                <CFormLabel htmlFor="validationCustom07">Telefono Autoridad*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom07"
@@ -318,7 +318,7 @@ const FormAutoridadActModal = (Props) => {
               </CCol>
             </CRow>
             <CRow>
-              <CCol md={9} style={{ marginTop: '20px', marginBottom: '20px' }}>
+              <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
                 {cargando === true ? (
                   <CLoadingButton
                     color="success"
@@ -327,7 +327,7 @@ const FormAutoridadActModal = (Props) => {
                     timeout={2000}
                   >
                     {' '}
-                    Enviando Datos Autoridad Tradicional
+                    Enviando Datos Autoridad Afrodescediente
                   </CLoadingButton>
                 ) : (
                   <CButton
@@ -341,7 +341,7 @@ const FormAutoridadActModal = (Props) => {
                   </CButton>
                 )}
               </CCol>
-              <CCol xs={3} style={{ marginTop: '20px', marginBottom: '20px' }}>
+              <CCol xs={2} style={{ marginTop: '20px', marginBottom: '20px' }}>
               <CButton
                     type="button"
                     color={'dark'}
