@@ -12,6 +12,7 @@ import {
   MiemboReducer,
   JefeHogarReducer,
   NucleoFamiliarReducer,
+  CaracterizacionReducer,
   } from './reducers'
 
 
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
   Miembro: MiemboReducer,
   JefeHogar: JefeHogarReducer,
   NucleoFamiliar: NucleoFamiliarReducer,
+  Caracterizacion: CaracterizacionReducer,
 })

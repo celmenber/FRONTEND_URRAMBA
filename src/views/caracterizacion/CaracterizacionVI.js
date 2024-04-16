@@ -10,10 +10,164 @@ import {
 } from '@coreui/react'
 import { CForm } from '@coreui/react-pro'
 const CaracterizacionVI = () => {
+   const [validated, setValidated] = useState(false)
+   const [personasHV, setPersonasHV] = useState("");
+   const [otrosTV, setOtrosTV] = useState("");
+   const [datoradio, setDatoradio] = useState({
+    viviendaTI: "",
+    viviendaTE: "",
+  });
+
+   const onChangeVEI = (e) => {
+    setDatoradio({
+      ...datoradio,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const [stateMT, setStateMT] = useState({
+    mexteriores_1: false,
+    mexteriores_2: false,
+    mexteriores_3: false,
+    mexteriores_4: false,
+    mexteriores_5: false,
+    mexteriores_6: false,
+    mexteriores_7: false,
+    mexteriores_8: false,
+    mexteriores_9: false,
+    mexteriores_10: false,
+    mexteriores_11: false,
+    mexteriores_12: false,
+    mexteriores_13: false,
+    mexteriores_14: false,
+  });
+
+  const datoMT = {
+        mexteriores_1: stateMT.mexteriores_1 === true ? "Material de desecho" : "",
+        mexteriores_2: stateMT.mexteriores_2 === true ? "Lámina de asbesto o metálica" : "",
+        mexteriores_3: stateMT.mexteriores_3 === true ? "Lámina de carton" : "",
+        mexteriores_4: stateMT.mexteriores_4 === true ? "En barro" : "",
+        mexteriores_5: stateMT.mexteriores_5 === true ? "Carrizo banbu" : "",
+        mexteriores_6: stateMT.mexteriores_6 === true ? "Bareque" : "",
+        mexteriores_7: stateMT.mexteriores_7 === true ? "Madera" : "",
+        mexteriores_8: stateMT.mexteriores_8 === true ? "Tabique" : "",
+        mexteriores_9: stateMT.mexteriores_9 === true ? "Adobe" : "",
+        mexteriores_10: stateMT.mexteriores_10 === true ? "Palma" : "",
+        mexteriores_11: stateMT.mexteriores_11 === true ? "Ladrillo" : "",
+        mexteriores_12: stateMT.mexteriores_12 === true ? "Block" : "",
+        mexteriores_13: stateMT.mexteriores_13 === true ? "Piedra" : "",
+        mexteriores_14: stateMT.mexteriores_14 === true ? "Cemento o concreto" : "",
+  };
+
+  const handleChangeMT = (event) => {
+    setStateMT({ ...stateMT, [event.target.name]: event.target.checked });
+  };
+
+    const [stateCT, setStateCT] = useState({
+    ctecho_1: false,
+    ctecho_2: false,
+    ctecho_3: false,
+    ctecho_4: false,
+    ctecho_5: false,
+    ctecho_6: false,
+    ctecho_7: false,
+    ctecho_8: false,
+    ctecho_9: false,
+    ctecho_10: false,
+    ctecho_11: false,
+  });
+
+const datoCT = {
+        ctecho_1: stateCT.ctecho_1 === true ? "Material de desecho" : "",
+        ctecho_2: stateCT.ctecho_2 === true ? "Lámina metálica" : "",
+        ctecho_3: stateCT.ctecho_3 === true ? "Palma o paja" : "",
+        ctecho_4: stateCT.ctecho_4 === true ? "Lámina de asbesto" : "",
+        ctecho_5: stateCT.ctecho_5 === true ? "Lámina de carton" : "",
+        ctecho_6: stateCT.ctecho_6 === true ? "Lámina fibrocemente ondulada (Techo Fijo)" : "",
+        ctecho_7: stateCT.ctecho_7 === true ? "Madera o tejamil" : "",
+        ctecho_8: stateCT.ctecho_8 === true ? "Terrado con vigueria" : "",
+        ctecho_9: stateCT.ctecho_9 === true ? "Tejas" : "",
+        ctecho_10: stateCT.ctecho_10 === true ? "Terrado con vigueria" : "",
+        ctecho_11: stateCT.ctecho_11 === true ? "Losa de concreto o viguetas con bovedilla" : "",
+  };
+
+  const handleChangeCT = (event) => {
+    setStateCT({ ...stateCT, [event.target.name]: event.target.checked });
+  };
+
+ const [stateEP, setStateEP] = useState({
+    episo_1: false,
+    episo_2: false,
+    episo_3: false,
+    episo_4: false,
+    episo_5: false,
+  });
+
+const datoEP = {
+    episo_1: stateEP.episo_1 === true ? "Tierra" : "",
+    episo_2: stateEP.episo_2 === true ? "Cemento" : "",
+    episo_3: stateEP.episo_3 === true ? "Madera" : "",
+    episo_4: stateEP.episo_4 === true ? "Mosaico" : "",
+    episo_5: stateEP.episo_5 === true ? "Otro recubrimiento" : "",
+
+  };
+
+  const handleChangeEP = (event) => {
+    setStateEP({ ...stateEP, [event.target.name]: event.target.checked });
+  };
+
+   const [stateEA, setStateEA] = useState({
+    eagua_1: false,
+    eagua_2: false,
+    eagua_3: false,
+    eagua_4: false,
+    eagua_5: false,
+  });
+
+  const datoEA = {
+    eagua_1: stateEA.eagua_1 === true ? "Red pública" : "",
+    eagua_2: stateEA.eagua_2 === true ? "Pozo" : "",
+    eagua_3: stateEA.eagua_3 === true ? "Río" : "",
+    eagua_4: stateEA.eagua_4 === true ? "Vertiente" : "",
+    eagua_5: stateEA.eagua_5 === true ? "Carrotanque" : "",
+
+  };
+
+  const handleChangeEA = (event) => {
+    setStateEA({ ...stateEA, [event.target.name]: event.target.checked });
+  };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setValidated(true)
+  const form = event.currentTarget
+  if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+      return false
+    }
+
+
+      console.log(datoMT);
+      console.log(datoCT);
+      console.log(datoEP);
+      console.log(datoEA);
+      console.log(datoradio);
+      console.log(personasHV);
+      console.log(otrosTV);
+
+}
+
+
   return <>
   <CRow>
        <CCol xs={12}>
-         <CForm validated={true}>
+         <CForm
+          className="row g-3 needs-validation"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}>
                      <CRow className="mb-4">
                          <CCol sm="auto">Cuantas personas habitan la vivienda:</CCol>
                         <CCol>
@@ -22,7 +176,11 @@ const CaracterizacionVI = () => {
                                 id="floatingInput"
                                 floatingClassName="mb-3"
                                 floatingLabel="Cuantas personas habitan la vivienda"
-                                placeholder="Cuantas personas habitan la vivienda" />
+                                placeholder="Cuantas personas habitan la vivienda"
+                                name="personasHV"
+                                value={personasHV}
+                                onChange={(e) => setPersonasHV(e.target.value)}
+                                />
                            </CCol>
                        </CRow>
                       <CRow className="mb-4">
@@ -31,56 +189,68 @@ const CaracterizacionVI = () => {
                           <CFormCheck inline
                             className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck2"
+                              id="viviendaFormCheck1"
                               label="Casa"
+                              value="Casa"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                             />
                             <CFormCheck inline
                               className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck3"
+                              id="viviendaFormCheck2"
                               label="Apartamento"
+                              value="Apartamento"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                             /><CFormCheck inline
                               className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck4"
+                              id="viviendaFormCheck3"
                               label="Pieza"
+                              value="Pieza"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                               />
                               <CFormCheck inline
                               className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck5"
+                              id="viviendaFormCheck4"
                               label="Inquilinato"
-                              feedbackInvalid="More example invalid feedback text"
+                              value="Inquilinato"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                               />
                               <CFormCheck inline
                               className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck6"
+                              id="viviendaFormCheck5"
                               label="Albergue"
-                              feedbackInvalid="More example invalid feedback text"
+                              value="Albergue"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                               />
                               <CFormCheck inline
                               className="mb-3"
                               type="radio"
-                              name="radio-stacked"
-                              id="validationFormCheck5"
+                              id="viviendaFormCheck6"
                               label="Otro"
-                              feedbackInvalid="More example invalid feedback text"
+                              value="Otro"
+                              name="viviendaTI"
+                              onChange={onChangeVEI}
                               required
                               />
                               </CCol>
                               <CCol sm="auto" style={{marginLeft:"-25px"}}>
-                                <CFormInput type="text" size="sm" placeholder="Ingrese otra " aria-label="sm input example"/>
+                                <CFormInput type="text" size="sm" placeholder="Otro tipo vivienda"
+                                  value={otrosTV}
+                                  onChange={(e) => setOtrosTV(e.target.value)}
+                                  aria-label="Otro tipo vivienda"/>
                               </CCol>
                         </CRow>
                         <CRow className="mb-2">
@@ -89,57 +259,71 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck1"
                                 label="Propia"
+                                value="Propia"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck2"
                                 label="En arriendo"
+                                value="En arriendo"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck3"
                                 label="Familiar"
+                                value="Familiar"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck4"
                                 label="Albergue"
+                                value="Albergue"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck5"
                                 label="Asentamiento"
+                                value="Asentamiento"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck6"
                                 label="Lugar de trabajo"
+                                value="Lugar de trabajo"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="Tenencia-Form"
                                 id="TenenciaFormCheck7"
                                 label="Paga diario"
+                                value="Paga diario"
+                                name="viviendaTE"
+                                onChange={onChangeVEI}
                                 required
                               />
                             </CCol>
@@ -162,41 +346,51 @@ const CaracterizacionVI = () => {
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="materialC-Form"
+                                    name="mexteriores_1"
                                     id="materialCFormCheck1"
                                     label="Material de desecho"
+                                    checked={stateMT.mexteriores_1}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="materialC-Form"
+                                    name="mexteriores_2"
                                     id="LaminaFormCheck2"
                                     label="Lámina de asbesto o metálica"
+                                    checked={stateMT.mexteriores_2}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="LaminaC-Form"
+                                    name="mexteriores_3"
                                     id="LaminaCFormCheck2"
                                     label="Lámina de carton"
+                                    checked={stateMT.mexteriores_3}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="barro-Form"
+                                    name="mexteriores_4"
                                     id="barroFormCheck3"
                                     label="En barro"
+                                    checked={stateMT.mexteriores_4}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="carrizob-Form"
+                                    name="mexteriores_5"
                                     id="carrizobFormCheck3"
                                     label="Carrizo banbu"
+                                    checked={stateMT.mexteriores_5}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   </CCol>
@@ -204,41 +398,51 @@ const CaracterizacionVI = () => {
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Bareque-Form"
+                                    name="mexteriores_6"
                                     id="BarequeFormCheck3"
                                     label="Bareque"
+                                    checked={stateMT.mexteriores_6}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Madera-Form"
+                                    name="mexteriores_7"
                                     id="MaderaFormCheck4"
                                     label="Madera"
+                                    checked={stateMT.mexteriores_7}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Tabique-Form"
+                                    name="mexteriores_8"
                                     id="TabiqueFormCheck5"
                                     label="Tabique"
+                                    checked={stateMT.mexteriores_8}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                    <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="adobe-Form"
+                                    name="mexteriores_9"
                                     id="adobeFormCheck5"
                                     label="Adobe"
+                                    checked={stateMT.mexteriores_9}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Palma-Form"
+                                    name="mexteriores_10"
                                     id="PalmaFormCheck5"
                                     label="Palma"
+                                    checked={stateMT.mexteriores_10}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   </CCol>
@@ -246,33 +450,41 @@ const CaracterizacionVI = () => {
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Ladrillo-Form"
+                                    name="mexteriores_11"
                                     id="LadrilloFormCheck5"
                                     label="Ladrillo"
+                                    checked={stateMT.mexteriores_11}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Block-Form"
+                                    name="mexteriores_12"
                                     id="BlockFormCheck5"
                                     label="Block"
+                                    checked={stateMT.mexteriores_12}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Piedra-Form"
+                                    name="mexteriores_13"
                                     id="PiedraFormCheck5"
                                     label="Piedra"
+                                    checked={stateMT.mexteriores_13}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                                   <CFormCheck
                                     className="mb-3"
                                     type="checkbox"
-                                    name="Cconcreto-Form"
+                                    name="mexteriores_14"
                                     id="CconcretoFormCheck5"
                                     label="Cemento o concreto"
+                                    checked={stateMT.mexteriores_14}
+                                    onChange={handleChangeMT}
                                     required
                                   />
                               </CCol>
@@ -283,33 +495,41 @@ const CaracterizacionVI = () => {
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="cubierta-Form"
+                                name="ctecho_1"
                                 id="cubiertaFormCheck1"
                                 label="Material de desecho"
+                                checked={stateCT.ctecho_1}
+                                onChange={handleChangeCT}
                                 required
                               />
                                <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="cubierta-Form"
+                                name="ctecho_2"
                                 id="cubiertaFormCheck2"
                                 label="Lámina metálica"
+                                checked={stateCT.ctecho_2}
+                                onChange={handleChangeCT}
                                 required
                               />
                                <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="cubierta-Form"
+                                name="ctecho_3"
                                 id="cubiertaFormCheck3"
                                 label="Palma o paja"
+                                checked={stateCT.ctecho_3}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="cubierta-Form"
+                                name="ctecho_4"
                                 id="cubiertaFormCheck4"
                                 label="Lámina de asbesto"
+                                checked={stateCT.ctecho_4}
+                                onChange={handleChangeCT}
                                 required
                               />
                               </CCol>
@@ -317,33 +537,41 @@ const CaracterizacionVI = () => {
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_5"
                                 id="cubiertaFormCheck5"
                                 label="Lámina de carton"
+                                checked={stateCT.ctecho_5}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_6"
                                 id="cubiertaFormCheck6"
                                 label="Lámina fibrocemente ondulada (Techo Fijo)"
+                                checked={stateCT.ctecho_6}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_7"
                                 id="cubiertaFormCheck7"
                                 label="Madera o tejamil"
+                                checked={stateCT.ctecho_7}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_8"
                                 id="cubiertaFormCheck8"
                                 label="Terrado con vigueria"
+                                checked={stateCT.ctecho_8}
+                                onChange={handleChangeCT}
                                 required
                               />
                               </CCol>
@@ -351,25 +579,31 @@ const CaracterizacionVI = () => {
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_9"
                                 id="cubiertaFormCheck9"
                                 label="Tejas"
+                                checked={stateCT.ctecho_9}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_10"
                                 id="cubiertaFormCheck10"
                                 label="Terrado con vigueria"
+                                checked={stateCT.ctecho_10}
+                                onChange={handleChangeCT}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="checkbox"
-                                name="Lcarton-Form"
+                                name="ctecho_11"
                                 id="cubiertaFormCheck11"
                                 label="Losa de concreto o viguetas con bovedilla"
+                                 checked={stateCT.ctecho_11}
+                                onChange={handleChangeCT}
                                 required
                               />
                             </CCol>
@@ -380,41 +614,51 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="piso-Form"
+                                name="episo_1"
                                 id="pisoFormCheck1"
                                 label="Tierra"
+                                checked={stateEP.episo_1}
+                                onChange={handleChangeEP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="piso-Form"
+                                name="episo_2"
                                 id="pisoFormCheck2"
                                 label="Cemento"
+                                checked={stateEP.episo_2}
+                                onChange={handleChangeEP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="piso-Form"
+                                name="episo_3"
                                 id="pisoFormCheck3"
                                 label="Madera"
+                                checked={stateEP.episo_3}
+                                onChange={handleChangeEP}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="piso-Form"
+                                name="episo_4"
                                 id="pisoFormCheck4"
-                                label="mosaico"
+                                label="Mosaico"
+                                checked={stateEP.episo_4}
+                                onChange={handleChangeEP}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="piso-Form"
+                                name="episo_5"
                                 id="pisoFormCheck5"
                                 label="Otro recubrimiento"
+                                checked={stateEP.episo_5}
+                                onChange={handleChangeEP}
                                 required
                               />
                             </CCol>
@@ -425,41 +669,51 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="agua-Form"
+                                name="eagua_1"
                                 id="aguaFormCheck1"
                                 label="Red pública"
+                                checked={stateEA.eagua_1}
+                                onChange={handleChangeEA}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="agua-Form"
+                                name="eagua_2"
                                 id="aguaFormCheck2"
                                 label="Pozo"
+                                checked={stateEA.eagua_2}
+                                onChange={handleChangeEA}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="agua-Form"
+                                name="eagua_3"
                                 id="aguaFormCheck3"
                                 label="Río"
+                                checked={stateEA.eagua_3}
+                                onChange={handleChangeEA}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="agua-Form"
+                                name="eagua_4"
                                 id="aguaFormCheck4"
                                 label="Vertiente"
+                                checked={stateEA.eagua_4}
+                                onChange={handleChangeEA}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="agua-Form"
+                                name="eagua_5"
                                 id="aguaFormCheck5"
                                 label="Carrotanque"
+                                checked={stateEA.eagua_5}
+                                onChange={handleChangeEA}
                                 required
                               />
                             </CCol>
@@ -467,12 +721,11 @@ const CaracterizacionVI = () => {
                          <CRow className="mb-2 mt-4">
                            <CCol xs={12}>
                               <CButton
-                                type="button"
+                                type="submit"
                                 color={'primary'}
                                 variant="outline"
                                 className="px-4"
                                 style={{ width: '100%' }}
-                                // onClick={() => setVisibleM(true)}
                               >{' '}
                                 {'Aceptar y Continuar Caracterizacón'}
                               </CButton>

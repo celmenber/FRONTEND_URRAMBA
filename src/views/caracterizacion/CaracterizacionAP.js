@@ -4,16 +4,79 @@ import {
   CCol,
   CRow,
   CFormCheck,
-  CFormInput,
   CButton,
   CAlert
 } from '@coreui/react'
 import { CForm } from '@coreui/react-pro'
-const CaracterizacionVI = () => {
+const CaracterizacionAP = () => {
+const [validated, setValidated] = useState(false)
+
+const [datoradioAP, setDatoradioAP] = useState({
+    viviendaSH: "",
+    electricidaSP:"",
+    basuraSP:"",
+    cocinarSP:"",
+    tfijoSP:"",
+    tmovilSP:"",
+    internetSP:"",
+    viaccesoSV:"",
+    canchasdSV:"",
+    parquesSV:"",
+    salonComunalSV:"",
+  });
+
+  const onChangeAP = (e) => {
+    setDatoradioAP({
+      ...datoradioAP,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+    const [stateC, setStateC] = useState({
+    metodococinarA: false,
+    metodococinarB: false,
+    metodococinarC: false,
+    metodococinarD: false,
+    metodococinarE: false,
+    metodococinarF: false,
+  });
+
+  const datoC = {
+        metodococinarA: stateC.metodococinarA === true ? "Gas" : "",
+        metodococinarB: stateC.metodococinarB === true ? "Petroleo" : "",
+        metodococinarC: stateC.metodococinarC === true ? "Leña o derivados" : "",
+        metodococinarD: stateC.metodococinarD === true ? "Electricidad" : "",
+        metodococinarE: stateC.metodococinarE === true ? "Carbón" : "",
+        metodococinarF: stateC.metodococinarF === true ? "Energia solar" : "",
+  };
+
+  const handleChangeC = (event) => {
+    setStateC({ ...stateC, [event.target.name]: event.target.checked });
+  };
+
+
+const handleSubmit = (event) => {
+    event.preventDefault();
+    setValidated(true)
+  const form = event.currentTarget
+  if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    return false;
+  }
+     /*  console.log(otrosV);
+      console.log(datoD);
+      console.log(datogeneral); */
+
+}
   return <>
   <CRow>
        <CCol xs={12}>
-         <CForm validated={true}>
+        <CForm
+          className="row g-3 needs-validation"
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}>
                         <CRow className="mb-2 mt-0">
                             <CCol className="mb-2" style={{textAlign:"center"}}>
                                     <CAlert color="primary">
@@ -27,96 +90,118 @@ const CaracterizacionVI = () => {
                               <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
+                                name="viviendaSH"
                                 id="servicioHFormCheck1"
                                 label="Conectado al alcantarillado"
+                                value={"Conectado al alcantarillado"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
                                 id="servicioHFormCheck2"
                                 label="Conectado a poza séptica"
+                                name="viviendaSH"
+                                value={"Conectado a poza séptica"}
+                                onChange={onChangeAP}
                                 required
                               /></CCol>
                                <CCol sm="auto">
                                <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
                                 id="servicioHFormCheck3"
                                 label="Sobre pozo ciego"
+                                name="viviendaSH"
+                                value={"Sobre pozo ciego"}
+                                onChange={onChangeAP}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
                                 id="servicioHFormCheck4"
                                 label="Baño quimico"
+                                name="viviendaSH"
+                                value={"Baño quimico"}
+                                onChange={onChangeAP}
                                 required
                               /></CCol>
                                <CCol sm="auto">
                               <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
                                 id="servicioHFormCheck5"
                                 label="Sobre acequia o canal"
+                                name="viviendaSH"
+                                value={"Sobre acequia o canal"}
+                                onChange={onChangeAP}
                                 required
                               />
                               <CFormCheck
                                 className="mb-3"
                                 type="radio"
-                                name="servicioH-Form"
                                 id="servicioHFormCheck6"
                                 label="No tiene servicio"
+                                name="viviendaSH"
+                                value={"No tiene servicio"}
+                                onChange={onChangeAP}
                                 required
                               />
                             </CCol>
                         </CRow>
                         <CRow className="mb-2">
-                            <CCol sm="auto">La electricidad proviene  de:</CCol>
+                            <CCol sm="auto">La electricidad proviene de:</CCol>
                             <CCol sm="auto">
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
                                 id="electricidadFormCheck1"
                                 label="Red pública"
+                                name="electricidaSP"
+                                value={"Red pública"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
                                 id="electricidadFormCheck2"
                                 label="Planta solar"
+                                name="electricidaSP"
+                                value={"Planta solar"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
                                 id="electricidadFormCheck3"
                                 label="Generador de combustible"
+                                name="electricidaSP"
+                                value={"Generador de combustible"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
                                 id="electricidadFormCheck4"
                                 label="Eolico (vientos)"
+                                name="electricidaSP"
+                                value={"Eolico (vientos)"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
                                 id="electricidadFormCheck5"
                                 label="No tiene servicio"
+                                name="electricidaSP"
+                                value={"No tiene servicio"}
+                                onChange={onChangeAP}
                                 required
                               />
                             </CCol>
@@ -127,33 +212,41 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="ebasura-Form"
                                 id="ebasuraFormCheck1"
                                 label="Servicio recolección pública"
+                                name="basuraSP"
+                                value={"Servicio recolección pública"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="ebasura-Form"
                                 id="ebasuraFormCheck2"
                                 label="La entierra y/o quema"
+                                name="basuraSP"
+                                value={"La entierra y/o quema"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="ebasura-Form"
                                 id="ebasuraFormCheck3"
                                 label="La deja en terreno"
+                                name="basuraSP"
+                                value={"La deja en terreno"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="ebasura-Form"
                                 id="ebasuraFormCheck4"
                                 label="La tira al rio"
+                                name="basuraSP"
+                                value={"La tira al rio"}
+                                onChange={onChangeAP}
                                 required
                               />
                             </CCol>
@@ -164,17 +257,21 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
-                                id="electricidadFormCheck1"
+                                id="cocinarSPFormRadio1"
                                 label="Si"
+                                name="cocinarSP"
+                                value={"Si"}
+                                onChange={onChangeAP}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="radio"
-                                name="electricidad-Form"
-                                id="electricidadFormCheck2"
+                                id="cocinarSPFormRadio2"
                                 label="No"
+                                name="cocinarSP"
+                                value={"No"}
+                                onChange={onChangeAP}
                                 required
                               />
                             </CCol>
@@ -185,55 +282,64 @@ const CaracterizacionVI = () => {
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarA"
                                 id="cocinarFormCheck1"
                                 label="Gas"
+                                checked={stateC.metodococinarA}
+                                onChange={handleChangeC}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarB"
                                 id="cocinarFormCheck2"
                                 label="Petroleo"
+                                checked={stateC.metodococinarB}
+                                onChange={handleChangeC}
                                 required
                               />
                                <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarC"
                                 id="cocinarFormCheck3"
                                 label="Leña o derivados"
+                                checked={stateC.metodococinarC}
+                                onChange={handleChangeC}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarD"
                                 id="cocinarFormCheck4"
                                 label="Electricidad"
+                                checked={stateC.metodococinarD}
+                                onChange={handleChangeC}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarE"
                                 id="cocinarFormCheck5"
                                 label="Carbón"
+                                checked={stateC.metodococinarE}
+                                onChange={handleChangeC}
                                 required
                               />
                               <CFormCheck inline
                                 className="mb-3"
                                 type="checkbox"
-                                name="cocinar-Form"
+                                name="metodococinarF"
                                 id="cocinarFormCheck6"
                                 label="Energia solar"
+                                checked={stateC.metodococinarF}
+                                onChange={handleChangeC}
                                 required
                               />
                             </CCol>
-                            {/*  <CCol sm="auto" style={{marginLeft:"-25px"}}>
-                                <CFormInput type="text" size="sm" placeholder="Small input" aria-label="sm input example"/>
-                              </CCol> */}
                         </CRow>
                         <CRow className="mb-2 mt-4">
                             <CCol className="mb-2" style={{textAlign:"center"}}>
@@ -247,46 +353,58 @@ const CaracterizacionVI = () => {
                             <CCol sm="auto">
                             <CFormCheck inline
                                 type="radio"
-                                name="TfijoRadioOptions"
                                 id="TfijoCheckbox1"
                                 value="Si"
-                                label="Si"/>
+                                label="Si"
+                                name="tfijoSP"
+                                onChange={onChangeAP}
+                                />
                             <CFormCheck inline
                                type="radio"
-                               name="TfijoRadioOptions"
                                id="TfijoCheckbox2"
                                value="No"
-                               label="No"/>
+                               label="No"
+                                name="tfijoSP"
+                                onChange={onChangeAP}
+                              />
                               </CCol>
                               <CCol sm="auto">Teléfono movil:</CCol>
                               <CCol sm="auto">
                                 <CFormCheck inline
                                     type="radio"
-                                    name="TmovilRadioOptions"
                                     id="TmovilCheckbox1"
                                     value="Si"
-                                    label="Si"/>
+                                    label="Si"
+                                    name="tmovilSP"
+                                    onChange={onChangeAP}
+                                />
                                 <CFormCheck inline
                                   type="radio"
-                                  name="TmovilRadioOptions"
                                   id="TmovilCheckbox2"
                                   value="No"
-                                  label="No"/>
+                                  label="No"
+                                  name="tmovilSP"
+                                  onChange={onChangeAP}
+                                  />
                               </CCol>
                               <CCol sm="auto">Internet:</CCol>
                               <CCol sm="auto">
                                 <CFormCheck inline
                                     type="radio"
-                                    name="InternetRadioOptions"
                                     id="InternetCheckbox1"
                                     value="Si"
-                                    label="Si"/>
+                                    label="Si"
+                                    name="internetSP"
+                                    onChange={onChangeAP}
+                                    />
                                 <CFormCheck inline
                                   type="radio"
-                                  name="InternetRadioOptions"
                                   id="InternetCheckbox2"
                                   value="No"
-                                  label="No"/>
+                                  label="No"
+                                  name="internetSP"
+                                  onChange={onChangeAP}
+                                  />
                               </CCol>
                         </CRow>
                          <CRow className="mb-2 mt-4">
@@ -301,72 +419,87 @@ const CaracterizacionVI = () => {
                             <CCol sm="auto">
                             <CFormCheck inline
                                 type="radio"
-                                name="viasaccesoRadioOptions"
+                                name="viaccesoSV"
                                 id="viasaccesoCheckbox1"
                                 value="Si"
-                                label="Si"/>
+                                label="Si"
+                                onChange={onChangeAP}
+                                 />
                             <CFormCheck inline
                                type="radio"
-                               name="viasaccesoRadioOptions"
+                               name="viaccesoSV"
                                id="viasaccesoCheckbox2"
                                value="No"
-                               label="No"/>
+                               label="No"
+                               onChange={onChangeAP}
+                               />
                               </CCol>
                               <CCol sm="auto">Canchas deportivas:</CCol>
                               <CCol sm="auto">
                                 <CFormCheck inline
                                     type="radio"
-                                    name="CdeportivasRadioOptions"
+                                    name="canchasdSV"
                                     id="CdeportivasCheckbox1"
                                     value="Si"
-                                    label="Si"/>
+                                    label="Si"
+                                    onChange={onChangeAP}
+                                    />
                                 <CFormCheck inline
                                   type="radio"
-                                  name="CdeportivasRadioOptions"
+                                  name="canchasdSV"
                                   id="CdeportivasCheckbox2"
                                   value="No"
-                                  label="No"/>
+                                  label="No"
+                                  onChange={onChangeAP}
+                                  />
                               </CCol>
                               <CCol sm="auto">Parques:</CCol>
                               <CCol sm="auto">
                                 <CFormCheck inline
                                     type="radio"
-                                    name="ParqueRadioOptions"
+                                    name="parquesSV"
                                     id="ParqueCheckbox1"
                                     value="Si"
-                                    label="Si"/>
+                                    label="Si"
+                                    onChange={onChangeAP}
+                                    />
                                 <CFormCheck inline
                                   type="radio"
-                                  name="ParqueRadioOptions"
+                                  name="parquesSV"
                                   id="ParqueCheckbox2"
                                   value="No"
-                                  label="No"/>
+                                  label="No"
+                                  onChange={onChangeAP}
+                                  />
                               </CCol>
                               <CCol sm="auto"> Salón Comunal:</CCol>
                               <CCol sm="auto">
                                 <CFormCheck inline
                                     type="radio"
-                                    name="ScomunalRadioOptions"
+                                    name="salonComunalSV"
                                     id="ScomunalCheckbox1"
                                     value="Si"
-                                    label="Si"/>
+                                    label="Si"
+                                    onChange={onChangeAP}
+                                    />
                                 <CFormCheck inline
                                   type="radio"
-                                  name="ScomunalRadioOptions"
+                                  name="salonComunalSV"
                                   id="ScomunalCheckbox2"
                                   value="No"
-                                  label="No"/>
+                                  label="No"
+                                  onChange={onChangeAP}
+                                  />
                               </CCol>
                         </CRow>
                          <CRow className="mb-2 mt-4">
                            <CCol xs={12}>
                               <CButton
-                                type="button"
+                                type="submit"
                                 color={'primary'}
                                 variant="outline"
                                 className="px-4"
                                 style={{ width: '100%' }}
-                                // onClick={() => setVisibleM(true)}
                               >{' '}
                                 {'Aceptar y Continuar Caracterizacón'}
                               </CButton>
@@ -377,4 +510,4 @@ const CaracterizacionVI = () => {
   </CRow>
   </>
 }
-export default CaracterizacionVI
+export default CaracterizacionAP

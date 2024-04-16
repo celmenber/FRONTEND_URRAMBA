@@ -9,4 +9,5 @@ export * from './useAutoridadTForm';
 export * from './useMiembroForm';
 export * from './useJefeHogarForm';
 export * from './useNucleoFamiliarForm';
+export * from './useCaracterizacionForm';
 
