@@ -21,21 +21,22 @@ const {
 
 // Crear nuevosServicios
 export const crearCaracterizacionAction = (Dataform) => {
+     console.log(Dataform);
   return async (dispatch) => {
     dispatch(agregarCaracterizacion())
 
-    const { formularioDatos } = Dataform
+   // const { formularioDatos } = Dataform
 
     try {
       // insertar en la API
-      const { data } = await Axios.post('asociacion/create-asociacion', formularioDatos)
+      const { data } = await Axios.post('caratacterizacion/create-caratacterizacion', Dataform)
 
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
       dispatch(agregarCaracterizacionExito(datos))
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'La  asociacion se agregar correctamente', 'success')
+        Swal.fire('Correcto', 'La  caratacterizacion se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)

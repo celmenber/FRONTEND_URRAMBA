@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
@@ -8,9 +9,8 @@ import {
   CAlert
 } from '@coreui/react'
 import { CForm } from '@coreui/react-pro'
-const CaracterizacionAP = () => {
+const CaracterizacionAP = ({setActiveKey}) => {
 const [validated, setValidated] = useState(false)
-
 const [datoradioAP, setDatoradioAP] = useState({
     viviendaSH: "",
     electricidaSP:"",
@@ -33,12 +33,12 @@ const [datoradioAP, setDatoradioAP] = useState({
   };
 
     const [stateC, setStateC] = useState({
-    metodococinarA: false,
-    metodococinarB: false,
-    metodococinarC: false,
-    metodococinarD: false,
-    metodococinarE: false,
-    metodococinarF: false,
+            metodococinarA: false,
+            metodococinarB: false,
+            metodococinarC: false,
+            metodococinarD: false,
+            metodococinarE: false,
+            metodococinarF: false,
   });
 
   const datoC = {
@@ -64,10 +64,15 @@ const handleSubmit = (event) => {
       event.stopPropagation()
     return false;
   }
-     /*  console.log(otrosV);
-      console.log(datoD);
-      console.log(datogeneral); */
 
+    const DataForm = {
+      datoC,
+      datoradioAP,
+    };
+    // console.log(DataForm);
+    localStorage.setItem("DataAP", JSON.stringify(DataForm));
+    console.log(localStorage.getItem("DataAP"));
+    setActiveKey(5)
 }
   return <>
   <CRow>
@@ -287,7 +292,7 @@ const handleSubmit = (event) => {
                                 label="Gas"
                                 checked={stateC.metodococinarA}
                                 onChange={handleChangeC}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -297,7 +302,7 @@ const handleSubmit = (event) => {
                                 label="Petroleo"
                                 checked={stateC.metodococinarB}
                                 onChange={handleChangeC}
-                                required
+
                               />
                                <CFormCheck inline
                                 className="mb-3"
@@ -307,7 +312,7 @@ const handleSubmit = (event) => {
                                 label="Leña o derivados"
                                 checked={stateC.metodococinarC}
                                 onChange={handleChangeC}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -317,7 +322,7 @@ const handleSubmit = (event) => {
                                 label="Electricidad"
                                 checked={stateC.metodococinarD}
                                 onChange={handleChangeC}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -327,7 +332,7 @@ const handleSubmit = (event) => {
                                 label="Carbón"
                                 checked={stateC.metodococinarE}
                                 onChange={handleChangeC}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -337,7 +342,7 @@ const handleSubmit = (event) => {
                                 label="Energia solar"
                                 checked={stateC.metodococinarF}
                                 onChange={handleChangeC}
-                                required
+
                               />
                             </CCol>
                         </CRow>
@@ -364,8 +369,9 @@ const handleSubmit = (event) => {
                                id="TfijoCheckbox2"
                                value="No"
                                label="No"
-                                name="tfijoSP"
-                                onChange={onChangeAP}
+                               name="tfijoSP"
+                               onChange={onChangeAP}
+                                required
                               />
                               </CCol>
                               <CCol sm="auto">Teléfono movil:</CCol>
@@ -377,6 +383,7 @@ const handleSubmit = (event) => {
                                     label="Si"
                                     name="tmovilSP"
                                     onChange={onChangeAP}
+                                    required
                                 />
                                 <CFormCheck inline
                                   type="radio"
@@ -385,6 +392,7 @@ const handleSubmit = (event) => {
                                   label="No"
                                   name="tmovilSP"
                                   onChange={onChangeAP}
+                                  required
                                   />
                               </CCol>
                               <CCol sm="auto">Internet:</CCol>
@@ -396,6 +404,7 @@ const handleSubmit = (event) => {
                                     label="Si"
                                     name="internetSP"
                                     onChange={onChangeAP}
+                                    required
                                     />
                                 <CFormCheck inline
                                   type="radio"
@@ -404,6 +413,7 @@ const handleSubmit = (event) => {
                                   label="No"
                                   name="internetSP"
                                   onChange={onChangeAP}
+                                  required
                                   />
                               </CCol>
                         </CRow>
@@ -432,6 +442,7 @@ const handleSubmit = (event) => {
                                value="No"
                                label="No"
                                onChange={onChangeAP}
+                               required
                                />
                               </CCol>
                               <CCol sm="auto">Canchas deportivas:</CCol>
@@ -443,6 +454,7 @@ const handleSubmit = (event) => {
                                     value="Si"
                                     label="Si"
                                     onChange={onChangeAP}
+                                    required
                                     />
                                 <CFormCheck inline
                                   type="radio"
@@ -451,6 +463,7 @@ const handleSubmit = (event) => {
                                   value="No"
                                   label="No"
                                   onChange={onChangeAP}
+                                  required
                                   />
                               </CCol>
                               <CCol sm="auto">Parques:</CCol>
@@ -462,6 +475,7 @@ const handleSubmit = (event) => {
                                     value="Si"
                                     label="Si"
                                     onChange={onChangeAP}
+                                    required
                                     />
                                 <CFormCheck inline
                                   type="radio"
@@ -470,6 +484,7 @@ const handleSubmit = (event) => {
                                   value="No"
                                   label="No"
                                   onChange={onChangeAP}
+                                  required
                                   />
                               </CCol>
                               <CCol sm="auto"> Salón Comunal:</CCol>
@@ -481,6 +496,7 @@ const handleSubmit = (event) => {
                                     value="Si"
                                     label="Si"
                                     onChange={onChangeAP}
+                                    required
                                     />
                                 <CFormCheck inline
                                   type="radio"
@@ -489,6 +505,7 @@ const handleSubmit = (event) => {
                                   value="No"
                                   label="No"
                                   onChange={onChangeAP}
+                                  required
                                   />
                               </CCol>
                         </CRow>

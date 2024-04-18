@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
@@ -9,7 +10,7 @@ import {
   CAlert
 } from '@coreui/react'
 import { CForm } from '@coreui/react-pro'
-const CaracterizacionVI = () => {
+const CaracterizacionVI = ({ setActiveKey }) => {
    const [validated, setValidated] = useState(false)
    const [personasHV, setPersonasHV] = useState("");
    const [otrosTV, setOtrosTV] = useState("");
@@ -63,7 +64,7 @@ const CaracterizacionVI = () => {
     setStateMT({ ...stateMT, [event.target.name]: event.target.checked });
   };
 
-    const [stateCT, setStateCT] = useState({
+  const [stateCT, setStateCT] = useState({
     ctecho_1: false,
     ctecho_2: false,
     ctecho_3: false,
@@ -148,15 +149,19 @@ const datoEP = {
       return false
     }
 
-
-      console.log(datoMT);
-      console.log(datoCT);
-      console.log(datoEP);
-      console.log(datoEA);
-      console.log(datoradio);
-      console.log(personasHV);
-      console.log(otrosTV);
-
+    const DataForm = {
+      datoMT,
+      datoCT,
+      datoEP,
+      datoEA,
+      datoradio,
+      personasHV,
+      otrosTV,
+    };
+    // console.log(DataForm);
+    localStorage.setItem("DataVI", JSON.stringify(DataForm));
+    console.log(localStorage.getItem("DataVI"));
+    setActiveKey(4)
 }
 
 
@@ -173,13 +178,14 @@ const datoEP = {
                         <CCol>
                           <CFormInput type="text" sm="auto"
                                 size="sm"
-                                id="floatingInput"
+                                id="personasHV"
                                 floatingClassName="mb-3"
                                 floatingLabel="Cuantas personas habitan la vivienda"
                                 placeholder="Cuantas personas habitan la vivienda"
                                 name="personasHV"
                                 value={personasHV}
                                 onChange={(e) => setPersonasHV(e.target.value)}
+                                required
                                 />
                            </CCol>
                        </CRow>
@@ -351,7 +357,7 @@ const datoEP = {
                                     label="Material de desecho"
                                     checked={stateMT.mexteriores_1}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -361,7 +367,7 @@ const datoEP = {
                                     label="Lámina de asbesto o metálica"
                                     checked={stateMT.mexteriores_2}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -371,7 +377,7 @@ const datoEP = {
                                     label="Lámina de carton"
                                     checked={stateMT.mexteriores_3}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -381,7 +387,7 @@ const datoEP = {
                                     label="En barro"
                                     checked={stateMT.mexteriores_4}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -391,7 +397,7 @@ const datoEP = {
                                     label="Carrizo banbu"
                                     checked={stateMT.mexteriores_5}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   </CCol>
                                   <CCol>
@@ -403,7 +409,7 @@ const datoEP = {
                                     label="Bareque"
                                     checked={stateMT.mexteriores_6}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -413,7 +419,7 @@ const datoEP = {
                                     label="Madera"
                                     checked={stateMT.mexteriores_7}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -423,7 +429,7 @@ const datoEP = {
                                     label="Tabique"
                                     checked={stateMT.mexteriores_8}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                    <CFormCheck
                                     className="mb-3"
@@ -433,7 +439,7 @@ const datoEP = {
                                     label="Adobe"
                                     checked={stateMT.mexteriores_9}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -443,7 +449,7 @@ const datoEP = {
                                     label="Palma"
                                     checked={stateMT.mexteriores_10}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   </CCol>
                                   <CCol>
@@ -455,7 +461,7 @@ const datoEP = {
                                     label="Ladrillo"
                                     checked={stateMT.mexteriores_11}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -465,7 +471,7 @@ const datoEP = {
                                     label="Block"
                                     checked={stateMT.mexteriores_12}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -475,7 +481,7 @@ const datoEP = {
                                     label="Piedra"
                                     checked={stateMT.mexteriores_13}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                                   <CFormCheck
                                     className="mb-3"
@@ -485,7 +491,7 @@ const datoEP = {
                                     label="Cemento o concreto"
                                     checked={stateMT.mexteriores_14}
                                     onChange={handleChangeMT}
-                                    required
+
                                   />
                               </CCol>
                           </CRow>
@@ -500,7 +506,7 @@ const datoEP = {
                                 label="Material de desecho"
                                 checked={stateCT.ctecho_1}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                                <CFormCheck
                                 className="mb-3"
@@ -510,7 +516,7 @@ const datoEP = {
                                 label="Lámina metálica"
                                 checked={stateCT.ctecho_2}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                                <CFormCheck
                                 className="mb-3"
@@ -520,7 +526,7 @@ const datoEP = {
                                 label="Palma o paja"
                                 checked={stateCT.ctecho_3}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -530,7 +536,7 @@ const datoEP = {
                                 label="Lámina de asbesto"
                                 checked={stateCT.ctecho_4}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               </CCol>
                               <CCol sm="auto">
@@ -542,7 +548,7 @@ const datoEP = {
                                 label="Lámina de carton"
                                 checked={stateCT.ctecho_5}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -552,7 +558,7 @@ const datoEP = {
                                 label="Lámina fibrocemente ondulada (Techo Fijo)"
                                 checked={stateCT.ctecho_6}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -562,7 +568,7 @@ const datoEP = {
                                 label="Madera o tejamil"
                                 checked={stateCT.ctecho_7}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -572,7 +578,7 @@ const datoEP = {
                                 label="Terrado con vigueria"
                                 checked={stateCT.ctecho_8}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               </CCol>
                               <CCol sm="auto">
@@ -584,7 +590,7 @@ const datoEP = {
                                 label="Tejas"
                                 checked={stateCT.ctecho_9}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -594,7 +600,7 @@ const datoEP = {
                                 label="Terrado con vigueria"
                                 checked={stateCT.ctecho_10}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                               <CFormCheck
                                 className="mb-3"
@@ -604,7 +610,7 @@ const datoEP = {
                                 label="Losa de concreto o viguetas con bovedilla"
                                  checked={stateCT.ctecho_11}
                                 onChange={handleChangeCT}
-                                required
+
                               />
                             </CCol>
                         </CRow>
@@ -619,7 +625,7 @@ const datoEP = {
                                 label="Tierra"
                                 checked={stateEP.episo_1}
                                 onChange={handleChangeEP}
-                                required
+
                               />
                                <CFormCheck inline
                                 className="mb-3"
@@ -629,7 +635,7 @@ const datoEP = {
                                 label="Cemento"
                                 checked={stateEP.episo_2}
                                 onChange={handleChangeEP}
-                                required
+
                               />
                                <CFormCheck inline
                                 className="mb-3"
@@ -639,7 +645,7 @@ const datoEP = {
                                 label="Madera"
                                 checked={stateEP.episo_3}
                                 onChange={handleChangeEP}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -649,7 +655,7 @@ const datoEP = {
                                 label="Mosaico"
                                 checked={stateEP.episo_4}
                                 onChange={handleChangeEP}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -659,7 +665,7 @@ const datoEP = {
                                 label="Otro recubrimiento"
                                 checked={stateEP.episo_5}
                                 onChange={handleChangeEP}
-                                required
+
                               />
                             </CCol>
                         </CRow>
@@ -674,7 +680,7 @@ const datoEP = {
                                 label="Red pública"
                                 checked={stateEA.eagua_1}
                                 onChange={handleChangeEA}
-                                required
+
                               />
                                <CFormCheck inline
                                 className="mb-3"
@@ -684,7 +690,7 @@ const datoEP = {
                                 label="Pozo"
                                 checked={stateEA.eagua_2}
                                 onChange={handleChangeEA}
-                                required
+
                               />
                                <CFormCheck inline
                                 className="mb-3"
@@ -694,7 +700,7 @@ const datoEP = {
                                 label="Río"
                                 checked={stateEA.eagua_3}
                                 onChange={handleChangeEA}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -704,7 +710,7 @@ const datoEP = {
                                 label="Vertiente"
                                 checked={stateEA.eagua_4}
                                 onChange={handleChangeEA}
-                                required
+
                               />
                               <CFormCheck inline
                                 className="mb-3"
@@ -714,7 +720,7 @@ const datoEP = {
                                 label="Carrotanque"
                                 checked={stateEA.eagua_5}
                                 onChange={handleChangeEA}
-                                required
+
                               />
                             </CCol>
                         </CRow>

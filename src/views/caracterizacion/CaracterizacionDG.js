@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-script-url */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
@@ -9,8 +10,9 @@ import {
   CButton,
   CAlert,
 } from '@coreui/react'
-import { CForm } from '@coreui/react-pro'
-const CaracterizacionDG = () => {
+import { CForm } from '@coreui/react-pro';
+
+const CaracterizacionDG = ({ setActiveKey }) => {
    const [validated, setValidated] = useState(false)
    const [otrosV, setOtrosV] = useState("");
    const [datogeneral, setDatogeneral] = useState({
@@ -20,6 +22,7 @@ const CaracterizacionDG = () => {
     RUV:"",
     discapacidadT:"",
   });
+
   const onChangeGeneral = (e) => {
     setDatogeneral({
       ...datogeneral,
@@ -43,23 +46,30 @@ const CaracterizacionDG = () => {
     discapacidadE: state.discapacidadE === true ? "Ninguna de la anteriores" : "",
   };
 
+
   const handleChangeDiscap = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValidated(true)
+     setValidated(true)
   const form = event.currentTarget
+  console.log(event)
   if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
     return false;
   }
-      console.log(otrosV);
-      console.log(datoD);
-      console.log(datogeneral);
-
+  const DataForm = {
+      datoD,
+      datogeneral,
+      otrosV,
+    };
+    // console.log(DataForm);
+    localStorage.setItem("DataDG", JSON.stringify(DataForm));
+    console.log(localStorage.getItem("DataDG"));
+    setActiveKey(2)
 }
 
   return <>
@@ -73,13 +83,14 @@ const CaracterizacionDG = () => {
                   <CRow className="mb-4">
                     <CCol sm="auto">Cuál es su régimen de salud:</CCol>
                     <CCol sm="auto">
-                      <CFormCheck inline
+                     <CFormCheck inline
                          className="mb-3"
                           type="radio"
                           name="regimenS"
-                          id="validationFormCheck2"
+                          id="regimenS1"
                           value={"Régimen Contributivo"}
                           label="Régimen Contributivo"
+                          checked={datogeneral.regimenS === "Régimen Contributivo" ? true : false}
                           onChange={onChangeGeneral}
                           required
                         />
@@ -87,18 +98,20 @@ const CaracterizacionDG = () => {
                           className="mb-3"
                           type="radio"
                           name="regimenS"
-                          id="validationFormCheck3"
+                          id="regimenS2"
                           label="Régimen Subsidiado"
                           value={"Régimen Subsidiado"}
+                          checked={datogeneral.regimenS === "Régimen Subsidiado" ? true : false}
                           onChange={onChangeGeneral}
                           required
                         /><CFormCheck inline
                           className="mb-3"
                           type="radio"
                           name="regimenS"
-                          id="validationFormCheck4"
+                          id="regimenS3"
                           label="Régimen Especial"
                           value={"Régimen Especial"}
+                          checked={datogeneral.regimenS === "Régimen Especial" ? true : false}
                           onChange={onChangeGeneral}
                           required
                           />
@@ -106,13 +119,14 @@ const CaracterizacionDG = () => {
                           className="mb-3"
                           type="radio"
                           name="regimenS"
-                          id="validationFormCheck5"
+                          id="regimenS4"
                           label="No afiliado"
                           value={"No afiliado"}
+                          checked={datogeneral.regimenS === "No afiliado" ? true : false}
                           onChange={onChangeGeneral}
-                          feedbackInvalid="No selecciono el régimen de salud"
                           required
-                          /></CCol>
+                          />
+                          </CCol>
                     </CRow>
                     <CRow className="mb-4">
                          <CCol sm="auto"> Se encuentra vinculado a:</CCol>
@@ -123,6 +137,7 @@ const CaracterizacionDG = () => {
                                 id="inlineRadioOptions1"
                                 value="Subsidio por parte del Estado"
                                 label="Subsidio por parte del Estado"
+                                checked={datogeneral.vinculadoA === "Subsidio por parte del Estado" ? true : false}
                                 onChange={onChangeGeneral}
                                 required
                               />
@@ -131,20 +146,24 @@ const CaracterizacionDG = () => {
                                name="vinculadoA"
                                id="inlineRadioOptions2"
                                value="Ninguno"
-                               label="Ninguno"/>
+                               label="Ninguno"
+                               checked={datogeneral.vinculadoA === "Ninguno" ? true : false}
+                               onChange={onChangeGeneral}
+                               />
                             <CFormCheck inline
                                type="radio"
                                name="vinculadoA"
                                id="inlineRadioOptions3"
                                value="Otro"
                                label="Otro"
+                               checked={datogeneral.vinculadoA === "Otro" ? true : false}
                                onChange={onChangeGeneral}
-                               feedbackInvalid="No selecciono vinculado"
                                required
-                                    />
+                               />
                          </CCol>
                         <CCol sm="auto">
-                          <CFormInput type="text"
+                          <CFormInput
+                          type="text"
                           size="sm"
                           placeholder="Otro vinculado"
                           name="otrosV"
@@ -162,7 +181,8 @@ const CaracterizacionDG = () => {
                                 id="victimaCheckbox1"
                                 value="Si"
                                 label="Si"
-                                onChange={onChangeGeneral}
+                                checked={datogeneral.victimaC}
+                                onChange={onChangeGeneral === "Si" ? true : false}
                                 required
                               />
                             <CFormCheck inline
@@ -171,8 +191,8 @@ const CaracterizacionDG = () => {
                                 id="victimaCheckbox2"
                                 value="No"
                                 label="No"
+                                checked={datogeneral.victimaC === "No" ? true : false}
                                 onChange={onChangeGeneral}
-                                feedbackInvalid="No selecciono victima del conflicto"
                                 required
                             />
                          </CCol>
@@ -185,6 +205,7 @@ const CaracterizacionDG = () => {
                                 value="Si"
                                 label="Si"
                                 onChange={onChangeGeneral}
+                                checked={datogeneral.RUV === "Si" ? true : false}
                                 required
                               />
                             <CFormCheck inline
@@ -194,6 +215,7 @@ const CaracterizacionDG = () => {
                                 value="No"
                                 label="No"
                                 onChange={onChangeGeneral}
+                                checked={datogeneral.RUV === "No" ? true : false}
                                 required
                                 />
                          </CCol>
@@ -208,6 +230,7 @@ const CaracterizacionDG = () => {
                            value="Si"
                            label="Si"
                            onChange={onChangeGeneral}
+                           checked={datogeneral.discapacidadT === "Si" ? true : false}
                            required
                            />
                        <CFormCheck inline
@@ -217,6 +240,7 @@ const CaracterizacionDG = () => {
                            value="No"
                            label="No"
                            onChange={onChangeGeneral}
+                           checked={datogeneral.discapacidadT === "No" ? true : false}
                            required
                           />
                          </CCol>
@@ -238,7 +262,6 @@ const CaracterizacionDG = () => {
                               label="Dificultad física y/o de movilidad"
                               checked={state.discapacidadA}
                               onChange={handleChangeDiscap}
-                              required
                             />
                              <CFormCheck
                               className="mb-3"
@@ -248,7 +271,6 @@ const CaracterizacionDG = () => {
                               label="Mudez o dificultad en el habla"
                               checked={state.discapacidadB}
                               onChange={handleChangeDiscap}
-                              required
                             />
                             <CFormCheck
                               className="mb-3"
@@ -258,7 +280,6 @@ const CaracterizacionDG = () => {
                               label="Sordera o dificultad auditiva incluso usando audífonos"
                               checked={state.discapacidadC}
                               onChange={handleChangeDiscap}
-                              required
                             />
                             </CCol>
                             <CCol sm="auto">
@@ -270,7 +291,6 @@ const CaracterizacionDG = () => {
                               label="Ceguera o dificultad para ver incluso usando lentes"
                               checked={state.discapacidadD}
                               onChange={handleChangeDiscap}
-                              required
                             />
                             <CFormCheck
                               className="mb-3"
@@ -280,7 +300,6 @@ const CaracterizacionDG = () => {
                               label="Ninguna de la anteriores"
                               checked={state.discapacidadE}
                               onChange={handleChangeDiscap}
-                              required
                             />
                             </CCol>
                         </CRow>

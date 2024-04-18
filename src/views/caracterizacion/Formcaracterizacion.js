@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   CCard,
   CCardBody,
@@ -15,14 +15,53 @@ import {
   CContainer,
   CCardTitle,
 } from '@coreui/react'
+//import { SelectPicker } from 'rsuite';
+// import '../../../node_modules/rsuite/dist/rsuite.css';
+
 import CaracterizacionDG from './CaracterizacionDG'
 import CaracterizacionOL from './CaracterizacionOL'
 import CaracterizacionVI from './CaracterizacionVI'
 import CaracterizacionAP from './CaracterizacionAP'
 import CaracterizacionTC from './CaracterizacionTC'
 
+//import { CaracterizacionForm } from '../../hooks'
+
 const Caracterizacion = () => {
+ /*  const {
+         obtenerJefeHogar,
+         JefeHogar,
+         userDetails,
+         IdJefeHogar,
+         setDatoJefeHogar
+       } = CaracterizacionForm(); */
+
   const [activeKey, setActiveKey] = useState(1)
+
+    useEffect(() => {
+    // Consultar la api listar parques
+  //  obtenerJefeHogar();
+    // eslint-disable-next-line
+  }, []);
+
+ /*  let data
+  if(userDetails.USER_ROL === 'superuser') {
+     data = JefeHogar?.map(
+        item => ({
+              label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
+              value: item.ID.toString()
+        })
+    );
+  }else{
+     data = JefeHogar?.filter(C => C.id_usuario === true).map(
+        item => ({
+            label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
+            value: item.ID.toString()
+        })
+    );
+  } */
+
+  //console.log(IdJefeHogar)
+
   return (
     <>
       <CRow>
@@ -32,11 +71,17 @@ const Caracterizacion = () => {
             <strong>Caracterizacion</strong> <small>Negritudes</small>
           </CCardHeader>
           <CCardHeader>
-               <CCardTitle>
               <div className="ml-2">
-                <div>BUSCAR JEFE HOGAR Y CARACERIZAR</div>
+                  {/*  <SelectPicker
+                   data={data}
+                   placeholder="JEFE DE HOGAR A CARACTERIZAR"
+                   name="datoJefeHogar"
+                   value={IdJefeHogar}
+                   onChange={setDatoJefeHogar}
+                   size="lg"
+                   block
+                   /> */}
               </div>
-            </CCardTitle>
           </CCardHeader>
         <CCardBody>
             <>
@@ -91,27 +136,27 @@ const Caracterizacion = () => {
             <CTabContent className="mt-5">
               <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
                 <CContainer>
-                <CaracterizacionDG />
+                <CaracterizacionDG setActiveKey={setActiveKey} />
               </CContainer>
               </CTabPane>
               <CTabPane role="tabpanel" aria-labelledby="profile-tab" visible={activeKey === 2}>
                  <CContainer>
-                    <CaracterizacionOL />
+                    <CaracterizacionOL setActiveKey={setActiveKey} />
                  </CContainer>
               </CTabPane>
               <CTabPane role="tabpanel" aria-labelledby="contact-tab" visible={activeKey === 3}>
                  <CContainer>
-                    <CaracterizacionVI />
+                    <CaracterizacionVI setActiveKey={setActiveKey} />
                 </CContainer>
               </CTabPane>
              <CTabPane role="tabpanel" aria-labelledby="contact-tab" visible={activeKey === 4}>
-                     <CaracterizacionAP />
+                     <CaracterizacionAP setActiveKey={setActiveKey} />
             </CTabPane>
             <CTabPane role="tabpanel" aria-labelledby="contact-tab" visible={activeKey === 5}>
-                 <CaracterizacionTC />
+                 <CaracterizacionTC setActiveKey={setActiveKey} />
            </CTabPane>
             </CTabContent>
-  </>
+          </>
            </CCardBody>
           </CCard>
          </CCol>

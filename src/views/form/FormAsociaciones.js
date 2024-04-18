@@ -52,13 +52,13 @@ import CIcon from '@coreui/icons-react' */
        obtenerAsociacion();
        // eslint-disable-next-line
      }, []);
-   
+
 
 
      const EditaAsociacion = (event, item) => {
       event.preventDefault();
       setNombreBotoGuardarActulizar('Actualizar asociación');
- 
+
       setDatoAsociacion({
         ID: item.ID,
         idMunicipio: item.id_municipio,
@@ -68,12 +68,12 @@ import CIcon from '@coreui/icons-react' */
         direccionAsociacion:item.direccion,
         telefonoAsociacion: item.telefono,
       });
-    
-  
-     
+
+
+
     };
 
-  console.log({asociaciones})
+  //console.log({asociaciones})
 
   return (
     <><CRow>
@@ -270,7 +270,7 @@ import CIcon from '@coreui/icons-react' */
                               <div>{item.municipio}</div>
                               </CTableDataCell>
                               <CTableDataCell className="text-center">
-                                  
+
                                   <CTableDataCell>
                                     <div className="small text-medium-emphasis">
                                       <CTooltip
@@ -287,7 +287,7 @@ import CIcon from '@coreui/icons-react' */
                                         </CButton></CTooltip>
                                     </div>
                                   </CTableDataCell>
-                                  
+
                               </CTableDataCell>
                             </CTableRow>
                             ))

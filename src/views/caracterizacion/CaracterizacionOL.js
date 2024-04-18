@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
@@ -8,7 +9,7 @@ import {
   CAlert
 } from '@coreui/react'
 import { CForm } from '@coreui/react-pro'
-const CaracterizacionOL = () => {
+const CaracterizacionOL = ({setActiveKey}) => {
    const [validated, setValidated] = useState(false)
    const [datoradio, setDatoradio] = useState({
     afiliado: "",
@@ -84,11 +85,18 @@ const handleSubmit = (event) => {
   if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
-  }else{
-     console.log(datoradio);
-      console.log(datoCL);
-      console.log(datoOU);
+    return false;
   }
+
+   const DataForm = {
+      datoOU,
+      datoCL,
+      datoradio,
+    };
+    // console.log(DataForm);
+    localStorage.setItem("DataOL", JSON.stringify(DataForm));
+    console.log(localStorage.getItem("DataOL"));
+    setActiveKey(3)
 }
 
   return <>
@@ -142,7 +150,7 @@ const handleSubmit = (event) => {
                               label="Dificultad física y/o de movilidad"
                               checked={stateCL.condicionlaboralA}
                               onChange={handleChangeCL}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -152,7 +160,7 @@ const handleSubmit = (event) => {
                               label="Tiene empleo, pero no está trabajando (vacaciones o licencias)"
                               checked={stateCL.condicionlaboralB}
                               onChange={handleChangeCL}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -162,7 +170,7 @@ const handleSubmit = (event) => {
                               label="Trabajando para un familiar sin pago"
                               checked={stateCL.condicionlaboralC}
                               onChange={handleChangeCL}
-                              required
+
                             />
                             </CCol>
                             <CCol>
@@ -174,7 +182,7 @@ const handleSubmit = (event) => {
                               label="Estudiando"
                               checked={stateCL.condicionlaboralD}
                               onChange={handleChangeCL}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -184,7 +192,7 @@ const handleSubmit = (event) => {
                               label="Sin trabajo, pero buscando"
                               checked={stateCL.condicionlaboralE}
                               onChange={handleChangeCL}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -194,7 +202,7 @@ const handleSubmit = (event) => {
                               label="En labores del hogar"
                               checked={stateCL.condicionlaboralF}
                               onChange={handleChangeCL}
-                              required
+
                             />
                             </CCol>
                             <CCol>
@@ -206,7 +214,7 @@ const handleSubmit = (event) => {
                               label="Jubilado, pensionado o rentista"
                               checked={stateCL.condicionlaboralG}
                               onChange={handleChangeCL}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -216,7 +224,7 @@ const handleSubmit = (event) => {
                               label="Otra situación"
                               checked={stateCL.condicionlaboralH}
                               onChange={handleChangeCL}
-                              required
+
                             />
                             </CCol>
                         </CRow>
@@ -298,7 +306,7 @@ const handleSubmit = (event) => {
                               label="Empleado(a) Doméstico"
                               checked={stateOU.ocupacionOficiolA}
                               onChange={handleChangeOU}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -308,7 +316,7 @@ const handleSubmit = (event) => {
                               label="Labores del Hogar"
                               checked={stateOU.ocupacionOficiolB}
                               onChange={handleChangeOU}
-                              required
+
                             />
                               <CFormCheck
                               className="mb-3"
@@ -318,7 +326,7 @@ const handleSubmit = (event) => {
                               label="Jornalero o Peón"
                               checked={stateOU.ocupacionOficiolC}
                               onChange={handleChangeOU}
-                              required
+
                             />
                              </CCol>
                              <CCol>
@@ -330,7 +338,7 @@ const handleSubmit = (event) => {
                                   label="Obrero(a) o Empleado de empresa Particular"
                                   checked={stateOU.ocupacionOficiolD}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                                   <CFormCheck
                                   className="mb-3"
@@ -340,7 +348,7 @@ const handleSubmit = (event) => {
                                   label="Obrero(a) o empleado del gobierno"
                                   checked={stateOU.ocupacionOficiolE}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                                   <CFormCheck
                                   className="mb-3"
@@ -350,7 +358,7 @@ const handleSubmit = (event) => {
                                   label="Trabajador(a) independiente o por cuenta propia"
                                   checked={stateOU.ocupacionOficiolF}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                                 </CCol>
                                 <CCol>
@@ -362,7 +370,7 @@ const handleSubmit = (event) => {
                                   label="Jubilado, pensionado o rentista"
                                   checked={stateOU.ocupacionOficiolG}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                                 <CFormCheck
                                   className="mb-3"
@@ -372,7 +380,7 @@ const handleSubmit = (event) => {
                                   label="No sabe no responde/No trabaja"
                                   checked={stateOU.ocupacionOficiolH}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                                 <CFormCheck
                                   className="mb-3"
@@ -382,7 +390,7 @@ const handleSubmit = (event) => {
                                   label="Otra"
                                   checked={stateOU.ocupacionOficiolI}
                                   onChange={handleChangeOU}
-                                  required
+
                                 />
                             </CCol>
                         </CRow>
