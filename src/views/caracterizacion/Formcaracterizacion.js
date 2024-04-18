@@ -15,8 +15,8 @@ import {
   CContainer,
   CCardTitle,
 } from '@coreui/react'
-//import { SelectPicker } from 'rsuite';
-// import '../../../node_modules/rsuite/dist/rsuite.css';
+import { SelectPicker } from 'rsuite';
+import '../../../node_modules/rsuite/dist/rsuite.css';
 
 import CaracterizacionDG from './CaracterizacionDG'
 import CaracterizacionOL from './CaracterizacionOL'
@@ -24,26 +24,31 @@ import CaracterizacionVI from './CaracterizacionVI'
 import CaracterizacionAP from './CaracterizacionAP'
 import CaracterizacionTC from './CaracterizacionTC'
 
-//import { CaracterizacionForm } from '../../hooks'
+import { CaracterizacionForm } from '../../hooks'
 
 const Caracterizacion = () => {
- /*  const {
+  const {
          obtenerJefeHogar,
          JefeHogar,
-         userDetails,
-         IdJefeHogar,
-         setDatoJefeHogar
-       } = CaracterizacionForm(); */
+         userDetails
+       } = CaracterizacionForm();
 
   const [activeKey, setActiveKey] = useState(1)
+  const [value, setValue] = useState(0)
 
     useEffect(() => {
     // Consultar la api listar parques
-  //  obtenerJefeHogar();
+    obtenerJefeHogar();
     // eslint-disable-next-line
   }, []);
 
- /*  let data
+    useEffect(() => {
+    // Consultar la api listar parques
+     localStorage.setItem("IdJefeHogar", value);
+    // eslint-disable-next-line
+  }, [value]);
+
+  let data
   if(userDetails.USER_ROL === 'superuser') {
      data = JefeHogar?.map(
         item => ({
@@ -58,9 +63,8 @@ const Caracterizacion = () => {
             value: item.ID.toString()
         })
     );
-  } */
+  }
 
-  //console.log(IdJefeHogar)
 
   return (
     <>
@@ -72,15 +76,15 @@ const Caracterizacion = () => {
           </CCardHeader>
           <CCardHeader>
               <div className="ml-2">
-                  {/*  <SelectPicker
+                   <SelectPicker
                    data={data}
                    placeholder="JEFE DE HOGAR A CARACTERIZAR"
                    name="datoJefeHogar"
-                   value={IdJefeHogar}
-                   onChange={setDatoJefeHogar}
+                   value={value}
+                   onChange={setValue}
                    size="lg"
                    block
-                   /> */}
+                   />
               </div>
           </CCardHeader>
         <CCardBody>

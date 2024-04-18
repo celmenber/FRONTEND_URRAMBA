@@ -99,6 +99,7 @@ const handleSubmit = (event) => {
                                 id="servicioHFormCheck1"
                                 label="Conectado al alcantarillado"
                                 value={"Conectado al alcantarillado"}
+                                checked={datoradioAP.viviendaSH === "Conectado al alcantarillado" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -109,6 +110,7 @@ const handleSubmit = (event) => {
                                 label="Conectado a poza séptica"
                                 name="viviendaSH"
                                 value={"Conectado a poza séptica"}
+                                checked={datoradioAP.viviendaSH === "Conectado a poza séptica" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               /></CCol>
@@ -120,6 +122,7 @@ const handleSubmit = (event) => {
                                 label="Sobre pozo ciego"
                                 name="viviendaSH"
                                 value={"Sobre pozo ciego"}
+                                checked={datoradioAP.viviendaSH === "Sobre pozo ciego" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -130,6 +133,7 @@ const handleSubmit = (event) => {
                                 label="Baño quimico"
                                 name="viviendaSH"
                                 value={"Baño quimico"}
+                                checked={datoradioAP.viviendaSH === "Baño quimico" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               /></CCol>
@@ -141,6 +145,7 @@ const handleSubmit = (event) => {
                                 label="Sobre acequia o canal"
                                 name="viviendaSH"
                                 value={"Sobre acequia o canal"}
+                                checked={datoradioAP.viviendaSH === "Sobre acequia o canal" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -151,6 +156,7 @@ const handleSubmit = (event) => {
                                 label="No tiene servicio"
                                 name="viviendaSH"
                                 value={"No tiene servicio"}
+                                checked={datoradioAP.viviendaSH === "No tiene servicio" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -166,6 +172,7 @@ const handleSubmit = (event) => {
                                 label="Red pública"
                                 name="electricidaSP"
                                 value={"Red pública"}
+                                checked={datoradioAP.electricidaSP === "Red pública" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -176,6 +183,7 @@ const handleSubmit = (event) => {
                                 label="Planta solar"
                                 name="electricidaSP"
                                 value={"Planta solar"}
+                                 checked={datoradioAP.electricidaSP === "Planta solar" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -186,6 +194,7 @@ const handleSubmit = (event) => {
                                 label="Generador de combustible"
                                 name="electricidaSP"
                                 value={"Generador de combustible"}
+                                checked={datoradioAP.electricidaSP === "Generador de combustible" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -196,6 +205,7 @@ const handleSubmit = (event) => {
                                 label="Eolico (vientos)"
                                 name="electricidaSP"
                                 value={"Eolico (vientos)"}
+                                checked={datoradioAP.electricidaSP === "Eolico (vientos)" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -206,6 +216,7 @@ const handleSubmit = (event) => {
                                 label="No tiene servicio"
                                 name="electricidaSP"
                                 value={"No tiene servicio"}
+                                checked={datoradioAP.electricidaSP === "No tiene servicio" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -221,6 +232,7 @@ const handleSubmit = (event) => {
                                 label="Servicio recolección pública"
                                 name="basuraSP"
                                 value={"Servicio recolección pública"}
+                                checked={datoradioAP.basuraSP === "Servicio recolección pública" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -231,6 +243,7 @@ const handleSubmit = (event) => {
                                 label="La entierra y/o quema"
                                 name="basuraSP"
                                 value={"La entierra y/o quema"}
+                                checked={datoradioAP.basuraSP === "La entierra y/o quema" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -241,6 +254,7 @@ const handleSubmit = (event) => {
                                 label="La deja en terreno"
                                 name="basuraSP"
                                 value={"La deja en terreno"}
+                                checked={datoradioAP.basuraSP === "La deja en terreno" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -251,6 +265,7 @@ const handleSubmit = (event) => {
                                 label="La tira al rio"
                                 name="basuraSP"
                                 value={"La tira al rio"}
+                                checked={datoradioAP.basuraSP === "La tira al rio" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -266,6 +281,7 @@ const handleSubmit = (event) => {
                                 label="Si"
                                 name="cocinarSP"
                                 value={"Si"}
+                                 checked={datoradioAP.cocinarSP === "Si" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -276,6 +292,7 @@ const handleSubmit = (event) => {
                                 label="No"
                                 name="cocinarSP"
                                 value={"No"}
+                                 checked={datoradioAP.cocinarSP === "No" ? true : false}
                                 onChange={onChangeAP}
                                 required
                               />
@@ -362,6 +379,7 @@ const handleSubmit = (event) => {
                                 value="Si"
                                 label="Si"
                                 name="tfijoSP"
+                                 checked={datoradioAP.tfijoSP === "Si" ? true : false}
                                 onChange={onChangeAP}
                                 />
                             <CFormCheck inline
@@ -370,6 +388,7 @@ const handleSubmit = (event) => {
                                value="No"
                                label="No"
                                name="tfijoSP"
+                                checked={datoradioAP.tfijoSP === "No" ? true : false}
                                onChange={onChangeAP}
                                 required
                               />
@@ -382,6 +401,7 @@ const handleSubmit = (event) => {
                                     value="Si"
                                     label="Si"
                                     name="tmovilSP"
+                                     checked={datoradioAP.tmovilSP === "Si" ? true : false}
                                     onChange={onChangeAP}
                                     required
                                 />
@@ -391,6 +411,7 @@ const handleSubmit = (event) => {
                                   value="No"
                                   label="No"
                                   name="tmovilSP"
+                                  checked={datoradioAP.tmovilSP === "No" ? true : false}
                                   onChange={onChangeAP}
                                   required
                                   />
@@ -403,6 +424,7 @@ const handleSubmit = (event) => {
                                     value="Si"
                                     label="Si"
                                     name="internetSP"
+                                     checked={datoradioAP.internetSP === "Si" ? true : false}
                                     onChange={onChangeAP}
                                     required
                                     />
@@ -412,6 +434,7 @@ const handleSubmit = (event) => {
                                   value="No"
                                   label="No"
                                   name="internetSP"
+                                  checked={datoradioAP.internetSP === "No" ? true : false}
                                   onChange={onChangeAP}
                                   required
                                   />
@@ -433,6 +456,7 @@ const handleSubmit = (event) => {
                                 id="viasaccesoCheckbox1"
                                 value="Si"
                                 label="Si"
+                                checked={datoradioAP.viaccesoSV === "Si" ? true : false}
                                 onChange={onChangeAP}
                                  />
                             <CFormCheck inline
@@ -441,6 +465,7 @@ const handleSubmit = (event) => {
                                id="viasaccesoCheckbox2"
                                value="No"
                                label="No"
+                                checked={datoradioAP.viaccesoSV === "No" ? true : false}
                                onChange={onChangeAP}
                                required
                                />
@@ -453,6 +478,7 @@ const handleSubmit = (event) => {
                                     id="CdeportivasCheckbox1"
                                     value="Si"
                                     label="Si"
+                                     checked={datoradioAP.canchasdSV === "Si" ? true : false}
                                     onChange={onChangeAP}
                                     required
                                     />
@@ -462,6 +488,7 @@ const handleSubmit = (event) => {
                                   id="CdeportivasCheckbox2"
                                   value="No"
                                   label="No"
+                                  checked={datoradioAP.canchasdSV === "No" ? true : false}
                                   onChange={onChangeAP}
                                   required
                                   />
@@ -474,6 +501,7 @@ const handleSubmit = (event) => {
                                     id="ParqueCheckbox1"
                                     value="Si"
                                     label="Si"
+                                     checked={datoradioAP.parquesSV === "Si" ? true : false}
                                     onChange={onChangeAP}
                                     required
                                     />
@@ -483,6 +511,7 @@ const handleSubmit = (event) => {
                                   id="ParqueCheckbox2"
                                   value="No"
                                   label="No"
+                                  checked={datoradioAP.parquesSV === "No" ? true : false}
                                   onChange={onChangeAP}
                                   required
                                   />
@@ -495,6 +524,7 @@ const handleSubmit = (event) => {
                                     id="ScomunalCheckbox1"
                                     value="Si"
                                     label="Si"
+                                    checked={datoradioAP.salonComunalSV === "Si" ? true : false}
                                     onChange={onChangeAP}
                                     required
                                     />
@@ -504,6 +534,7 @@ const handleSubmit = (event) => {
                                   id="ScomunalCheckbox2"
                                   value="No"
                                   label="No"
+                                    checked={datoradioAP.salonComunalSV === "No" ? true : false}
                                   onChange={onChangeAP}
                                   required
                                   />

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2'
 
 import { CaracterizacionForm } from '../../hooks'
 
-const CaracterizacionTC = () => {
+const CaracterizacionTC = ({ID}) => {
   const [validated, setValidated] = useState(false)
   const [otrosTC, setOtrosTC] = useState("");
   const [otroQEJ, setOtrosQEJE] = useState("");
@@ -105,7 +106,7 @@ const CaracterizacionTC = () => {
     }).then((result) => {
       console.log(result);
       if (result.value) {
-         handleSubmitCaracterizacion(result);
+         handleSubmitCaracterizacion({result,ID});
       }
     });
 
@@ -224,6 +225,7 @@ const CaracterizacionTC = () => {
                                 id="eviaFormCheck1"
                                 label="Buena"
                                 value="Buena"
+                                 checked={datoradioTC.eviasectorTC === "Buena" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -234,6 +236,7 @@ const CaracterizacionTC = () => {
                                 id="eviaFormCheck2"
                                 label="Regular"
                                 value="Regular"
+                                checked={datoradioTC.eviasectorTC === "Regular" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -244,6 +247,7 @@ const CaracterizacionTC = () => {
                                 id="eviaFormCheck3"
                                 label="Mala"
                                 value="Mala"
+                                checked={datoradioTC.eviasectorTC === "Mala" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -259,6 +263,7 @@ const CaracterizacionTC = () => {
                                 id="transportePFormCheck1"
                                 label="Si"
                                 value="Si"
+                                checked={datoradioTC.transporteTC === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -269,6 +274,7 @@ const CaracterizacionTC = () => {
                                 id="transportePFormCheck2"
                                 label="No"
                                 value="No"
+                                 checked={datoradioTC.transporteTC === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -285,6 +291,7 @@ const CaracterizacionTC = () => {
                                 id="apoblacionFormCheck1"
                                 label="Facil"
                                 value="Facil"
+                                 checked={datoradioTC.dpoblacionTC === "Facil" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -295,6 +302,7 @@ const CaracterizacionTC = () => {
                                 id="apoblacionFormCheck2"
                                 label="Complejo"
                                 value="Complejo"
+                                 checked={datoradioTC.dpoblacionTC === "Complejo" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -310,6 +318,7 @@ const CaracterizacionTC = () => {
                                 id="proyectosBFormCheck1"
                                 label="Si"
                                 value="Si"
+                                checked={datoradioTC.pbeneficiendeTC === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -320,6 +329,7 @@ const CaracterizacionTC = () => {
                                 id="proyectosBFormCheck2"
                                 label="No"
                                 value="No"
+                                checked={datoradioTC.pbeneficiendeTC === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -342,6 +352,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTFormCheck1"
                                 label="Si"
                                 value="Si"
+                                checked={datoradioTC.mtradicionalTC === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -352,6 +363,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTFormCheck2"
                                 label="No"
                                 value="No"
+                                checked={datoradioTC.mtradicionalTC === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -367,6 +379,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTEFormCheck1"
                                 label="Medico tradicional"
                                 value="Medico tradicional"
+                                 checked={datoradioTC.qejeterritorioTC === "Medico tradicional" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -377,6 +390,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTEFormCheck2"
                                 label="Curandero"
                                 value="Curandero"
+                                 checked={datoradioTC.qejeterritorioTC === "Curandero" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -387,6 +401,7 @@ const CaracterizacionTC = () => {
                                 id="emedicinaTEFormCheck3"
                                 label="Llervero"
                                 value="Llervero"
+                                 checked={datoradioTC.qejeterritorioTC === "Llervero" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -397,6 +412,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTEFormCheck4"
                                 label="Sobador"
                                 value="Sobador"
+                                 checked={datoradioTC.qejeterritorioTC === "Sobador" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -407,6 +423,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTEFormCheck5"
                                 label="Partera"
                                 value="Partera"
+                                 checked={datoradioTC.qejeterritorioTC === "Partera" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -417,6 +434,7 @@ const CaracterizacionTC = () => {
                                 id="medicinaTEFormCheck6"
                                 label="Otro"
                                 value="Otro"
+                                 checked={datoradioTC.qejeterritorioTC === "Otro" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -456,6 +474,7 @@ const CaracterizacionTC = () => {
                                 id="BMapaleFormCheck1"
                                 label="Si"
                                 value="Si"
+                                checked={datoradioTC.MapaleAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -466,6 +485,7 @@ const CaracterizacionTC = () => {
                                 id="BMapaleFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.MapaleAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -476,6 +496,7 @@ const CaracterizacionTC = () => {
                                 id="BMapaleFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.MapaleAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -486,6 +507,7 @@ const CaracterizacionTC = () => {
                                 id="BMapaleFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.MapaleAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -499,6 +521,7 @@ const CaracterizacionTC = () => {
                                 id="SonNegroFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                 checked={datoradioTC.SonNegroAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -509,6 +532,7 @@ const CaracterizacionTC = () => {
                                 id="SonNegroFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.SonNegroAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -519,6 +543,7 @@ const CaracterizacionTC = () => {
                                 id="SonNegroFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.SonNegroAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -529,6 +554,7 @@ const CaracterizacionTC = () => {
                                 id="SonNegroFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.SonNegroAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -544,6 +570,7 @@ const CaracterizacionTC = () => {
                                 id="NegritosFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                 checked={datoradioTC.LosNegritosAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -554,6 +581,7 @@ const CaracterizacionTC = () => {
                                 id="NegritosFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.LosNegritosAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -564,6 +592,7 @@ const CaracterizacionTC = () => {
                                 id="NegritosFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.LosNegritosAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -574,6 +603,7 @@ const CaracterizacionTC = () => {
                                 id="NegritosFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                checked={datoradioTC.LosNegritosAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -587,6 +617,7 @@ const CaracterizacionTC = () => {
                                 id="SereseseFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                checked={datoradioTC.SereseseAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -597,6 +628,7 @@ const CaracterizacionTC = () => {
                                 id="SereseseFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.SereseseAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -607,6 +639,7 @@ const CaracterizacionTC = () => {
                                 id="SereseseFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.SereseseAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -617,6 +650,7 @@ const CaracterizacionTC = () => {
                                 id="SereseseFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.SereseseAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -637,6 +671,7 @@ const CaracterizacionTC = () => {
                                 id="FBMapaleFormCheck1"
                                 label="Si"
                                 value="Si"
+                                 checked={datoradioTC.FMapaleAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -647,6 +682,7 @@ const CaracterizacionTC = () => {
                                 id="FBMapaleFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.FMapaleAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -657,6 +693,7 @@ const CaracterizacionTC = () => {
                                 id="FBMapaleFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.FMapaleAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -667,6 +704,7 @@ const CaracterizacionTC = () => {
                                 id="FBMapaleFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.FMapaleAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -680,6 +718,7 @@ const CaracterizacionTC = () => {
                                 id="FSonNegroFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                 checked={datoradioTC.FSonNegroAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -690,6 +729,7 @@ const CaracterizacionTC = () => {
                                 id="FSonNegroFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.FSonNegroAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -700,6 +740,7 @@ const CaracterizacionTC = () => {
                                 id="FSonNegroFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.FSonNegroAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -710,6 +751,7 @@ const CaracterizacionTC = () => {
                                 id="FSonNegroFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.FSonNegroAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -725,6 +767,7 @@ const CaracterizacionTC = () => {
                                 id="FNegritosFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                 checked={datoradioTC.FLosNegritosAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -735,6 +778,7 @@ const CaracterizacionTC = () => {
                                 id="FNegritosFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.FLosNegritosAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -745,6 +789,7 @@ const CaracterizacionTC = () => {
                                 id="FNegritosFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.FLosNegritosAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -755,6 +800,7 @@ const CaracterizacionTC = () => {
                                 id="FNegritosFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.FLosNegritosAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -768,6 +814,7 @@ const CaracterizacionTC = () => {
                                 id="FSereseseFormCheck1"
                                 label="Si"
                                 value={"Si"}
+                                checked={datoradioTC.FSereseseAF === "Si" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -778,6 +825,7 @@ const CaracterizacionTC = () => {
                                 id="FSereseseFormCheck2"
                                 label="No"
                                 value={"No"}
+                                 checked={datoradioTC.FSereseseAF === "No" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -788,6 +836,7 @@ const CaracterizacionTC = () => {
                                 id="FSereseseFormCheck3"
                                 label="No Sabe"
                                 value={"No Sabe"}
+                                 checked={datoradioTC.FSereseseAF === "No Sabe" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -798,6 +847,7 @@ const CaracterizacionTC = () => {
                                 id="FSereseseFormCheck4"
                                 label="No Responde"
                                 value={"No Responde"}
+                                 checked={datoradioTC.FSereseseAF === "No Responde" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -817,6 +867,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck1"
                                 label="Fiestas"
                                 value={"Fiestas"}
+                                 checked={datoradioTC.UsoDanzas === "Fiestas" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -827,6 +878,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck2"
                                 label="Matrimonios"
                                 value={"Matrimonios"}
+                                  checked={datoradioTC.UsoDanzas === "Matrimonios" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -837,6 +889,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck3"
                                 label="Funerales"
                                 value={"Funerales"}
+                                  checked={datoradioTC.UsoDanzas === "Funerales" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -847,6 +900,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck4"
                                 label="Sobador"
                                 value={"Sobador"}
+                                  checked={datoradioTC.UsoDanzas === "Sobador" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -857,6 +911,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck5"
                                 label="Nacimientos"
                                 value={"Nacimientos"}
+                                  checked={datoradioTC.UsoDanzas === "Nacimientos" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -867,6 +922,7 @@ const CaracterizacionTC = () => {
                                 id="danzasTFormCheck6"
                                 label="Otro"
                                 value={"Otro"}
+                                  checked={datoradioTC.UsoDanzas === "Otro" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />

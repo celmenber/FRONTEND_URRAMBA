@@ -181,8 +181,8 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                                 id="victimaCheckbox1"
                                 value="Si"
                                 label="Si"
-                                checked={datogeneral.victimaC}
-                                onChange={onChangeGeneral === "Si" ? true : false}
+                                checked={datogeneral.victimaC === "Si" ? true : false}
+                                onChange={onChangeGeneral}
                                 required
                               />
                             <CFormCheck inline

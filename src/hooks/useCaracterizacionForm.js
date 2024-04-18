@@ -20,19 +20,9 @@ export const CaracterizacionForm = () => {
   //selecion del state en el  store
  const { userDetails } = useSelector((state) => state.Auth);
  const JefeHogar = useSelector((state) => state.JefeHogar.listaJefeHogar)
- //const [IdJefeHogar, setDatoJefeHogar] = useState('0')
 
   const handleSubmitCaracterizacion = (result) => {
-   //event.preventDefault();
-   // setValidated(true)
-/*     const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-      return false;
-    } */
-
-
+    const IdJefeHogar = parseInt(localStorage.getItem("IdJefeHogar"))
     const DataDG = JSON.parse(localStorage.getItem("DataDG"));
     const DataOL = JSON.parse(localStorage.getItem("DataOL"));
     const DataVI = JSON.parse(localStorage.getItem("DataVI"));
@@ -41,7 +31,7 @@ export const CaracterizacionForm = () => {
 
     const formularioDatos = {
             id_usuario:userDetails.ID_USER,
-            id_jefe_hogar:4,
+            id_jefe_hogar:IdJefeHogar,
             regimen_salud:DataDG.datogeneral.regimenS,
             se_encuentra_vinculado_asalud:DataDG.datogeneral.vinculadoA !=='Otro'
             ? DataDG.datogeneral.vinculadoA
@@ -95,11 +85,14 @@ export const CaracterizacionForm = () => {
             : DataTC.datoradioTC.otrosTC,
       }
        console.log(formularioDatos);
-      crearCaracterizacion(formularioDatos);
+       if(result.value){
+         crearCaracterizacion(formularioDatos);
+       }
+
   }
 
 const handleDiscapacida = (DATO) => {
-/* let cadena = DATO.discapacidadA+","+
+let cadena = DATO.discapacidadA+","+
              DATO.discapacidadB+","+
              DATO.discapacidadC+","+
              DATO.discapacidadD+","+
@@ -111,7 +104,7 @@ const handleDiscapacida = (DATO) => {
       if (vector[i] !== "") {
         lista = lista + vector[i] + ";";
       }
-    } */
+    }
     return true;
   };
 
@@ -283,7 +276,5 @@ return {
      obtenerJefeHogar,
      JefeHogar,
      userDetails,
-   //  IdJefeHogar,
-  //   setDatoJefeHogar
     }
 };

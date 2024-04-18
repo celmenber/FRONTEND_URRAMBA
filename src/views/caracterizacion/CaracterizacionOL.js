@@ -118,6 +118,7 @@ const handleSubmit = (event) => {
                               id="afiliadoCheck1"
                               label="Si"
                               value={"Si"}
+                              checked={datoradio.afiliado === "Si" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
@@ -128,6 +129,7 @@ const handleSubmit = (event) => {
                               id="afiliadoCheck2"
                               label="No"
                               value={"No"}
+                              checked={datoradio.afiliado === "No" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
@@ -236,54 +238,61 @@ const handleSubmit = (event) => {
                               </CCol>
                         </CRow>
                         <CRow className="mb-4">
-                          <CCol sm="auto">
-                            <CFormCheck inline
+                          <CCol>
+                            <CFormCheck
                               className="mb-3"
                               type="radio"
                               name="remuneracionL"
                               id="TiporemunCheck1"
                               label="Trabajador(a) asalariado"
                               value={"Trabajador(a) asalariado"}
+                              checked={datoradio.remuneracionL === "Trabajador(a) asalariado" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
-                            <CFormCheck inline
+                            <CFormCheck
                               className="mb-3"
                               type="radio"
                               name="remuneracionL"
                               id="TiporemunCheck2"
                               label="Trabajador(a) de servicio doméstico"
                               value={"Trabajador(a) de servicio doméstico"}
+                              checked={datoradio.remuneracionL === "Trabajador(a) de servicio doméstico" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
-                            <CFormCheck inline
+                            <CFormCheck
                               className="mb-3"
                               type="radio"
                               name="remuneracionL"
                               id="TiporemunCheck3"
                               label="Empleador(a), empresario(a) o patrón"
                               value={"Empleador(a), empresario(a) o patrón"}
+                              checked={datoradio.remuneracionL === "Empleador(a), empresario(a) o patrón" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
-                            <CFormCheck inline
+                            </CCol>
+                            <CCol>
+                            <CFormCheck
                               className="mb-3"
                               type="radio"
                               name="remuneracionL"
                               id="TiporemunCheck4"
                               label="Trabajador(a) por cuenta propia o independiente"
                               value={"Trabajador(a) por cuenta propia o independiente"}
+                              checked={datoradio.remuneracionL === "Trabajador(a) por cuenta propia o independiente" ? true : false}
                               onChange={onChangeOL}
                               required
                             />
-                            <CFormCheck inline
+                            <CFormCheck
                               className="mb-3"
                               type="radio"
                               name="remuneracionL"
                               id="TiporemunCheck5"
                               label="Familiar no remunerado"
                               value={"Familiar no remunerado"}
+                              checked={datoradio.remuneracionL === "Familiar no remunerado" ? true : false}
                               onChange={onChangeOL}
                               required
                             />

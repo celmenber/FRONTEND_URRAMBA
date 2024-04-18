@@ -179,9 +179,7 @@ const datoEP = {
                           <CFormInput type="text" sm="auto"
                                 size="sm"
                                 id="personasHV"
-                                floatingClassName="mb-3"
-                                floatingLabel="Cuantas personas habitan la vivienda"
-                                placeholder="Cuantas personas habitan la vivienda"
+                                placeholder="Escriba numero personas"
                                 name="personasHV"
                                 value={personasHV}
                                 onChange={(e) => setPersonasHV(e.target.value)}
@@ -199,6 +197,7 @@ const datoEP = {
                               label="Casa"
                               value="Casa"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Casa" ? true : false}
                               onChange={onChangeVEI}
                               required
                             />
@@ -209,6 +208,7 @@ const datoEP = {
                               label="Apartamento"
                               value="Apartamento"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Apartamento" ? true : false}
                               onChange={onChangeVEI}
                               required
                             /><CFormCheck inline
@@ -218,6 +218,7 @@ const datoEP = {
                               label="Pieza"
                               value="Pieza"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Pieza" ? true : false}
                               onChange={onChangeVEI}
                               required
                               />
@@ -228,6 +229,7 @@ const datoEP = {
                               label="Inquilinato"
                               value="Inquilinato"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Inquilinato" ? true : false}
                               onChange={onChangeVEI}
                               required
                               />
@@ -238,6 +240,7 @@ const datoEP = {
                               label="Albergue"
                               value="Albergue"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Albergue" ? true : false}
                               onChange={onChangeVEI}
                               required
                               />
@@ -248,6 +251,7 @@ const datoEP = {
                               label="Otro"
                               value="Otro"
                               name="viviendaTI"
+                              checked={datoradio.viviendaTI === "Otro" ? true : false}
                               onChange={onChangeVEI}
                               required
                               />
@@ -269,6 +273,7 @@ const datoEP = {
                                 label="Propia"
                                 value="Propia"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Propia" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -279,6 +284,7 @@ const datoEP = {
                                 label="En arriendo"
                                 value="En arriendo"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "En arriendo" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -289,6 +295,7 @@ const datoEP = {
                                 label="Familiar"
                                 value="Familiar"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Familiar" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -299,6 +306,7 @@ const datoEP = {
                                 label="Albergue"
                                 value="Albergue"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Albergue" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -309,6 +317,7 @@ const datoEP = {
                                 label="Asentamiento"
                                 value="Asentamiento"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Asentamiento" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -319,6 +328,7 @@ const datoEP = {
                                 label="Lugar de trabajo"
                                 value="Lugar de trabajo"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Lugar de trabajo" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
@@ -329,6 +339,7 @@ const datoEP = {
                                 label="Paga diario"
                                 value="Paga diario"
                                 name="viviendaTE"
+                                checked={datoradio.viviendaTE === "Paga diario" ? true : false}
                                 onChange={onChangeVEI}
                                 required
                               />
