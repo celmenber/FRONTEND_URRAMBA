@@ -28,7 +28,7 @@ export const MiembroForm = () => {
     const crearMiembro = (Dataform) => dispatch(crearNuevoMiembroAction(Dataform));
     const actulizarMiembro = (Dataform) => dispatch(editarMiembroAction(Dataform));
 
-
+    const { userDetails } = useSelector((state) => state.Auth);
     const cargando = useSelector(state => state.Miembro.loading);
     const cargandolista = useSelector(state => state.Miembro.loadinglista);
     const barrios = useSelector(state => state.Parametros.barriosveredas);
@@ -105,7 +105,7 @@ export const MiembroForm = () => {
         } else {
 
             const formularioDatos = {
-                Id_usuario:"1",
+                Id_usuario: userDetails.ID_USER,
                 Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
                 Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
                 Id_corregimiento: datoMiembro.Id_corregimiento,
@@ -135,11 +135,11 @@ export const MiembroForm = () => {
             setVisibleM(false)
             event.stopPropagation()
         }
-   
+
         setValidated(true)
     }
     const EditaMiembro = (id) => {
-        
+
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({
@@ -165,11 +165,11 @@ export const MiembroForm = () => {
             Fecha_ingreso: datos[0].fecha_ingreso,
         });
     };
-    
+
     const handleSubmitAct = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-    
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
@@ -194,7 +194,7 @@ export const MiembroForm = () => {
                 Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
                 Fecha_ingreso: datoMiembro.Fecha_ingreso,
             };
-    
+
             // Asumo que actulizarMiembro es una función que realiza la actualización
             // No tengo su implementación, así que debes ajustarlo según tu código real
             if (!valedita) {
@@ -205,7 +205,7 @@ export const MiembroForm = () => {
                 });
             }
         }
-    
+
         setVisibleMI(false);
         event.stopPropagation();
     };
@@ -222,10 +222,10 @@ export const MiembroForm = () => {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.value) {
-                dispatch(borrarMiembroAction(Id)); 
-            } 
+                dispatch(borrarMiembroAction(Id));
+            }
         });
-        
+
     }
     return {
         handleSubmit,

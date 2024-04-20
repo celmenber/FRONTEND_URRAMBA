@@ -21,9 +21,9 @@ export const ConcejoForm = () => {
   const obtenerConcejo = () => dispatch(obtenerConcejoAction())
   const crearNuevoConcejo = (Dataform) => dispatch(crearNuevoConcejoAction(Dataform))
   const actulizarConcejo = (Dataform) => dispatch(editarConcejoAction(Dataform))
-  // const updateConcejo = (Dataform) => dispatch(editarConcejoAction(Dataform))
 
   //selecion del state en el  store
+  const { userDetails } = useSelector((state) => state.Auth);
   const cargando = useSelector((state) => state.Asociacion.loading)
   const cargandolista = useSelector((state) => state.Asociacion.loadinglista)
   // const Asociacioneditar = useSelector((state) => state.Asociacion.Asociacioneditar)
@@ -76,6 +76,7 @@ export const ConcejoForm = () => {
       setValidated(true); // Si hay campos inválidos, establecer validated a true
     } else {
       const formularioDatos = {
+        Id_usuario: userDetails.ID_USER,
         Id_asociacion: datoConcejo.id_asociacion,
         Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
         Id_municipio: datoConcejo.idMunicipio,

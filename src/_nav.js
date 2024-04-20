@@ -32,11 +32,11 @@ const administrador_nav = [
         name: 'Admin Asociacion',
         to: '/admin/asociaciones',
       },
-      {
+     /*  {
         component: CNavItem,
         name: 'Parámetros',
         to: '/admin/parametros',
-      },
+      }, */
     ],
   },
   {

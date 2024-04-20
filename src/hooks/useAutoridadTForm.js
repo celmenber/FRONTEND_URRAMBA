@@ -31,7 +31,7 @@ export const AutoridadTForm = () => {
   const actulizarAutoridadT = (Dataform) => dispatch(editarAutoridadTAction(Dataform));
 
     //selecion del state en el  store
-   // const { userDetails } = useSelector((state) => state.Auth);
+  const { userDetails } = useSelector((state) => state.Auth);
   const cargando = useSelector(state => state.AutoridadT.loading);
   const cargandolista = useSelector(state => state.AutoridadT.loadinglista);
   const municipio = useSelector(state => state.Parametros.municipios);
@@ -70,7 +70,7 @@ export const AutoridadTForm = () => {
 
     // Leer los datos del formulario
     const onChangeFormulario = e => {
-      
+
       setDatoAutoridad({
         ...datoAutoridad,
             [e.target.name]: e.target.value
@@ -99,7 +99,7 @@ export const AutoridadTForm = () => {
     };
 
     const handleSubmit = (event) => {
-      
+
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {
@@ -109,7 +109,7 @@ export const AutoridadTForm = () => {
 
             const formularioDatos = {
 
-                    Id_usuario:"1",
+                    Id_usuario:userDetails.ID_USER,
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
                     Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
                     Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
@@ -145,7 +145,7 @@ export const AutoridadTForm = () => {
 
     // función que redirige Edita ContactoAsunto
   const EditarAutoridad = (id) => {
-    
+
     const datos = autoridadT.filter(C => C.ID === id)
     setVisibleEAT(true)
     setDatoAutoridad({
@@ -169,13 +169,13 @@ export const AutoridadTForm = () => {
   }
 
   const handleSubmitAct = (event) => {
-    
+
     event.preventDefault();
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
         event.stopPropagation();
-       
+
     } else {
         const formularioDatos = {
           Id_usuario:"1",
@@ -195,7 +195,7 @@ export const AutoridadTForm = () => {
           Fecha_ingreso: datoAutoridad.Fechaingreso,
           Id_escolaridad: 1,
           Estado_escolaridad: 'Terminado',
-     
+
         };
 
         // Asumo que actulizarMiembro es una función que realiza la actualización
@@ -253,7 +253,7 @@ export const AutoridadTForm = () => {
       valedita,
       datoAutoridad,
        setDatoAutoridad,
-      selectActivar, 
+      selectActivar,
       setSelectActivar,
       visibleAT, setVisibleAT,
       visibleEAT, setVisibleEAT,

@@ -85,9 +85,9 @@ export const CaracterizacionForm = () => {
             : DataTC.datoradioTC.otrosTC,
       }
        console.log(formularioDatos);
-       if(result.value){
+      // if(result.value){
          crearCaracterizacion(formularioDatos);
-       }
+       //}
 
   }
 

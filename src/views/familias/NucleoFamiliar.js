@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useState, useEffect } from 'react'
@@ -28,13 +29,15 @@ import { NucleoFamiliarForm } from 'src/hooks/useNucleoFamiliarForm'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/icons'
 import { CLoadingButton } from '@coreui/react-pro'
+import { SelectPicker } from 'rsuite';
+import '../../../node_modules/rsuite/dist/rsuite.css';
 
 const NucleoFamiliar = () => {
   const [selectServicio] = useState(1);
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [habilitarAgregar, setHabilitarAgregar] = useState(false)
   const [nuevaListaHogar, setNuevaListaHogar] = useState([])
-
+  const [valueJH, setValueJH] = useState(0)
 
   const {
     jefeHogarByID,
@@ -47,6 +50,9 @@ const NucleoFamiliar = () => {
     obtenerParentesco,
     obtenerEscolaridad,
     obtenerOrientacionSexual,
+    obtenerJefeHogar,
+    JefeHogar,
+    userDetails,
     tipodocumento,
     onChangeFormulario,
     handleSubmit,
@@ -62,9 +68,14 @@ const NucleoFamiliar = () => {
     handleActualizarNucleoFamiliar,
     nombreBotoGuardarActulizar,
     validated
-
   } = NucleoFamiliarForm();
   const { id } = useParams()
+
+  useEffect(() => {
+    // Consultar la api listar parques
+    obtenerJefeHogar();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     obtenerNucleoFamiliar()
@@ -88,6 +99,14 @@ const NucleoFamiliar = () => {
     }
 
   }, [id])
+
+    useEffect(() => {
+    // Consultar la api listar parques
+     console.log(valueJH);
+     setIdJefeHogar(valueJH)
+    // eslint-disable-next-line
+  }, [valueJH]);
+
   useEffect(() => {
     setNuevaListaHogar(nucleoFamiliar?.filter(item => item?.ID_jefehogar === id));
   }, [nucleoFamiliar, id]);
@@ -120,6 +139,23 @@ debugger
     console.log(item)
   }
  // acciones editar , eliminar, trasladar
+
+   let data
+  if(userDetails.USER_ROL === 'superuser') {
+     data = JefeHogar?.map(
+        item => ({
+              label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
+              value: item.ID.toString()
+        })
+    );
+  }else{
+     data = JefeHogar?.filter(C => C.id_usuario === true).map(
+        item => ({
+            label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
+            value: item.ID.toString()
+        })
+    );
+  }
 
   return (
     <CContainer>
@@ -154,11 +190,19 @@ debugger
               </div>
             </CCardTitle>
           ) : (
-            <CCardTitle>
-              <div className="ml-2">
-                <CButton>BUSCAR JEFE HOGAR</CButton>
-              </div>
-            </CCardTitle>
+              <CCardTitle>
+                 <div className="ml-2">
+                   <SelectPicker
+                   data={data}
+                   placeholder="SELECCIONAR EL JEFE DE HOGAR"
+                   name="datoJefeHogar"
+                   value={valueJH}
+                   onChange={setValueJH}
+                   size="lg"
+                   block
+                   />
+               </div>
+          </CCardTitle>
           )}
         </CCardHeader>
         <CCardBody>
@@ -167,7 +211,7 @@ debugger
             noValidate
             validated={validated}>
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-2">
                 <CFormSelect
                   type='text'
                   id="Id_tipo_documento"
@@ -191,7 +235,7 @@ debugger
                     )}
                 </CFormSelect>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <CFormInput
                   type="number"
                   id="Documentos"
@@ -202,7 +246,32 @@ debugger
                   required
                 />
               </div>
-              <div className="col-md-4">
+              <div className='col-md-3'>
+              <CFormInput
+                  type="text"
+                  id="Nombres"
+                  name="Nombres"
+                  placeholder="Nombres"
+                  value={datoNucleoFamiliar.Nombres}
+                  onChange={onChangeFormulario}
+                  required
+                />
+              </div>
+              <div className='col-md-4'>
+              <CFormInput
+                  type="text"
+                  id="Apellidos"
+                  name="Apellidos"
+                  placeholder="Apellidos"
+                  value={datoNucleoFamiliar.Apellidos}
+                  onChange={onChangeFormulario}
+                  required
+                />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+             <div className="col-md-3">
                 <CFormSelect
                   type="text"
                   id="Id_parentesco"
@@ -211,7 +280,7 @@ debugger
                   value={datoNucleoFamiliar.Id_parentesco}
                   onChange={onChangeFormulario}
                   required>
-                    <option key={'0'} value={''}>Tipo Parentesco</option>
+                    <option key={'0'} value={''}>Parentesco</option>
                 {parentesco?.length === 0
                     ? <option key={'0'} value={''}>Seleccione...</option>
                     : (
@@ -226,37 +295,7 @@ debugger
                     )}
                 </CFormSelect>
               </div>
-
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-              <CFormInput
-                  type="text"
-                  id="Nombres"
-                  name="Nombres"
-                  placeholder="Nombres"
-                  value={datoNucleoFamiliar.Nombres}
-                  onChange={onChangeFormulario}
-                  required
-                />
-              </div>
-              <div className='col-md-6'>
-              <CFormInput
-                  type="text"
-                  id="Apellidos"
-                  name="Apellidos"
-                  placeholder="Apellidos"
-                  value={datoNucleoFamiliar.Apellidos}
-                  onChange={onChangeFormulario}
-                  required
-                />
-              </div>
-            </div>
-            {/* otro */}
-            <br/>
-            <div className="row">
-              <div className='col-md-4'>
+               <div className='col-md-3'>
                 <CFormInput
                   type="Date"
                   id="Fecha_nacimiento"
@@ -266,7 +305,7 @@ debugger
                   onChange={onChangeFormulario}
                   required />
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <CFormSelect
                   type='text'
                   id="Id_escolaridad"
@@ -291,7 +330,7 @@ debugger
                     )}
                 </CFormSelect>
               </div>
-              <div className="col-md-4">
+                <div className="col-md-3">
                 <CFormSelect
                   id="Estado_escolaridad"
                   name='Estado_escolaridad'
@@ -304,13 +343,10 @@ debugger
                   <option value={'Retirado'}>Retirado</option>
                 </CFormSelect>
               </div>
-
-
             </div>
-            {/* otro */}
             <br/>
             <div className="row">
-              <div className='col-md-4'>
+              <div className='col-md-3'>
                 <CFormSelect
                   id="Genero"
                   name='Genero'
@@ -320,6 +356,18 @@ debugger
                   <option value={''}>Genero...</option>
                   <option value={'Masculino'}>Masculino</option>
                   <option value={'Femenino'}>Femenino</option>
+                </CFormSelect>
+              </div>
+              <div className="col-md-3">
+                <CFormSelect
+                  id="Sexo"
+                  name='Sexo'
+                  value={datoNucleoFamiliar.Sexo}
+                  onChange={onChangeFormulario}
+                  required>
+                  <option value={''}>Sexo...</option>
+                  <option value={'Hombre'}>Hombre</option>
+                  <option value={'Mujer'}>Mujer</option>
                 </CFormSelect>
               </div>
               <div className="col-md-4">
@@ -344,22 +392,7 @@ debugger
                     )}
                 </CFormSelect>
               </div>
-              <div className="col-md-4">
-                <CFormSelect
-                  id="Sexo"
-                  name='Sexo'
-                  value={datoNucleoFamiliar.Sexo}
-                  onChange={onChangeFormulario}
-                  required>
-                  <option value={''}>Sexo...</option>
-                  <option value={'Hombre'}>Hombre</option>
-                  <option value={'Mujer'}>Mujer</option>
-                </CFormSelect>
-              </div>
-
-
             </div>
-
             <br/>
             <CButton
                   type="button"

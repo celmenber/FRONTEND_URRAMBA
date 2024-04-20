@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerConcejoAction } from 'src/action/ConsejoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
+import { obtenerJefeHogarAction } from '../action/JefeHogarAction'
 import {
     obtenerBarrioVeredaAction,
     obtenerEscolaridadAction,
@@ -13,15 +14,16 @@ import {
 }
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
-import { borrarNucleoFamiliarAction, 
-    crearNuevoNucleoFamiliarAction, 
-    editarNucleoFamiliarAction, 
+import { borrarNucleoFamiliarAction,
+    crearNuevoNucleoFamiliarAction,
+    editarNucleoFamiliarAction,
     obtenerNucleoFamiliarAction } from 'src/action/NucleoFamiliarAction';
 
 
 export const NucleoFamiliarForm = () => {
 
     const dispatch = useDispatch()
+    const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction())
     const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
     const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
     const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
@@ -34,7 +36,7 @@ export const NucleoFamiliarForm = () => {
     const crearNucleoFamiliar = (Dataform) => dispatch(crearNuevoNucleoFamiliarAction(Dataform));
     const actualizarNucleoFamiliar = (Dataform) => dispatch(editarNucleoFamiliarAction(Dataform));
 
-
+    const { userDetails } = useSelector((state) => state.Auth);
     const cargando = useSelector(state => state.NucleoFamiliar.loading);
     const cargandolista = useSelector(state => state.NucleoFamiliar.loadinglista);
     const barrios = useSelector(state => state.Parametros.barriosveredas);
@@ -46,6 +48,7 @@ export const NucleoFamiliarForm = () => {
     const nucleoFamiliar = useSelector(state => state.NucleoFamiliar.listarNucleoFamiliar);
     const escolaridades = useSelector(state => state.Parametros.escolaridad)
     const orientacion_sexuales = useSelector(state => state.Parametros.orientacionSexual)
+    const JefeHogar = useSelector((state) => state.JefeHogar.listaJefeHogar)
 
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
@@ -54,7 +57,7 @@ export const NucleoFamiliarForm = () => {
     const [visibleMI, setVisibleMI] = useState(false)
     const [idJefeHogar, setIdJefeHogar] = useState('')
     const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Nucleo Familiar'))
-    
+
 
     const [datoNucleoFamiliar, setDatoNucleoFamiliar] = useState({
         Id_jefe_hogar: '',
@@ -103,7 +106,7 @@ export const NucleoFamiliarForm = () => {
             event.stopPropagation()
         } else {
             const formularioDatos = {
-                Id_usuario: "1",
+                Id_usuario: userDetails.ID_USER,
                 Id_jefe_hogar: idJefeHogar,
                 Id_parentesco: datoNucleoFamiliar.Id_parentesco,
                 Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
@@ -129,16 +132,16 @@ export const NucleoFamiliarForm = () => {
                     })
                     obtenerNucleoFamiliar()
                 }
-              
+
             }
         }
 
-    
+
     const handleActualizarNucleoFamiliar = (event) => {
         debugger
         event.preventDefault();
         const form = event.currentTarget;
-    
+
         // Obtener los campos del formulario
         const formularioDatos = {
             Id_usuario: "1",
@@ -155,30 +158,30 @@ export const NucleoFamiliarForm = () => {
             Genero: datoNucleoFamiliar.Genero,
             Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento
         };
-    
+
         // Verificar si hay campos vacíos o no válidos
         const camposInvalidos = Object.keys(formularioDatos).some((key) => {
           const input = form[key];
           return input && input.required && !input.checkValidity();
         });
-    
+
         if (camposInvalidos) {
           // Hay campos vacíos o no válidos
           setValidated(true);
         } else {
           // No hay campos vacíos o no válidos
           setValidated(false);
-    
+
           // Verificar si algún campo está vacío
           const camposVacios = Object.values(formularioDatos).some(value => value === '');
-    
+
           if (camposVacios) {
             // Hay campos vacíos
             setValidated(true);
           } else {
             // No hay campos vacíos
             setValidated(false);
-    
+
             // Llamas a la acción de actualizar y esperas a que termine
             actualizarNucleoFamiliar({
               formularioDatos,
@@ -190,7 +193,7 @@ export const NucleoFamiliarForm = () => {
             });
           }
         }
-    
+
         event.stopPropagation();
     };
     const eliminarMiembro = (id) => {
@@ -206,10 +209,10 @@ export const NucleoFamiliarForm = () => {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.value) {
-                dispatch(borrarNucleoFamiliarAction(Id)); 
-            } 
+                dispatch(borrarNucleoFamiliarAction(Id));
+            }
         });
-        
+
     }
     return {
         handleSubmit,
@@ -225,7 +228,10 @@ export const NucleoFamiliarForm = () => {
         obtenercorregimiento,
         obtenerEscolaridad,
         obtenerOrientacionSexual,
+        obtenerJefeHogar,
         eliminarMiembro,
+        userDetails,
+        JefeHogar,
         asociacion,
         tipodocumento,
         corregimiento,

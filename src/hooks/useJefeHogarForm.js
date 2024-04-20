@@ -13,22 +13,22 @@ import {
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 import { borrarJefeHogarAction,
-     crearNuevoJefeHogarAction, 
-     editarJefeHogarAction, 
-     obtenerJefeHogarAction, 
+     crearNuevoJefeHogarAction,
+     editarJefeHogarAction,
+     obtenerJefeHogarAction,
      obtenerJefeHogarByIdAction} from 'src/action/JefeHogarAction';
 
 
 export const JefeHogarForm = () => {
 
-    
+
 
     const dispatch = useDispatch()
     const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
     const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
     const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
     const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction());
-   
+
     const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
     const obtenerConcejo = () => dispatch(obtenerConcejoAction());
     const obtenerEscolaridad = () => dispatch(obtenerEscolaridadAction());
@@ -36,7 +36,7 @@ export const JefeHogarForm = () => {
     const crearJefeHogar = (Dataform) => dispatch(crearNuevoJefeHogarAction(Dataform));
     const actulizarJefeHogar = (Dataform) => dispatch(editarJefeHogarAction(Dataform));
 
-
+    const { userDetails } = useSelector((state) => state.Auth);
     const cargando = useSelector(state => state.Miembro.loading);
     const cargandolista = useSelector(state => state.Miembro.loadinglista);
     const barrios = useSelector(state => state.Parametros.barriosveredas);
@@ -105,7 +105,7 @@ export const JefeHogarForm = () => {
         setValedita(false)
     };
     const handleSubmit = (event) => {
-      
+
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {
@@ -114,7 +114,7 @@ export const JefeHogarForm = () => {
         } else {
 
             const formularioDatos = {
-                Id_usuario:"1",
+                Id_usuario:userDetails.ID_USER,
                 Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
@@ -145,11 +145,11 @@ export const JefeHogarForm = () => {
             setVisibleM(false)
             event.stopPropagation()
         }
-   
+
         setValidated(true)
     }
     const EditarJefeHogar = (id) => {
-        
+
         const datos = jefeHogar.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoJefeHogar({
@@ -176,16 +176,16 @@ export const JefeHogarForm = () => {
             Fecha_ingreso: datos[0].fecha_ingreso,
         });
     };
-    
+
     const handleSubmitAct = (event) => {
-        
+
         event.preventDefault();
         const form = event.currentTarget;
-    
+
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
-           
+
         } else {
 
             const formularioDatos = {
@@ -210,7 +210,7 @@ export const JefeHogarForm = () => {
                 Fecha_nacimiento: datoJefeHogar.Fecha_nacimiento,
                 Fecha_ingreso: datoJefeHogar.Fecha_ingreso,
             };
-    
+
             // Asumo que actulizarMiembro es una función que realiza la actualización
             // No tengo su implementación, así que debes ajustarlo según tu código real
             if (valedita === false) {
@@ -223,11 +223,11 @@ export const JefeHogarForm = () => {
             setVisibleMI(false)
             event.stopPropagation()
 
-         
-           
+
+
         }
      setValidated(true)
-    
+
     };
 
     const jefeHogarByID = (id) => {
@@ -249,10 +249,10 @@ export const JefeHogarForm = () => {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.value) {
-                dispatch(borrarJefeHogarAction(Id)); 
-            } 
+                dispatch(borrarJefeHogarAction(Id));
+            }
         });
-        
+
     }
     return {
         handleSubmit,
