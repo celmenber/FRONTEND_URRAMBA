@@ -15,9 +15,14 @@ const {
   EDITAR_USUARIO_ERROR,
   ACTIVAR_USUARIO,
   ACTIVAR_USUARIO_SUCCESS,
+  CAMBIO_CLAVE_USUARIO,
+  CAMBIO_CLAVE_USUARIO_SUCCESS,
   DELETE_USUARIO,
   DELETE_USUARIO_SUCCESS,
   DELETE_USUARIO_ERROR,
+  OBTENER_PERFIL,
+  OBTENER_PERFIL_SUCCESS,
+  OBTENER_PERFIL_ERROR,
 } = TYPES
 
 // Crear nuevos Usuarios
@@ -95,14 +100,17 @@ const obtenerUsuarioUpdate = (datos) => ({
 export const editarUsuarioAction = (formDatos) => {
   return async (dispatch) => {
     dispatch(editarUsuario())
-    console.log(formDatos)
     const { formularioDatos, handleReset, Id } = formDatos
     try {
       const { data } = await Axios.put(`/users/edit-user/${Id}`, formularioDatos)
-      dispatch(editarUsuarioExito(data.datos))
+       if (data.code === 203) {
+         dispatch(editarUsuarioError())
+        Swal.fire('Error', 'El Usuario o correo '+formularioDatos.USERNAME+' ya existe', 'error')
+      }
 
       if (data.code === 200) {
         handleReset()
+        dispatch(editarUsuarioExito(data.data))
         Swal.fire('Correcto', 'El Usuario se actualizó correctamente', 'success')
       }
     } catch (error) {
@@ -128,17 +136,16 @@ const editarUsuarioError = () => ({
 })
 
 // ***************** Seleccion editar el editarEstado Usuario //****************/
-
 export const editarEstadoUsuarioAction = (Datos) => {
   return async (dispatch) => {
     dispatch(editarEstadoUsuario())
-    const { setSelectActivar, estadoDatos, Id } = Datos
+    const { setSelectActivarEST, estadoDatos, Id } = Datos
     try {
-      const { data } = await Axios.patch(`/app/usuario/estadouser/${Id}`, {
-        Estado: estadoDatos,
+      const { data } = await Axios.patch(`/users/edit-userestado/${Id}`, {
+        ESTADO: estadoDatos,
       })
-      dispatch(editarEstadoUsuarioExito(data.datos))
-      setSelectActivar(false)
+      dispatch(editarEstadoUsuarioExito(data.data))
+      setSelectActivarEST(false)
     } catch (error) {
       console.log(error)
     }
@@ -152,6 +159,35 @@ const editarEstadoUsuario = () => ({
 
 const editarEstadoUsuarioExito = (datos) => ({
   type: ACTIVAR_USUARIO_SUCCESS,
+  payload: datos,
+})
+
+
+// ***************** Seleccion editar el editarEstado Usuario //****************/
+export const editarClaveUsuarioAction = (Datos) => {
+  return async (dispatch) => {
+    dispatch(editarClaveUsuario())
+    const { setSelectActivarREC, DOCUMENTO, Id } = Datos
+    try {
+      const { data } = await Axios.patch(`/users/edit-usercambioclave/${Id}`, { DOCUMENTO })
+      dispatch(editarClaveUsuarioExito(data.data))
+      if (data.code === 200) {
+        setSelectActivarREC(false)
+        Swal.fire('Correcto', 'La contraseña del Usuario se reinicio correctamente', 'success')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+const editarClaveUsuario = () => ({
+  type: CAMBIO_CLAVE_USUARIO,
+  payload: true,
+})
+
+const editarClaveUsuarioExito = (datos) => ({
+  type: CAMBIO_CLAVE_USUARIO_SUCCESS,
   payload: datos,
 })
 
@@ -185,6 +221,39 @@ const obtenerUsuarioExitosa = (datos) => ({
 
 const obtenerUsuariosrror = () => ({
   type: OBTENER_USUARIO_ERROR,
+  payload: true,
+})
+
+// procedimiento obtener listado slaiders
+export const obtenerPerfilAction = () => {
+  return async (dispatch) => {
+    dispatch(ObtenerPerfil())
+
+    try {
+      const { data } = await Axios.get('/users/view-user-roll')
+
+      if (data.success === true) {
+        dispatch(obtenerPerfilExitosa(data.data))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(obtenerPerfilsrror())
+    }
+  }
+}
+
+const ObtenerPerfil = () => ({
+  type: OBTENER_PERFIL,
+  payload: true,
+})
+
+const obtenerPerfilExitosa = (datos) => ({
+  type: OBTENER_PERFIL_SUCCESS,
+  payload: datos,
+})
+
+const obtenerPerfilsrror = () => ({
+  type: OBTENER_PERFIL_ERROR,
   payload: true,
 })
 

@@ -116,18 +116,15 @@ const obtenerAsociacionEditar = (datos) => ({
 // ***************** Seleccion editar editar Conveniocod //****************/
 // Edita un registro en la api y state
 export const editarAsociacionAction = (Datos) => {
-  
+
   return async (dispatch) => {
     dispatch(editarAsociacion())
     const id = Number(Datos.Id)
- 
-		
-
     try {
       const { data } = await Axios.put(`/asociacion/edit-asociacion/${id}`, Datos.formularioDatos)
 
       dispatch(editarAsociacionExito(data.data))
-      
+
       if (data.code === 200) {
         Swal.fire( 'La asociación se actualizo correctamente', 'success')
       }

@@ -14,14 +14,20 @@ const {
     EDITAR_USUARIO_ERROR,
     ACTIVAR_USUARIO,
     ACTIVAR_USUARIO_SUCCESS,
+    CAMBIO_CLAVE_USUARIO,
+    CAMBIO_CLAVE_USUARIO_SUCCESS,
     DELETE_USUARIO,
     DELETE_USUARIO_SUCCESS,
     DELETE_USUARIO_ERROR,
+    OBTENER_PERFIL,
+    OBTENER_PERFIL_SUCCESS,
+    OBTENER_PERFIL_ERROR,
 } = TYPES;
 
 // cada reducer tiene su propio state
 const initialState = {
     usuariolista: [],
+    Perfil: [],
     loading: false,
     loadinglista: false,
     loadingactivar: false,
@@ -52,15 +58,14 @@ export const UsuarioReducer = (state = initialState, action) => {
           return {
               ...state,
               loading: action.payload,
-          }    
+          }
       case EDITAR_USUARIO_SUCCESS:
           return {
               ...state,
               loading: false,
               usuarioeditar: null,
               usuariolista: state.usuariolista.map(U =>
-                  U.UsuarioId === action.payload.UsuarioId ? U = action.payload : U
-              )
+                  U.ID_USER === action.payload.ID_USER ? U = action.payload : U)
           }
       case ACTIVAR_USUARIO:
           return {
@@ -70,10 +75,20 @@ export const UsuarioReducer = (state = initialState, action) => {
       case ACTIVAR_USUARIO_SUCCESS:
           return {
               ...state,
-              loadingactivar: false,
-              usuariolista: state.usuariolista.map(U =>
-                  U.UsuarioId === action.payload.UsuarioId ? U = action.payload : U
-              )
+              // usuariolista: action.payload,
+               usuariolista: state.usuariolista.map(U =>
+                  U.ID_USER === action.payload.ID_USER ? U = action.payload : U)
+          }
+      case CAMBIO_CLAVE_USUARIO:
+          return {
+              ...state,
+              loadingactivar: action.payload,
+          }
+      case CAMBIO_CLAVE_USUARIO_SUCCESS:
+          return {
+              ...state,
+               usuariolista: state.usuariolista.map(U =>
+                  U.ID_USER === action.payload.ID_USER ? U = action.payload : U)
           }
       case OBTENER_USUARIO:
           return {
@@ -85,6 +100,18 @@ export const UsuarioReducer = (state = initialState, action) => {
               ...state,
               loadinglista: false,
               usuariolista: action.payload
+          }
+
+      case OBTENER_PERFIL:
+          return {
+              ...state,
+              loadinglista: action.payload,
+          }
+      case OBTENER_PERFIL_SUCCESS:
+          return {
+              ...state,
+              loadinglista: false,
+              Perfil: action.payload
           }
       case DELETE_USUARIO:
           return {
@@ -100,6 +127,7 @@ export const UsuarioReducer = (state = initialState, action) => {
       case ADD_USUARIO_ERROR:
       case EDITAR_USUARIO_ERROR:
       case OBTENER_USUARIO_ERROR:
+      case OBTENER_PERFIL_ERROR:
       case DELETE_USUARIO_ERROR:
           return {
               ...state,

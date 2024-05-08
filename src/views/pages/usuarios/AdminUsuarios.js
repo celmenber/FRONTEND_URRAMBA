@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useEffect } from 'react'
-import AdminUsuariosModalCrear from './AdminUsuariosModal'
+//import AdminUsuariosModalCrear from './AdminUsuariosModal'
 import AdminUsuariosModalActuliza from './AdminUsuariosActModal'
 
 import {
@@ -31,19 +31,22 @@ import { CLoadingButton } from '@coreui/react-pro'
 import { useState } from 'react'
 
 const AdminUsuarios = () => {
-  const [selectServicio] = useState(1)
-
+  const [selectServicio, setSelectServicio] = useState(1);
+  const [selectClave, setSelectClave] = useState(1);
   const {
     onChangeFormulario,
     obtenerUsuario,
     usuariolista,
     EditaUsuarios,
+    UpdateUserEstado,
+    CambioUserClave,
     EliminarUsuarios,
     datoUsuario,
     setDatoUsuario,
-    selectActivar,
-    visibleNUS,
-    setVisibleNUS,
+    setSelectActivarEST,
+    selectActivarEST,
+    setSelectActivarREC,
+    selectActivarREC,
     visibleUS,
     setVisibleUS,
     cargandoLista,
@@ -56,10 +59,15 @@ const AdminUsuarios = () => {
   }, [])
 
   const handleSelectEst = (id) => {
-    console.log(id)
-   /*  setSelectActivar(true)
+    setSelectActivarEST(true)
     setSelectServicio(id)
-    UpdateUserEstado(id) */
+    UpdateUserEstado(id)
+  }
+
+  const handleSelectClave = (id) => {
+    setSelectActivarREC(true)
+    setSelectClave(id)
+    CambioUserClave(id)
   }
 
 
@@ -68,7 +76,7 @@ const AdminUsuarios = () => {
       <CCol>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Gestión</strong> <small>Servicios Parques</small>
+            <strong>Gestión</strong> <small>Usarios</small>
           </CCardHeader>
           {/* proceso de listar archovos de las normativas */}
           <CCardBody>
@@ -122,7 +130,7 @@ const AdminUsuarios = () => {
                               content={item.ESTADO === '1' ? 'Desactivar' : 'Activar'}
                               placement="bottom"
                             >
-                                {selectServicio === item.ID_USER && selectActivar === true ? (
+                                {selectServicio === item.ID_USER && selectActivarEST === true ? (
                                 <CLoadingButton
                                   variant="outline"
                                   size="lg"
@@ -133,7 +141,7 @@ const AdminUsuarios = () => {
                               ) : (
                                 <CButton
                                   size="lg"
-                                  color={item.ESTADO === '1' ? 'success' : 'secondary'}
+                                  color={parseInt(item.ESTADO) === 1 ? 'success' : 'secondary'}
                                   style={{ width: '100%' }}
                                       id={`estado${item.ID_USER}`}
                                       key={item.ID_USER}
@@ -180,15 +188,27 @@ const AdminUsuarios = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip content="Reiniciar Clave Usuario." placement="bottom">
-                              <CButton
-                                style={{ width: '100%' }}
-                                color="warning"
-                                variant="outline"
-                                size="lg"
-                                //onClick={() => EditaUsuariosClave(item.UsuarioId)}
-                              >
-                                {'Reiniciar Clave'}
-                              </CButton>
+                               {selectClave === item.ID_USER && selectActivarREC === true ? (
+                                <CLoadingButton
+                                  variant="outline"
+                                  size="lg"
+                                  color="warning"
+                                  style={{ width: '100%' }}
+                                  timeout={2000}
+                                > {'Reiniciando Clave'}</CLoadingButton>
+                              ) : (
+                                <CButton
+                                     variant="outline"
+                                     size="lg"
+                                     color="warning"
+                                     style={{ width: '100%' }}
+                                      id={`Clave${item.ID_USER}`}
+                                      key={item.ID_USER}
+                                      onClick={() => handleSelectClave(item.ID_USER)}
+                                >
+                                     {'Reiniciar Clave'}
+                                </CButton>
+                              )}
                             </CTooltip>
                           </div>
                         </CTableDataCell>
@@ -203,13 +223,13 @@ const AdminUsuarios = () => {
                                 size="lg"
                                   onClick={() => EditaUsuarios(item.ID_USER)}
                               >
-                                {'Editar'}
+                                {'Corregir Usuario'}
                               </CButton>
                             </CTooltip>
                           </div>
                         </CTableDataCell>
 
-                        <CTableDataCell>
+                        {/* <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip content="Eliminar Usuario" placement="bottom">
                               <CButton
@@ -224,7 +244,7 @@ const AdminUsuarios = () => {
                               </CButton>
                             </CTooltip>
                           </div>
-                        </CTableDataCell>
+                        </CTableDataCell> */}
                       </CTableRow>
                     ))
                   )}
@@ -235,7 +255,7 @@ const AdminUsuarios = () => {
         </CCard>
       </CCol>
 
-      <AdminUsuariosModalCrear visibleNUS={visibleNUS} setVisibleNUS={setVisibleNUS} />
+      {/* <AdminUsuariosModalCrear visibleNUS={visibleNUS} setVisibleNUS={setVisibleNUS} /> */}
       <AdminUsuariosModalActuliza
         visibleUS={visibleUS}
         setVisibleUS={setVisibleUS}

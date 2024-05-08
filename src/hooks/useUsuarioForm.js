@@ -2,15 +2,15 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-
-//import { obtenerPerfilAction } from '../action/PerfilAction';
 //import { obtenerTipoUserAction } from '../action/TipoUserAction';
 import {
   crearNuevoUsuarioAction,
   editarUsuarioAction,
   editarEstadoUsuarioAction,
+  editarClaveUsuarioAction,
   obtenerUsuarioAction,
-  obtenerUsuarioEditar,
+  obtenerPerfilAction,
+  //obtenerUsuarioEditar,
   borrarUsuarioAction,
 } from '../action/UsuarioAction'
 
@@ -18,7 +18,7 @@ export const Usuarios = () => {
   // ejecutando los acciones atraves de los dispatch
   const dispatch = useDispatch()
   ///////########//////#####//////#####################///////
-  //const obtenerPerfil = () => dispatch(obtenerPerfilAction());
+  const obtenerPerfil = () => dispatch(obtenerPerfilAction());
   //const obtenerTipoUser = () => dispatch(obtenerTipoUserAction());
 
   const obtenerUsuario = () => dispatch(obtenerUsuarioAction())
@@ -31,28 +31,22 @@ export const Usuarios = () => {
   const cargandoLista = useSelector((state) => state.Usuario.loadinglista)
   const loadingactivar = useSelector((state) => state.Usuario.loadingactivar)
   const usuarioeditar = useSelector((state) => state.Usuario.usuarioeditar)
-  const { usuariolista } = useSelector((state) => state.Usuario)
-  //const { perfil } = useSelector((state) => state.Perfil)
+  const { usuariolista, Perfil } = useSelector((state) => state.Usuario)
   //const { tipouser } = useSelector((state) => state.TipoUser)
 
   // ejecutando para ontener los estados locales
   const [activeKey, setActiveKey] = useState(1)
   const [usuariodetalle, setUsuariodetalle] = useState({})
-  const [selectActivar, setSelectActivar] = useState(false)
+  const [selectActivarEST, setSelectActivarEST] = useState(false)
+  const [selectActivarREC, setSelectActivarREC] = useState(false)
   const [visibleNUS, setVisibleNUS] = useState(false)
   const [visibleUS, setVisibleUS] = useState(false)
   const [visiblePSW, setVisiblePSW] = useState(false)
 
   // nuevo state de Tenerencuenta
   const [datoUsuario, setDatoUsuario] = useState({
-    usuario: '',
-    claveuno: '',
-    estado: '',
-    //codperfil: '',
-    //codtipousuario: '',
-    documento: '',
-    nombres: '',
-    apellidos: '',
+    USERNAME: '',
+    ID_ROLL: '',
   })
 
   // Leer los datos del formulario
@@ -64,37 +58,46 @@ export const Usuarios = () => {
   }
 
   // función que redirige Editaparques
-  const EditaUsuarios = (Id) => {
-    const datos = usuariolista?.filter((U) => U.UsuarioId === Id)
-    dispatch(obtenerUsuarioEditar(datos))
+  const EditaUsuarios = (ID) => {
+    const datos = usuariolista?.filter((U) => U.ID_USER === ID)
+    //console.log(datos)
 
-    setDatoUsuario({
-      Codigoparques: datos[0].ParqueId === null ? '' : datos[0].ParqueId,
-      usuario: datos[0].Email === null ? '' : datos[0].Email,
-      estado: datos[0].Estado === null ? '' : datos[0].Estado,
-      //codperfil: datos[0].PerfilId === null ? '' : datos[0].PerfilId,
-      //codtipousuario: datos[0].TipoUsuarioId === null ? '' : datos[0].TipoUsuarioId,
-      documento: datos[0].Documento === null ? '' : datos[0].Documento,
-      nombres: datos[0].Nombres === null ? '' : datos[0].Nombres,
-      apellidos: datos[0].Apellidos === null ? '' : datos[0].Apellidos,
+   setDatoUsuario({
+      USERNAME: datos[0].USERNAME === null ? '' : datos[0].USERNAME,
+      ID_USER: datos[0].ID_USER === null ? '' : datos[0].ID_USER,
+      ID_ROLL: datos[0].ID_ROLL === null ? '' : datos[0].ID_ROLL,
+      ID_EMP: datos[0].ID_EMP === null ? '' : datos[0].ID_EMP,
+      ID_AUT: datos[0].ID_AUT === null ? '' : datos[0].ID_AUT,
     })
     setVisibleUS(true)
   }
 
   // función que redirige Editaservicio
   const UpdateUserEstado = (Id) => {
-    const datos = usuariolista?.filter((U) => U.UsuarioId === Id)
+    const datos = usuariolista?.filter((U) => U.ID_USER === Id)
     dispatch(
       editarEstadoUsuarioAction({
         Id,
-        setSelectActivar,
-        estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
+        setSelectActivarEST,
+        estadoDatos: datos[0].ESTADO === '0' ? '1' : '0',
+      }),
+    )
+  }
+
+    // función que redirige Editaservicio
+  const CambioUserClave = (Id) => {
+    const datos = usuariolista?.filter((U) => U.ID_USER === Id)
+    dispatch(
+      editarClaveUsuarioAction({
+        Id,
+        setSelectActivarREC,
+        DOCUMENTO: datos[0].emp_documento !== null ? datos[0].emp_documento  : datos[0].aut_documentos,
       }),
     )
   }
 
   // función que redirige Eliminar Servicioparque
-  const EliminarUsuarios = (id) => {
+  const EliminarUsuarios = (Id) => {
     Swal.fire({
       title: '¿Estas seguro de eliminar este Usurio?',
       text: 'El Usuario eliminado no se podrá recuperar',
@@ -106,7 +109,7 @@ export const Usuarios = () => {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        dispatch(borrarUsuarioAction(id))
+        dispatch(borrarUsuarioAction(Id))
       }
     })
   }
@@ -116,18 +119,19 @@ export const Usuarios = () => {
     onChangeFormulario,
     crearNuevoUsuario,
     UpdateUserEstado,
+    CambioUserClave,
     editarUsuario,
     obtenerUsuario,
-    // obtenerPerfil,
-    //  obtenerTipoUser,
+    obtenerPerfil,
     EditaUsuarios,
     EliminarUsuarios,
     usuariolista,
-    //perfil,
-    //tipouser,
+    Perfil,
     usuarioeditar,
-    selectActivar,
-    setSelectActivar,
+    setSelectActivarEST,
+    selectActivarEST,
+    setSelectActivarREC,
+    selectActivarREC,
     datoUsuario,
     setDatoUsuario,
     activeKey,

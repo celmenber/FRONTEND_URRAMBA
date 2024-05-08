@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CLoadingButton, CModalTitle } from '@coreui/react-pro'
 import {
   CButton,
@@ -8,7 +8,7 @@ import {
   CFormFeedback,
   CFormInput,
   CFormLabel,
-  //CFormSelect,
+  CFormSelect,
   CModal,
   CModalBody,
   CModalHeader,
@@ -19,31 +19,21 @@ import { Usuarios } from 'src/hooks'
 
 const AdminUsuariosModalAct = (Props) => {
   const [validated, setValidated] = useState(false)
-  const handleClose = () => {
-    handleReset()
-    setVisibleUS(false)
-  }
-
   const { visibleUS, setVisibleUS, datoUsuario, setDatoUsuario, onChangeFormulario } = Props
 
   const {
     editarUsuario,
-    usuarioeditar,
+    obtenerPerfil,
     cargando,
-    User,
+    Perfil
   } = Usuarios()
 
-  const { usuario, estado, codperfil, codtipousuario, documento, nombres, apellidos } = datoUsuario
+  const { USERNAME, ID_ROLL, ID_USER  } = datoUsuario
 
   const handleReset = () => {
     setDatoUsuario({
-      usuario: '',
-      estado: '',
-      codperfil: '',
-      codtipousuario: '',
-      documento: '',
-      nombres: '',
-      apellidos: '',
+      USERNAME: '',
+      ID_ROLL: '',
     })
   }
 
@@ -55,47 +45,39 @@ const AdminUsuariosModalAct = (Props) => {
       event.stopPropagation()
     } else {
       const formularioDatos = {
-        UsuarioModificacion: User.userDetails.Id,
-        TipoUsuarioId: parseInt(codtipousuario),
-        PerfilId: parseInt(codperfil),
-        Email: usuario,
-        Documento: documento,
-        Nombres: nombres,
-        Apellidos: apellidos,
-        Estado: estado,
+        ID_ROLL,
+        USERNAME,
       }
 
       editarUsuario({
         formularioDatos,
         handleReset,
-        Id: usuarioeditar[0].UsuarioId,
+        Id: ID_USER,
       })
-
-      setVisibleUS(false)
+        setVisibleUS(false)
     }
-
     setValidated(true)
   }
 
-  /* useEffect(() => {
+useEffect(() => {
     // Consultar la api un parque
     obtenerPerfil()
     // eslint-disable-next-line
-  }, []) */
+  }, [])
 
-  /* useEffect(() => {
-    // Consultar la api un parque
-    obtenerTipoUser()
-    // eslint-disable-next-line
-  }, []) */
+    const handleClose = () => {
+       handleReset()
+       setValidated(false)
+        setVisibleUS(false)
+    }
 
   return (
     <>
-      <CModal size="xl" visible={visibleUS} onClose={handleClose}>
+       <CModal size="xl" visible={visibleUS} onClose={handleClose}>
         <CModalHeader>
           <CModalTitle>
             {' '}
-            <strong>Editar Usuario</strong>
+            <strong>Corregir el Usuario</strong>
           </CModalTitle>
         </CModalHeader>
         <CForm
@@ -106,63 +88,43 @@ const AdminUsuariosModalAct = (Props) => {
         >
           <CModalBody>
             <CRow className="g-3">
-              <CCol xs={4}>
-                <CFormLabel htmlFor="validationCustom04" value={''}>
-                  Parques*
-                </CFormLabel>
-
-                <CFormFeedback invalid>Seleccione un Estado Servicio.</CFormFeedback>
+               <CCol md={4} style={{ marginTop: '15px' }}>
+                <CFormLabel htmlFor="validationCustom06" value={''}>Perfil*</CFormLabel>
+                <CFormSelect
+                  key={'validationCustom06'}
+                  name='ID_ROLL'
+                  id="ID_ROLL"
+                  value={ID_ROLL}
+                  onChange={onChangeFormulario}
+                  required
+                >
+                  <option key={'validationCustom001'} value={''}>Seleccione...</option>
+                  {Perfil?.length === 0
+                    ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
+                    : (
+                      Perfil?.map(item => (
+                        <option
+                          key={item.ID}
+                          value={item.ID}
+                        >
+                          {item.NOMBRE}
+                        </option>
+                      ))
+                    )}
+                </CFormSelect>
+                <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
               </CCol>
-              <CCol md={8} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Nombre Usuario*</CFormLabel>
+                <CCol md={8} style={{ marginTop: '15px' }}>
+                <CFormLabel htmlFor="validationCustom07">Usuario*</CFormLabel>
                 <CFormInput
                   type="email"
-                  id="validationCustom01"
-                  name="usuario"
-                  value={usuario}
+                  id="validationCustom07"
+                  name="USERNAME"
+                  value={USERNAME}
                   onChange={onChangeFormulario}
                   required
                 />
                 <CFormFeedback invalid>El campo Usuario es Requerido!</CFormFeedback>
-              </CCol>
-            </CRow>
-
-            <CRow>
-              <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom07">Documento*</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="validationCustom07"
-                  name="documento"
-                  value={documento}
-                  onChange={onChangeFormulario}
-                  required
-                />
-                <CFormFeedback invalid>El campo Documento es Requerido!</CFormFeedback>
-              </CCol>
-              <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Nombres*</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="validationCustom001"
-                  name="nombres"
-                  value={nombres}
-                  onChange={onChangeFormulario}
-                  required
-                />
-                <CFormFeedback invalid>El campo Nombres es Requerido!</CFormFeedback>
-              </CCol>
-              <CCol md={4} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom01">Apellidos*</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="validationCustom002"
-                  name="apellidos"
-                  value={apellidos}
-                  onChange={onChangeFormulario}
-                  required
-                />
-                <CFormFeedback invalid>El campo Apellidos es Requerido!</CFormFeedback>
               </CCol>
             </CRow>
             <CRow>
@@ -175,7 +137,7 @@ const AdminUsuariosModalAct = (Props) => {
                     timeout={2000}
                   >
                     {' '}
-                    Actualizando Datos Usuarios
+                    {'Actualizando Datos Usuario'}
                   </CLoadingButton>
                 ) : (
                   <CButton
@@ -185,7 +147,7 @@ const AdminUsuariosModalAct = (Props) => {
                     style={{ width: '100%' }}
                   >
                     {' '}
-                    {'Actualizar Datos Usuarios'}
+                    {'Actualizar Datos Usuario'}
                   </CButton>
                 )}
               </CCol>
@@ -198,7 +160,7 @@ const AdminUsuariosModalAct = (Props) => {
                   onClick={() => handleClose()}
                 >
                   {' '}
-                  {'Cancelar Edición'}
+                  {'Cancelar'}
                 </CButton>
               </CCol>
             </CRow>

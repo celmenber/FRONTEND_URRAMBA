@@ -18,7 +18,7 @@ const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.change.sidebarShow)
   const User = useSelector((state) => state.Auth.userDetails)
-  console.log(User)
+ // console.log(User)
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
