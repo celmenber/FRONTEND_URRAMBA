@@ -46,26 +46,30 @@ export const MiembroForm = () => {
     const [visibleM, setVisibleM] = useState(false)
     const [visibleMI, setVisibleMI] = useState(false)
 
-    const [datoMiembro, setDatoMiembro] = useState({
-        Id_usuario:'',
-        Id_barrio_vereda: '',
-        Id_corregimiento: '',
-        Id_tipo_documento: '',
-        Documentos: '',
-        Nombres: '',
-        Apellidos: '',
-        Sexo: '',
-        Id_escolaridad: '',
-        Estado_escolaridad: '',
-        Genero: '',
-        Id_orientacion_sexual: '',
-        Direccion: '',
-        Telefono: '',
-        Estado: '',
-        Fecha_nacimiento: '',
-        Fecha_ingreso: '',
-        Correo: ''
-    })
+    const ObjMiembro = {
+                  Id_conncejo_comunitario:'',
+                  Id_usuario:'',
+                  Id_barrio_vereda: '',
+                  Id_corregimiento: '',
+                  Id_tipo_documento: '',
+                  Documentos: '',
+                  Nombres: '',
+                  Apellidos: '',
+                  Sexo: '',
+                  Cargo_miembro:'',
+                  Id_escolaridad: '',
+                  Estado_escolaridad: '',
+                  Genero: '',
+                  Id_orientacion_sexual: '',
+                  Direccion: '',
+                  Telefono: '',
+                  Estado: '',
+                  Fecha_nacimiento: '',
+                  Fecha_ingreso: '',
+                  Correo: ''
+                };
+
+    const [datoMiembro, setDatoMiembro] = useState(ObjMiembro)
 
     const onChangeFormulario = e => {
         setDatoMiembro({
@@ -73,30 +77,10 @@ export const MiembroForm = () => {
         })
     }
     const handleReset = () => {
-        setDatoMiembro({
-            Id_usuario:'',
-            Id_barrio_vereda: '',
-            Id_corregimiento: '',
-            Id_tipo_documento: '',
-            Documentos: '',
-            Nombres: '',
-            Apellidos: '',
-            Sexo: '',
-            Id_escolaridad: '',
-            Estado_escolaridad: '',
-            Genero: '',
-            Id_orientacion_sexual: '',
-            Direccion: '',
-            Telefono: '',
-            Estado: '',
-            Fecha_nacimiento: '',
-            Fecha_ingreso: '',
-            Correo: '',
-        })
+        setDatoMiembro(ObjMiembro)
         setValedita(false)
     };
     const handleSubmit = (event) => {
-      debugger
         event.preventDefault();
         const form = event.currentTarget
         if (form.checkValidity() === false) {
@@ -113,6 +97,7 @@ export const MiembroForm = () => {
                 Documentos: datoMiembro.Documentos,
                 Nombres: datoMiembro.Nombres,
                 Apellidos: datoMiembro.Apellidos,
+                Cargo_miembro: datoMiembro.Cargo_miembro,
                 Sexo: datoMiembro.Sexo,
                 Id_escolaridad: datoMiembro.Id_escolaridad,
                 Estado_escolaridad: datoMiembro.Estado_escolaridad,
@@ -143,7 +128,6 @@ export const MiembroForm = () => {
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);
         setDatoMiembro({
-            Id_usuario:'1',
             ID: datos[0].ID,
             Id_conncejo_comunitario: datos[0].id_conncejo_comunitario,
             Id_barrio_vereda: datos[0].id_barrio_vereda,
@@ -152,6 +136,7 @@ export const MiembroForm = () => {
             Documentos: datos[0].documentos,
             Nombres: datos[0].nombres,
             Apellidos: datos[0].apellidos,
+            Cargo_miembro: datos[0].cargo_miembro,
             Sexo: datos[0].sexo,
             Id_escolaridad: datos[0].id_escolaridad,
             Estado_escolaridad: datos[0].estado_escolaridad,
@@ -166,49 +151,6 @@ export const MiembroForm = () => {
         });
     };
 
-    const handleSubmitAct = (event) => {
-        event.preventDefault();
-        const form = event.currentTarget;
-
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-        } else {
-            const formularioDatos = {
-                Id_usuario:"1",
-                Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
-                Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
-                Id_corregimiento: datoMiembro.Id_corregimiento,
-                Id_tipo_documento: datoMiembro.Id_tipo_documento,
-                Documentos: datoMiembro.Documentos,
-                Nombres: datoMiembro.Nombres,
-                Apellidos: datoMiembro.Apellidos,
-                Sexo: datoMiembro.Sexo,
-                Id_escolaridad: datoMiembro.Id_escolaridad,
-                Estado_escolaridad: datoMiembro.Estado_escolaridad,
-                Genero: datoMiembro.Genero,
-                Id_orientacion_sexual: datoMiembro.Id_orientacion_sexual,
-                Direccion: datoMiembro.Direccion,
-                Telefono: datoMiembro.Telefono,
-                Correo: datoMiembro.Correo,
-                Estado: Number(datoMiembro.Estado),
-                Fecha_nacimiento: datoMiembro.Fecha_nacimiento,
-                Fecha_ingreso: datoMiembro.Fecha_ingreso,
-            };
-
-            // Asumo que actulizarMiembro es una función que realiza la actualización
-            // No tengo su implementación, así que debes ajustarlo según tu código real
-            if (!valedita) {
-                actulizarMiembro({
-                    formularioDatos,
-                    id: datoMiembro.ID,
-                    handleReset,
-                });
-            }
-        }
-
-        setVisibleMI(false);
-        event.stopPropagation();
-    };
     const eliminarMiembro = (id) => {
         const Id = id
         Swal.fire({
@@ -229,7 +171,7 @@ export const MiembroForm = () => {
     }
     return {
         handleSubmit,
-        handleSubmitAct,
+        actulizarMiembro,
         onChangeFormulario,
         handleReset,
         obtenerMiembro,

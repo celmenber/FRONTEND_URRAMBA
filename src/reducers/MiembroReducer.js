@@ -52,7 +52,7 @@ export const MiemboReducer = (state = initialState, action) => {
                 loadinglista: false,
                 listaMiembro: action.payload
             }
-    
+
         case EDITAR_MIEMBRO:
             return {
                 ...state,
@@ -63,11 +63,11 @@ export const MiemboReducer = (state = initialState, action) => {
                 const updatedMiembros = state.listaMiembro.map((miembro) =>
                   miembro.ID === updatedMiembro.ID ? updatedMiembro : miembro
                 );
-              
+
                 return {
                   ...state,
                   listaMiembro: updatedMiembros,
-                  // other properties...
+                  loading: false,
                 };
         case DELETE_MIEMBRO:
             return {
@@ -75,7 +75,7 @@ export const MiemboReducer = (state = initialState, action) => {
                 miembroeliminar: action.payload,
             }
             case DELETE_MIEMBRO_SUCCESS:
-           
+
                 return {
                     ...state,
                     listaMiembro: state.listaMiembro.filter(A => A.ID !== state.miembroeliminar),

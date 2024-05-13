@@ -21,18 +21,21 @@ import {
   CFormFeedback,
   CSpinner,
   CTooltip,
+  CCardTitle,
+  CCollapse,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
-/* import { cilLockLocked, cilLockUnlocked, cilPeople } from '@coreui/icons'
-import CIcon from '@coreui/icons-react' */
+import CIcon from '@coreui/icons-react';
+import { cilTrash } from '@coreui/icons'
 
- const Contactenos = () => {
+ const Asociaciones = () => {
+ const [visible, setVisible] = useState(false)
+
    const { handleSubmit,
             onChangeFormulario,
             obtenerAsociacion,
             obtenerMunicipio,
-          /*   EliminarAsociacion,
-            asociacioncodeditar, */
+            EliminarAsociacion,
             Municipio,
             asociaciones,
             cargandolista,
@@ -68,12 +71,8 @@ import CIcon from '@coreui/icons-react' */
         direccionAsociacion:item.direccion,
         telefonoAsociacion: item.telefono,
       });
-
-
-
+        setVisible(true);
     };
-
-  //console.log({asociaciones})
 
   return (
     <><CRow>
@@ -83,12 +82,17 @@ import CIcon from '@coreui/icons-react' */
             <strong>Asociaciones</strong> <small>Negritudes</small>
           </CCardHeader>
           <CCardBody>
+            <CButton onClick={() => setVisible(!visible)} color="secondary" style={{ width: '100%' }}>
+              {visible ? 'Cerrar Formulario' : 'Abrir Formulario'}
+           </CButton>
             <CForm
               className="row g-3 needs-validation"
               noValidate
               validated={validated}
               onSubmit={handleSubmit}
             >
+             <CCardTitle></CCardTitle>
+             <CCollapse visible={visible}>
               <CRow className="mt-4">
               <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom01">Nit </CFormLabel>
@@ -127,7 +131,7 @@ import CIcon from '@coreui/icons-react' */
                   onChange={onChangeFormulario}
                   required
                 />
-                <CFormFeedback invalid>El campo Correo Electronico Requerido!</CFormFeedback>
+                <CFormFeedback invalid>El Correo Electronico Requerido!</CFormFeedback>
               </CCol>
               </CRow>
             <CRow>
@@ -181,33 +185,38 @@ import CIcon from '@coreui/icons-react' */
                    onChange={onChangeFormulario}
                   required
                 />
-                <CFormFeedback invalid>El campo Telefono Requerido!</CFormFeedback>
+                <CFormFeedback invalid>El Telefono es Requerido!</CFormFeedback>
               </CCol>
               </CRow>
-              <CCol xs={12}>
-                {cargando === true ? (
-                  <CLoadingButton
-                    color="success"
-                    variant="outline"
-                    style={{ width: '100%' }}
-                    timeout={2000}
-                  >
-                    {' '}
-                    Enviando Concejo Comunitario
-                  </CLoadingButton>
-                ) : (
-                  <CButton
-                  type="button"
-                  color={'primary'}
-                  variant="outline"
-                  className="px-4"
-                  style={{ width: '100%' }}
-                  onClick={nombreBotoGuardarActulizar === 'Agregar Nueva Asociación' ? handleSubmit : handleActualizarAsociacion}
-                >
-                  {nombreBotoGuardarActulizar}
-                </CButton>
-                )}
-              </CCol>
+               <br />
+               <CRow>
+                  <CCol xs={12}>
+                    {cargando === true ? (
+                      <CLoadingButton
+                        color="success"
+                        variant="outline"
+                        style={{ width: '100%' }}
+                        timeout={2000}
+                      >
+                        {' '}
+                        Enviando Concejo Comunitario
+                      </CLoadingButton>
+                    ) : (
+                      <CButton
+                      type="button"
+                      color={'primary'}
+                      variant="outline"
+                      className="px-4"
+                      style={{ width: '100%' }}
+                      onClick={nombreBotoGuardarActulizar === 'Agregar Nueva Asociación' ? handleSubmit : handleActualizarAsociacion}
+                    >
+                      {nombreBotoGuardarActulizar}
+                    </CButton>
+                    )}
+                  </CCol>
+                 </CRow>
+                 </CCollapse>
+               </CForm>
               <hr />
               <CCol xs={12}>
                 <CRow>
@@ -229,7 +238,7 @@ import CIcon from '@coreui/icons-react' */
                             <CTableHeaderCell>Asociacion</CTableHeaderCell>
                             <CTableHeaderCell className="text-center">Nit</CTableHeaderCell>
                               <CTableHeaderCell className="text-center">Municipio</CTableHeaderCell>
-                            <CTableHeaderCell></CTableHeaderCell>
+                            <CTableHeaderCell className="text-center" colSpan={2}>...</CTableHeaderCell>
                           </CTableRow>
                         </CTableHead>
                         <CTableBody>
@@ -255,23 +264,19 @@ import CIcon from '@coreui/icons-react' */
                                   <div>{item.nombre}</div>
 
                                 <div className="small text-medium-emphasis">
-                                    <span>{item.correo}</span> | Telefono: {' '}
-                                    {item.telefono}
-
+                                    <span>{item.correo}</span>
                                 </div>
                                   <div className="small text-medium-emphasis">
-                                    <span>{item.direccion}</span>
+                                   Telefono: {' '}  {item.telefono} | Dir: {' '} <span>{item.direccion}</span>
                                   </div>
                               </CTableDataCell>
-                              <CTableDataCell>
+                              <CTableDataCell className="text-center">
                               <div>{item.nit}</div>
                               </CTableDataCell>
-                              <CTableDataCell>
+                              <CTableDataCell className="text-center">
                               <div>{item.municipio}</div>
                               </CTableDataCell>
                               <CTableDataCell className="text-center">
-
-                                  <CTableDataCell>
                                     <div className="small text-medium-emphasis">
                                       <CTooltip
                                         content="Actualizar Asociación"
@@ -286,9 +291,22 @@ import CIcon from '@coreui/icons-react' */
                                           {'Corregir Asociación'}
                                         </CButton></CTooltip>
                                     </div>
-                                  </CTableDataCell>
-
                               </CTableDataCell>
+                               <CTableDataCell>
+                                 <div className="small text-medium-emphasis">
+                                     <CTooltip
+                                          content="Eliminar Empleado" placement="bottom">
+                                            <CButton style={{ 'width': '100%' }}
+                                                 color="danger"
+                                                  variant="outline"
+                                                  size="lg"
+                                                  onClick={() => EliminarAsociacion(item.ID)}
+                                                  >
+                                                   <CIcon icon={cilTrash} size="lg" />
+                                                    </CButton>
+                                                  </CTooltip>
+                                                 </div>
+                                               </CTableDataCell>
                             </CTableRow>
                             ))
                           )}
@@ -297,11 +315,9 @@ import CIcon from '@coreui/icons-react' */
                      )}
                   </CCol>
                 </CRow>
-              </CCol>
-            </CForm>
+               </CCol>
 
           </CCardBody>
-
         </CCard>
       </CCol>
 
@@ -309,4 +325,4 @@ import CIcon from '@coreui/icons-react' */
     </>
   )
 }
-export default Contactenos
+export default Asociaciones

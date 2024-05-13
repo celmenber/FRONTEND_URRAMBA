@@ -183,7 +183,7 @@ const AdminUsuarios = () => {
                         </CTableDataCell>
                           <CTableDataCell className="text-center">
                             <h5>
-                              {item.ID_EMP !== 0 ? 'Empleado' : 'Autoridad tradicional'}</h5>
+                              {item.ID_EMP !== 0 ? 'Empleado' : 'Autoridad'}</h5>
                           </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">

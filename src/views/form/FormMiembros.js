@@ -37,7 +37,7 @@ import FormMiembrosActModal from './modal/FormMiembrosActModal'
 
 
 const WidgetBarChart = () => {
-  
+
 
   const [selectServicio] = useState(1);
   const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
@@ -66,7 +66,7 @@ const WidgetBarChart = () => {
 
   useEffect(() => {
     obtenerConcejo();
-    obtenerMiembro(); 
+    obtenerMiembro();
     obtenerEscolaridad()
     obtenerOrientacionSexual()
 
@@ -74,30 +74,30 @@ const WidgetBarChart = () => {
   }, []);
 
   useEffect(()=>{
-    
-   
+
+
     obtenerNombre();
     setVisibleM(false)
    // eslint-disable-next-line
   },[miembro])
 
- 
+
 
   const obtenerNombre = () => {
-    
+
     const miembrosConOrientacionSexual = miembro.map(orientacion => {
       const orientacionSexuales = orientacion_sexuales?.find(item => item.ID === orientacion.id_orientacion_sexual)
       const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
       return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
-  
+
     });
-  
+
     const miembrosConEscolaridad = miembrosConOrientacionSexual.map(miembr => {
       const escolaridad = escolaridades.find(item => item.ID === miembr.id_escolaridad);
       const escolaridadNombre = escolaridad ? escolaridad.Nombre : "No encontrado";
       return { ...miembr, nombre_escolaridad: escolaridadNombre };
     });
-  
+
     setNombreEscolaridad(miembrosConEscolaridad);
   }
 
@@ -135,9 +135,8 @@ const WidgetBarChart = () => {
                       <CIcon icon={cilPeople} />
                     </CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} >Datos Miembro Consejo</CTableHeaderCell>
-                    {/* <CTableHeaderCell colSpan={2} className="text-center">Consejo</CTableHeaderCell> */}
-                    <CTableHeaderCell colSpan={1} className="text-center">Escolaridad</CTableHeaderCell>
-                    
+                    <CTableHeaderCell colSpan={1} className="text-center">Cargo</CTableHeaderCell>
+                    <CTableHeaderCell colSpan={1} className="text-center">Estudios</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Genero</CTableHeaderCell>
                     <CTableHeaderCell colSpan={1} className="text-center">Ubicación</CTableHeaderCell>
                     <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
@@ -155,7 +154,7 @@ const WidgetBarChart = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-                 
+
                     nombreEscolaridad?.map((item, index) => (
 
                       <CTableRow v-for="item in tableItems" key={index}>
@@ -173,7 +172,7 @@ const WidgetBarChart = () => {
                               {item.nombres} {item.apellidos}
                             </strong></span><br></br>
                             <small style={{ marginLeft: '5px' }}>
-                              {item.Tipo_documento}{item.documentos}
+                              {item.Tipo_documento}: {item.documentos}
                             </small>
                           </div>
                           <div className="small text-medium-emphasis">
@@ -182,35 +181,27 @@ const WidgetBarChart = () => {
                             </span>
                           </div>
                         </CTableDataCell>
-                        {/* <CTableDataCell className="text-center">
-                          <h5>{item.asociacion}</h5>
-                        </CTableDataCell> */}
+                        <CTableDataCell className="text-center">
+                          <h6>{item.cargo_miembro}</h6>
+                        </CTableDataCell>
                         <CTableDataCell>
                         <div className="small text-medium-emphasis">Escolaridad/Estado</div>
-                          <strong>{
+                          <span>{
                             item.nombre_escolaridad
-                          }</strong> |     <strong>{
+                          }</span> | <span>{
                             item.estado_escolaridad
-                          }</strong>
+                          }</span>
                         </CTableDataCell>
-                       
-
-                        {/* <CTableDataCell>
-                          <div className="small text-medium-emphasis">Municipio/Ciudad</div>
-                          <strong>{
-                            item.municipio
-                          }</strong>
-                        </CTableDataCell> */}
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
                           <span>
-                            {item.sexo}</span> | <span> Gen: {item.genero} | <span>Ori Sex: {item.nombreOrientacionSex}</span>
+                            {item.sexo}</span> | <span>{item.genero} | <span>{item.nombreOrientacionSex}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>
-                          <div className="small text-medium-emphasis">Barrio/Vereda</div>
+                          <div className="small text-medium-emphasis">Barrio/Vereda/Corregimiento</div>
                           <span>
-                            {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion} | <span>Corrg: {item.Corregimiento}</span>
+                            {item.Veredas_Barrios}</span> | <span>{item.direccion} | <span>{item.Corregimiento}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>
@@ -225,48 +216,11 @@ const WidgetBarChart = () => {
                                 size="lg"
                                 onClick={() => EditaMiembro(item.ID)}
                               >
-                                {'Editar'}
+                                {'Corregir'}
                               </CButton>
                               </CTooltip>
                           </div>
                         </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                          {console.log({selectServicio})}
-                            <CTooltip
-                              content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
-                              placement="bottom"
-                            >
-                             
-                              {selectServicio !== 1 ? (
-                                <CLoadingButton
-                                  variant="outline"
-                                  size="lg"
-                                  color={item.estado === '1' ? 'secondary' : 'success'}
-                                  style={{ 'width': '100%' }}
-                                  timeout={2000}
-                                >
-                                </CLoadingButton>
-                              ) : (
-                                <CButton
-                                  size="lg"
-                                  color={item.estado === '1' ? 'success' : 'secondary'}
-                                  style={{ 'width': '100%' }}
-                                  id={`estado${1}`}
-                                // key={item.IdConvenio}
-                                //onClick={() => handleSelectEst(item.IdConvenio)}
-                                >
-                                  {item.estado === '1'
-                                    ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                    : <CIcon icon={cilLockLocked} size="lg" />
-                                  }
-                                </CButton>
-                              )}
-
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-                       
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
@@ -295,7 +249,7 @@ const WidgetBarChart = () => {
       <FormMiembrosModal
         visibleM={visibleM}
         setVisibleM={setVisibleM}
-                                  
+
       />
       <FormMiembrosActModal
        visibleMI={visibleMI}

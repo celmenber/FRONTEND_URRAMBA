@@ -20,7 +20,7 @@ const {
 
 // Crear nuevos AutoridadT
 export const crearNuevoAutoridadTAction = (Dataform) => {
-  
+
   return async (dispatch) => {
     dispatch(agregarAutoridadT())
 
@@ -64,23 +64,18 @@ const agregarAutoridadTExito = (datos) => ({
 
 // si hubo un error
 const agregarAutoridadTError = (estado) => ({
-  
+
   type: ADD_AUTORIDADT_ERROR,
   payload: estado,
 })
 
 // ***************** Seleccion obtener contananos //****************/
 export const obtenerAutoridadTAction = () => {
-
     return async (dispatch) => {
-
         dispatch(obtenerAutoridadT());
-
         try {
           const { data } = await Axios.get('autoridatradicional/view-autoridatradicional');
-
             if (data.code === 200) {
-              console.log(data.data)
                 dispatch(obtenerAutoridadTExitosa(data.data))
            }
         } catch (error) {
@@ -107,29 +102,16 @@ const obtenerAutoridadTError = () => ({
 
 // ***************** Seleccion editar el AutoridadT //****************/
 
-export const editarAutoridadTAction = (Datos) => {
-  
+export const editarAutoridadTAction = (Dataform) => {
     return async (dispatch) => {
         dispatch(editarAutoridadT());
-        console.log(Datos)
-        const { id } = Datos
+        const { formularioDatos, id } = Dataform
         try {
-          
-
-          const {data} = await Axios.put(`/autoridatradicional/edit-autoridatradicional/${id}`, Datos.formularioDatos);
-      
-          console.log('data', data)
-                dispatch(editarAutoridadTExito(data.data.datos));
-         
-
+          const {data} = await Axios.put(`/autoridatradicional/edit-autoridatradicional/${id}`, formularioDatos);
+             dispatch(editarAutoridadTExito(data.data));
             if (data.code === 200) {
-                Swal.fire(
-                    'Correcto',
-                    'El AutoridadT se actualizó correctamente',
-                    'success'
-                );
+                Swal.fire( 'Correcto','La Autoridad tradicional se actualizó correctamente','success');
             }
-
         } catch (error) {
             console.log(error);
             dispatch(editarAutoridadTError());
@@ -157,13 +139,9 @@ const editarAutoridadTError = () => ({
 // ***************** Seleccion y elimina el registro  Normativida//****************/
 export const borrarAutoridadTAction = id => {
     return async (dispatch) => {
-
         dispatch(eliminaAutoridadT(id));
-
         try {
-          
           const { data } = await Axios.delete(`/autoridatradicional/delete-autoridatradicional/${id}`);
-
             if (data.code === 200) {
                 dispatch(eliminarAutoridadTExito(id));
                 // Si se elimina, mostrar alerta

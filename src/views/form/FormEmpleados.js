@@ -46,30 +46,30 @@ const AdminConvenios = () => {
         empleados,
         visibleE, setVisibleE,
         visibleEM, setVisibleEM,
-        setValidated, 
-        datoEmpleado, 
+        setValidated,
+        datoEmpleado,
         cargandolista,
         onChangeFormulario,
         handleSubmitAct,
-       
+
     } = EmpleadoForm()
 
 
    useEffect(() => {
         // Consultar la api listar parques
-    
+
         obtenerEmpleado();
         // eslint-disable-next-line
     }, []);
    useEffect(() => {
         // Consultar la api listar parques
-     
+
      setVisibleE(false)
         // eslint-disable-next-line
     }, [empleados]);
 
 
- 
+
 
     return (
         <CRow>
@@ -178,43 +178,8 @@ const AdminConvenios = () => {
                                                                                 {'Editar'}
                                                                             </CButton></CTooltip>
                                                                     </div>
-                                                                </CTableDataCell>
-                                                          <CTableDataCell>
-                                                            <div className="small text-medium-emphasis">
-                                                              <CTooltip
-                                                                content={item.estado === '1' ? 'Desactivar' : 'Activar'}
-                                                                placement="bottom"
-                                                              >
-                                                                {selectServicio !== 1 ? (
-                                                                  <CLoadingButton
-                                                                    variant="outline"
-                                                                    size="lg"
-                                                                    color={item.estado === '1' ? 'secondary' : 'success'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    timeout={2000}
-                                                                  >
-                                                                  </CLoadingButton>
-                                                                ) : (
-                                                                  <CButton
-                                                                    size="lg"
-                                                                    color={item.estado === '1' ? 'success' : 'secondary'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    id={`estado${1}`}
-                                                                  // key={item.IdConvenio}
-                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
-                                                                  >
-                                                                    {item.estado === '1'
-                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                                                      : <CIcon icon={cilLockLocked} size="lg" />
-                                                                    }
-                                                                  </CButton>
-                                                                )}
-
-                                                              </CTooltip>
-                                                            </div>
                                                           </CTableDataCell>
-                                                        
-                                                                <CTableDataCell>
+                                                          <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
                                                                             content="Eliminar Empleado"

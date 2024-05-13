@@ -57,7 +57,7 @@ const Caracterizacion = () => {
         })
     );
   }else{
-     data = JefeHogar?.filter(C => C.id_usuario === true).map(
+     data = JefeHogar?.filter(C => C.id_usuario === userDetails.ID_USER).map(
         item => ({
             label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
             value: item.ID.toString()

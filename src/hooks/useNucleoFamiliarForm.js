@@ -71,7 +71,7 @@ export const NucleoFamiliarForm = () => {
         Estado_escolaridad:'',
         Sexo:'',
         Genero:'',
-        Fecha_nacimiento: new Date()
+        Fecha_nacimiento: ''
     })
 
     const onChangeFormulario = (e) => {
@@ -79,6 +79,7 @@ export const NucleoFamiliarForm = () => {
             ...datoNucleoFamiliar, [e.target.name]: e.target.value
         })
     }
+
     const handleReset = () => {
         setDatoNucleoFamiliar({
             Id_jefe_hogar: '',
@@ -92,12 +93,12 @@ export const NucleoFamiliarForm = () => {
             Estado_escolaridad:'',
             Sexo:'',
             Genero:'',
-            Fecha_nacimiento: new Date()
+            Fecha_nacimiento: ''
         })
         setValedita(false)
     };
     const handleSubmit = (event) => {
-        debugger
+     //   debugger
         event.preventDefault();
         setValidated(true)
         const form = event.currentTarget
@@ -106,7 +107,6 @@ export const NucleoFamiliarForm = () => {
             event.stopPropagation()
         } else {
             const formularioDatos = {
-                Id_usuario: userDetails.ID_USER,
                 Id_jefe_hogar: idJefeHogar,
                 Id_parentesco: datoNucleoFamiliar.Id_parentesco,
                 Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
@@ -120,6 +120,7 @@ export const NucleoFamiliarForm = () => {
                 Genero: datoNucleoFamiliar.Genero,
                 Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento
             }
+            console.log(formularioDatos);
             if (Object.values(formularioDatos).some(value => !value)) {
                 setValidated(true)
 
@@ -138,13 +139,12 @@ export const NucleoFamiliarForm = () => {
 
 
     const handleActualizarNucleoFamiliar = (event) => {
-        debugger
+      //  debugger
         event.preventDefault();
         const form = event.currentTarget;
 
         // Obtener los campos del formulario
         const formularioDatos = {
-            Id_usuario: "1",
             Id_jefe_hogar: idJefeHogar,
             Id_parentesco: datoNucleoFamiliar.Id_parentesco,
             Id_tipo_documento: datoNucleoFamiliar.Id_tipo_documento,
@@ -196,11 +196,10 @@ export const NucleoFamiliarForm = () => {
 
         event.stopPropagation();
     };
-    const eliminarMiembro = (id) => {
-        const Id = id
+    const handleliminarMiembro = (Id) => {
         Swal.fire({
-            title: '¿Estas seguro de eliminar el Concejo Comunitario?',
-            text: 'El Concejo Comunitario eliminado no se podrá recuperar',
+            title: '¿Estas seguro de eliminar el miembro el Familiar?',
+            text: 'El miembro del nucleo Familiar eliminado no se podrá recuperar',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -229,7 +228,7 @@ export const NucleoFamiliarForm = () => {
         obtenerEscolaridad,
         obtenerOrientacionSexual,
         obtenerJefeHogar,
-        eliminarMiembro,
+        handleliminarMiembro,
         userDetails,
         JefeHogar,
         asociacion,
@@ -251,6 +250,7 @@ export const NucleoFamiliarForm = () => {
         cargandolista,
         cargando,
         setIdJefeHogar,
+        idJefeHogar,
         setNombreBotoGuardarActulizar,
         nombreBotoGuardarActulizar
     }

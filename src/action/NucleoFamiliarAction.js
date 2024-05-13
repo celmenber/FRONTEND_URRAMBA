@@ -20,32 +20,25 @@ const {
     DELETE_NUCLEO_FAMILIAR_ERROR,
 } = TYPES
 
-// Crear nuevos Empleado
-
+// Crear nuevos miembros de la famimilia
 export const crearNuevoNucleoFamiliarAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(agregarNucleoFamiliar())
-
     const { formularioDatos } = Dataform
-
     try {
       // insertar en la API
-      
       const { data } = await Axios.post('/nucleofamiiar/create-nucleofamiiar', formularioDatos)
-
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarNucleoFamiliarExito(datos))
+      dispatch(agregarNucleoFamiliarExito(data.data))
 
-      if (data.success === true) {
-        Swal.fire('Correcto', 'El Familiar se agrego correctamente', 'success')
-        
+      if (data.code === 201) {
+        Swal.fire('Correcto', 'El miembro al nucleo Familiar se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
-     
+
       dispatch(agregarNucleoFamiliarError(true))
-    
+
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -80,10 +73,10 @@ export const obtenerNucleoFamiliarAction = () => {
 
         try {
             const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar')
-            debugger
+
             if (data.code === 200) {
                 dispatch(obtenerNucleoFamiliarExistosa(data.data))
-                
+
             }
         } catch (error) {
             console.log(error);
@@ -107,30 +100,20 @@ const obtenerNucleoFamiliarError = () => ({
     payload: true
 });
 
+export const editarNucleoFamiliarAction = (Dataform) => {
 
-
-
-
-export const editarNucleoFamiliarAction = (datos) => {
-  
   return async (dispatch) => {
     dispatch(editarNucleoFamiliar());
-
-    const id = Number(datos.Id);
-
+     const { formularioDatos, Id } = Dataform
+    console.log(Dataform);
     try {
-     	
-      debugger
-                
-      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${id}`, datos.formularioDatos);
-      
-
-      dispatch(editarNucleoFamiliarExito(data.data.datos));
+      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${Id}`, formularioDatos);
+      console.log(data);
+      dispatch(editarNucleoFamiliarExito(data.data));
 
       if (data.code === 200) {
-       
         Swal.fire('Correcto',
-         'El Usuario se actualizó correctamente', 
+         'El miembro del nucleo Familiar se actualizó correctamente',
          'success')
       }
     } catch (error) {
@@ -147,12 +130,12 @@ export const editarNucleoFamiliarAction = (datos) => {
     type: EDITAR_NUCLEO_FAMILIAR,
     payload: true,
   });
-  
+
   const editarNucleoFamiliarExito = (datos) => ({
     type: EDITAR_NUCLEO_FAMILIAR_SUCCESS,
     payload: datos,
   });
-  
+
   const editarNucleoFamiliarError = () => ({
     type: EDITAR_NUCLEO_FAMILIAR_ERROR,
     payload: true,
@@ -161,14 +144,14 @@ export const editarNucleoFamiliarAction = (datos) => {
 
 
 export const borrarNucleoFamiliarAction = (id) => {
-  
+
   return async (dispatch) => {
     dispatch(eliminarNucleoFamiliar(id))
 
     try {
-       const { data } = await Axios.delete(`/jefehogar/delete-jefehogar/${id}`)
+       const { data } = await Axios.delete(`/nucleofamiiar/delete-nucleofamiiar/${id}`)
       if (data.code === 200) {
-        dispatch(eliminarNucleoFamiliarExito(id))
+        dispatch(eliminarNucleoFamiliarExito())
         // Si se elimina, mostrar alerta
         Swal.fire('Eliminado', 'Se eliminó correctamente', 'success')
       }

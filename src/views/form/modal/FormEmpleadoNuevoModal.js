@@ -215,7 +215,7 @@ const EmpleadoNuevoModal = (Props) => {
                             </CCol>
                         </CRow>
                         <CRow>
-                            <CCol md={9} style={{ marginTop: '20px', marginBottom: '20px' }}>
+                            <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
                                 {cargando === true ? (
                                     <CLoadingButton
                                         color="success"
@@ -238,7 +238,7 @@ const EmpleadoNuevoModal = (Props) => {
                                     </CButton>
                                 )}
                             </CCol>
-                            <CCol xs={3} style={{ marginTop: '20px', marginBottom: '20px' }}>
+                            <CCol xs={2} style={{ marginTop: '20px', marginBottom: '20px' }}>
                                 <CButton
                                     type="button"
                                     color={'light'}
@@ -247,7 +247,7 @@ const EmpleadoNuevoModal = (Props) => {
                                     onClick={() => handleReset()}
                                 >
                                     {' '}
-                                    {'Nuevo Empleado'}
+                                    {'Nuevo Registro'}
                                 </CButton>
                             </CCol>
                         </CRow>

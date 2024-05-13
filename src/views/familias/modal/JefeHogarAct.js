@@ -34,7 +34,6 @@ const {
   validated,
 } = Props
 const {
-
   handleReset,
   obtenerAsociacion,
   obtenerEscolaridad,
@@ -81,11 +80,11 @@ useEffect(() => {
   obtenerEscolaridad();
   obtenerOrientacionSexual();
   obtenerBarrioVereda();
-  
+
   // eslint-disable-next-line
 }, []);
 
-console.log({validated})
+//console.log({validated})
 
 return (
   <>
@@ -140,8 +139,8 @@ return (
           </CFormSelect>
           <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
         </CCol>
-      
-     
+
+
       </CRow>
 
       <CRow className="g-3">
@@ -298,7 +297,7 @@ return (
           <CFormFeedback invalid>El campo Corregimientos es Requerido!</CFormFeedback>
         </CCol>
       <CCol md={4} style={{ marginTop: '15px' }}>
-        
+
         <CFormLabel htmlFor="validationCustom11">Sexo*</CFormLabel>
         <CFormSelect
           id="validationCustom11"
@@ -312,11 +311,11 @@ return (
         </CFormSelect>
         <CFormFeedback invalid>El campo Sexo es Requerido!</CFormFeedback>
       </CCol>
-   
-       
 
-  
-       
+
+
+
+
       </CRow>
 
       <CRow>
@@ -415,12 +414,12 @@ return (
             required />
           <CFormFeedback invalid>El campo Fecha Ingresp es Requerido!</CFormFeedback>
         </CCol>
-    
+
       </CRow>
 
         <CRow>
           <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
-           
+
               <CButton
                 type="submit"
                 color={'primary'}
@@ -430,7 +429,7 @@ return (
                 {' '}
                   {'Actualizando Datos  Jefe Hogar'}
               </CButton>
-            
+
           </CCol>
           <CCol xs={2} style={{ marginTop: '20px', marginBottom: '20px' }}>
             <CButton
@@ -448,7 +447,7 @@ return (
       </CModalBody>
     </CForm>
   </CModal>
-     
+
   </>
 )
 }

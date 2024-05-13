@@ -126,7 +126,7 @@ export const editarAsociacionAction = (Datos) => {
       dispatch(editarAsociacionExito(data.data))
 
       if (data.code === 200) {
-        Swal.fire( 'La asociación se actualizo correctamente', 'success')
+        Swal.fire( 'Correcto', 'La asociación se actualizo correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
@@ -156,12 +156,12 @@ export const borrarAsociacionAction = (id) => {
     dispatch(eliminarAsociacion(id))
 
     try {
-      const { data } = await Axios.delete(`/app/conveniocodigo/delete/${id}`)
+      const { data } = await Axios.delete(`/asociacion/delete-asociacion/${id}`)
 
       if (data.code === 200) {
         dispatch(eliminarAsociacionExito(id))
         // Si se elimina, mostrar alerta
-        Swal.fire('Eliminado', 'La Reserva se eliminó correctamente', 'success')
+        Swal.fire('Eliminado', 'La Asociacion se eliminó correctamente', 'success')
       }
     } catch (error) {
       console.log(error)

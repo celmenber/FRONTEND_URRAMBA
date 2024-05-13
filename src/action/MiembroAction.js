@@ -36,13 +36,10 @@ export const crearNuevoMiembroAction = (Dataform) => {
 
       if (data.success === true) {
         Swal.fire('Correcto', 'El Miembro se agregar correctamente', 'success')
-        
       }
     } catch (error) {
       console.log(error)
-     
       dispatch(agregarMiembroError(true))
-    
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -77,11 +74,11 @@ export const obtenerMiembroAction = () => {
         dispatch(obtenerMiembro());
 
         try {
-            
+
           const { data } = await Axios.get('/miembrosconcejo/view-miembrosconcejo');
             if (data.code === 200) {
                 dispatch(obtenerMiembroExitosa(data.data))
-                
+
             }
         } catch (error) {
             console.log(error);
@@ -106,16 +103,16 @@ const obtenerMiembroError = (estado) => ({
 });
 
 export const editarMiembroAction = (Datos) => {
-  
+
   return async (dispatch) => {
     dispatch(editarMiembro());
 
     const id = Number(Datos.id);
 
     try {
-                                     
+
       const {data} = await Axios.put(`/miembrosconcejo/edit-miembrosconcejo/${id}`, Datos.formularioDatos);
-      
+
 
       dispatch(editarMiembroExito(data.data.datos));
 
@@ -140,12 +137,12 @@ export const editarMiembroAction = (Datos) => {
     type: EDITAR_MIEMBRO,
     payload: true,
   });
-  
+
   const editarMiembroExito = (datos) => ({
     type: EDITAR_MIEMBRO_SUCCESS,
     payload: datos,
   });
-  
+
   const editarMiembroError = () => ({
     type: EDITAR_MIEMBRO_ERROR,
     payload: true,

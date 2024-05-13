@@ -70,7 +70,6 @@ export const AutoridadTForm = () => {
 
     // Leer los datos del formulario
     const onChangeFormulario = e => {
-
       setDatoAutoridad({
         ...datoAutoridad,
             [e.target.name]: e.target.value
@@ -82,6 +81,7 @@ export const AutoridadTForm = () => {
             Idbarriovereda: '',
             Idcorregimiento: '',
             Idtipodocumento: '',
+            Id_escolaridad: '',
             Documentos: '',
             Nombres: '',
             Apellidos: '',
@@ -92,15 +92,14 @@ export const AutoridadTForm = () => {
             Estado: '',
             Fechanacimiento: '',
             Fechaingreso: '',
-            Id_escolaridad: '',
             Estado_escolaridad: '',
         })
         setValedita(false)
     };
 
     const handleSubmit = (event) => {
-
         event.preventDefault();
+        setValidated(true)
         const form = event.currentTarget
         if (form.checkValidity() === false) {
             event.preventDefault()
@@ -108,7 +107,6 @@ export const AutoridadTForm = () => {
         } else {
 
             const formularioDatos = {
-
                     Id_usuario:userDetails.ID_USER,
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
                     Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
@@ -124,8 +122,8 @@ export const AutoridadTForm = () => {
                     Estado: datoAutoridad.Estado,
                     Fecha_nacimiento: datoAutoridad.Fechanacimiento,
                     Fecha_ingreso: datoAutoridad.Fechaingreso,
-                    Id_escolaridad: 1,
-                    Estado_escolaridad: 'Terminado',
+                    Id_escolaridad:  datoAutoridad.Id_escolaridad,
+                    Estado_escolaridad:  datoAutoridad.Estado_escolaridad,
             }
             if (valedita === false) {
               crearNuevoAutoridadT({
@@ -137,19 +135,15 @@ export const AutoridadTForm = () => {
             setVisibleAT(false)
             event.stopPropagation()
         }
-       // event.stopPropagation()
-        setValidated(true)
     }
-
 
 
     // función que redirige Edita ContactoAsunto
   const EditarAutoridad = (id) => {
-
     const datos = autoridadT.filter(C => C.ID === id)
+
     setVisibleEAT(true)
     setDatoAutoridad({
-      Id_usuario:"1",
       ID: datos[0].ID,
       Idmunicipio: Number(datos[0].id_municipio),
       Idbarriovereda: Number(datos[0].id_barrio_vereda),
@@ -167,51 +161,6 @@ export const AutoridadTForm = () => {
       Fechaingreso: datos[0].fecha_ingreso,
     });
   }
-
-  const handleSubmitAct = (event) => {
-
-    event.preventDefault();
-    const form = event.currentTarget;
-
-    if (form.checkValidity() === false) {
-        event.stopPropagation();
-
-    } else {
-        const formularioDatos = {
-          Id_usuario:"1",
-          Id_municipio: parseInt(datoAutoridad.Idmunicipio),
-          Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
-          Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
-          Id_tipo_documento: parseInt(datoAutoridad.Idtipodocumento),
-          Documentos: datoAutoridad.Documentos,
-          Nombres: datoAutoridad.Nombres,
-          Apellidos: datoAutoridad.Apellidos,
-          Sexo: datoAutoridad.Sexo,
-          Direccion: datoAutoridad.Direccion,
-          Telefono: datoAutoridad.Telefono,
-          Correo: datoAutoridad.Correo,
-          Estado: datoAutoridad.Estado,
-          Fecha_nacimiento: datoAutoridad.Fechanacimiento,
-          Fecha_ingreso: datoAutoridad.Fechaingreso,
-          Id_escolaridad: 1,
-          Estado_escolaridad: 'Terminado',
-
-        };
-
-        // Asumo que actulizarMiembro es una función que realiza la actualización
-        // No tengo su implementación, así que debes ajustarlo según tu código real
-        if (!valedita) {
-          actulizarAutoridadT({
-                formularioDatos,
-                id: datoAutoridad.ID,
-                handleReset,
-            });
-        }
-    }
-
-    setVisibleEAT(false);
-    event.stopPropagation();
-};
 
     // función que redirige Eliminar ContactoConvenio
   const eliminarAutoridadT = id => {
@@ -260,6 +209,5 @@ export const AutoridadTForm = () => {
       cargandolista,
       cargando,
       setValidated,
-      handleSubmitAct
   }
 }

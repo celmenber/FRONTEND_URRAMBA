@@ -115,20 +115,15 @@ const obtenerConcejoEditar = (datos) => ({
 })
 // ***************** Seleccion editar editar Conveniocod //****************/
 // Edita un registro en la api y state
-export const editarConcejoAction = (datos) => {
+export const editarConcejoAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(editarConcejo())
-    const id = Number(datos.Id)
+     const { formularioDatos, Id} = Dataform
     try {
-      
-      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${id}`, datos.formularioDatos)
-
-      dispatch(editarConcejoExito(data.datos))
-   
+      const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${Id}`, formularioDatos)
+    dispatch(editarConcejoExito(data.data))
       if (data.code === 200) {
-        Swal.fire('Correcto', 
-        'El concejo se actualizó correctamente',
-         'success')
+        Swal.fire('Correcto','El concejo se actualizó correctamente','success')
       }
     } catch (error) {
       console.log(error)

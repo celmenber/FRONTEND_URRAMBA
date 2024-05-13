@@ -40,7 +40,7 @@ import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const JefeHogar = () => {
-   const [selectServicio] = useState(1);
+  const [selectServicio] = useState(1);
   const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
   const history = useHistory();
 
@@ -54,6 +54,7 @@ const JefeHogar = () => {
     EditarJefeHogar,
     datoJefeHogar,
     jefeHogar,
+    userDetails,
     escolaridades,
     obtenerOrientacionSexual,
     orientacion_sexuales,
@@ -68,43 +69,46 @@ const JefeHogar = () => {
 
   useEffect(() => {
     obtenerConcejo();
-    obtenerJefeHogar(); 
+    obtenerJefeHogar();
     obtenerEscolaridad()
     obtenerOrientacionSexual()
 
       // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{  
-    
+  useEffect(()=>{
+
     obtenerNombre();
     setVisibleM(false)
-   
+
    // eslint-disable-next-line
-  },[jefeHogar,  ])
+  },[])
 
   const obtenerNombre = () => {
-    
+
     const jefeHogarConOrientacionSexual = jefeHogar?.map(orientacion => {
       const orientacionSexuales = orientacion_sexuales?.find(item => item?.ID === orientacion?.id_orientacion_sexual)
       const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
       return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
-  
+
     });
-  
+
     const jefeHogarConEscolaridad = jefeHogarConOrientacionSexual.map(jefe => {
-      const escolaridad = escolaridades.find(item => item.ID === jefe.id_escolaridad);
+      const escolaridad = escolaridades?.find(item => item.ID === jefe.id_escolaridad);
       const escolaridadNombre = escolaridad ? escolaridad.Nombre : "No encontrado";
       return { ...jefe, nombre_escolaridad: escolaridadNombre };
     });
-  
+
     setNombreEscolaridad(jefeHogarConEscolaridad);
   }
 
   const idJefeHogar = (id) => {
-
     history.push(`/familias/nucleos/${id}`);
   }
+
+   //const user =  JSON.parse(localStorage.getItem('currentUser'));
+   const JefeHogar =  nombreEscolaridad?.filter(x => x.id_usuario === userDetails.ID_USER)
+   const lstJefeHogar = userDetails?.USER_ROL === 'superuser' ? nombreEscolaridad : JefeHogar;
 
   return (
     <CRow>
@@ -157,8 +161,8 @@ const JefeHogar = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-                 
-                    nombreEscolaridad?.map((item, index) => (
+
+                    lstJefeHogar?.map((item, index) => (
 
                       <CTableRow v-for="item in tableItems" key={index}>
 
@@ -195,7 +199,7 @@ const JefeHogar = () => {
                             item.estado_escolaridad
                           }</strong>
                         </CTableDataCell>
-                       
+
 
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
@@ -228,12 +232,12 @@ const JefeHogar = () => {
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
-                         
+
                             <CTooltip
                               content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
                               placement="bottom"
                             >
-                             
+
                               {selectServicio !== 1 ? (
                                 <CLoadingButton
                                   variant="outline"
@@ -260,7 +264,7 @@ const JefeHogar = () => {
                             </CTooltip>
                           </div>
                         </CTableDataCell>
-                       
+
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
@@ -277,9 +281,9 @@ const JefeHogar = () => {
                               </CButton></CTooltip>
                           </div>
                         </CTableDataCell>
-                      
+
                         {
-                          item.estado === "0" ||  item.estado === undefined  ? '' : 
+                          item.estado === "0" ||  item.estado === undefined  ? '' :
                           <CTableDataCell>
                             <div className="small text-medium-emphasis">
                               <CTooltip
@@ -297,7 +301,7 @@ const JefeHogar = () => {
                             </div>
                           </CTableDataCell>
                         }
-                        
+
                       </CTableRow>
                     ))
                   )}
@@ -310,7 +314,7 @@ const JefeHogar = () => {
       <JefeHogarNuevo
         visibleM={visibleM}
         setVisibleM={setVisibleM}
-                                  
+
       />
       <JefeHogarAct
        visibleMI={visibleMI}

@@ -19,7 +19,6 @@ const {
 
 const initialState = {
     listarNucleoFamiliar: [],
-
     loading: false,
     loadinglista: false,
     nucleofamiliareditar: null,
@@ -44,7 +43,7 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadinglista: action.payload,
-               
+
             }
         case OBTENER_NUCLEO_FAMILIAR_SUCCESS:
             return {
@@ -53,7 +52,7 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 listarNucleoFamiliar: action.payload
             }
 
-            
+
 
         case EDITAR_NUCLEO_FAMILIAR:
             return {
@@ -61,15 +60,13 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 loading: action.payload,
             }
         case EDITAR_NUCLEO_FAMILIAR_SUCCESS:
-            const updatedNucleoFamiliar = action.payload;
-            const updatedNucleoFamiliarres = state.listarNucleoFamiliar.map((familiar) =>
-                familiar.ID === updatedNucleoFamiliar.ID ? updatedNucleoFamiliar : familiar
-            );
-
-            return {
+             return {
                 ...state,
-                listarNucleoFamiliar: updatedNucleoFamiliarres,
-
+                loading: false,
+                nucleofamiliareditar: null,
+                listarNucleoFamiliar: state.listarNucleoFamiliar.map(NF =>
+                    NF.ID === action.payload.ID ? NF = action.payload : NF
+                )
             };
         case DELETE_NUCLEO_FAMILIAR:
             return {
@@ -77,7 +74,6 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 nucleofamiliareliminar: action.payload,
             }
         case DELETE_NUCLEO_FAMILIAR_SUCCESS:
-
             return {
                 ...state,
                 listarNucleoFamiliar: state.listarNucleoFamiliar.filter(A => A.ID !== state.nucleofamiliareliminar),

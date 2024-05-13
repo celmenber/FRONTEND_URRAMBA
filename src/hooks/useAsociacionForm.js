@@ -78,7 +78,7 @@ export const AsociacionForm = () => {
 //console.log(formularioDatos)
       if (Object.values(formularioDatos).some(value => !value)) {
         setValidated(true)
-       
+
       }else{
         setValidated(false)
         crearNuevoAsociacion({
@@ -138,13 +138,11 @@ export const AsociacionForm = () => {
 
     event.stopPropagation();
   };
-  //  nombreBotoGuardarActulizar,
-  //  setNombreBotoGuardarActulizar
 
   // función que redirige Eliminar ContactoConvenio
   const EliminarAsociacion = (id) => {
     Swal.fire({
-      title: '¿Estas seguro de eliminar el Codigo?',
+      title: '¿Estas seguro de eliminar la Asociacion?',
       text: 'El Codigo eliminado no se podrá recuperar',
       icon: 'warning',
       showCancelButton: true,

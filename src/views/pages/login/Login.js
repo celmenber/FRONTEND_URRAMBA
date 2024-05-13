@@ -43,23 +43,37 @@ const Login = () => {
 
   const [valpass, setValpass] = useState(false)
   const [toast, addToast] = useState(0)
-
+console.log(estatus?.data);
  useEffect(() => {
-   if (estatus?.data) {
-    addToast(<CToast
-      autohide={true}
-      color={estatus?.data.code === 401 ? 'danger' :'info'}
-      className="text-white align-items-center"
-      >
-        <div className="d-flex">
-          <CToastBody>
-          {estatus?.data.code === 401
-          ? 'Contraseña o Password es incorrecto'
-          : 'Email o Usuario está incorrecto'}
-            </CToastBody>
-          <CToastClose className="me-2 m-auto" white />
-        </div>
-      </CToast>)
+   if (estatus?.data.code === 400) {
+    if(estatus?.data.response !== '102'){
+        addToast(<CToast
+          autohide={true}
+          color={estatus?.data.response === '101' ? 'danger' :'info'}
+          className="text-white align-items-center"
+          >
+            <div className="d-flex">
+              <CToastBody>
+              {estatus?.data.response === '101'
+              ? 'Contraseña o Password es incorrecto'
+              : 'Email o Usuario está incorrecto'}
+                </CToastBody>
+              <CToastClose className="me-2 m-auto" white />
+            </div>
+          </CToast>)
+        }else{
+            addToast(<CToast
+          autohide={true}
+          color={'warning'}
+          className="text-white align-items-center"
+          >
+            <div className="d-flex">
+              <CToastBody>{'El Usuario está inactivo'}
+                </CToastBody>
+              <CToastClose className="me-2 m-auto" white />
+            </div>
+          </CToast>)
+        }
    }
     // eslint-disable-next-line
  }, [estatus])

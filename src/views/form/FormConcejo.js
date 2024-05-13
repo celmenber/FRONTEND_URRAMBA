@@ -21,12 +21,15 @@ import {
   CFormFeedback,
   CSpinner,
   CTooltip,
+  CCardTitle,
+  CCollapse,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
 import CIcon from '@coreui/icons-react'
 import { cilTrash } from '@coreui/icons'
 
 const FormConcejo = () => {
+   const [visible, setVisible] = useState(false)
   const {
     handleSubmit,
     onChangeFormulario,
@@ -47,7 +50,6 @@ const FormConcejo = () => {
     handleActualizarConcejo,
     nombreBotoGuardarActulizar,
     setNombreBotoGuardarActulizar
-
   } = ConcejoForm();
 
   useEffect(() => {
@@ -58,8 +60,6 @@ const FormConcejo = () => {
     obtenerAsociacion();
     // eslint-disable-next-line
   }, []);
-
-  console.log(Concejo);
 
  const EditaConsejo = (event, item) => {
 
@@ -75,12 +75,10 @@ const FormConcejo = () => {
       idMunicipio: item.id_municipio,
       // ... (otros campos)
     });
-
+    setVisible(true);
   };
 
-
-
-
+  //console.log(Autoridad)
 
   return (
     <><CRow>
@@ -90,12 +88,17 @@ const FormConcejo = () => {
             <strong>Concejos Comunitarios</strong> <small>Negritudes</small>
           </CCardHeader>
           <CCardBody>
+               <CButton onClick={() => setVisible(!visible)} color="secondary" style={{ width: '100%' }}>
+                  {visible ? 'Cerrar Formulario' : 'Abrir Formulario'}
+              </CButton>
             <CForm
               className="row g-3 needs-validation"
               noValidate
               validated={validated}
               onSubmit={handleSubmit}
             >
+             <CCollapse visible={visible}>
+            <CRow className="mt-4">
               <CCol md={3}>
                 <CFormLabel htmlFor="validationCustom01">Nit </CFormLabel>
                 <CFormInput
@@ -120,9 +123,10 @@ const FormConcejo = () => {
                   onChange={onChangeFormulario}
                   required
                 />
-                <CFormFeedback invalid>El campo Nombre Concejo Comunitario Requerido!</CFormFeedback>
-              </CCol>
-              <CRow>
+                <CFormFeedback invalid>El Nombre Concejo Comunitario Requerido!</CFormFeedback>
+               </CCol>
+             </CRow>
+              <CRow className="mt-3">
               <CCol xs={4}>
                 <CFormLabel htmlFor="validationCustom03" value={''}>Asociacion</CFormLabel>
                 <CFormSelect
@@ -164,7 +168,10 @@ const FormConcejo = () => {
                       ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
                       : (
                         Autoridad?.filter(item => item.Estado !== '0').map(item => (
-                          <option key={item.ID} value={item.ID}>
+                          <option
+                            key={item.ID}
+                            value={item.ID}
+                            >
                             {item.nombres+" "+item.apellidos}
                           </option>
                         ))
@@ -198,34 +205,36 @@ const FormConcejo = () => {
                   </CFormSelect>
                   <CFormFeedback invalid>Seleccione Municipio por favor.</CFormFeedback>
                 </CCol>
-              </CRow>
-              <CCol xs={12}>
-                {cargando === true ? (
-                  <CLoadingButton
-                    color="success"
-                    variant="outline"
-                    style={{ width: '100%' }}
-                    timeout={2000}
-                  >
-                    {' '}
-                    Enviando Concejo Comunitario
-                  </CLoadingButton>
-                ) : (
-                  <CButton
-                  type="button"
-                  color={'primary'}
-                  variant="outline"
-                  className="px-4"
-                  style={{ width: '100%' }}
-                  onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Concejo Comunitario' ? handleSubmit : handleActualizarConcejo}
-                >
-                  {nombreBotoGuardarActulizar}
-                </CButton>
-                )}
-              </CCol>
+                </CRow>
+                <CRow className="mt-4">
+                    <CCol xs={12}>
+                      {cargando === true ? (
+                        <CLoadingButton
+                          color="success"
+                          variant="outline"
+                          style={{ width: '100%' }}
+                          timeout={2000}
+                        >
+                          {' '}
+                          Enviando Concejo Comunitario
+                        </CLoadingButton>
+                      ) : (
+                        <CButton
+                        type="button"
+                        color={'primary'}
+                        variant="outline"
+                        className="px-4"
+                        style={{ width: '100%' }}
+                        onClick={nombreBotoGuardarActulizar === 'Agregar Nuevo Concejo Comunitario' ? handleSubmit : handleActualizarConcejo}
+                      >
+                        {nombreBotoGuardarActulizar}
+                      </CButton>
+                      )}
+                    </CCol>
+              </CRow></CCollapse>
 
-              <hr />
               <CCol xs={12}>
+                <hr />
                 <CRow>
                   <CCol xs={12}>
                     {Concejo.length === 0 ? (

@@ -101,6 +101,23 @@ const operadores_nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
+     {  component: CNavGroup,
+    name: 'CONCEJOS',
+    to: '/dashboard/admin',
+    icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Admin Concejos',
+        to: '/admin/concejos',
+      },
+      {
+        component: CNavItem,
+        name: 'Miembros Consejo',
+        to: '/admin/Miembros',
+      },
+    ],
+  },
   {
     component: CNavGroup,
     name: 'FAMILIAS',

@@ -21,8 +21,6 @@ import { borrarJefeHogarAction,
 
 export const JefeHogarForm = () => {
 
-
-
     const dispatch = useDispatch()
     const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
     const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
@@ -274,6 +272,7 @@ export const JefeHogarForm = () => {
         corregimiento,
         consejos,
         jefeHogar,
+        userDetails,
         barrios,
         jefeHogarByID,
         escolaridades,

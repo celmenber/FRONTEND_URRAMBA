@@ -35,8 +35,6 @@ import { CLoadingButton } from '@coreui/react-pro'
 import FormAutoridadActModal from './modal/FormAutoridadTActModal'
 
 const AutoridadT = () => {
-    const [selectServicio] = useState(1);
-
     const {
       obtenerAutoridadT,
       eliminarAutoridadT,
@@ -46,7 +44,6 @@ const AutoridadT = () => {
       visibleAT, setVisibleAT,
       visibleEAT, setVisibleEAT,
       cargandolista,
-      handleSubmitAct,
       onChangeFormulario,
       setValidated,
     } = AutoridadTForm()
@@ -90,7 +87,7 @@ const AutoridadT = () => {
                                                         <CIcon icon={cilPeople} />
                                                         </CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={1}>Datos Autoridad Afro</CTableHeaderCell>
-                                                        <CTableHeaderCell colSpan={1}  className="text-center">Asociacion</CTableHeaderCell>
+                                                        {/* <CTableHeaderCell colSpan={1}  className="text-center">Asociacion</CTableHeaderCell> */}
                                                         <CTableHeaderCell colSpan={2}  className="text-center">Ubicación</CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
                                                     </CTableRow>
@@ -124,7 +121,7 @@ const AutoridadT = () => {
                                                                           { item.nombres } {item.apellidos}
                                                                         </strong></span><br></br>
                                                                         <small style={{ marginLeft: '5px' }}>
-                                                                         {item.Tipo_documento}{item.documentos}
+                                                                         {item.Tipo_documento}: {item.documentos}
                                                                         </small>
                                                                     </div>
                                                                     <div className="small text-medium-emphasis">
@@ -140,9 +137,7 @@ const AutoridadT = () => {
 
                                                                 <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">Municipio/Ciudad</div>
-                                                                  <strong>{
-                                                              item.municipio
-                                                                    }</strong>
+                                                                  <strong>{item.Municipio }</strong>
                                                                 </CTableDataCell>
                                                               <CTableDataCell>
                                                             <div className="small text-medium-emphasis">Barrio/Vereda</div>
@@ -162,45 +157,10 @@ const AutoridadT = () => {
                                                                                 size="lg"
                                                                                 onClick={() => EditarAutoridad(item.ID)}
                                                                             >
-                                                                                {'Editar'}
+                                                                                {'Corregir Autoridad'}
                                                                             </CButton></CTooltip>
                                                                     </div>
                                                                 </CTableDataCell>
-                                                          <CTableDataCell>
-                                                            <div className="small text-medium-emphasis">
-                                                              <CTooltip
-                                                                content={item.estado === '1' ? 'Desactivar' : 'Activar'}
-                                                                placement="bottom"
-                                                              >
-                                                                {selectServicio !== 1 ? (
-                                                                  <CLoadingButton
-                                                                    variant="outline"
-                                                                    size="lg"
-                                                                    color={item.estado === '1' ? 'secondary' : 'success'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    timeout={2000}
-                                                                  >
-                                                                  </CLoadingButton>
-                                                                ) : (
-                                                                  <CButton
-                                                                    size="lg"
-                                                                    color={item.estado === '1' ? 'success' : 'secondary'}
-                                                                    style={{ 'width': '100%' }}
-                                                                    id={`estado${1}`}
-                                                                  // key={item.IdConvenio}
-                                                                  //onClick={() => handleSelectEst(item.IdConvenio)}
-                                                                  >
-                                                                    {item.estado === '1'
-                                                                      ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                                                      : <CIcon icon={cilLockLocked} size="lg" />
-                                                                    }
-                                                                  </CButton>
-                                                                )}
-
-                                                              </CTooltip>
-                                                            </div>
-                                                          </CTableDataCell>
-
                                                                 <CTableDataCell>
                                                                     <div className="small text-medium-emphasis">
                                                                         <CTooltip
@@ -235,10 +195,8 @@ const AutoridadT = () => {
                   visibleEAT={visibleEAT}
                   setVisibleEAT={setVisibleEAT}
                   datoAutoridad={datoAutoridad}
-                  handleSubmitAct = {handleSubmitAct}
                   onChangeFormulario={onChangeFormulario}
                   setValidated = {setValidated}
-
                   />
         </CRow>
     )
