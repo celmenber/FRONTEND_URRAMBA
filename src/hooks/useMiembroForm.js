@@ -9,8 +9,7 @@ import {
     obtenerOrientacionSexualAction,
     obtenercorregimientoAction,
     obtenertipodocumentoAction
-}
-    from '../action/ParametrosAction'
+} from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 import { borrarMiembroAction, crearNuevoMiembroAction, editarMiembroAction, obtenerMiembroAction } from 'src/action/MiembroAction';
 
@@ -151,11 +150,13 @@ export const MiembroForm = () => {
         });
     };
 
-    const eliminarMiembro = (id) => {
-        const Id = id
+    const eliminarMiembro = (Id) => {
+         const datos = miembro.filter((C) => C.ID === Id);
+         const Nombres =  datos[0].nombres +' '+ datos[0].apellidos;
+
         Swal.fire({
-            title: '¿Estas seguro de eliminar el Concejo Comunitario?',
-            text: 'El Concejo Comunitario eliminado no se podrá recuperar',
+            title: '¿Estas seguro de eliminar a Miembro Consejo '+ Nombres +' ?',
+            text: 'El Miembro del Consejo eliminado no se podrá recuperar',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

@@ -53,8 +53,8 @@ export const NucleoFamiliarForm = () => {
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
     const [selectActivar, setSelectActivar] = useState(false);
-    const [visibleM, setVisibleM] = useState(false)
-    const [visibleMI, setVisibleMI] = useState(false)
+    //const [visibleM, setVisibleM] = useState(false)
+    const [visibleTM, setVisibleTM] = useState(false)
     const [idJefeHogar, setIdJefeHogar] = useState('')
     const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Nucleo Familiar'))
 
@@ -139,7 +139,6 @@ export const NucleoFamiliarForm = () => {
 
 
     const handleActualizarNucleoFamiliar = (event) => {
-      //  debugger
         event.preventDefault();
         const form = event.currentTarget;
 
@@ -196,6 +195,10 @@ export const NucleoFamiliarForm = () => {
 
         event.stopPropagation();
     };
+
+  const  handletrasladamiembro = (Id) => {
+      setVisibleTM(true);
+    }
     const handleliminarMiembro = (Id) => {
         Swal.fire({
             title: '¿Estas seguro de eliminar el miembro el Familiar?',
@@ -229,6 +232,7 @@ export const NucleoFamiliarForm = () => {
         obtenerOrientacionSexual,
         obtenerJefeHogar,
         handleliminarMiembro,
+        handletrasladamiembro,
         userDetails,
         JefeHogar,
         asociacion,
@@ -245,8 +249,8 @@ export const NucleoFamiliarForm = () => {
         valedita,
         datoNucleoFamiliar, setDatoNucleoFamiliar,
         selectActivar, setSelectActivar,
-        visibleM, setVisibleM,
-        visibleMI, setVisibleMI,
+       // visibleM, setVisibleM,
+        visibleTM, setVisibleTM,
         cargandolista,
         cargando,
         setIdJefeHogar,

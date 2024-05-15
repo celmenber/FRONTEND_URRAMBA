@@ -40,8 +40,8 @@ import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const JefeHogar = () => {
-  const [selectServicio] = useState(1);
-  const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
+/*   const [selectServicio] = useState(1);
+  const [nombreEscolaridad, setNombreEscolaridad] = useState([]); */
   const history = useHistory();
 
   const {
@@ -49,15 +49,11 @@ const JefeHogar = () => {
     handleSubmitAct,
     obtenerJefeHogar,
     obtenerConcejo,
-    obtenerEscolaridad,
     eliminarJefeHogar,
     EditarJefeHogar,
     datoJefeHogar,
     jefeHogar,
     userDetails,
-    escolaridades,
-    obtenerOrientacionSexual,
-    orientacion_sexuales,
     visibleM,
     setVisibleM,
     visibleMI,
@@ -68,47 +64,28 @@ const JefeHogar = () => {
   } = JefeHogarForm()
 
   useEffect(() => {
-    obtenerConcejo();
-    obtenerJefeHogar();
-    obtenerEscolaridad()
-    obtenerOrientacionSexual()
+      obtenerJefeHogar();
+       // eslint-disable-next-line
+  }, []);
 
+  useEffect(() => {
+    obtenerConcejo();
       // eslint-disable-next-line
   }, []);
 
+
   useEffect(()=>{
-
-    obtenerNombre();
     setVisibleM(false)
-
    // eslint-disable-next-line
   },[])
-
-  const obtenerNombre = () => {
-
-    const jefeHogarConOrientacionSexual = jefeHogar?.map(orientacion => {
-      const orientacionSexuales = orientacion_sexuales?.find(item => item?.ID === orientacion?.id_orientacion_sexual)
-      const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
-      return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
-
-    });
-
-    const jefeHogarConEscolaridad = jefeHogarConOrientacionSexual.map(jefe => {
-      const escolaridad = escolaridades?.find(item => item.ID === jefe.id_escolaridad);
-      const escolaridadNombre = escolaridad ? escolaridad.Nombre : "No encontrado";
-      return { ...jefe, nombre_escolaridad: escolaridadNombre };
-    });
-
-    setNombreEscolaridad(jefeHogarConEscolaridad);
-  }
 
   const idJefeHogar = (id) => {
     history.push(`/familias/nucleos/${id}`);
   }
 
-   //const user =  JSON.parse(localStorage.getItem('currentUser'));
-   const JefeHogar =  nombreEscolaridad?.filter(x => x.id_usuario === userDetails.ID_USER)
-   const lstJefeHogar = userDetails?.USER_ROL === 'superuser' ? nombreEscolaridad : JefeHogar;
+  const lstJefeHogar = userDetails.USER_ROL === 'Administrador'
+                      ? jefeHogar
+                      : jefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
 
   return (
     <CRow>
@@ -161,11 +138,8 @@ const JefeHogar = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-
                     lstJefeHogar?.map((item, index) => (
-
                       <CTableRow v-for="item in tableItems" key={index}>
-
                         <CTableDataCell className="text-center">
                           <CAvatar size="md"
                             key={index}
@@ -179,7 +153,7 @@ const JefeHogar = () => {
                               {item.nombres} {item.apellidos}
                             </strong></span><br></br>
                             <small style={{ marginLeft: '5px' }}>
-                              {item.Tipo_documento}{item.documentos}
+                              {item.Tipo_documento}: {item.documentos}
                             </small>
                           </div>
                           <div className="small text-medium-emphasis">
@@ -188,23 +162,19 @@ const JefeHogar = () => {
                             </span>
                           </div>
                         </CTableDataCell>
-                        {/* <CTableDataCell className="text-center">
-                          <h5>{item.asociacion}</h5>
-                        </CTableDataCell> */}
                         <CTableDataCell>
                         <div className="small text-medium-emphasis">Escolaridad/Estado</div>
-                          <strong>{
-                            item.nombre_escolaridad
-                          }</strong> |     <strong>{
+                          <span>{
+                            item.Escolaridad
+                          }</span> | <span>{
                             item.estado_escolaridad
-                          }</strong>
+                          }</span>
                         </CTableDataCell>
-
 
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
                           <span>
-                            {item.sexo}</span> | <span> Gen: {item.genero} | <span>Ori Sex: {item.nombreOrientacionSex}</span>
+                            {item.sexo}</span> | <span>{item.genero} | <span> {item.Orientacion_sexual}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>
@@ -216,7 +186,7 @@ const JefeHogar = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
-                              content="Actulizar Miembro"
+                              content="Actulizar Jefe hogar"
                               placement="bottom"
                             >
                               <CButton style={{ 'width': '100%' }}
@@ -225,69 +195,15 @@ const JefeHogar = () => {
                                 size="lg"
                                 onClick={() => EditarJefeHogar(item.ID)}
                               >
-                                {'Editar'}
+                                {'Corregir'}
                               </CButton>
                               </CTooltip>
                           </div>
                         </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-
-                            <CTooltip
-                              content={item.estado === '1' ? 'Activo ' : 'Desactivo'}
-                              placement="bottom"
-                            >
-
-                              {selectServicio !== 1 ? (
-                                <CLoadingButton
-                                  variant="outline"
-                                  size="lg"
-                                  color={item.estado === '1' ? 'secondary' : 'success'}
-                                  style={{ 'width': '100%' }}
-                                  timeout={2000}
-                                >
-                                </CLoadingButton>
-                              ) : (
-                                <CButton
-                                  size="lg"
-                                  color={item.estado === '1' ? 'success' : 'secondary'}
-                                  style={{ 'width': '100%' }}
-                                  id={`estado${1}`}
-                                 >
-                                  {item.estado === '1'
-                                    ? <CIcon icon={cilLockUnlocked} size="lg" />
-                                    : <CIcon icon={cilLockLocked} size="lg" />
-                                  }
-                                </CButton>
-                              )}
-
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell>
-
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip
-                              content="Eliminar Miembro"
-                              placement="bottom"
-                            >
-                              <CButton style={{ 'width': '100%' }}
-                                color="danger"
-                                variant="outline"
-                                size="lg"
-                                onClick={() => eliminarJefeHogar(item.ID)}
-                              >
-                                <CIcon icon={cilTrash} size="lg" />
-                              </CButton></CTooltip>
-                          </div>
-                        </CTableDataCell>
-
-                        {
-                          item.estado === "0" ||  item.estado === undefined  ? '' :
                           <CTableDataCell>
                             <div className="small text-medium-emphasis">
                               <CTooltip
-                                content="Ir Nucleo Filia"
+                                content="Ir Nucleo Familia"
                                 placement="bottom"
                               >
                                 <CButton style={{ 'width': '100%' }}
@@ -300,8 +216,22 @@ const JefeHogar = () => {
                                 </CButton></CTooltip>
                             </div>
                           </CTableDataCell>
-                        }
-
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Eliminar Jefe hogar"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="danger"
+                                variant="outline"
+                                size="lg"
+                                onClick={() => eliminarJefeHogar(item.ID)}
+                              >
+                                <CIcon icon={cilTrash} size="lg" />
+                              </CButton></CTooltip>
+                          </div>
+                        </CTableDataCell>
                       </CTableRow>
                     ))
                   )}

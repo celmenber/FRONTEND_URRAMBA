@@ -147,7 +147,7 @@ export const borrarAutoridadTAction = id => {
                 // Si se elimina, mostrar alerta
                 Swal.fire(
                     'Eliminado',
-                    'El registro se eliminó correctamente',
+                    'La Autoridad Afro se eliminó correctamente',
                     'success'
                 )
             }
@@ -157,7 +157,7 @@ export const borrarAutoridadTAction = id => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al intenar eliminar el registro.'
+                text: 'No es posible eliminar la Autoridad Afro, tiene asignacion de registro.',
             })
         }
     }

@@ -172,7 +172,7 @@ export const borrarAsociacionAction = (id) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Hubo un error al intenar eliminar el registro. ',
+        text: 'No es posible eliminar la asociacion, tiene asignacion de registro.',
       })
     }
   }

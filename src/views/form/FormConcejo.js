@@ -62,10 +62,8 @@ const FormConcejo = () => {
   }, []);
 
  const EditaConsejo = (event, item) => {
-
     event.preventDefault();
     setNombreBotoGuardarActulizar('Actualizar Concejo Comunitario');
-    // Llenar el formulario con los datos del Concejo seleccionado
     setDatoconcejo({
       ID: item.ID,
       nitConcejo: item.nit,
@@ -73,7 +71,6 @@ const FormConcejo = () => {
       id_asociacion: item.id_asociacion,
       id_autoridad_tradicional: item.id_autoridad_tradicional,
       idMunicipio: item.id_municipio,
-      // ... (otros campos)
     });
     setVisible(true);
   };

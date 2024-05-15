@@ -154,9 +154,10 @@ export const ConcejoForm = () => {
 
 
   // función que redirige Eliminar ContactoConvenio
-  const EliminarConcejo = (id) => {
+  const EliminarConcejo = (Id) => {
+      const datos = Concejo.filter((C) => C.ID === Id);
     Swal.fire({
-      title: '¿Estas seguro de eliminar el Concejo Comunitario?',
+      title: '¿Estas seguro de eliminar el Concejo Comunitario '+ datos[0].nombre_concejo_comunitario +'?',
       text: 'El Concejo Comunitario eliminado no se podrá recuperar',
       icon: 'warning',
       showCancelButton: true,
@@ -166,7 +167,7 @@ export const ConcejoForm = () => {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        dispatch(borrarConcejoAction(id))
+        dispatch(borrarConcejoAction(Id))
       }
     })
   }

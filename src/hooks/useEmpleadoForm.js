@@ -7,30 +7,28 @@ import {
   crearNuevoEmpleadoAction,
   editarEmpleadoAction,
   obtenerEmpleadoAction,
-
-  
 } from '../action/EmpleadoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerBarrioVeredaAction } from '../action/ParametrosAction'
+import { obtenerPerfilAction } from '../action/UsuarioAction'
 import Swal from 'sweetalert2';
 
 export const EmpleadoForm = () => {
-  
+
   const dispatch = useDispatch()
+  const obtenerPerfil = () => dispatch(obtenerPerfilAction())
   const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
   const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
-  
   const obtenerEmpleado = () => dispatch(obtenerEmpleadoAction());
-  
   const crearNuevoEmpleado = (Dataform) => dispatch(crearNuevoEmpleadoAction(Dataform));
   const actulizarEmpleado = (Dataform) => dispatch(editarEmpleadoAction(Dataform));
-  
 
 
     //selecion del state en el  store
    // const { userDetails } = useSelector((state) => state.Auth);
   const cargando = useSelector(state => state.Empleado.loading);
   const cargandolista = useSelector(state => state.Empleado.loadinglista);
+  const perfil = useSelector(state => state.Usuario.Perfil);
   const barrios = useSelector(state => state.Parametros.barriosveredas);
   const asociacion = useSelector(state => state.Asociacion.asociacionlista);
   const empleados  = useSelector(state => state.Empleado.listaempleado);
@@ -41,20 +39,19 @@ export const EmpleadoForm = () => {
     const [visibleE, setVisibleE] = useState(false)
     const [visibleEM, setVisibleEM] = useState(false)
 
-    const [datoEmpleado, setDatoEmpleado] = useState({
-          Id_asociacion:'',
-          Id_barrio_vereda:'',
-          Id_tipo_documento:'',
-          Documentos:'',
-          Nombres: '',
-          Apellidos: '',
-          Direccion:'',
-          Telefono:'',
-          Correo:'',
-          Estado: '',
-          Fecha_ingreso:'',
-    })
-
+    const ObjEmpleado = {
+                  Id_asociacion:'',
+                  Id_barrio_vereda:'',
+                  Id_perfil:'',
+                  Documentos:'',
+                  Nombres: '',
+                  Apellidos: '',
+                  Direccion:'',
+                  Telefono:'',
+                  Correo:'',
+                  Estado: '',
+    }
+    const [datoEmpleado, setDatoEmpleado] = useState(ObjEmpleado)
     // Leer los datos del formulario
     const onChangeFormulario = e => {
       setDatoEmpleado({
@@ -63,19 +60,7 @@ export const EmpleadoForm = () => {
         })
     }
     const handleReset = () => {
-      setDatoEmpleado({
-            Id_asociacion: '',
-            Id_barrio_vereda: '',
-            Id_tipo_documento: '',
-            Documentos: '',
-            Nombres: '',
-            Apellidos: '',
-            Direccion: '',
-            Telefono: '',
-            Correo: '',
-            Estado: '',
-            Fecha_ingreso: '',
-        })
+        setDatoEmpleado(ObjEmpleado)
         setValedita(false)
     };
 
@@ -90,7 +75,7 @@ export const EmpleadoForm = () => {
             const formularioDatos = {
               Id_asociacion: datoEmpleado.Id_asociacion,
               Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
-              Id_tipo_documento:1,
+              Id_perfil:datoEmpleado.Id_perfil,
               Documentos:datoEmpleado.Documentos,
               Nombres: datoEmpleado.Nombres,
               Apellidos: datoEmpleado.Apellidos,
@@ -98,18 +83,14 @@ export const EmpleadoForm = () => {
               Telefono:datoEmpleado.Telefono,
               Correo:datoEmpleado.Correo,
               Estado: datoEmpleado.Estado,
-              Fecha_ingreso: '2023-12-30' //datoEmpleado.Fecha_ingreso
             }
 
             if (valedita === false) {
-
               crearNuevoEmpleado({
                     formularioDatos,
                     handleReset
                 })
             }
-
-           // setValedita(false)
             setVisibleE(false)
             event.stopPropagation()
         }
@@ -117,13 +98,9 @@ export const EmpleadoForm = () => {
         setValidated(true)
     }
 
-
-
     // función que redirige Edita ContactoAsunto
     const EditaEmpleado= id => {
       const datos = empleados.filter(C => C.ID === id)
-      // console.log(datos)
-      //  dispatch(obtenerConvenioEditarAction(datos));
             setDatoEmpleado({
               ID: datos[0].ID,
               Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
@@ -141,18 +118,16 @@ export const EmpleadoForm = () => {
     }
 
 
-  const   handleSubmitAct = (event) => {
-    
+  const  handleSubmitAct = (event) => {
     event.preventDefault();
         const form = event.currentTarget;
-    
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
             const formularioDatos = {
               Id_asociacion: datoEmpleado.Id_asociacion,
               Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
-              Id_tipo_documento:1,
               Documentos:datoEmpleado.Documentos,
               Nombres: datoEmpleado.Nombres,
               Apellidos: datoEmpleado.Apellidos,
@@ -160,11 +135,7 @@ export const EmpleadoForm = () => {
               Telefono:datoEmpleado.Telefono,
               Correo:datoEmpleado.Correo,
               Estado: datoEmpleado.Estado,
-              Fecha_ingreso: '2023-12-30' //datoEmpleado.Fecha_ingreso
             };
-    
-            // Asumo que actulizarMiembro es una función que realiza la actualización
-            // No tengo su implementación, así que debes ajustarlo según tu código real
             if (valedita) {
                 actulizarEmpleado({
                     formularioDatos,
@@ -173,20 +144,9 @@ export const EmpleadoForm = () => {
                 });
             }
         }
-    
         setVisibleEM(false);
         event.stopPropagation();
     };
-
-    // función que redirige Editaservicio
-    // const UpdateConvenioEstado = Id => {
-    //   /*   const datos = convenio.filter(C => C.IdConvenio === Id);
-    //     dispatch(editarEstadoConvenioAction({
-    //         Id,
-    //         setSelectActivar,
-    //         estadoDatos: datos[0].Estado === null ? '' : datos[0].Estado,
-    //     })); */
-    // }
 
 
     // función que redirige Eliminar ContactoConvenio
@@ -207,11 +167,6 @@ export const EmpleadoForm = () => {
         });
     }
 
-  /*   const BuscaMunicipio = id => {
-        const Arraymunicipio = municipio.filter(P => P.MunicipioId === parseInt(id))
-        const Municipio = Arraymunicipio.length !== 0 ? Arraymunicipio[0].NombreMunicipio : ''
-        return Municipio
-    } */
   return {
       /* funciones */
       handleSubmit,
@@ -220,19 +175,13 @@ export const EmpleadoForm = () => {
       obtenerEmpleado,
       obtenerAsociacion,
       obtenerBarrioVereda,
+      obtenerPerfil,
       eliminarEmpleado,
       EditaEmpleado,
-   /*   obtenerConvenio,
-      crearNuevoConvenio,
-      UpdateConvenioEstado,
-      updateConvenio,
-      EliminarConvenio,
-      EditaConvenio,
-      convenioeditar,*/
     /* metodos */
-    //  userDetails,
       asociacion,
       empleados,
+      perfil,
       barrios,
       setValidated,
       validated,

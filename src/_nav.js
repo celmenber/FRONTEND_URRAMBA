@@ -101,7 +101,22 @@ const operadores_nav = [
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
-     {  component: CNavGroup,
+  {
+    component: CNavItem,
+    name: 'CARACTERIZACION',
+    to: '/caracterizacion/caracterizacion',
+    icon: <CIcon icon={cilQrCode} customClassName="nav-icon" />,
+  },
+  ]
+
+const autoridades_nav = [
+  {
+    component: CNavItem,
+    name: 'Dashboard',
+    to: '/dashboard',
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+  },
+  {  component: CNavGroup,
     name: 'CONCEJOS',
     to: '/dashboard/admin',
     icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
@@ -145,4 +160,4 @@ const operadores_nav = [
 ]
 
 
-export { administrador_nav, operadores_nav }
+export { administrador_nav, operadores_nav,autoridades_nav }

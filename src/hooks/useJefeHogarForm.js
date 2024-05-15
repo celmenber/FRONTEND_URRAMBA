@@ -53,26 +53,27 @@ export const JefeHogarForm = () => {
     const [visibleM, setVisibleM] = useState(false)
     const [visibleMI, setVisibleMI] = useState(false)
 
-    const [datoJefeHogar, setDatoJefeHogar] = useState({
-        Id_concejo_comunitario:'',
-        Id_barrio_vereda: '',
-        Id_corregimiento: '',
-        Id_tipo_documento: '',
-        Documentos: '',
-        Nombres: '',
-        Apellidos: '',
-        Sexo: '',
-        Id_escolaridad: '',
-        Estado_escolaridad: '',
-        Genero: '',
-        Id_orientacion_sexual: '',
-        Direccion: '',
-        Telefono: '',
-        Estado: '',
-        Fecha_nacimiento: '',
-        Fecha_ingreso: '',
-        Correo: ''
-    })
+     const ObjJefeHogar = {
+              Id_concejo_comunitario:'',
+              Id_barrio_vereda: '',
+              Id_corregimiento: '',
+              Id_tipo_documento: '',
+              Documentos: '',
+              Nombres: '',
+              Apellidos: '',
+              Sexo: '',
+              Id_escolaridad: '',
+              Estado_escolaridad: '',
+              Genero: '',
+              Id_orientacion_sexual: '',
+              Direccion: '',
+              Telefono: '',
+              Estado: '',
+              Fecha_nacimiento: '',
+              Fecha_ingreso: '',
+              Correo: ''
+          }
+    const [datoJefeHogar, setDatoJefeHogar] = useState(ObjJefeHogar)
 
     const onChangeFormulario = e => {
         setDatoJefeHogar({
@@ -80,32 +81,13 @@ export const JefeHogarForm = () => {
         })
     }
     const handleReset = () => {
-        setDatoJefeHogar({
-            Id_concejo_comunitario:'',
-            Id_barrio_vereda: '',
-            Id_corregimiento: '',
-            Id_tipo_documento: '',
-            Documentos: '',
-            Nombres: '',
-            Apellidos: '',
-            Sexo: '',
-            Id_escolaridad: '',
-            Estado_escolaridad: '',
-            Genero: '',
-            Id_orientacion_sexual: '',
-            Direccion: '',
-            Telefono: '',
-            Estado: '',
-            Fecha_nacimiento: '',
-            Fecha_ingreso: '',
-            Correo: '',
-        })
+        setDatoJefeHogar(ObjJefeHogar)
         setValedita(false)
     };
     const handleSubmit = (event) => {
-
         event.preventDefault();
         const form = event.currentTarget
+        setValidated(true)
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
@@ -116,7 +98,6 @@ export const JefeHogarForm = () => {
                 Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
-                Id_municipio:'1',
                 Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
                 Documentos: datoJefeHogar.Documentos,
                 Nombres: datoJefeHogar.Nombres,
@@ -125,7 +106,7 @@ export const JefeHogarForm = () => {
                 Id_escolaridad: datoJefeHogar.Id_escolaridad,
                 Estado_escolaridad: datoJefeHogar.Estado_escolaridad,
                 Genero: datoJefeHogar.Genero,
-                Id_orientacion_sexual: (datoJefeHogar.Id_orientacion_sexual),
+                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
                 Direccion: datoJefeHogar.Direccion,
                 Telefono: datoJefeHogar.Telefono,
                 Correo: datoJefeHogar.Correo,
@@ -140,59 +121,26 @@ export const JefeHogarForm = () => {
                     handleReset
                 })
             }
-            setVisibleM(false)
             event.stopPropagation()
         }
-
-        setValidated(true)
+        setVisibleM(false)
     }
-    const EditarJefeHogar = (id) => {
-
-        const datos = jefeHogar.filter((C) => C.ID === id);
-        setVisibleMI(true);
-        setDatoJefeHogar({
-            Id_usuario:"1",
-            ID: datos[0].ID,
-            Id_concejo_comunitario: datos[0].id_concejo_comunitario,
-            Id_barrio_vereda: datos[0].id_barrio_vereda,
-            Id_municipio:'1',
-            Id_corregimiento: datos[0].id_corregimiento,
-            Id_tipo_documento: datos[0].id_tipo_documento,
-            Documentos: datos[0].documentos,
-            Nombres: datos[0].nombres,
-            Apellidos: datos[0].apellidos,
-            Sexo: datos[0].sexo,
-            Id_escolaridad: datos[0].id_escolaridad,
-            Estado_escolaridad: datos[0].estado_escolaridad,
-            Genero: datos[0].genero,
-            Id_orientacion_sexual: Number(datos[0].id_orientacion_sexual),
-            Direccion: datos[0].direccion,
-            Telefono: datos[0].telefono,
-            Correo: datos[0].correo,
-            Estado: datos[0].estado,
-            Fecha_nacimiento: datos[0].fecha_nacimiento,
-            Fecha_ingreso: datos[0].fecha_ingreso,
-        });
-    };
 
     const handleSubmitAct = (event) => {
-
         event.preventDefault();
         const form = event.currentTarget;
-
+        setValidated(true)
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
-
         } else {
 
             const formularioDatos = {
-                Id_usuario:"1",
                 Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
                 Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
-                Id_municipio:'1',
                 Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
+                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
                 Documentos: datoJefeHogar.Documentos,
                 Nombres: datoJefeHogar.Nombres,
                 Apellidos: datoJefeHogar.Apellidos,
@@ -200,17 +148,16 @@ export const JefeHogarForm = () => {
                 Id_escolaridad: datoJefeHogar.Id_escolaridad,
                 Estado_escolaridad: datoJefeHogar.Estado_escolaridad,
                 Genero: datoJefeHogar.Genero,
-                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
                 Direccion: datoJefeHogar.Direccion,
                 Telefono: datoJefeHogar.Telefono,
                 Correo: datoJefeHogar.Correo,
-                Estado: Number(datoJefeHogar.Estado),
+                Estado: datoJefeHogar.Estado,
                 Fecha_nacimiento: datoJefeHogar.Fecha_nacimiento,
                 Fecha_ingreso: datoJefeHogar.Fecha_ingreso,
             };
 
-            // Asumo que actulizarMiembro es una función que realiza la actualización
-            // No tengo su implementación, así que debes ajustarlo según tu código real
+            console.log(formularioDatos)
+
             if (valedita === false) {
                 actulizarJefeHogar({
                     formularioDatos,
@@ -218,14 +165,39 @@ export const JefeHogarForm = () => {
                     handleReset,
                 });
             }
-            setVisibleMI(false)
             event.stopPropagation()
-
-
-
         }
-     setValidated(true)
+     setVisibleMI(false)
+    };
 
+      const EditarJefeHogar = (id) => {
+        const datos = jefeHogar.filter((C) => C.ID === id);
+
+        setVisibleMI(true);
+
+        setDatoJefeHogar({
+            ID: datos[0].ID,
+            Id_concejo_comunitario: datos[0].id_concejo_comunitario,
+            Id_barrio_vereda: datos[0].id_barrio_vereda,
+            Id_corregimiento: datos[0].id_corregimiento,
+            Id_tipo_documento: datos[0].id_tipo_documento,
+            Id_orientacion_sexual: datos[0].id_orientacion_sexual,
+            Documentos: datos[0].documentos,
+            Nombres: datos[0].nombres,
+            Apellidos: datos[0].apellidos,
+            Sexo: datos[0].sexo,
+            Id_escolaridad: datos[0].id_escolaridad,
+            Estado_escolaridad: datos[0].estado_escolaridad,
+            Genero: datos[0].genero,
+            Direccion: datos[0].direccion,
+            Telefono: datos[0].telefono,
+            Correo: datos[0].correo,
+            Estado: datos[0].estado,
+            Fecha_nacimiento: datos[0].fecha_nacimiento,
+            Fecha_ingreso: datos[0].fecha_ingreso,
+        });
+
+                    console.log(datos[0].genero, datos[0].sexo)
     };
 
     const jefeHogarByID = (id) => {
@@ -234,11 +206,13 @@ export const JefeHogarForm = () => {
         }
 
     }
-    const eliminarJefeHogar = (id) => {
-        const Id = id
+    const eliminarJefeHogar = (Id) => {
+        const datos = jefeHogar.filter((C) => C.ID === Id);
+       const  Nombres =  datos[0].nombres + ' '+ datos[0].apellidos;
+
         Swal.fire({
-            title: '¿Estas seguro de eliminar el Concejo Comunitario?',
-            text: 'El Concejo Comunitario eliminado no se podrá recuperar',
+            title: '¿Estas seguro de eliminar el Jefe de hogar ' + Nombres +'?',
+            text: 'El Jefe de hogar eliminado no se podrá recuperar',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

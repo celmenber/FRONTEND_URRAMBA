@@ -38,7 +38,7 @@ import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/ico
 import { CLoadingButton } from '@coreui/react-pro'
 import { SelectPicker } from 'rsuite';
 import '../../../node_modules/rsuite/dist/rsuite.css';
-
+import TrasladoMiembro from './modal/TrasladoMiembro'
 const NucleoFamiliar = () => {
 /*  const [selectServicio, setSelectServicio] = useState(1);
   const [selectClave, setSelectClave] = useState(1); */
@@ -65,6 +65,7 @@ const NucleoFamiliar = () => {
     onChangeFormulario,
     handleSubmit,
     handleliminarMiembro,
+    handletrasladamiembro,
     nucleoFamiliar,
     parentesco,
     escolaridades,
@@ -77,7 +78,8 @@ const NucleoFamiliar = () => {
     setNombreBotoGuardarActulizar,
     handleActualizarNucleoFamiliar,
     nombreBotoGuardarActulizar,
-    validated
+    validated,
+    visibleTM, setVisibleTM
   } = NucleoFamiliarForm();
 
   const { id } = useParams()
@@ -151,8 +153,8 @@ const NucleoFamiliar = () => {
     setVisible(true);
   };
 
-   let data
-  if(userDetails.USER_ROL === 'superuser') {
+  let data
+  if(userDetails.USER_ROL === 'Administrador') {
      data = JefeHogar?.map(
         item => ({
               label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
@@ -469,11 +471,8 @@ const NucleoFamiliar = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-
                     nucleoFamiliar?.filter(item => item?.ID_jefehogar === parseInt(nuevaListaHogar)).map((item, index) => (
-
                       <CTableRow v-for="item in tableItems" key={index}>
-
                         <CTableDataCell className="text-center">
                           <CAvatar size="md"
                             key={index}
@@ -530,28 +529,18 @@ const NucleoFamiliar = () => {
                         </CTableDataCell>
                         <CTableDataCell>
                            <div className="small text-medium-emphasis">
-                            <CTooltip content="Reiniciar Clave Usuario." placement="bottom">
-                               {1 === item.ID_USER && true === true ? (
-                                <CLoadingButton
-                                  variant="outline"
-                                  size="lg"
-                                  color="warning"
-                                  style={{ width: '100%' }}
-                                  timeout={2000}
-                                > {'Trasladando...'}</CLoadingButton>
-                              ) : (
+                            <CTooltip content="Trasladar miembro." placement="bottom">
                                 <CButton
                                      variant="outline"
                                      size="lg"
                                      color="warning"
                                      style={{ width: '100%' }}
-                                      id={`Clave${item.ID_USER}`}
-                                      key={item.ID_USER}
-                                      //onClick={() => handleSelectClave(item.ID_USER)}
+                                      id={`Clave${item.ID}`}
+                                      key={item.ID}
+                                      onClick={() => handletrasladamiembro(item.ID)}
                                 >
                                      {'Trasladar'}
                                 </CButton>
-                              )}
                             </CTooltip>
                           </div>
                         </CTableDataCell>
@@ -580,6 +569,15 @@ const NucleoFamiliar = () => {
               </CTable>
         </CCardBody>
       </CCard>
+       <TrasladoMiembro
+        visibleTM={visibleTM}
+        setVisibleTM={setVisibleTM}
+       /*  datoJefeHogar={datoJefeHogar}
+        onChangeFormulario={onChangeFormulario}
+        handleSubmitAct = {handleSubmitAct}
+        setValidated = {setValidated}
+        validated = {validated} */
+      />
     </CContainer>
   )
 }

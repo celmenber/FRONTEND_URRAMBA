@@ -36,8 +36,6 @@ import { CLoadingButton } from '@coreui/react-pro'
 import { useState } from 'react'
 
 const AdminConvenios = () => {
-    const [selectServicio] = useState(1);
-
     const {
         obtenerEmpleado,
         eliminarEmpleado,
@@ -51,9 +49,7 @@ const AdminConvenios = () => {
         cargandolista,
         onChangeFormulario,
         handleSubmitAct,
-
     } = EmpleadoForm()
-
 
    useEffect(() => {
         // Consultar la api listar parques
@@ -67,9 +63,6 @@ const AdminConvenios = () => {
      setVisibleE(false)
         // eslint-disable-next-line
     }, [empleados]);
-
-
-
 
     return (
         <CRow>
@@ -186,9 +179,14 @@ const AdminConvenios = () => {
                                                                             placement="bottom"
                                                                         >
                                                                             <CButton style={{ 'width': '100%' }}
-                                                                                color="danger"
+                                                                                color={parseInt(item.id_Perfil) === 1
+                                                                                  ? 'secondary'
+                                                                                  : 'danger'}
                                                                                 variant="outline"
                                                                                 size="lg"
+                                                                                disabled={item.id_Perfil === 1
+                                                                                  ? true
+                                                                                  : false}
                                                                                onClick={() => eliminarEmpleado(item.ID)}
                                                                             >
                                                                                 <CIcon icon={cilTrash} size="lg" />

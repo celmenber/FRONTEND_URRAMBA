@@ -140,10 +140,12 @@ export const AsociacionForm = () => {
   };
 
   // función que redirige Eliminar ContactoConvenio
-  const EliminarAsociacion = (id) => {
+  const EliminarAsociacion = (Id) => {
+      const datos = asociaciones.filter((C) => C.ID === Id);
+      console.log(datos)
     Swal.fire({
-      title: '¿Estas seguro de eliminar la Asociacion?',
-      text: 'El Codigo eliminado no se podrá recuperar',
+      title: '¿Estas seguro de eliminar la Asociacion '+ datos[0].nombre +'?',
+      text: 'La Asociacion eliminada no se podrá recuperar',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -152,7 +154,7 @@ export const AsociacionForm = () => {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        dispatch(borrarAsociacionAction(id))
+        dispatch(borrarAsociacionAction(Id))
       }
     })
   }

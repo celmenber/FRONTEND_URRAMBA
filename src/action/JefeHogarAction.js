@@ -32,23 +32,23 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
 
     try {
       // insertar en la API
-    
+
 
       const { data } = await Axios.post('/jefehogar/create-jefehogar', formularioDatos)
-      
+
       // Si todo sale bien, actualizar el state
       const { datos } = data.data;
       dispatch(agregarJefeHogarExito(datos))
 
       if (data.success === true) {
         Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
-        
+
       }
     } catch (error) {
       console.log(error)
-     
+
       dispatch(agregarJefeHogarError(true))
-    
+
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -86,7 +86,7 @@ export const obtenerJefeHogarAction = () => {
           const { data } = await Axios.get('/jefehogar/view-jefehogar');
             if (data.code === 200) {
                 dispatch(obtenerJefeHogarExitosa(data.data))
-                
+
             }
         } catch (error) {
             console.log(error);
@@ -117,7 +117,7 @@ export const obtenerJefeHogarByIdAction = (id) => {
       try {
         const { data } = await Axios.get(`/jefehogar/view-jefehogar/${id}`);
           if (data.code === 200) {
-              dispatch(obtenerJefeHogarByIdExitosa(data.data))    
+              dispatch(obtenerJefeHogarByIdExitosa(data.data))
           }
       } catch (error) {
           console.log(error);
@@ -142,17 +142,17 @@ const obtenerJefeHogarByIdError = (estado) => ({
 });
 
 export const editarJefeHogarAction = (Datos) => {
-  
+
   return async (dispatch) => {
     dispatch(editarJefeHogar());
 
     const id = Number(Datos.id);
 
     try {
-     	
-                          
+
+
       const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
-      
+
 
       dispatch(editarJefeHogarExito(data.data.datos));
 
@@ -177,12 +177,12 @@ export const editarJefeHogarAction = (Datos) => {
     type: EDITAR_JEFE_HOGAR,
     payload: true,
   });
-  
+
   const editarJefeHogarExito = (datos) => ({
     type: EDITAR_JEFE_HOGAR_SUCCESS,
     payload: datos,
   });
-  
+
   const editarJefeHogarError = () => ({
     type: EDITAR_JEFE_HOGAR_ERROR,
     payload: true,
@@ -191,7 +191,7 @@ export const editarJefeHogarAction = (Datos) => {
 
 
 export const borrarJefeHogarAction = (id) => {
-  
+
   return async (dispatch) => {
     dispatch(eliminaJefeHogar(id))
 
@@ -211,7 +211,7 @@ export const borrarJefeHogarAction = (id) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Hubo un error al intenar eliminar el registro. ',
+        text: 'No es posible eliminar el jefe de hogar, tiene asignacion de registro.',
       })
     }
   }

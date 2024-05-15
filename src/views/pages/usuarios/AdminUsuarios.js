@@ -76,7 +76,7 @@ const AdminUsuarios = () => {
       <CCol>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Gestión</strong> <small>Usarios</small>
+            <strong>Gestión</strong> <small>Usuarios</small>
           </CCardHeader>
           {/* proceso de listar archovos de las normativas */}
           <CCardBody>
@@ -184,7 +184,7 @@ const AdminUsuarios = () => {
                           <CTableDataCell className="text-center">
                             <h5>
                               {item.ID_EMP !== 0 ? 'Empleado' : 'Autoridad'}</h5>
-                          </CTableDataCell>
+                        </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip content="Reiniciar Clave Usuario." placement="bottom">
@@ -228,23 +228,6 @@ const AdminUsuarios = () => {
                             </CTooltip>
                           </div>
                         </CTableDataCell>
-
-                        {/* <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip content="Eliminar Usuario" placement="bottom">
-                              <CButton
-                                style={{ width: '100%' }}
-                                color="danger"
-                                variant="outline"
-                                size="lg"
-                                  disabled={item.ESTADO === 0 ? true : false}
-                                  onClick={() => EliminarUsuarios(item.ID_USER)}
-                              >
-                                <CIcon icon={cilTrash} size="lg" />
-                              </CButton>
-                            </CTooltip>
-                          </div>
-                        </CTableDataCell> */}
                       </CTableRow>
                     ))
                   )}

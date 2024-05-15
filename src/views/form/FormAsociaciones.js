@@ -261,9 +261,8 @@ import { cilTrash } from '@coreui/icons'
                             asociaciones.map((item, index) => (
                             <CTableRow v-for="item in tableItems" key={index}>
                               <CTableDataCell>
-                                  <div>{item.nombre}</div>
-
-                                <div className="small text-medium-emphasis">
+                                    <div><b>{item.nombre}</b></div>
+                                     <div className="small text-medium-emphasis">
                                     <span>{item.correo}</span>
                                 </div>
                                   <div className="small text-medium-emphasis">

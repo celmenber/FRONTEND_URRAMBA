@@ -163,10 +163,12 @@ export const AutoridadTForm = () => {
   }
 
     // función que redirige Eliminar ContactoConvenio
-  const eliminarAutoridadT = id => {
+  const eliminarAutoridadT = (Id) => {
+         const datos = autoridadT.filter(C => C.ID === Id)
+         const Nombres =  datos[0].nombres +' '+ datos[0].apellidos;
         Swal.fire({
-            title: '¿Estas seguro de eliminar?',
-          text: "La autoridad tradicional eliminada no se podrá recuperar",
+            title: '¿Estas seguro de eliminar a la Autoridad '+ Nombres +'?',
+          text: "La autoridad afro eliminada no se podrá recuperar",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -175,7 +177,7 @@ export const AutoridadTForm = () => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-              dispatch(borrarAutoridadTAction(id));
+              dispatch(borrarAutoridadTAction(Id));
             }
         });
     }

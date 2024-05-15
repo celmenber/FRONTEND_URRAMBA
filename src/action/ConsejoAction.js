@@ -160,7 +160,7 @@ export const borrarConcejoAction = (id) => {
       if (data.code === 200) {
         dispatch(eliminarConcejoExito(id))
         // Si se elimina, mostrar alerta
-        Swal.fire('Eliminado', 'La Reserva se eliminó correctamente', 'success')
+        Swal.fire('Eliminado', 'El Concejo Comunitario se eliminó correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
@@ -171,7 +171,7 @@ export const borrarConcejoAction = (id) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Hubo un error al intenar eliminar el registro. ',
+        text: 'No es posible eliminar el Concejo Comunitario, tiene asignacion de registro.',
       })
     }
   }

@@ -35,6 +35,8 @@ const EmpleadoNuevoModal = (Props) => {
         handleReset,
         obtenerAsociacion,
         obtenerBarrioVereda,
+        obtenerPerfil,
+        perfil,
         barrios,
         asociacion,
         cargando
@@ -43,6 +45,7 @@ const EmpleadoNuevoModal = (Props) => {
   const {
         Id_asociacion,
         Id_barrio_vereda,
+        Id_perfil,
         Documentos,
         Nombres,
         Apellidos,
@@ -61,6 +64,7 @@ const EmpleadoNuevoModal = (Props) => {
 
   useEffect(() => {
         // Consultar la api un asociacion
+      obtenerPerfil();
       obtenerAsociacion();
       obtenerBarrioVereda();
         // eslint-disable-next-line
@@ -79,7 +83,7 @@ const EmpleadoNuevoModal = (Props) => {
                 >
                     <CModalBody>
                         <CRow className="g-3">
-                          <CCol md={9} style={{ marginTop: '15px' }}>
+                          <CCol md={6} style={{ marginTop: '15px' }}>
                             <CFormLabel htmlFor="validationCustom01">Asociacion*</CFormLabel>
                             <CFormSelect
                               id="validationCustom05"
@@ -101,7 +105,31 @@ const EmpleadoNuevoModal = (Props) => {
                                   ))
                                 )}
                             </CFormSelect>
-                           <CFormFeedback invalid>El campo Asociacion es Requerido!</CFormFeedback>
+                           <CFormFeedback invalid>La Asociacion es Requerida!</CFormFeedback>
+                          </CCol>
+                          <CCol md={3} style={{ marginTop: '15px' }}>
+                            <CFormLabel htmlFor="validationCustom01">Perfil*</CFormLabel>
+                            <CFormSelect
+                              id="validationCustom05"
+                              name='Id_perfil'
+                              value={Id_perfil}
+                              onChange={onChangeFormulario}
+                              required>
+                              <option key={'0'} value={''}>Seleccione...</option>
+                               {perfil?.length === 0
+                                ? <option key={'0'} value={0}>Seleccione...</option>
+                                : (
+                                 perfil?.filter(p=>p.ID !== 3).map(item => (
+                                    <option
+                                      key={item.ID}
+                                      value={item.ID}
+                                    >
+                            {         item.NOMBRE}
+                                    </option>
+                                  ))
+                                )}
+                            </CFormSelect>
+                           <CFormFeedback invalid>El perfil es Requerido!</CFormFeedback>
                           </CCol>
                           <CCol md={3} style={{ marginTop: '15px' }}>
                             <CFormLabel htmlFor="validationCustom04">Estado*</CFormLabel>
@@ -115,12 +143,12 @@ const EmpleadoNuevoModal = (Props) => {
                               <option value={1}>Activado</option>
                               <option value={0}>Desactivado</option>
                             </CFormSelect>
-                            <CFormFeedback invalid>El campo Estado es Requerido!</CFormFeedback>
+                            <CFormFeedback invalid>El estado es Requerido!</CFormFeedback>
                           </CCol>
                           </CRow>
-                          <CRow className="g-3">
+                          <CRow className="g-6">
                           <CCol md={3} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom01">Documento Empleado*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom01">Documento*</CFormLabel>
                                 <CFormInput
                                     type="text"
                                     id="validationCustom01"
@@ -128,7 +156,7 @@ const EmpleadoNuevoModal = (Props) => {
                                     value={Documentos}
                                     onChange={onChangeFormulario}
                                     required />
-                             <CFormFeedback invalid>El campo Documentos es Requerido!</CFormFeedback>
+                             <CFormFeedback invalid>El Documento es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={4} style={{ marginTop: '15px' }}>
                                 <CFormLabel htmlFor="validationCustom02">Nombres*</CFormLabel>
@@ -139,7 +167,7 @@ const EmpleadoNuevoModal = (Props) => {
                                     value={Nombres}
                                     onChange={onChangeFormulario}
                                     required />
-                                   <CFormFeedback invalid>El campo Nombres es Requerido!</CFormFeedback>
+                                   <CFormFeedback invalid>El Nombre es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={5} style={{ marginTop: '15px' }}>
                              <CFormLabel htmlFor="validationCustom02">Apellidos*</CFormLabel>
@@ -150,10 +178,10 @@ const EmpleadoNuevoModal = (Props) => {
                                 value={Apellidos}
                                 onChange={onChangeFormulario}
                                 required />
-                             <CFormFeedback invalid>El campo Apellidos es Requerido!</CFormFeedback>
+                             <CFormFeedback invalid>El Apellido es Requerido!</CFormFeedback>
                             </CCol>
                         </CRow>
-                        <CRow>
+                          <CRow className="g-6">
                             <CCol md={7} style={{ marginTop: '15px' }}>
                              <CFormLabel htmlFor="validationCustom05">Barrio Vereda*</CFormLabel>
                                 <CFormSelect
@@ -176,7 +204,7 @@ const EmpleadoNuevoModal = (Props) => {
                                             ))
                                         )}
                                 </CFormSelect>
-                                 <CFormFeedback invalid>El campo Barrio Vereda es Requerido!</CFormFeedback>
+                                 <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={5} style={{ marginTop: '15px' }}>
                                <CFormLabel htmlFor="validationCustom07">Direccion Empleado*</CFormLabel>
@@ -187,12 +215,12 @@ const EmpleadoNuevoModal = (Props) => {
                                     value={Direccion}
                                     onChange={onChangeFormulario}
                                     required />
-                                  <CFormFeedback invalid>El campo Direccion Empleado es Requerido!</CFormFeedback>
+                                  <CFormFeedback invalid>La Direccion es Requerido!</CFormFeedback>
                             </CCol>
                         </CRow>
                         <CRow>
                 <CCol md={4} style={{ marginTop: '15px' }}>
-                            <CFormLabel htmlFor="validationCustom07">Telefono Empleado*</CFormLabel>
+                            <CFormLabel htmlFor="validationCustom07">Telefono*</CFormLabel>
                             <CFormInput
                               type="text"
                               id="validationCustom07"
@@ -200,10 +228,10 @@ const EmpleadoNuevoModal = (Props) => {
                               value={Telefono}
                               onChange={onChangeFormulario}
                               required />
-                            <CFormFeedback invalid>El campo Telefono Empleado es Requerido!</CFormFeedback>
+                            <CFormFeedback invalid>El Telefono es Requerido!</CFormFeedback>
                           </CCol>
                             <CCol md={8} style={{ marginTop: '15px' }}>
-                                <CFormLabel htmlFor="validationCustom01">Email Empleado*</CFormLabel>
+                                <CFormLabel htmlFor="validationCustom01">Correo electronico*</CFormLabel>
                                 <CFormInput
                                     type="text"
                                     id="validationCustom001"
@@ -211,7 +239,7 @@ const EmpleadoNuevoModal = (Props) => {
                                     value={Correo}
                                     onChange={onChangeFormulario}
                                     required />
-                             <CFormFeedback invalid>El campo Email Empleado es Requerido!</CFormFeedback>
+                             <CFormFeedback invalid>El correo electronico es Requerido!</CFormFeedback>
                             </CCol>
                         </CRow>
                         <CRow>
@@ -224,7 +252,7 @@ const EmpleadoNuevoModal = (Props) => {
                                         timeout={2000}
                                     >
                                         {' '}
-                                        Enviando Datos Empleado
+                                        Enviando Datos...
                                     </CLoadingButton>
                                 ) : (
                                     <CButton
