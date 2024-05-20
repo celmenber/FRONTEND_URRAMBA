@@ -69,30 +69,28 @@ export const JefeHogarReducer = (state = initialState, action) => {
                 loadinglista: false,
                 jefeHogar: action.payload
             }
-    
+
         case EDITAR_JEFE_HOGAR:
             return {
                 ...state,
                 loading: action.payload,
             }
         case EDITAR_JEFE_HOGAR_SUCCESS:
-                const updatedJefeHogar = action.payload; 
-                const updatedJefeHogares = state.listaJefeHogar.map((jefeHogar) =>
-                jefeHogar.ID === updatedJefeHogar.ID ? updatedJefeHogar : jefeHogar
-                );
-              
-                return {
+            return {
                   ...state,
-                  listaJefeHogar: updatedJefeHogares,
-                 
-                };
+                  loading: false,
+                  jefehogareditar: null,
+                  listaJefeHogar: state.listaJefeHogar.map(JF =>
+                      JF.ID === action.payload.ID ? JF = action.payload : JF
+                  )
+              };
         case DELETE_JEFE_HOGAR:
             return {
                 ...state,
                 jefehogareliminar: action.payload,
             }
             case DELETE_JEFE_HOGAR_SUCCESS:
-           
+
                 return {
                     ...state,
                     listaJefeHogar: state.listaJefeHogar.filter(A => A.ID !== state.jefehogareliminar),

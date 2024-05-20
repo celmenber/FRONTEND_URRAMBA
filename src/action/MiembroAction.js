@@ -31,10 +31,17 @@ export const crearNuevoMiembroAction = (Dataform) => {
       const { data } = await Axios.post('miembrosconcejo/create-miembrosconcejo', formularioDatos)
 
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarMiembroExito(datos))
+        if (data.code === 203) {
+          dispatch(agregarMiembroError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El numero de documento digitado aparece como miembro de un consejo Comunitario',
+            })
+        }
 
       if (data.success === true) {
+        dispatch(agregarMiembroExito(data.data))
         Swal.fire('Correcto', 'El Miembro se agregar correctamente', 'success')
       }
     } catch (error) {
@@ -114,7 +121,7 @@ export const editarMiembroAction = (Datos) => {
       const {data} = await Axios.put(`/miembrosconcejo/edit-miembrosconcejo/${id}`, Datos.formularioDatos);
 
 
-      dispatch(editarMiembroExito(data.data.datos));
+      dispatch(editarMiembroExito(data.data));
 
       if (data.code === 200) {
         Swal.fire(

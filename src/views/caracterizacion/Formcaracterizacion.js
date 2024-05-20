@@ -49,7 +49,7 @@ const Caracterizacion = () => {
   }, [value]);
 
   let data
-  if(userDetails.USER_ROL === 'superuser') {
+  if(userDetails.USER_ROL === 'Administrador') {
      data = JefeHogar?.map(
         item => ({
               label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),

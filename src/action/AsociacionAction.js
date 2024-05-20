@@ -29,12 +29,19 @@ export const crearNuevoAsociacionAction = (Dataform) => {
     try {
       // insertar en la API
       const { data } = await Axios.post('asociacion/create-asociacion', formularioDatos)
-
+      //console.log(data)
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarAsociacionExito(datos))
+      if (data.code === 203) {
+          dispatch(agregarAsociacionError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El numero de Nit digitado aparece relacionado a otra asociacion de Negritudes',
+            })
+        }
 
       if (data.success === true) {
+        dispatch(agregarAsociacionExito(data.data))
         Swal.fire('Correcto', 'La  asociacion se agregar correctamente', 'success')
       }
     } catch (error) {

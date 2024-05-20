@@ -160,4 +160,4 @@ const autoridades_nav = [
 ]
 
 
-export { administrador_nav, operadores_nav,autoridades_nav }
+export { administrador_nav, operadores_nav, autoridades_nav }

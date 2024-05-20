@@ -10,6 +10,7 @@ const Parametros = lazy(() => import('./views/parametros/Parametros'))
 const Reportes = lazy(() => import('./views/parametros/Parametros'))
 const JefeHogar = lazy(() => import('./views/familias/JefeHogar'))
 const NucleoFamiliar = lazy(() => import('./views/familias/NucleoFamiliar'))
+const TrasladoMiembro = lazy(() => import('./views/familias/TrasladoMiembro'))
 const Miembros = lazy(() => import('./views/form/FormMiembros'))
 const Caracterizacion = lazy(() => import('./views/caracterizacion/Formcaracterizacion'))
 
@@ -20,6 +21,7 @@ const routes = [
   { path: '/admin/autoridadT', name: 'AutoridadT', component: AutoridadT },
   { path: '/familias/jefehogar', name: 'JefeHogar', component: JefeHogar },
   { path: '/familias/nucleos/:id?', name: 'Nucleo', component: NucleoFamiliar },
+  { path: '/familias/trasladamiembro/:id?', name: 'Nucleo', component: TrasladoMiembro },
   { path: '/familias/nucleo', name: 'Nucleo', component: NucleoFamiliar },
   { path: '/admin/usuarios', name: 'Usuarios', component: Usuarios },
   { path: '/admin/concejos', name: 'Concejos', component: Concejos },

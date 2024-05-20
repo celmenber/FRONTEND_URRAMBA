@@ -116,12 +116,11 @@ const AdminConvenios = () => {
                                                     ) : (
                                                       empleados?.map((item, index) => (
                                                          <CTableRow v-for="item in tableItems" key={index}>
-
                                                                 <CTableDataCell className="text-center">
                                                                     <CAvatar size="md"
                                                                         key={index}
                                                                         src={avatar}
-                                                                        status={item.estado === true ? 'success' : 'secondary'}
+                                                                        status={item.estado === '1' ? 'success' : 'secondary'}
                                                                     />
                                                                 </CTableDataCell>
                                                                 <CTableDataCell>
@@ -130,7 +129,7 @@ const AdminConvenios = () => {
                                                                           { item.nombres } {item.apellidos}
                                                                         </strong></span><br></br>
                                                                         <small style={{ marginLeft: '5px' }}>
-                                                                         {item.Tipo_documento}{item.documentos}
+                                                                         C.C: {item.documentos}
                                                                         </small>
                                                                     </div>
                                                                     <div className="small text-medium-emphasis">

@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-script-url */
 import React, { useState, useEffect } from 'react'
-
-
+import { useHistory } from 'react-router-dom'
 import {
   CRow,
   CCol,
@@ -26,22 +25,16 @@ import {
 import CIcon from '@coreui/icons-react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
-  cilLockLocked,
-  cilLockUnlocked,
   cilPeople,
   cilTrash,
   cilArrowThickFromLeft,
 } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
-
 import JefeHogarNuevo from './modal/JefeHogarNuevo'
 import JefeHogarAct from './modal/JefeHogarAct'
 import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+
 
 const JefeHogar = () => {
-/*   const [selectServicio] = useState(1);
-  const [nombreEscolaridad, setNombreEscolaridad] = useState([]); */
   const history = useHistory();
 
   const {
@@ -79,13 +72,19 @@ const JefeHogar = () => {
    // eslint-disable-next-line
   },[])
 
-  const idJefeHogar = (id) => {
-    history.push(`/familias/nucleos/${id}`);
-  }
 
   const lstJefeHogar = userDetails.USER_ROL === 'Administrador'
                       ? jefeHogar
                       : jefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
+
+
+
+
+                      const idJefeHogar = (id) => {
+    history.push(`/familias/nucleos/${id}`);
+  }
+                      //console.log(jefeHogar);
+                    //    console.log(lstJefeHogar);
 
   return (
     <CRow>

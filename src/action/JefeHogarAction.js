@@ -32,17 +32,27 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
 
     try {
       // insertar en la API
-
-
       const { data } = await Axios.post('/jefehogar/create-jefehogar', formularioDatos)
-
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarJefeHogarExito(datos))
+       if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como jefe de hogar'
+        : 'El numero de documento digitado ya aparece como miembro de un nucleo familiar'
+
+          dispatch(agregarJefeHogarError(true))
+
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+            return false;
+        }
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
-
+         dispatch(agregarJefeHogarExito(data.data))
+         Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
@@ -150,11 +160,25 @@ export const editarJefeHogarAction = (Datos) => {
 
     try {
 
-
       const {data} = await Axios.put(`/jefehogar/edit-jefehogar/${id}`, Datos.formularioDatos);
 
+ if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como jefe de hogar'
+        : 'El numero de documento digitado ya aparece como miembro de un nucleo familiar'
 
-      dispatch(editarJefeHogarExito(data.data.datos));
+          dispatch(agregarJefeHogarError(true))
+
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+            return false;
+        }
+      console.log(data.data);
+      dispatch(editarJefeHogarExito(data.data));
 
       if (data.code === 200) {
         Swal.fire(

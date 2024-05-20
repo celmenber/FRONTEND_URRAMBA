@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
   CButton,
@@ -29,21 +30,16 @@ import {
   CFormLabel,
   CInputGroup,
   CCol,
-  CInputGroupText,
   CCollapse,
 } from '@coreui/react'
 import { NucleoFamiliarForm } from 'src/hooks/useNucleoFamiliarForm'
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilLockUnlocked, cilPeople, cilTrash } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
+import { cilPeople, cilTrash,cilArrowThickFromRight } from '@coreui/icons'
 import { SelectPicker } from 'rsuite';
 import '../../../node_modules/rsuite/dist/rsuite.css';
-import TrasladoMiembro from './modal/TrasladoMiembro'
 const NucleoFamiliar = () => {
-/*  const [selectServicio, setSelectServicio] = useState(1);
-  const [selectClave, setSelectClave] = useState(1); */
+  const history = useHistory();
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
- // const [habilitarAgregar, setHabilitarAgregar] = useState(false)
   const [nuevaListaHogar, setNuevaListaHogar] = useState([])
   const [valueJH, setValueJH] = useState(0)
  const [visible, setVisible] = useState(false)
@@ -53,6 +49,9 @@ const NucleoFamiliar = () => {
    } = JefeHogarForm()
 
    const {
+    onChangeFormulario,
+    handleSubmit,
+    handleliminarMiembro,
     obtenerNucleoFamiliar,
     obtenertipodocumento,
     obtenerParentesco,
@@ -62,10 +61,6 @@ const NucleoFamiliar = () => {
     JefeHogar,
     userDetails,
     tipodocumento,
-    onChangeFormulario,
-    handleSubmit,
-    handleliminarMiembro,
-    handletrasladamiembro,
     nucleoFamiliar,
     parentesco,
     escolaridades,
@@ -79,7 +74,6 @@ const NucleoFamiliar = () => {
     handleActualizarNucleoFamiliar,
     nombreBotoGuardarActulizar,
     validated,
-    visibleTM, setVisibleTM
   } = NucleoFamiliarForm();
 
   const { id } = useParams()
@@ -108,17 +102,14 @@ const NucleoFamiliar = () => {
 
     if (id) {
       setMostrarJefeHByID(true)
-    //  setHabilitarAgregar(false)
       jefeHogarByID(id)
       setIdJefeHogar(id)
      } else {
       setMostrarJefeHByID(false)
-     // setHabilitarAgregar(true)
     }
   }, [])
 
   useEffect(() => {
-     console.log(valueJH);
      if(valueJH !== 0){
        setIdJefeHogar(valueJH)
       setNuevaListaHogar(valueJH)
@@ -130,7 +121,13 @@ const NucleoFamiliar = () => {
      setNuevaListaHogar(idJefeHogar);
   }, [idJefeHogar]);
 
+ const handletrasladamiembro = (id) => {
+    history.push(`/familias/trasladamiembro/${id}`);
+    }
 
+  const handleregresar = () => {
+      history.push(`/familias/jefehogar`);
+      }
 
   const EditarFamiliar = (event, item) => {
     event.preventDefault();
@@ -179,9 +176,11 @@ const NucleoFamiliar = () => {
         <CCardHeader>
           {mostrarJefeHByID ? (
             <CCardTitle>
+            <CRow>
+             <CCol xs={10}>
               <div className="d-flex align-items-center">
                 <CAvatar
-                  className="m-3"
+                  className="m-2"
                   size="md"
                   src={avatar}
                   status={true ? 'success' : 'danger'}
@@ -199,18 +198,32 @@ const NucleoFamiliar = () => {
                   }
                 </div>
               </div>
+             </CCol>
+              <CCol xs={2}>
+                <CButton
+                  type="button"
+                  color={'primary'}
+                  variant="outline"
+                  className="px-2"
+                  style={{ width:'70%',marginTop:'12px', float: 'right' }}
+                  onClick={() => handleregresar()}
+                >
+                   <CIcon icon={cilArrowThickFromRight} size="md" /> {'Regresar'}
+                </CButton>
+              </CCol>
+          </CRow>
             </CCardTitle>
           ) : (
               <CCardTitle>
                  <div className="ml-2">
                    <SelectPicker
-                   data={data}
-                   placeholder="SELECCIONAR EL JEFE DE HOGAR"
-                   name="datoJefeHogar"
-                   value={valueJH}
-                   onChange={setValueJH}
-                   size="lg"
-                   block
+                      data={data}
+                      placeholder="SELECCIONAR EL JEFE DE HOGAR"
+                      name="datoJefeHogar"
+                      value={valueJH}
+                      onChange={setValueJH}
+                      size="lg"
+                      block
                    />
                </div>
           </CCardTitle>
@@ -527,6 +540,7 @@ const NucleoFamiliar = () => {
                               </CTooltip>
                           </div>
                         </CTableDataCell>
+                        {userDetails.USER_ROL === 'Administrador' && (
                         <CTableDataCell>
                            <div className="small text-medium-emphasis">
                             <CTooltip content="Trasladar miembro." placement="bottom">
@@ -543,8 +557,7 @@ const NucleoFamiliar = () => {
                                 </CButton>
                             </CTooltip>
                           </div>
-                        </CTableDataCell>
-
+                        </CTableDataCell>)}
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
@@ -569,15 +582,6 @@ const NucleoFamiliar = () => {
               </CTable>
         </CCardBody>
       </CCard>
-       <TrasladoMiembro
-        visibleTM={visibleTM}
-        setVisibleTM={setVisibleTM}
-       /*  datoJefeHogar={datoJefeHogar}
-        onChangeFormulario={onChangeFormulario}
-        handleSubmitAct = {handleSubmitAct}
-        setValidated = {setValidated}
-        validated = {validated} */
-      />
     </CContainer>
   )
 }

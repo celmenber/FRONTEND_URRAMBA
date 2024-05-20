@@ -31,11 +31,18 @@ export const crearNuevoConcejoAction = (Dataform) => {
       const { data } = await Axios.post('/concejocomunitario/create-concejocomunitario', formularioDatos)
 
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarConcejoExito(datos))
+      if (data.code === 203) {
+          dispatch(agregarConcejoError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El numero de Nit digitado aparece relacionado a otro concejo Comunitario de Negritudes',
+            })
+        }
 
       if (data.success === true) {
-        Swal.fire('Correcto', 'El  Concejo comunitario se agrego correctamente', 'success')
+        dispatch(agregarConcejoExito(data.data))
+        Swal.fire('Correcto', 'El  Concejo comunitario de Negritudes se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
@@ -121,6 +128,17 @@ export const editarConcejoAction = (Dataform) => {
      const { formularioDatos, Id} = Dataform
     try {
       const { data } = await Axios.put(`/concejocomunitario/edit-concejocomunitario/${Id}`, formularioDatos)
+
+
+       if (data.code === 203) {
+          dispatch(editarConcejoError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El numero de Nit digitado aparece relacionado a otra asociacion de Negritudes',
+            })
+        }
+
     dispatch(editarConcejoExito(data.data))
       if (data.code === 200) {
         Swal.fire('Correcto','El concejo se actualizó correctamente','success')

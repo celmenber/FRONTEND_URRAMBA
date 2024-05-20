@@ -17,24 +17,25 @@ import Swal from 'sweetalert2';
 import { borrarNucleoFamiliarAction,
     crearNuevoNucleoFamiliarAction,
     editarNucleoFamiliarAction,
-    obtenerNucleoFamiliarAction } from 'src/action/NucleoFamiliarAction';
+    obtenerNucleoFamiliarAction,
+    trasladoMiembroFamiliarAction
+  } from 'src/action/NucleoFamiliarAction';
 
 
 export const NucleoFamiliarForm = () => {
 
     const dispatch = useDispatch()
+
     const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction())
-    const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
-    const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
     const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
     const obtenerParentesco = () => dispatch(obtenerParentescoAction())
     const obtenercorregimiento = () => dispatch(obtenercorregimientoAction())
-    const obtenerConcejo = () => dispatch(obtenerConcejoAction());
     const obtenerEscolaridad = () => dispatch(obtenerEscolaridadAction());
     const obtenerOrientacionSexual = () => dispatch(obtenerOrientacionSexualAction());
     const obtenerNucleoFamiliar = () => dispatch(obtenerNucleoFamiliarAction());
     const crearNucleoFamiliar = (Dataform) => dispatch(crearNuevoNucleoFamiliarAction(Dataform));
     const actualizarNucleoFamiliar = (Dataform) => dispatch(editarNucleoFamiliarAction(Dataform));
+    //const trasladoMiembroFamiliar = (Dataform) => dispatch(trasladoMiembroFamiliarAction(Dataform));
 
     const { userDetails } = useSelector((state) => state.Auth);
     const cargando = useSelector(state => state.NucleoFamiliar.loading);
@@ -53,9 +54,9 @@ export const NucleoFamiliarForm = () => {
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
     const [selectActivar, setSelectActivar] = useState(false);
-    //const [visibleM, setVisibleM] = useState(false)
     const [visibleTM, setVisibleTM] = useState(false)
-    const [idJefeHogar, setIdJefeHogar] = useState('')
+    const [idJefeHogar, setIdJefeHogar] = useState(0)
+    const [idNucleoflia, setIdNucleoflia] = useState(0)
     const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Nucleo Familiar'))
 
 
@@ -120,16 +121,16 @@ export const NucleoFamiliarForm = () => {
                 Genero: datoNucleoFamiliar.Genero,
                 Fecha_nacimiento: datoNucleoFamiliar.Fecha_nacimiento
             }
-            console.log(formularioDatos);
+           // console.log(formularioDatos);
             if (Object.values(formularioDatos).some(value => !value)) {
                 setValidated(true)
-
             } else{
                     setValidated(false)
                     crearNucleoFamiliar({
                         formularioDatos,
+                        handleReset
                     }).then(() => {
-                        handleReset();
+                      // handleReset();
                     })
                     obtenerNucleoFamiliar()
                 }
@@ -196,12 +197,40 @@ export const NucleoFamiliarForm = () => {
         event.stopPropagation();
     };
 
-  const  handletrasladamiembro = (Id) => {
-      setVisibleTM(true);
+  const  handletrasladamiembro = (event) => {
+        const datos = nucleoFamiliar.filter((C) => C.ID === Number(idNucleoflia));
+        const  Nombres =  datos[0]?.nombres + ' '+ datos[0]?.apellidos;
+        if(idJefeHogar === 0){
+          Swal.fire({
+                  icon: 'warning',
+                  title: 'warning',
+                  text: 'No selecciono el jefe de hogar al intentar trasladar el miembro del nucleo',
+                })
+        }else{
+          Swal.fire({
+                  title: '¿Estas seguro de trasladar al miembro del nucleo '+ Nombres +'?',
+                  text: 'El miembro del nucleo Familiar eliminado no se podrá recuperar',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Si, trasladar!',
+                  cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                  if (result.value) {
+                      dispatch(trasladoMiembroFamiliarAction({
+                          Id_jefe_hogar: idJefeHogar,
+                          Id: idNucleoflia,
+                          }));
+                  }
+                });
+          }
     }
     const handleliminarMiembro = (Id) => {
+         const datos = nucleoFamiliar.filter((C) => C.ID === Id);
+         const  Nombres =  datos[0].nombres + ' '+ datos[0].apellidos;
         Swal.fire({
-            title: '¿Estas seguro de eliminar el miembro el Familiar?',
+            title: '¿Estas seguro de eliminar el miembro Familiar '+ Nombres +'?',
             text: 'El miembro del nucleo Familiar eliminado no se podrá recuperar',
             icon: 'warning',
             showCancelButton: true,
@@ -214,7 +243,6 @@ export const NucleoFamiliarForm = () => {
                 dispatch(borrarNucleoFamiliarAction(Id));
             }
         });
-
     }
     return {
         handleSubmit,
@@ -222,9 +250,6 @@ export const NucleoFamiliarForm = () => {
         onChangeFormulario,
         handleReset,
         obtenerNucleoFamiliar,
-        obtenerAsociacion,
-        obtenerConcejo,
-        obtenerBarrioVereda,
         obtenertipodocumento,
         obtenerParentesco,
         obtenercorregimiento,
@@ -247,14 +272,16 @@ export const NucleoFamiliarForm = () => {
         validated,
         setValidated,
         valedita,
-        datoNucleoFamiliar, setDatoNucleoFamiliar,
-        selectActivar, setSelectActivar,
-       // visibleM, setVisibleM,
-        visibleTM, setVisibleTM,
+        datoNucleoFamiliar,
+        setDatoNucleoFamiliar,
+        selectActivar,
+        setSelectActivar,
+        visibleTM,
+        setVisibleTM,
         cargandolista,
         cargando,
-        setIdJefeHogar,
-        idJefeHogar,
+        setIdJefeHogar,idJefeHogar,
+        setIdNucleoflia,idNucleoflia,
         setNombreBotoGuardarActulizar,
         nombreBotoGuardarActulizar
     }

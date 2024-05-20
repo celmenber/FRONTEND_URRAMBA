@@ -29,12 +29,22 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
     try {
       // insertar en la API
       const { data } = await Axios.post('/autoridatradicional/create-autoridatradicional', formularioDatos)
-
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarAutoridadTExito(datos))
+      if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como Autoridad  en otro concejo Comunitario'
+        : 'Este correo electronico ya se encuentra registrado en el sistema'
+          dispatch(agregarAutoridadTError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+        }
 
-      if (data.success === true) {
+      if (data.code === 201) {
+         dispatch(agregarAutoridadTExito(data.data))
         Swal.fire('Correcto', 'La autorida tradicional se agrego correctamente', 'success')
       }
     } catch (error) {

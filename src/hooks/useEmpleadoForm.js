@@ -121,7 +121,6 @@ export const EmpleadoForm = () => {
   const  handleSubmitAct = (event) => {
     event.preventDefault();
         const form = event.currentTarget;
-
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
@@ -147,7 +146,6 @@ export const EmpleadoForm = () => {
         setVisibleEM(false);
         event.stopPropagation();
     };
-
 
     // función que redirige Eliminar ContactoConvenio
     const eliminarEmpleado = id => {

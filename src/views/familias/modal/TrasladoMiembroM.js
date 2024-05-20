@@ -6,26 +6,25 @@ import {
   CCol,
   CForm,
   CFormFeedback,
-  CFormInput,
-  CFormLabel,
-  CFormSelect,
   CModal,
   CModalBody,
   CModalHeader,
   CRow,
 } from '@coreui/react'
-import { Usuarios } from 'src/hooks'
+import { NucleoFamiliarForm } from 'src/hooks'
+import { SelectPicker } from 'rsuite'
 
 
 const TrasladoMiembro = (Props) => {
   const [validated, setValidated] = useState(false)
+  const [valueJH, setValueJH] = useState(0)
   const { visibleTM, setVisibleTM  } = Props
 //datoUsuario, setDatoUsuario, onChangeFormulario
   const {
-    editarUsuario,
-    obtenerPerfil,
+    obtenerJefeHogar,
+    JefeHogar,
     cargando,
-  } = Usuarios()
+  } = NucleoFamiliarForm()
 
   // const { ID_JEFEH, ID_MIEMBRO  } = datoUsuario
 
@@ -60,15 +59,32 @@ const TrasladoMiembro = (Props) => {
 
 useEffect(() => {
     // Consultar la api un parque
-    obtenerPerfil()
+    obtenerJefeHogar()
     // eslint-disable-next-line
   }, [])
 
-    const handleClose = () => {
-       handleReset()
-        setValidated(false)
-        setVisibleTM(false)
-    }
+   useEffect(() => {
+     console.log(valueJH);
+     if(valueJH !== 0){
+     //  setIdJefeHogar(valueJH)
+     }
+    // eslint-disable-next-line
+  }, [valueJH]);
+
+ const handleClose = () => {
+      handleReset()
+      setValidated(false)
+      setVisibleTM(false)
+  }
+
+ const data = JefeHogar?.map(
+        item => ({
+              label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
+              value: item.ID.toString()
+        })
+    );
+
+ console.log(JefeHogar)
 
   return (
     <>
@@ -88,7 +104,18 @@ useEffect(() => {
           <CModalBody>
             <CRow className="g-3">
                <CCol md={12} style={{ marginTop: '15px' }}>
-                <CFormLabel htmlFor="validationCustom06" value={''}>Jefe de hogar*</CFormLabel>
+               {/* <CFormLabel htmlFor="validationCustom06" value={''}>Jefe de hogar*</CFormLabel>*/}
+                <div className="ml-2">
+                   <SelectPicker
+                    data={data}
+                    placeholder="SELECCIONAR EL JEFE DE HOGAR A TRASLADAR"
+                    name="IdJefeHogar"
+                    value={valueJH}
+                    onChange={setValueJH}
+                    size="lg"
+                    block
+                   />
+               </div>
                 {/* <CFormSelect
                   key={'validationCustom06'}
                   name='ID_ROLL'

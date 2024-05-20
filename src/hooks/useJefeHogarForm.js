@@ -35,8 +35,8 @@ export const JefeHogarForm = () => {
     const actulizarJefeHogar = (Dataform) => dispatch(editarJefeHogarAction(Dataform));
 
     const { userDetails } = useSelector((state) => state.Auth);
-    const cargando = useSelector(state => state.Miembro.loading);
-    const cargandolista = useSelector(state => state.Miembro.loadinglista);
+    const cargando = useSelector(state => state.JefeHogar.loading);
+    const cargandolista = useSelector(state => state.JefeHogar.loadinglista);
     const barrios = useSelector(state => state.Parametros.barriosveredas);
     const tipodocumento = useSelector(state => state.Parametros.tipodocumentos);
     const consejos = useSelector((state) => state.Concejo.concejolista)
@@ -165,12 +165,12 @@ export const JefeHogarForm = () => {
                     handleReset,
                 });
             }
+             setVisibleMI(false)
             event.stopPropagation()
         }
-     setVisibleMI(false)
-    };
+  };
 
-      const EditarJefeHogar = (id) => {
+  const EditarJefeHogar = (id) => {
         const datos = jefeHogar.filter((C) => C.ID === id);
 
         setVisibleMI(true);
@@ -196,8 +196,6 @@ export const JefeHogarForm = () => {
             Fecha_nacimiento: datos[0].fecha_nacimiento,
             Fecha_ingreso: datos[0].fecha_ingreso,
         });
-
-                    console.log(datos[0].genero, datos[0].sexo)
     };
 
     const jefeHogarByID = (id) => {
@@ -208,7 +206,7 @@ export const JefeHogarForm = () => {
     }
     const eliminarJefeHogar = (Id) => {
         const datos = jefeHogar.filter((C) => C.ID === Id);
-       const  Nombres =  datos[0].nombres + ' '+ datos[0].apellidos;
+        const  Nombres =  datos[0].nombres + ' '+ datos[0].apellidos;
 
         Swal.fire({
             title: '¿Estas seguro de eliminar el Jefe de hogar ' + Nombres +'?',

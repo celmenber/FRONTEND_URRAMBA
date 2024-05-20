@@ -1,7 +1,4 @@
 /* eslint-disable prettier/prettier */
-
-
-
 import TYPES from 'src/type/NucleoFamiliarType';
 import { Axios } from '../config/axios';
 import Swal from 'sweetalert2';
@@ -18,22 +15,42 @@ const {
     DELETE_NUCLEO_FAMILIAR,
     DELETE_NUCLEO_FAMILIAR_SUCCESS,
     DELETE_NUCLEO_FAMILIAR_ERROR,
+    TRASLADO_NUCLEO_FAMILIAR,
+    TRASLADO_NUCLEO_FAMILIAR_SUCCESS,
+    TRASLADO_NUCLEO_FAMILIAR_ERROR,
 } = TYPES
 
 // Crear nuevos miembros de la famimilia
 export const crearNuevoNucleoFamiliarAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(agregarNucleoFamiliar())
-    const { formularioDatos } = Dataform
+    const { formularioDatos, handleReset } = Dataform
     try {
       // insertar en la API
-      const { data } = await Axios.post('/nucleofamiiar/create-nucleofamiiar', formularioDatos)
+      const { data } = await Axios.post('/nucleofamiliar/create-nucleofamiliar', formularioDatos)
       // Si todo sale bien, actualizar el state
-      dispatch(agregarNucleoFamiliarExito(data.data))
+      //console.log(data)
+      if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como jefe de hogar'
+        : 'El numero de documento digitado ya aparece como miembro de un nucleo familiar'
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+          return false
+        }
+
+        dispatch(agregarNucleoFamiliarExito(data.data));
 
       if (data.code === 201) {
-        Swal.fire('Correcto', 'El miembro al nucleo Familiar se agrego correctamente', 'success')
+         handleReset();
+        Swal.fire('Correcto', 'El miembro al nucleo Familiar se agrego correctamente', 'success');
       }
+
+
     } catch (error) {
       console.log(error)
 
@@ -72,7 +89,7 @@ export const obtenerNucleoFamiliarAction = () => {
         dispatch(obtenerNucleoFamiliar())
 
         try {
-            const { data } = await Axios.get('/nucleofamiiar/view-nucleofamiiar')
+            const { data } = await Axios.get('/nucleofamiliar/view-nucleofamiliar')
 
             if (data.code === 200) {
                 dispatch(obtenerNucleoFamiliarExistosa(data.data))
@@ -107,8 +124,22 @@ export const editarNucleoFamiliarAction = (Dataform) => {
      const { formularioDatos, Id } = Dataform
     console.log(Dataform);
     try {
-      const {data} = await Axios.put(`/nucleofamiiar/edit-nucleofamiiar/${Id}`, formularioDatos);
-      console.log(data);
+      const {data} = await Axios.put(`/nucleofamiliar/edit-nucleofamiliar/${Id}`, formularioDatos);
+     // console.log(data);
+
+        if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como jefe de hogar'
+        : 'El numero de documento digitado ya aparece como miembro de un nucleo familiar'
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+          return false
+        }
+
       dispatch(editarNucleoFamiliarExito(data.data));
 
       if (data.code === 200) {
@@ -122,9 +153,6 @@ export const editarNucleoFamiliarAction = (Dataform) => {
     }
   };
 };
-
-
-
 
   const editarNucleoFamiliar = () => ({
     type: EDITAR_NUCLEO_FAMILIAR,
@@ -142,6 +170,43 @@ export const editarNucleoFamiliarAction = (Dataform) => {
   });
 
 
+  export const trasladoMiembroFamiliarAction = (Dataform) => {
+  return async (dispatch) => {
+    dispatch(trasladoNucleoFamiliar());
+    try {
+          console.log(Dataform);
+      const {data} = await Axios.put(`/nucleofamiliar/traslado-nucleofamiliar/${Dataform.Id}`, Dataform);
+      console.log(data);
+      dispatch(trasladoNucleoFamiliarExito(data.data));
+
+      if (data.code === 200) {
+        Swal.fire('Correcto',
+         'El miembro del nucleo Familiar se traslado correctamente',
+         'success')
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(trasladoNucleoFamiliarError());
+    }
+  };
+};
+
+const trasladoNucleoFamiliar = () => ({
+    type: TRASLADO_NUCLEO_FAMILIAR,
+    payload: true,
+  });
+
+  const trasladoNucleoFamiliarExito = (datos) => ({
+    type: TRASLADO_NUCLEO_FAMILIAR_SUCCESS,
+    payload: datos,
+  });
+
+  const trasladoNucleoFamiliarError = () => ({
+    type: TRASLADO_NUCLEO_FAMILIAR_ERROR,
+    payload: true,
+  });
+
+
 
 export const borrarNucleoFamiliarAction = (id) => {
 
@@ -149,7 +214,7 @@ export const borrarNucleoFamiliarAction = (id) => {
     dispatch(eliminarNucleoFamiliar(id))
 
     try {
-       const { data } = await Axios.delete(`/nucleofamiiar/delete-nucleofamiiar/${id}`)
+       const { data } = await Axios.delete(`/nucleofamiliar/delete-nucleofamiliar/${id}`)
       if (data.code === 200) {
         dispatch(eliminarNucleoFamiliarExito())
         // Si se elimina, mostrar alerta

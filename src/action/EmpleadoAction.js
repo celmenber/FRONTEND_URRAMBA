@@ -28,12 +28,23 @@ export const crearNuevoEmpleadoAction = (Dataform) => {
     try {
       // insertar en la API
       const { data } = await Axios.post('empleados/create-empleado', formularioDatos)
-
+       //console.log(data)
       // Si todo sale bien, actualizar el state
-      const { datos } = data.data;
-      dispatch(agregarEmpleadoExito(datos))
+      if (data.code === 203) {
+        const valmsg = data.response.split('-')[1]
+        const stringMsg = valmsg === '1'
+        ? 'El numero de documento digitado aparece como empleado de la asociacion'
+        : 'Este correo electronico ya se encuentra registrado en el sistema'
+          dispatch(agregarEmpleadoError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: stringMsg,
+            })
+        }
 
       if (data.success === true) {
+           dispatch(agregarEmpleadoExito(data.data))
         Swal.fire('Correcto', 'El Empleado se agregar correctamente', 'success')
       }
     } catch (error) {
@@ -162,10 +173,10 @@ const obtenerEmpleadoFiltroError = () => ({
 // ***************** Seleccion editar el Empleado //****************/
 
 export const editarEmpleadoAction = (Datos) => {
-    
+
     return async (dispatch) => {
         dispatch(editarEmpleado());
-      
+
         const id  = Number(Datos.id)
         try {
 

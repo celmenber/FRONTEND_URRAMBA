@@ -59,16 +59,14 @@ export const MiemboReducer = (state = initialState, action) => {
                 loading: action.payload,
             }
         case EDITAR_MIEMBRO_SUCCESS:
-                const updatedMiembro = action.payload; // Assuming action.payload is the updated member
-                const updatedMiembros = state.listaMiembro.map((miembro) =>
-                  miembro.ID === updatedMiembro.ID ? updatedMiembro : miembro
-                );
-
-                return {
-                  ...state,
-                  listaMiembro: updatedMiembros,
-                  loading: false,
-                };
+          return {
+                ...state,
+                loading: false,
+                miembroeditar: null,
+                listaMiembro: state.listaMiembro.map(M =>
+                    M.ID === action.payload.ID ? M = action.payload : M
+                )
+              };
         case DELETE_MIEMBRO:
             return {
                 ...state,
