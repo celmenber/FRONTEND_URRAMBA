@@ -457,9 +457,8 @@ return (
                 color={'primary'}
                 className="px-4"
                 style={{ width: '100%' }}
-              >
-                {' '}
-                  {'Actualizar Datos  Jefe Hogar'}
+              >{' '}
+               {'Actualizar Datos Jefe Hogar'}
               </CButton>
 
           </CCol>

@@ -43,11 +43,11 @@ export const crearNuevoNucleoFamiliarAction = (Dataform) => {
           return false
         }
 
-        dispatch(agregarNucleoFamiliarExito(data.data));
+        dispatch(agregarNucleoFamiliarExito(data.data[0]));
 
       if (data.code === 201) {
          handleReset();
-        Swal.fire('Correcto', 'El miembro al nucleo Familiar se agrego correctamente', 'success');
+         Swal.fire('Correcto', 'El miembro al nucleo Familiar se agrego correctamente', 'success');
       }
 
 
@@ -125,7 +125,6 @@ export const editarNucleoFamiliarAction = (Dataform) => {
     console.log(Dataform);
     try {
       const {data} = await Axios.put(`/nucleofamiliar/edit-nucleofamiliar/${Id}`, formularioDatos);
-     // console.log(data);
 
         if (data.code === 203) {
         const valmsg = data.response.split('-')[1]
@@ -140,7 +139,7 @@ export const editarNucleoFamiliarAction = (Dataform) => {
           return false
         }
 
-      dispatch(editarNucleoFamiliarExito(data.data));
+      dispatch(editarNucleoFamiliarExito(data.data[0]));
 
       if (data.code === 200) {
         Swal.fire('Correcto',

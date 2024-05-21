@@ -44,7 +44,7 @@ export const crearNuevoEmpleadoAction = (Dataform) => {
         }
 
       if (data.success === true) {
-           dispatch(agregarEmpleadoExito(data.data))
+           dispatch(agregarEmpleadoExito(data.data[0]))
         Swal.fire('Correcto', 'El Empleado se agregar correctamente', 'success')
       }
     } catch (error) {

@@ -20,13 +20,11 @@ import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 
 
 const JefeHogarNuevo = (Props) => {
-    const {
-        visibleM,
-        setVisibleM,
+    const {visibleM,  setVisibleM } = Props
 
-    } = Props
     const {
-        handleSubmit,
+        userDetails,
+        crearJefeHogar,
         onChangeFormulario,
         setValidated,
         validated,
@@ -70,7 +68,6 @@ const JefeHogarNuevo = (Props) => {
     } = datoJefeHogar
 
     const handleClose = () => {
-
         setVisibleM(false)
         setValidated(false)
         handleReset()
@@ -85,6 +82,50 @@ const JefeHogarNuevo = (Props) => {
         obtenerBarrioVereda();
         // eslint-disable-next-line
     }, []);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget
+        setValidated(true)
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        } else {
+
+            const formularioDatos = {
+                Id_usuario:userDetails.ID_USER,
+                Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
+                Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
+                Id_corregimiento: datoJefeHogar.Id_corregimiento,
+                Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
+                Documentos: datoJefeHogar.Documentos,
+                Nombres: datoJefeHogar.Nombres,
+                Apellidos: datoJefeHogar.Apellidos,
+                Sexo: datoJefeHogar.Sexo,
+                Id_escolaridad: datoJefeHogar.Id_escolaridad,
+                Estado_escolaridad: datoJefeHogar.Estado_escolaridad,
+                Genero: datoJefeHogar.Genero,
+                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
+                Direccion: datoJefeHogar.Direccion,
+                Telefono: datoJefeHogar.Telefono,
+                Correo: datoJefeHogar.Correo,
+                Estado: datoJefeHogar.Estado,
+                Fecha_nacimiento: datoJefeHogar.Fecha_nacimiento,
+                Fecha_ingreso: datoJefeHogar.Fecha_ingreso
+            }
+
+           // if (valedita === false) {
+                crearJefeHogar({
+                    formularioDatos,
+                    handleReset,
+                    setVisibleM
+                })
+        //    }
+             event.stopPropagation()
+            setVisibleM(false)
+        }
+    }
+
     return (
         <>
             <CModal size="xl" visible={visibleM} onClose={handleClose}>

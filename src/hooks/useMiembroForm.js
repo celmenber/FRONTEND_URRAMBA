@@ -185,6 +185,7 @@ export const MiembroForm = () => {
         obtenerOrientacionSexual,
         eliminarMiembro,
         EditaMiembro,
+        userDetails,
         asociacion,
         tipodocumento,
         corregimiento,

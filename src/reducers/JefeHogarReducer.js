@@ -58,7 +58,7 @@ export const JefeHogarReducer = (state = initialState, action) => {
                 loadinglista: false,
                 listaJefeHogar: action.payload
             }
-        case OBTENER_JEFE_HOGAR_BY_ID:
+         case OBTENER_JEFE_HOGAR_BY_ID:
             return {
                 ...state,
                 loadinglista: action.payload,
@@ -98,9 +98,9 @@ export const JefeHogarReducer = (state = initialState, action) => {
                   }
         case ADD_JEFE_HOGAR_ERROR:
         case OBTENER_JEFE_HOGAR_ERROR:
-        case OBTENER_JEFE_HOGAR_BY_ID_ERROR:
         case EDITAR_JEFE_HOGAR_ERROR:
         case DELETE_JEFE_HOGAR_ERROR:
+        case OBTENER_JEFE_HOGAR_BY_ID_ERROR:
             return {
                 ...state,
                 loading: false,

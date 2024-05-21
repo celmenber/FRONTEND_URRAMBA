@@ -71,7 +71,7 @@ export const JefeHogarForm = () => {
               Estado: '',
               Fecha_nacimiento: '',
               Fecha_ingreso: '',
-              Correo: ''
+              Correo: 'Jefe@correo.com'
           }
     const [datoJefeHogar, setDatoJefeHogar] = useState(ObjJefeHogar)
 
@@ -84,7 +84,9 @@ export const JefeHogarForm = () => {
         setDatoJefeHogar(ObjJefeHogar)
         setValedita(false)
     };
-    const handleSubmit = (event) => {
+
+
+/*     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.currentTarget
         setValidated(true)
@@ -118,18 +120,19 @@ export const JefeHogarForm = () => {
             if (valedita === false) {
                 crearJefeHogar({
                     formularioDatos,
-                    handleReset
+                    handleReset,
+                    setVisibleM
                 })
             }
-            event.stopPropagation()
+             // event.stopPropagation()
+            setVisibleM(false)
         }
-        setVisibleM(false)
-    }
+    } */
 
     const handleSubmitAct = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-        setValidated(true)
+
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
@@ -156,7 +159,6 @@ export const JefeHogarForm = () => {
                 Fecha_ingreso: datoJefeHogar.Fecha_ingreso,
             };
 
-            console.log(formularioDatos)
 
             if (valedita === false) {
                 actulizarJefeHogar({
@@ -167,7 +169,8 @@ export const JefeHogarForm = () => {
             }
              setVisibleMI(false)
             event.stopPropagation()
-        }
+         }
+       setValidated(true)
   };
 
   const EditarJefeHogar = (id) => {
@@ -225,7 +228,8 @@ export const JefeHogarForm = () => {
 
     }
     return {
-        handleSubmit,
+     //   handleSubmit,
+        crearJefeHogar,
         handleSubmitAct,
         onChangeFormulario,
         handleReset,

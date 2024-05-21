@@ -38,6 +38,7 @@ const FormConcejo = () => {
     obtenerAutoridadT,
     obtenerAsociacion,
     EliminarConcejo,
+    userDetails,
     Concejo,
     Municipio,
     Asociaciones,
@@ -75,10 +76,12 @@ const FormConcejo = () => {
     setVisible(true);
   };
 
-  //console.log(Autoridad)
-
+    const lstConcejo = userDetails.USER_ROL === 'Administrador'
+                          ? Concejo
+                          : Concejo?.filter(U => U.id_usuario === userDetails.ID_USER)
   return (
-    <><CRow>
+    <>
+     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
@@ -271,7 +274,7 @@ const FormConcejo = () => {
                               </CTableHeaderCell>
                             </CTableRow>
                           ) : (
-                              Concejo.map((item, index) => (
+                              lstConcejo.map((item, index) => (
                               <CTableRow v-for="item in tableItems" key={index}>
                                 <CTableDataCell>
                                     <div><b>{item.nombre_concejo_comunitario}</b></div>

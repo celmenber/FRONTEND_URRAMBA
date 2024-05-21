@@ -78,13 +78,9 @@ const JefeHogar = () => {
                       : jefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
 
 
-
-
-                      const idJefeHogar = (id) => {
+const idJefeHogar = (id) => {
     history.push(`/familias/nucleos/${id}`);
   }
-                      //console.log(jefeHogar);
-                    //    console.log(lstJefeHogar);
 
   return (
     <CRow>

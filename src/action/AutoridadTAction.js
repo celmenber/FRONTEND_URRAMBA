@@ -44,7 +44,7 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
         }
 
       if (data.code === 201) {
-         dispatch(agregarAutoridadTExito(data.data))
+         dispatch(agregarAutoridadTExito(data.data[0]))
         Swal.fire('Correcto', 'La autorida tradicional se agrego correctamente', 'success')
       }
     } catch (error) {

@@ -38,10 +38,12 @@ export const crearNuevoMiembroAction = (Dataform) => {
               title: 'Error',
               text: 'El numero de documento digitado aparece como miembro de un consejo Comunitario',
             })
+            return false
         }
+      //   console.log(data.data[0])
+         dispatch(agregarMiembroExito(data.data[0]))
 
-      if (data.success === true) {
-        dispatch(agregarMiembroExito(data.data))
+      if (data.code === 201) {
         Swal.fire('Correcto', 'El Miembro se agregar correctamente', 'success')
       }
     } catch (error) {
@@ -113,22 +115,26 @@ export const editarMiembroAction = (Datos) => {
 
   return async (dispatch) => {
     dispatch(editarMiembro());
-
     const id = Number(Datos.id);
-
     try {
 
       const {data} = await Axios.put(`/miembrosconcejo/edit-miembrosconcejo/${id}`, Datos.formularioDatos);
+// Si todo sale bien, actualizar el state
+        if (data.code === 203) {
+          dispatch(agregarMiembroError(true))
+         Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El numero de documento digitado aparece como miembro de un consejo Comunitario',
+            })
+            return false
+        }
+       //  console.log(data.data)
 
-
-      dispatch(editarMiembroExito(data.data));
+      dispatch(editarMiembroExito(data.data[0]));
 
       if (data.code === 200) {
-        Swal.fire(
-          'Correcto',
-          'El miembro de consejo se actualizó correctamente',
-          'success'
-        );
+        Swal.fire('Correcto','El miembro de consejo se actualizó correctamente','success');
       }
     } catch (error) {
       console.log(error);

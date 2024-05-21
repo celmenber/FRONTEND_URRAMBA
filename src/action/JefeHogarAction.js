@@ -28,7 +28,7 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(agregarJefeHogar())
 
-    const { formularioDatos } = Dataform
+    const { formularioDatos, handleReset } = Dataform
 
     try {
       // insertar en la API
@@ -39,9 +39,7 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
         const stringMsg = valmsg === '1'
         ? 'El numero de documento digitado aparece como jefe de hogar'
         : 'El numero de documento digitado ya aparece como miembro de un nucleo familiar'
-
           dispatch(agregarJefeHogarError(true))
-
         Swal.fire({
               icon: 'error',
               title: 'Error',
@@ -50,15 +48,15 @@ export const crearNuevoJefeHogarAction = (Dataform) => {
             return false;
         }
 
-      if (data.success === true) {
-         dispatch(agregarJefeHogarExito(data.data))
+      dispatch(agregarJefeHogarExito(data.data[0]))
+
+      if (data.code === 201) {
+         handleReset()
          Swal.fire('Correcto', 'El JegeHogar se agregar correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
-
       dispatch(agregarJefeHogarError(true))
-
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -177,8 +175,8 @@ export const editarJefeHogarAction = (Datos) => {
             })
             return false;
         }
-      console.log(data.data);
-      dispatch(editarJefeHogarExito(data.data));
+     // console.log(data.data[0]);
+      dispatch(editarJefeHogarExito(data.data[0]));
 
       if (data.code === 200) {
         Swal.fire(

@@ -52,9 +52,10 @@ const WidgetBarChart = () => {
     EditaMiembro,
     datoMiembro,
     miembro,
-    escolaridades,
+    userDetails,
+   // escolaridades,
     obtenerOrientacionSexual,
-    orientacion_sexuales,
+   // orientacion_sexuales,
     visibleM,
     setVisibleM,
     visibleMI,
@@ -73,34 +74,15 @@ const WidgetBarChart = () => {
       // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{
-
-
+  /* useEffect(()=>{
     obtenerNombre();
     setVisibleM(false)
    // eslint-disable-next-line
-  },[miembro])
+  },[miembro]) */
 
-
-
-  const obtenerNombre = () => {
-
-    const miembrosConOrientacionSexual = miembro.map(orientacion => {
-      const orientacionSexuales = orientacion_sexuales?.find(item => item.ID === orientacion.id_orientacion_sexual)
-      const nombreOrientacionSexual = orientacionSexuales ? orientacionSexuales.Nombre : "No encontrado";
-      return { ...orientacion, nombreOrientacionSex: nombreOrientacionSexual };
-
-    });
-
-    const miembrosConEscolaridad = miembrosConOrientacionSexual.map(miembr => {
-      const escolaridad = escolaridades.find(item => item.ID === miembr.id_escolaridad);
-      const escolaridadNombre = escolaridad ? escolaridad.Nombre : "No encontrado";
-      return { ...miembr, nombre_escolaridad: escolaridadNombre };
-    });
-
-    setNombreEscolaridad(miembrosConEscolaridad);
-  }
-
+    const lstMiembro = userDetails?.USER_ROL === 'Administrador'
+                      ? miembro
+                      : miembro?.filter(U => U.id_usuario === userDetails?.ID_USER)
 
   return (
     <CRow>
@@ -154,9 +136,7 @@ const WidgetBarChart = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-
-                    nombreEscolaridad?.map((item, index) => (
-
+                    lstMiembro?.map((item, index) => (
                       <CTableRow v-for="item in tableItems" key={index}>
 
                         <CTableDataCell className="text-center">
@@ -187,7 +167,7 @@ const WidgetBarChart = () => {
                         <CTableDataCell>
                         <div className="small text-medium-emphasis">Escolaridad/Estado</div>
                           <span>{
-                            item.nombre_escolaridad
+                            item.Escolaridad
                           }</span> | <span>{
                             item.estado_escolaridad
                           }</span>
@@ -195,7 +175,7 @@ const WidgetBarChart = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Sexo/Genero/Sexualidad</div>
                           <span>
-                            {item.sexo}</span> | <span>{item.genero} | <span>{item.nombreOrientacionSex}</span>
+                            {item.sexo}</span> | <span>{item.genero} | <span>{item.Orientacion_sexual}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>

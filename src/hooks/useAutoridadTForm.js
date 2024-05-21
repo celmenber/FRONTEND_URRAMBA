@@ -40,9 +40,6 @@ export const AutoridadTForm = () => {
   const tipodocumento = useSelector(state => state.Parametros.tipodocumentos);
   const autoridadT = useSelector(state => state.AutoridadT.listautoridad);
 
-
-
-
     const [validated, setValidated] = useState(false);
     const [valedita, setValedita] = useState(false)
     const [selectActivar, setSelectActivar] = useState(false);
@@ -131,7 +128,7 @@ export const AutoridadTForm = () => {
                     handleReset
                 })
             }
-           // setValedita(false)
+
             setVisibleAT(false)
             event.stopPropagation()
         }

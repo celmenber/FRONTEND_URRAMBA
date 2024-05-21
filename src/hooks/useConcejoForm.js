@@ -36,15 +36,17 @@ export const ConcejoForm = () => {
   const [nombreBotoGuardarActulizar, setNombreBotoGuardarActulizar] = useState(('Agregar Nuevo Concejo Comunitario'))
   // const [valedita, setValedita] = useState(false)
 
+  const ObjConcejo = {
+      Id_usuario:'',
+      id_asociacion: '',
+      id_autoridad_tradicional: '',
+      idMunicipio: '',
+      nitConcejo: '',
+      nombreConcejo: '',
+      nombreAsociacion: ''
+    }
 
-  const [datoConcejo, setDatoconcejo] = useState({
-    id_asociacion: '',
-    id_autoridad_tradicional: '',
-    idMunicipio: '',
-    nitConcejo: '',
-    nombreConcejo: '',
-    nombreAsociacion: ''
-  })
+  const [datoConcejo, setDatoconcejo] = useState(ObjConcejo)
 
   // Leer los datos del formulario
   const onChangeFormulario = (e) => {
@@ -55,16 +57,7 @@ export const ConcejoForm = () => {
   }
 
   const handleReset = () => {
-    setDatoconcejo({
-      id_asociacion: '',
-      id_autoridad_tradicional: '',
-      idMunicipio: '',
-      nitConcejo: '',
-      nombreConcejo: '',
-      nombreAsociacion: ''
-    })
-
-
+    setDatoconcejo(ObjConcejo)
   }
 
   const handleSubmit = (event) => {
@@ -93,7 +86,6 @@ export const ConcejoForm = () => {
           formularioDatos,
         }).then(() => {
           handleReset();
-
         });
       }
     }
@@ -107,6 +99,7 @@ export const ConcejoForm = () => {
     // Obtener los campos del formulario
     const formularioDatos = {
       Id_asociacion: datoConcejo.id_asociacion,
+      id_usuario:userDetails.ID_USER,
       Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
       Id_municipio: datoConcejo.idMunicipio,
       Nit: datoConcejo.nitConcejo,
@@ -181,6 +174,7 @@ export const ConcejoForm = () => {
     obtenerAutoridadT,
     obtenerAsociacion,
     EliminarConcejo,
+    userDetails,
     Concejo,
     Municipio,
     Asociaciones,
