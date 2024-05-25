@@ -2,11 +2,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import {
-  crearCaracterizacionAction
-/*   obtenerAsociacionAction,
-  editarAsociacionAction,
-  crearNuevoAsociacionAction,
-  borrarAsociacionAction, */
+  crearCaracterizacionAction,
+  obtenerCaratacterizacionAction
 } from '../action/CaracterizacionAction'
 import { obtenerJefeHogarAction } from '../action/JefeHogarAction'
 import Swal from 'sweetalert2'
@@ -14,12 +11,14 @@ import Swal from 'sweetalert2'
 export const CaracterizacionForm = () => {
 
       const dispatch = useDispatch()
+      const obtenerCaratacterizacion = () => dispatch(obtenerCaratacterizacionAction())
       const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction())
       const crearCaracterizacion = (Dataform) => dispatch(crearCaracterizacionAction(Dataform))
 
   //selecion del state en el  store
  const { userDetails } = useSelector((state) => state.Auth);
  const JefeHogar = useSelector((state) => state.JefeHogar.listaJefeHogar)
+ const caracterizacion = useSelector((state) => state.Caracterizacion.Caracterizacionlista)
 
   const handleSubmitCaracterizacion = (result) => {
     const IdJefeHogar = parseInt(localStorage.getItem("IdJefeHogar"))
@@ -273,7 +272,9 @@ const handleEqsocial = (DATO) => {
 
 return {
      handleSubmitCaracterizacion,
+     obtenerCaratacterizacion,
      obtenerJefeHogar,
+     caracterizacion,
      JefeHogar,
      userDetails,
     }

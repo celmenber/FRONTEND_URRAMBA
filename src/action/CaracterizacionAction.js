@@ -68,3 +68,35 @@ const agregarCaracterizacionError = (datos) => ({
   type: ADD_CARATERIZACION_ERROR,
   payload: datos,
 })
+
+// ***************** Seleccion obtener registros conveniocodigo//****************/
+export const obtenerCaratacterizacionAction = () => {
+  return async (dispatch) => {
+    dispatch(obtenerCaratacterizacion())
+
+    try {
+      const { data } = await Axios.get('/caratacterizacion/view-caratacterizacion')
+      if (data.success === true) {
+        dispatch(obteneCaratacterizacionExito(data.data))
+      }
+    } catch (error) {
+      console.log(error.response)
+      dispatch(obtenerCaratacterizacionError())
+    }
+  }
+}
+
+const obtenerCaratacterizacion = () => ({
+  type: OBTENER_CARATERIZACION,
+  payload: true,
+})
+
+const obteneCaratacterizacionExito = (datos) => ({
+  type: OBTENER_CARATERIZACION_SUCCESS,
+  payload: datos,
+})
+
+const obtenerCaratacterizacionError = () => ({
+  type: OBTENER_CARATERIZACION_ERROR,
+  payload: true,
+})

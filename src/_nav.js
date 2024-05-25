@@ -7,7 +7,7 @@ import { CNavItem, CNavGroup } from '@coreui/react'
 const administrador_nav = [
   {
     component: CNavItem,
-    name: 'INICIO',
+    name: 'PANEL PRINCIPAL',
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
@@ -97,7 +97,7 @@ const administrador_nav = [
 const operadores_nav = [
   {
     component: CNavItem,
-    name: 'Dashboard',
+    name: 'PANEL PRINCIPAL',
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
@@ -112,7 +112,7 @@ const operadores_nav = [
 const autoridades_nav = [
   {
     component: CNavItem,
-    name: 'Dashboard',
+    name: 'PANEL PRINCIPAL',
     to: '/dashboard',
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },

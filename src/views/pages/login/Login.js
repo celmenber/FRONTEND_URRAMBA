@@ -45,8 +45,8 @@ const Login = () => {
   const [toast, addToast] = useState(0)
 console.log(estatus?.data);
  useEffect(() => {
-   if (estatus?.data.code === 400) {
-    if(estatus?.data.response !== '102'){
+   if (estatus?.data?.code === 400) {
+    if(estatus?.data?.response !== '102'){
         addToast(<CToast
           autohide={true}
           color={estatus?.data.response === '101' ? 'danger' :'info'}
