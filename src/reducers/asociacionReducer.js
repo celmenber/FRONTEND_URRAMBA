@@ -50,12 +50,10 @@ export const AsociacionReducer = (state = initialState, action) => {
         ...state,
         loading: action.payload,
       }
-
-    
     case EDITAR_ASOCIACION_SUCCESS:
       const updatedAsociacion = action.payload;
       const updatedAsociaciones = state.asociacionlista.map((asociacion)=>
-      asociacion.ID === updatedAsociacion.ID? updatedAsociacion: asociacion
+      asociacion.ID === updatedAsociacion.ID ? updatedAsociacion : asociacion
       );
       return {
         ...state,

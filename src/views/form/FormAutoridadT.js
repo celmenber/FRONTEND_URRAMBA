@@ -26,12 +26,9 @@ import { AutoridadTForm } from 'src/hooks'
 import CIcon from '@coreui/icons-react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
-    cilLockLocked,
-    cilLockUnlocked,
     cilPeople,
     cilTrash,
 } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
 import FormAutoridadActModal from './modal/FormAutoridadTActModal'
 
 const AutoridadT = () => {
@@ -70,7 +67,7 @@ const AutoridadT = () => {
                                     variant="outline"
                                     className="px-4"
                                     style={{ width: '100%' }}
-                    onClick={() => setVisibleAT(true)}
+                                    onClick={() => setVisibleAT(true)}
                                 >{' '}
                     {'Agregar Nueva Autoridad Afro'}
                                 </CButton>
@@ -87,7 +84,6 @@ const AutoridadT = () => {
                                                         <CIcon icon={cilPeople} />
                                                         </CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={1}>Datos Autoridad Afro</CTableHeaderCell>
-                                                        {/* <CTableHeaderCell colSpan={1}  className="text-center">Asociacion</CTableHeaderCell> */}
                                                         <CTableHeaderCell colSpan={2}  className="text-center">Ubicación</CTableHeaderCell>
                                                         <CTableHeaderCell colSpan={3} className="text-center">Acciones</CTableHeaderCell>
                                                     </CTableRow>
@@ -112,7 +108,7 @@ const AutoridadT = () => {
                                                                     <CAvatar size="md"
                                                                         key={index}
                                                                         src={avatar}
-                                                                        status={item.estado === '1' ? 'success' : 'secondary'}
+                                                                        status={parseInt(item.estado) === 1 ? 'success' : 'secondary'}
                                                                     />
                                                                 </CTableDataCell>
                                                                 <CTableDataCell>
@@ -142,7 +138,7 @@ const AutoridadT = () => {
                                                               <CTableDataCell>
                                                             <div className="small text-medium-emphasis">Barrio/Vereda</div>
                                                               <span>
-                                                              {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion}
+                                                              {item.barrio_vereda}</span> | <span> Dir: {item.direccion}
                                                             </span>
                                                               </CTableDataCell>
                                                               <CTableDataCell>
@@ -187,8 +183,8 @@ const AutoridadT = () => {
                         </CCard>
                     </CCol>
 
-                 <AutoridadTNuevoCrear
-                  visibleAT={visibleAT}
+          <AutoridadTNuevoCrear
+                   visibleAT={visibleAT}
                    setVisibleAT={setVisibleAT}
                   />
           <FormAutoridadActModal

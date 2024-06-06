@@ -41,7 +41,6 @@ const FormAutoridadActModal = (Props) => {
     /* metodos */
     setValidated,
     municipio,
-    barrios,
     corregimiento,
     tipodocumento,
     validated,
@@ -50,13 +49,13 @@ const FormAutoridadActModal = (Props) => {
 
   const {
     Idmunicipio,
-    Idbarriovereda,
     Idcorregimiento,
     Idtipodocumento,
     Documentos,
     Nombres,
     Apellidos,
     Sexo,
+    Barrio_vereda,
     Direccion,
     Telefono,
     Correo,
@@ -76,7 +75,7 @@ const FormAutoridadActModal = (Props) => {
     // eslint-disable-next-line
   }, []);
 
-    const handleSubmit = (event) => {
+    const handleSubmitUpdate = (event) => {
     event.preventDefault();
      setValidated(true)
     const form = event.currentTarget;
@@ -87,21 +86,19 @@ const FormAutoridadActModal = (Props) => {
 
         const formularioDatos = {
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
-                    Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
                     Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
                     Id_tipo_documento: parseInt(datoAutoridad.Idtipodocumento),
                     Documentos:datoAutoridad.Documentos,
                     Nombres:datoAutoridad.Nombres,
                     Apellidos:datoAutoridad.Apellidos,
                     Sexo:datoAutoridad.Sexo,
+                    Barrio_vereda: datoAutoridad.Barrio_vereda,
                     Direccion: datoAutoridad.Direccion,
                     Telefono: datoAutoridad.Telefono,
                     Correo: datoAutoridad.Correo,
                     Estado: datoAutoridad.Estado,
                     Fecha_nacimiento: datoAutoridad.Fechanacimiento,
                     Fecha_ingreso: datoAutoridad.Fechaingreso,
-                    Id_escolaridad:  datoAutoridad.Id_escolaridad,
-                    Estado_escolaridad:  datoAutoridad.Estado_escolaridad,
 
         };
 
@@ -125,7 +122,7 @@ const FormAutoridadActModal = (Props) => {
         <CForm className="row g-3 needs-validation"
           noValidate
           validated={validated}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitUpdate}
         >
           <CModalBody>
             <CRow className="g-3">
@@ -310,27 +307,14 @@ const FormAutoridadActModal = (Props) => {
               </CCol>
               <CCol md={4} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom05">Barrio Vereda*</CFormLabel>
-                <CFormSelect
-                  id="validationCustom05"
-                  name='Idbarriovereda'
-                  value={Idbarriovereda}
+                <CFormInput
+                  type="text"
+                  id="validationCustom002"
+                  name='Barrio_vereda'
+                  value={Barrio_vereda}
                   onChange={onChangeFormulario}
-                  >
-                  <option key={'0'} value={''}>Seleccione...</option>
-                  {barrios?.length === 0
-                    ? <option key={'0'} value={''}>Seleccione...</option>
-                    : (
-                      barrios?.map(item => (
-                        <option
-                          key={item.ID}
-                          value={item.ID}
-                        >
-                          {item.Nombre}
-                        </option>
-                      ))
-                    )}
-                </CFormSelect>
-               {/*  <CFormFeedback invalid>El campo Barrio Vereda es Requerido!</CFormFeedback> */}
+                  required />
+                  <CFormFeedback invalid>El campo Barrio Vereda es Requerido!</CFormFeedback>
               </CCol>
             </CRow>
             <br/>

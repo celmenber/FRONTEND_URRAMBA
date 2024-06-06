@@ -27,17 +27,17 @@ const EmpleadoNuevoModal = (Props) => {
   } = Props
 
   const {
-    handleSubmit,
+    //handleSubmit,
+    crearNuevoAutoridadT,
     onChangeFormulario,
     handleReset,
-    obtenerBarrioVereda,
     obtenerMunicipio,
     obtenertipodocumento,
     obtenercorregimiento,
     setValidated,
     /* metodos */
+    userDetails,
     municipio,
-    barrios,
     corregimiento,
     tipodocumento,
     datoAutoridad,
@@ -48,13 +48,13 @@ const EmpleadoNuevoModal = (Props) => {
 
   const {
     Idmunicipio,
-    Idbarriovereda,
     Idcorregimiento,
     Idtipodocumento,
     Documentos,
     Nombres,
     Apellidos,
     Sexo,
+    Barrio_vereda,
     Direccion,
     Telefono,
     Correo,
@@ -64,7 +64,6 @@ const EmpleadoNuevoModal = (Props) => {
   } = datoAutoridad
 
   const handleClose = () =>{
-
     setVisibleAT(false)
     setValidated(false)
     handleReset()
@@ -74,18 +73,51 @@ const EmpleadoNuevoModal = (Props) => {
     // Consultar la api un obtenerMunicipio
       obtenerMunicipio();
       obtenercorregimiento();
-      obtenerBarrioVereda();
       obtenertipodocumento();
     // eslint-disable-next-line
   }, []);
 
+  const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        } else {
 
+            const formularioDatos = {
+                    Id_usuario:userDetails.ID_USER,
+                    Id_municipio: parseInt(Idmunicipio),
+                    Id_corregimiento: parseInt(Idcorregimiento),
+                    Id_tipo_documento: parseInt(Idtipodocumento),
+                    Documentos:Documentos,
+                    Nombres:Nombres,
+                    Apellidos:Apellidos,
+                    Sexo:Sexo,
+                    Barrio_vereda: Barrio_vereda,
+                    Direccion: Direccion,
+                    Telefono: Telefono,
+                    Correo: Correo,
+                    Estado: Estado,
+                    Fecha_nacimiento: Fechanacimiento,
+                    Fecha_ingreso: Fechaingreso,
+            }
+                crearNuevoAutoridadT({
+                          formularioDatos,
+                          handleReset
+                      })
+             setVisibleAT(false)
+             event.stopPropagation()
+           }
+
+    setValidated(true)
+}
 
   return (
     <>
       <CModal size="xl" visible={visibleAT} onClose={handleClose}>
         <CModalHeader>
-          <CModalTitle> <strong>Agregar Autoridad Afrodescediente</strong></CModalTitle>
+          <CModalTitle> <strong>Agregar Autoridad Afrodescendiente</strong></CModalTitle>
         </CModalHeader>
         <CForm className="row g-3 needs-validation"
           noValidate
@@ -164,7 +196,8 @@ const EmpleadoNuevoModal = (Props) => {
                   value={Estado}
                   onChange={onChangeFormulario}
                   required>
-                  <option value={'1'}>Activado</option>
+                  <option value={''} selected>Seleccione...</option>
+                  <option value={'1'} >Activado</option>
                   <option value={'0'}>Desactivado</option>
                 </CFormSelect>
                 <CFormFeedback invalid>El Estado Requerido!</CFormFeedback>
@@ -274,26 +307,13 @@ const EmpleadoNuevoModal = (Props) => {
               </CCol>
               <CCol md={4} style={{ marginTop: '15px' }}>
                 <CFormLabel htmlFor="validationCustom05">Barrio Vereda*</CFormLabel>
-                <CFormSelect
-                  id="validationCustom05"
-                  name='Idbarriovereda'
-                  value={Idbarriovereda}
+                <CFormInput
+                  type="text"
+                  id="validationCustom002"
+                  name='Barrio_vereda'
+                  value={Barrio_vereda}
                   onChange={onChangeFormulario}
-                  required>
-                  <option key={'0'} value={''}>Seleccione...</option>
-                  {barrios?.length === 0
-                    ? <option key={'0'} value={''}>Seleccione...</option>
-                    : (
-                      barrios?.map(item => (
-                        <option
-                          key={item.ID}
-                          value={item.ID}
-                        >
-                          {item.Nombre}
-                        </option>
-                      ))
-                    )}
-                </CFormSelect>
+                  required />
                 <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
               </CCol>
             </CRow>

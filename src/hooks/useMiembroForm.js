@@ -122,7 +122,8 @@ export const MiembroForm = () => {
 
         setValidated(true)
     }
-    const EditaMiembro = (id) => {
+
+const EditaMiembro = (id) => {
 
         const datos = miembro.filter((C) => C.ID === id);
         setVisibleMI(true);

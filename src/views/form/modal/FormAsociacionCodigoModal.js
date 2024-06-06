@@ -79,7 +79,7 @@ const FormAsociacionCodigoModal = (Props) => {
         nitEmpresa: datoAsociacion.nitEmpresa,
         FechaFinalizar: dataCodigo.fechaFinaliza,
       }
-      console.log(formularioDatos)
+     // console.log(formularioDatos)
       crearNuevoAsociacioncod({
         formularioDatos,
         handleReset,

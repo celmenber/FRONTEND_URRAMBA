@@ -35,7 +35,7 @@ export const AutoridadTForm = () => {
   const cargando = useSelector(state => state.AutoridadT.loading);
   const cargandolista = useSelector(state => state.AutoridadT.loadinglista);
   const municipio = useSelector(state => state.Parametros.municipios);
-  const barrios = useSelector(state => state.Parametros.barriosveredas);
+  //const barrios = useSelector(state => state.Parametros.barriosveredas);
   const corregimiento = useSelector(state => state.Parametros.corregimientos);
   const tipodocumento = useSelector(state => state.Parametros.tipodocumentos);
   const autoridadT = useSelector(state => state.AutoridadT.listautoridad);
@@ -46,24 +46,24 @@ export const AutoridadTForm = () => {
     const [visibleAT, setVisibleAT] = useState(false)
     const [visibleEAT, setVisibleEAT] = useState(false)
 
-    const [datoAutoridad, setDatoAutoridad] = useState({
-          Idmunicipio:'',
-          Idbarriovereda:'',
-          Idcorregimiento:'',
-          Idtipodocumento:'',
-          Documentos:'',
-          Nombres:'',
-          Apellidos:'',
-          Sexo:'',
-          Direccion:'',
-          Telefono:'',
-          Correo: '',
-          Estado:'',
-          Fechanacimiento:'',
-          Fechaingreso:'',
-          Id_escolaridad: '',
-          Estado_escolaridad: '',
-    })
+    const objAutoridad = {
+              Idmunicipio:'',
+              Idcorregimiento:'',
+              Idtipodocumento:'',
+              Documentos:'',
+              Nombres:'',
+              Apellidos:'',
+              Barrio_vereda:'',
+              Sexo:'',
+              Direccion:'',
+              Telefono:'',
+              Correo: '',
+              Estado:'',
+              Fechanacimiento:'',
+              Fechaingreso:'',
+          }
+
+    const [datoAutoridad, setDatoAutoridad] = useState(objAutoridad)
 
     // Leer los datos del formulario
     const onChangeFormulario = e => {
@@ -73,30 +73,12 @@ export const AutoridadTForm = () => {
         })
     }
     const handleReset = () => {
-      setDatoAutoridad({
-            Idmunicipio: '',
-            Idbarriovereda: '',
-            Idcorregimiento: '',
-            Idtipodocumento: '',
-            Id_escolaridad: '',
-            Documentos: '',
-            Nombres: '',
-            Apellidos: '',
-            Sexo: '',
-            Direccion: '',
-            Telefono: '',
-            Correo: '',
-            Estado: '',
-            Fechanacimiento: '',
-            Fechaingreso: '',
-            Estado_escolaridad: '',
-        })
+        setDatoAutoridad(objAutoridad)
         setValedita(false)
     };
 
-    const handleSubmit = (event) => {
+/* const handleSubmit = (event) => {
         event.preventDefault();
-        setValidated(true)
         const form = event.currentTarget
         if (form.checkValidity() === false) {
             event.preventDefault()
@@ -106,33 +88,30 @@ export const AutoridadTForm = () => {
             const formularioDatos = {
                     Id_usuario:userDetails.ID_USER,
                     Id_municipio: parseInt(datoAutoridad.Idmunicipio),
-                    Id_barrio_vereda: parseInt(datoAutoridad.Idbarriovereda),
                     Id_corregimiento: parseInt(datoAutoridad.Idcorregimiento),
                     Id_tipo_documento: parseInt(datoAutoridad.Idtipodocumento),
                     Documentos:datoAutoridad.Documentos,
                     Nombres:datoAutoridad.Nombres,
                     Apellidos:datoAutoridad.Apellidos,
                     Sexo:datoAutoridad.Sexo,
+                    Barrio_vereda: datoAutoridad.Barrio_vereda,
                     Direccion: datoAutoridad.Direccion,
                     Telefono: datoAutoridad.Telefono,
                     Correo: datoAutoridad.Correo,
                     Estado: datoAutoridad.Estado,
                     Fecha_nacimiento: datoAutoridad.Fechanacimiento,
                     Fecha_ingreso: datoAutoridad.Fechaingreso,
-                    Id_escolaridad:  datoAutoridad.Id_escolaridad,
-                    Estado_escolaridad:  datoAutoridad.Estado_escolaridad,
             }
-            if (valedita === false) {
-              crearNuevoAutoridadT({
-                    formularioDatos,
-                    handleReset
-                })
-            }
+                crearNuevoAutoridadT({
+                          formularioDatos,
+                          handleReset
+                      })
+             setVisibleAT(false)
+             //event.stopPropagation()
+           }
 
-            setVisibleAT(false)
-            event.stopPropagation()
-        }
-    }
+    setValidated(true)
+} */
 
 
     // función que redirige Edita ContactoAsunto
@@ -143,13 +122,13 @@ export const AutoridadTForm = () => {
     setDatoAutoridad({
       ID: datos[0].ID,
       Idmunicipio: Number(datos[0].id_municipio),
-      Idbarriovereda: Number(datos[0].id_barrio_vereda),
       Idcorregimiento: Number(datos[0].id_corregimiento),
       Idtipodocumento: Number(datos[0].id_tipo_documento),
       Documentos: datos[0].documentos,
       Nombres: datos[0].nombres,
       Apellidos: datos[0].apellidos,
       Sexo: datos[0].sexo,
+      Barrio_vereda: datos[0].barrio_vereda,
       Direccion: datos[0].direccion,
       Telefono: datos[0].telefono,
       Correo: datos[0].correo,
@@ -180,9 +159,10 @@ export const AutoridadTForm = () => {
     }
   return {
       /* funciones */
-      handleSubmit,
+     // handleSubmit,
       onChangeFormulario,
       handleReset,
+      crearNuevoAutoridadT,
       obtenerAutoridadT,
       actulizarAutoridadT,
       obtenerBarrioVereda,
@@ -193,14 +173,14 @@ export const AutoridadTForm = () => {
       EditarAutoridad,
     /* metodos */
       autoridadT,
-      barrios,
+      userDetails,
       municipio,
       corregimiento,
       tipodocumento,
       validated,
       valedita,
       datoAutoridad,
-       setDatoAutoridad,
+      setDatoAutoridad,
       selectActivar,
       setSelectActivar,
       visibleAT, setVisibleAT,

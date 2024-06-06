@@ -24,12 +24,13 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
   return async (dispatch) => {
     dispatch(agregarAutoridadT())
 
-    const { formularioDatos } = Dataform
+    const { formularioDatos, handleReset } = Dataform
 
     try {
       // insertar en la API
       const { data } = await Axios.post('/autoridatradicional/create-autoridatradicional', formularioDatos)
       // Si todo sale bien, actualizar el state
+    //  console.log(data)
       if (data.code === 203) {
         const valmsg = data.response.split('-')[1]
         const stringMsg = valmsg === '1'
@@ -45,7 +46,9 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
 
       if (data.code === 201) {
          dispatch(agregarAutoridadTExito(data.data[0]))
-        Swal.fire('Correcto', 'La autorida tradicional se agrego correctamente', 'success')
+         handleReset();
+
+        Swal.fire('Correcto', 'La autorida Afrodescendiente se agrego correctamente', 'success')
       }
     } catch (error) {
       console.log(error)
@@ -55,7 +58,7 @@ export const crearNuevoAutoridadTAction = (Dataform) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Hubo un error al intenar agregar el registro, intenta nuevamentess',
+        text: 'Hubo un error al intenar agregar el registro, intenta nuevamente',
       })
     }
   }
@@ -118,9 +121,9 @@ export const editarAutoridadTAction = (Dataform) => {
         const { formularioDatos, id } = Dataform
         try {
           const {data} = await Axios.put(`/autoridatradicional/edit-autoridatradicional/${id}`, formularioDatos);
-             dispatch(editarAutoridadTExito(data.data));
+             dispatch(editarAutoridadTExito(data.data[0]));
             if (data.code === 200) {
-                Swal.fire( 'Correcto','La Autoridad tradicional se actualizó correctamente','success');
+                Swal.fire( 'Correcto','La Autoridad Afrodescendiente se actualizó correctamente','success');
             }
         } catch (error) {
             console.log(error);
