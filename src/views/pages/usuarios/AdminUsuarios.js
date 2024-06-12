@@ -145,7 +145,7 @@ const AdminUsuarios = () => {
                                   style={{ width: '100%' }}
                                       id={`estado${item.ID_USER}`}
                                       key={item.ID_USER}
-                                      disabled={item.ID_ROLL === 1 ? true : false}
+                                      disabled={parseInt(item.ID_ROLL) === 1 ? true : false}
                                       onClick={() => handleSelectEst(item.ID_USER)}
                                 >
                                     {item.ESTADO === '1' ? (

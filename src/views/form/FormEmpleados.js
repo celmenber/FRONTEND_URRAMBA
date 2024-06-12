@@ -183,7 +183,7 @@ const AdminConvenios = () => {
                                                                                   : 'danger'}
                                                                                 variant="outline"
                                                                                 size="lg"
-                                                                                disabled={item.id_Perfil === 1
+                                                                                disabled={parseInt(item.id_Perfil)  === 1
                                                                                   ? true
                                                                                   : false}
                                                                                onClick={() => eliminarEmpleado(item.ID)}

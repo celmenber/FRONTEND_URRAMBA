@@ -102,7 +102,7 @@ useEffect(() => {
                   {Perfil?.length === 0
                     ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
                     : (
-                      Perfil?.map(item => (
+                      Perfil?.filter(U => U.NOMBRE !== "Autoridad").map(item => (
                         <option
                           key={item.ID}
                           value={item.ID}
