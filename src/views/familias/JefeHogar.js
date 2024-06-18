@@ -175,7 +175,7 @@ const idJefeHogar = (id) => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Barrio/Vereda</div>
                           <span>
-                            {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion} | <span>Corrg: {item.Corregimiento}</span>
+                            {item.barrio_vereda}</span> | <span> Dir: {item.direccion} | <span>Corrg: {item.Corregimiento}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>

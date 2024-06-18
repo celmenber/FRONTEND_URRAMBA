@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilHome, cilCog, cilGroup, cilQrCode, cilInstitution, cilPrint, cilDescription } from '@coreui/icons'
+import { cilHome, cilCog, cilGroup, cilQrCode, cilInstitution, cilDescription } from '@coreui/icons'
 import { CNavItem, CNavGroup } from '@coreui/react'
 
 const administrador_nav = [

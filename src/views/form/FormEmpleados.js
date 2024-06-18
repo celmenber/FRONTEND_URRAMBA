@@ -150,9 +150,9 @@ const AdminConvenios = () => {
                                                                     }</strong>
                                                                 </CTableDataCell>
                                                               <CTableDataCell>
-                                                            <div className="small text-medium-emphasis">Barrio/Vereda</div>
+                                                            <div className="small text-medium-emphasis">Barrio/Vereda/Direccion</div>
                                                               <span>
-                                                              {item.Veredas_Barrios}</span> | <span> Dir: {item.direccion}
+                                                              {item.barrio_vereda}</span> | <span> Dir: {item.direccion}
                                                             </span>
                                                               </CTableDataCell>
                                                               <CTableDataCell>

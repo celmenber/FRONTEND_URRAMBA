@@ -9,7 +9,6 @@ import {
   obtenerEmpleadoAction,
 } from '../action/EmpleadoAction';
 import { obtenerAsociacionAction } from '../action/AsociacionAction'
-import { obtenerBarrioVeredaAction } from '../action/ParametrosAction'
 import { obtenerPerfilAction } from '../action/UsuarioAction'
 import Swal from 'sweetalert2';
 
@@ -18,7 +17,6 @@ export const EmpleadoForm = () => {
   const dispatch = useDispatch()
   const obtenerPerfil = () => dispatch(obtenerPerfilAction())
   const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
-  const obtenerBarrioVereda = () => dispatch(obtenerBarrioVeredaAction())
   const obtenerEmpleado = () => dispatch(obtenerEmpleadoAction());
   const crearNuevoEmpleado = (Dataform) => dispatch(crearNuevoEmpleadoAction(Dataform));
   const actulizarEmpleado = (Dataform) => dispatch(editarEmpleadoAction(Dataform));
@@ -29,7 +27,6 @@ export const EmpleadoForm = () => {
   const cargando = useSelector(state => state.Empleado.loading);
   const cargandolista = useSelector(state => state.Empleado.loadinglista);
   const perfil = useSelector(state => state.Usuario.Perfil);
-  const barrios = useSelector(state => state.Parametros.barriosveredas);
   const asociacion = useSelector(state => state.Asociacion.asociacionlista);
   const empleados  = useSelector(state => state.Empleado.listaempleado);
 
@@ -41,11 +38,11 @@ export const EmpleadoForm = () => {
 
     const ObjEmpleado = {
                   Id_asociacion:'',
-                  Id_barrio_vereda:'',
                   Id_perfil:'',
                   Documentos:'',
                   Nombres: '',
                   Apellidos: '',
+                  Barrio_vereda:'',
                   Direccion:'',
                   Telefono:'',
                   Correo:'',
@@ -74,11 +71,11 @@ export const EmpleadoForm = () => {
 
             const formularioDatos = {
               Id_asociacion: datoEmpleado.Id_asociacion,
-              Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
               Id_perfil:datoEmpleado.Id_perfil,
               Documentos:datoEmpleado.Documentos,
               Nombres: datoEmpleado.Nombres,
               Apellidos: datoEmpleado.Apellidos,
+              Barrio_vereda:datoEmpleado.Barrio_vereda,
               Direccion: datoEmpleado.Direccion,
               Telefono:datoEmpleado.Telefono,
               Correo:datoEmpleado.Correo,
@@ -104,10 +101,10 @@ export const EmpleadoForm = () => {
             setDatoEmpleado({
               ID: datos[0].ID,
               Id_asociacion: datos[0].id_asociacion === null ? '' : datos[0].id_asociacion,
-              Id_barrio_vereda: datos[0].id_barrio_vereda === null ? '' : datos[0].id_barrio_vereda,
               Documentos: datos[0].documentos === null ? '' : datos[0].documentos,
               Nombres: datos[0].nombres === null ? '' : datos[0].nombres,
               Apellidos: datos[0].apellidos === null ? '' : datos[0].apellidos,
+              Barrio_vereda: datos[0].barrio_vereda === null ? '' : datos[0].barrio_vereda,
               Direccion: datos[0].direccion === null ? '' : datos[0].direccion,
               Telefono: datos[0].telefono === null ? '' : datos[0].telefono,
               Correo: datos[0].correo === null ? '' : datos[0].correo,
@@ -126,10 +123,10 @@ export const EmpleadoForm = () => {
         } else {
             const formularioDatos = {
               Id_asociacion: datoEmpleado.Id_asociacion,
-              Id_barrio_vereda:datoEmpleado.Id_barrio_vereda,
               Documentos:datoEmpleado.Documentos,
               Nombres: datoEmpleado.Nombres,
               Apellidos: datoEmpleado.Apellidos,
+              Barrio_vereda:datoEmpleado.Barrio_vereda,
               Direccion: datoEmpleado.Direccion,
               Telefono:datoEmpleado.Telefono,
               Correo:datoEmpleado.Correo,
@@ -172,7 +169,6 @@ export const EmpleadoForm = () => {
       handleReset,
       obtenerEmpleado,
       obtenerAsociacion,
-      obtenerBarrioVereda,
       obtenerPerfil,
       eliminarEmpleado,
       EditaEmpleado,
@@ -180,7 +176,6 @@ export const EmpleadoForm = () => {
       asociacion,
       empleados,
       perfil,
-      barrios,
       setValidated,
       validated,
       valedita,

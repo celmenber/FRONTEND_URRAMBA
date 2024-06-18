@@ -27,12 +27,12 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Cuenta</CDropdownHeader>
-        <CDropdownItem href="/dashboard">
+        <CDropdownItem href="/#/admin/perfilUser" style={{ textDecoration: 'none' }}>
           <CIcon icon={cilUser} className="me-2" />
           Mi Perfil
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="/#" onClick={handleLogout}>
+        <CDropdownItem href="/#" onClick={handleLogout} style={{ textDecoration: 'none' }}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Salir
         </CDropdownItem>

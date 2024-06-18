@@ -44,7 +44,6 @@ const FormMiembrosActModal = (Props) => {
     obtenerBarrioVereda,
     obtenerEscolaridad,
     obtenerOrientacionSexual,
-    barrios,
     consejos,
     tipodocumento,
     corregimiento,
@@ -57,7 +56,6 @@ const FormMiembrosActModal = (Props) => {
 
   const {
     Id_conncejo_comunitario,
-    Id_barrio_vereda,
     Id_corregimiento,
     Id_tipo_documento,
     Documentos,
@@ -69,6 +67,7 @@ const FormMiembrosActModal = (Props) => {
     Sexo,
     Genero,
     Id_orientacion_sexual,
+    Barrio_vereda,
     Direccion,
     Telefono,
     Estado,
@@ -108,9 +107,9 @@ const FormMiembrosActModal = (Props) => {
             const formularioDatos = {
                 Id_usuario:"1",
                 Id_conncejo_comunitario: datoMiembro.Id_conncejo_comunitario,
-                Id_barrio_vereda: datoMiembro.Id_barrio_vereda,
                 Id_corregimiento: datoMiembro.Id_corregimiento,
                 Id_tipo_documento: datoMiembro.Id_tipo_documento,
+                Id_orientacion_sexual: datoMiembro.Id_orientacion_sexual,
                 Documentos: datoMiembro.Documentos,
                 Nombres: datoMiembro.Nombres,
                 Apellidos: datoMiembro.Apellidos,
@@ -119,7 +118,7 @@ const FormMiembrosActModal = (Props) => {
                 Id_escolaridad: datoMiembro.Id_escolaridad,
                 Estado_escolaridad: datoMiembro.Estado_escolaridad,
                 Genero: datoMiembro.Genero,
-                Id_orientacion_sexual: datoMiembro.Id_orientacion_sexual,
+                Barrio_vereda: datoMiembro.Barrio_vereda,
                 Direccion: datoMiembro.Direccion,
                 Telefono: datoMiembro.Telefono,
                 Correo: datoMiembro.Correo,
@@ -405,7 +404,14 @@ const FormMiembrosActModal = (Props) => {
               </CCol>
             <CCol md={5}>
                 <CFormLabel htmlFor="validationCustom13">Barrio Vereda*</CFormLabel>
-                <CFormSelect
+                <CFormInput
+                  type="text"
+                  id="validationCustom14"
+                  name='Barrio_vereda'
+                  value={Barrio_vereda}
+                  onChange={onChangeFormulario}
+                  required />
+               {/*  <CFormSelect
                   id="validationCustom13"
                   name='Id_barrio_vereda'
                   value={Id_barrio_vereda}
@@ -424,7 +430,7 @@ const FormMiembrosActModal = (Props) => {
                         </option>
                       ))
                     )}
-                </CFormSelect>
+                </CFormSelect> */}
                 <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
               </CCol>
             <CCol md={3}>

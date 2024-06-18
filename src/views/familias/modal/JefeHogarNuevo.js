@@ -48,7 +48,7 @@ const JefeHogarNuevo = (Props) => {
 
     const {
         Id_concejo_comunitario,
-        Id_barrio_vereda,
+        Id_orientacion_sexual,
         Id_corregimiento,
         Id_tipo_documento,
         Documentos,
@@ -58,7 +58,7 @@ const JefeHogarNuevo = (Props) => {
         Estado_escolaridad,
         Sexo,
         Genero,
-        Id_orientacion_sexual,
+        Barrio_vereda,
         Direccion,
         Telefono,
         Estado,
@@ -381,26 +381,13 @@ const JefeHogarNuevo = (Props) => {
                             </CCol>
                             <CCol md={5} style={{ marginTop: '15px' }}>
                                 <CFormLabel htmlFor="validationCustom13">Barrio Vereda*</CFormLabel>
-                                <CFormSelect
-                                    id="validationCustom13"
-                                    name='Id_barrio_vereda'
-                                    value={Id_barrio_vereda}
+                                <CFormInput
+                                    type="text"
+                                    id="validationCustom14"
+                                    name='Barrio_vereda'
+                                    value={Barrio_vereda}
                                     onChange={onChangeFormulario}
-                                    required>
-                                    <option key={'0'} value={''}>Seleccione...</option>
-                                    {barrios?.length === 0
-                                        ? <option key={'0'} value={0}>Seleccione...</option>
-                                        : (
-                                            barrios?.map(item => (
-                                                <option
-                                                    key={item.ID}
-                                                    value={item.ID}
-                                                >
-                                                    {item.Nombre}
-                                                </option>
-                                            ))
-                                        )}
-                                </CFormSelect>
+                                    required />
                                 <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={3} style={{ marginTop: '15px' }}>

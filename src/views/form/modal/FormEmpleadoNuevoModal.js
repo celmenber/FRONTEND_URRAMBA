@@ -37,18 +37,17 @@ const EmpleadoNuevoModal = (Props) => {
         obtenerBarrioVereda,
         obtenerPerfil,
         perfil,
-        barrios,
         asociacion,
         cargando
     } = EmpleadoForm()
 
   const {
         Id_asociacion,
-        Id_barrio_vereda,
         Id_perfil,
         Documentos,
         Nombres,
         Apellidos,
+        Barrio_vereda,
         Direccion,
         Telefono,
         Correo,
@@ -66,7 +65,6 @@ const EmpleadoNuevoModal = (Props) => {
         // Consultar la api un asociacion
       obtenerPerfil();
       obtenerAsociacion();
-      obtenerBarrioVereda();
         // eslint-disable-next-line
     }, []);
 
@@ -184,26 +182,13 @@ const EmpleadoNuevoModal = (Props) => {
                           <CRow className="g-6">
                             <CCol md={7} style={{ marginTop: '15px' }}>
                              <CFormLabel htmlFor="validationCustom05">Barrio Vereda*</CFormLabel>
-                                <CFormSelect
+                                <CFormInput
+                                    type="text"
                                     id="validationCustom05"
-                                    name='Id_barrio_vereda'
-                                    value={Id_barrio_vereda}
+                                    name='Barrio_vereda'
+                                    value={Barrio_vereda}
                                     onChange={onChangeFormulario}
-                                    required>
-                                    <option key={'0'} value={''}>Seleccione...</option>
-                    {barrios?.length === 0
-                                        ? <option key={'0'} value={0}>Seleccione...</option>
-                                        : (
-                        barrios?.map(item => (
-                                                <option
-                                                    key={item.ID}
-                                                    value={item.ID}
-                                                >
-                                                  {item.Nombre}
-                                                </option>
-                                            ))
-                                        )}
-                                </CFormSelect>
+                                    required />
                                  <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
                             </CCol>
                             <CCol md={5} style={{ marginTop: '15px' }}>

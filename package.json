@@ -12,7 +12,6 @@
   },
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
-
   "scripts": {
     "build": "react-scripts --openssl-legacy-provider build",
     "build:n17": "react-scripts --openssl-legacy-provider build",
@@ -55,6 +54,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-big-calendar": "^1.5.2",
     "react-dom": "^17.0.2",
+    "react-google-charts": "^4.0.1",
     "react-image-size": "^1.0.5",
     "react-native-buffer-image-size": "^0.6.5",
     "react-redux": "^7.2.6",

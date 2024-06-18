@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { lazy } from 'react'
 const Dashboard = lazy(() => import('./views/dashboard/Dashboard'))
+const PerfilUser = lazy(() => import('./views/pages/usuarios/AdminPerfil'))
 const Usuarios = lazy(() => import('./views/pages/usuarios/AdminUsuarios'))
 const Asociaciones = lazy(() => import('./views/form/FormAsociaciones'))
 const Empleados = lazy(() => import('./views/form/FormEmpleados'))
@@ -24,6 +25,7 @@ const routes = [
   { path: '/familias/trasladamiembro/:id?', name: 'Nucleo', component: TrasladoMiembro },
   { path: '/familias/nucleo', name: 'Nucleo', component: NucleoFamiliar },
   { path: '/admin/usuarios', name: 'Usuarios', component: Usuarios },
+  { path: '/admin/perfilUser', name: 'perfilUser', component: PerfilUser },
   { path: '/admin/concejos', name: 'Concejos', component: Concejos },
   { path: '/admin/asociaciones', name: 'Asociaciones', component: Asociaciones },
   { path: '/admin/parametros', name: 'Parametros', component: Parametros },

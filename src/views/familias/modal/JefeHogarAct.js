@@ -53,7 +53,7 @@ const {
 
 const {
   Id_concejo_comunitario,
-  Id_barrio_vereda,
+  Id_orientacion_sexual,
   Id_corregimiento,
   Id_tipo_documento,
   Documentos,
@@ -63,7 +63,7 @@ const {
   Estado_escolaridad,
   Sexo,
   Genero,
-  Id_orientacion_sexual,
+  Barrio_vereda,
   Direccion,
   Telefono,
   Estado,
@@ -184,42 +184,6 @@ return (
                                 <CFormFeedback invalid>Numero y tipo documento Requerido!</CFormFeedback>
                                 </CInputGroup>
                               </CCol>
-      {/*     <CCol md={3} style={{ marginTop: '15px' }}>
-              <CFormLabel htmlFor="validationCustom03">Tipo Documento*</CFormLabel>
-              <CFormSelect
-                id="validationCustom03"
-                name='Id_tipo_documento'
-                value={Id_tipo_documento}
-                onChange={onChangeFormulario}
-
-                required>
-                <option key={'0'} value={''}>Seleccione...</option>
-                {tipodocumento?.length === 0
-                  ? <option key={'0'} value={''}>Seleccione...</option>
-                  : (
-                    tipodocumento?.filter(item => item.Estado !== null).map(item => (
-                      <option
-                        key={item.ID}
-                        value={item.ID}
-                      >
-                        {item.Nombre}
-                      </option>
-                    ))
-                  )}
-              </CFormSelect>
-              <CFormFeedback invalid>El campo es Requerido!</CFormFeedback>
-            </CCol> */}
-        {/* <CCol md={3} style={{ marginTop: '15px' }}>
-          <CFormLabel htmlFor="validationCustom04">Documento Jefe de Hogar*</CFormLabel>
-          <CFormInput
-            type="text"
-            id="validationCustom04"
-            name='Documentos'
-            value={Documentos}
-            onChange={onChangeFormulario}
-            required />
-          <CFormFeedback invalid>El campo Documentos es Requerido!</CFormFeedback>
-        </CCol> */}
         <CCol md={4} style={{ marginTop: '15px' }}>
           <CFormLabel htmlFor="validationCustom05">Nombres*</CFormLabel>
           <CFormInput
@@ -377,7 +341,14 @@ return (
         </CCol>
       <CCol md={5} style={{ marginTop: '15px' }}>
           <CFormLabel htmlFor="validationCustom13">Barrio Vereda*</CFormLabel>
-          <CFormSelect
+          <CFormInput
+            type="text"
+            id="validationCustom14"
+            name='Barrio_vereda'
+            value={Barrio_vereda}
+            onChange={onChangeFormulario}
+            required />
+          {/* <CFormSelect
             id="validationCustom13"
             name='Id_barrio_vereda'
             value={Id_barrio_vereda}
@@ -396,7 +367,7 @@ return (
                   </option>
                 ))
               )}
-          </CFormSelect>
+          </CFormSelect> */}
           <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
         </CCol>
       <CCol md={3} style={{ marginTop: '15px' }}>

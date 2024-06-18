@@ -64,8 +64,6 @@ const FormAutoridadActModal = (Props) => {
     Fechaingreso,
   } = datoAutoridad
 
-  //console.log(datoAutoridad)
-
   useEffect(() => {
     // Consultar la api un obtenerMunicipio
       obtenerMunicipio();

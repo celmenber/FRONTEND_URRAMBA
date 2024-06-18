@@ -54,9 +54,9 @@ const FormMiembrosModal = (Props) => {
   } = MiembroForm()
   const {
     Id_conncejo_comunitario,
-    Id_barrio_vereda,
     Id_corregimiento,
     Id_tipo_documento,
+    Id_orientacion_sexual,
     Documentos,
     Nombres,
     Apellidos,
@@ -65,7 +65,7 @@ const FormMiembrosModal = (Props) => {
     Estado_escolaridad,
     Sexo,
     Genero,
-    Id_orientacion_sexual,
+    Barrio_vereda,
     Direccion,
     Telefono,
     Estado,
@@ -336,7 +336,7 @@ const FormMiembrosModal = (Props) => {
               </CCol>
             </CRow>
             <CRow className="mt-2">
-            <CCol md={3}>
+            <CCol md={5}>
                 <CFormLabel htmlFor="validationCustom12">Corregimientos*</CFormLabel>
                 <CFormSelect
                   id="validationCustom12"
@@ -360,32 +360,19 @@ const FormMiembrosModal = (Props) => {
                 </CFormSelect>
                 <CFormFeedback invalid>El Corregimiento es Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={5}>
+              <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom13">Barrio Vereda*</CFormLabel>
-                <CFormSelect
-                  id="validationCustom13"
-                  name='Id_barrio_vereda'
-                  value={Id_barrio_vereda}
+                <CFormInput
+                  type="text"
+                  id="validationCustom14"
+                  name='Barrio_vereda'
+                  value={Barrio_vereda}
                   onChange={onChangeFormulario}
-                  required>
-                  <option key={'0'} value={''}>Seleccione...</option>
-                  {barrios?.length === 0
-                    ? <option key={'0'} value={0}>Seleccione...</option>
-                    : (
-                      barrios?.map(item => (
-                        <option
-                          key={item.ID}
-                          value={item.ID}
-                        >
-                          {item.Nombre}
-                        </option>
-                      ))
-                    )}
-                </CFormSelect>
+                  required />
                 <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
               </CCol>
-            <CCol md={4}>
-                <CFormLabel htmlFor="validationCustom14">Direccion Miembro Consejo*</CFormLabel>
+            <CCol md={3}>
+                <CFormLabel htmlFor="validationCustom14">Direccion*</CFormLabel>
                 <CFormInput
                   type="text"
                   id="validationCustom14"

@@ -20,27 +20,25 @@ import {
   CTableBody,
   CTableDataCell,
   CAvatar,
+  CCardTitle,
 } from '@coreui/react'
 //import { CLoadingButton } from '@coreui/react-pro'
 import { MiembroForm } from 'src/hooks'
 import CIcon from '@coreui/icons-react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
-  cilLockLocked,
-  cilLockUnlocked,
   cilPeople,
   cilTrash,
 } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
 import FormMiembrosActModal from './modal/FormMiembrosActModal'
-
-
+import { SelectPicker } from 'rsuite'
+import '../../../node_modules/rsuite/dist/rsuite.css';
 
 const WidgetBarChart = () => {
-
-
-  const [selectServicio] = useState(1);
-  const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
+  //const [selectServicio] = useState(1);
+  //const [nombreEscolaridad, setNombreEscolaridad] = useState([]);
+   const [valueCC, setValueCC] = useState(0)
+   const [idConcejoC, setIdConcejoC] = useState(0)
 
   const {
     onChangeFormulario,
@@ -52,10 +50,9 @@ const WidgetBarChart = () => {
     EditaMiembro,
     datoMiembro,
     miembro,
+    consejos,
     userDetails,
-   // escolaridades,
     obtenerOrientacionSexual,
-   // orientacion_sexuales,
     visibleM,
     setVisibleM,
     visibleMI,
@@ -74,15 +71,30 @@ const WidgetBarChart = () => {
       // eslint-disable-next-line
   }, []);
 
-  /* useEffect(()=>{
-    obtenerNombre();
-    setVisibleM(false)
-   // eslint-disable-next-line
-  },[miembro]) */
+ useEffect(() => {
+     if(valueCC !== 0){
+       setIdConcejoC(valueCC)
+     }
+    // eslint-disable-next-line
+  }, [valueCC]);
 
     const lstMiembro = userDetails?.USER_ROL === 'Administrador'
                       ? miembro
                       : miembro?.filter(U => U.id_usuario === userDetails?.ID_USER)
+
+    let data
+  if(userDetails.USER_ROL === 'Administrador') {
+     data = consejos?.map(
+        item => ({
+              label: 'Consejo Comunitario: '+ item.nombre_concejo_comunitario.toUpperCase(),
+              value: item.ID.toString()
+        })
+    );
+  }else{
+     data = consejos?.filter(U => U.id_usuario === userDetails.ID_USER)
+  }
+
+  console.log(data);
 
   return (
     <CRow>
@@ -108,6 +120,52 @@ const WidgetBarChart = () => {
             </CForm>
           </CCardBody>
           {/* proceso de listar archovos de las normativas */}
+           <CCardBody>
+             <CCardTitle>
+          {userDetails.USER_ROL === 'Administrador' ? (
+                <CCardTitle>
+                    <div className="ml-2">
+                      <SelectPicker
+                          data={data}
+                          placeholder="FILTRAR POR CONCEJO COMUNITARIO"
+                          name="datoConcejoComunitario"
+                          value={valueCC}
+                          onChange={setValueCC}
+                          size="lg"
+                          block
+                      />
+                  </div>
+              </CCardTitle>
+          ) : (
+                <CCardTitle>
+                    <CRow>
+                    <CCol xs={10}>
+                      <div className="d-flex align-items-center">
+                        <CAvatar
+                          className="m-2"
+                          size="md"
+                          src={avatar}
+                          status={true ? 'success' : 'danger'}
+                        />
+                        <div className="ml-2">
+                          {
+                            <>
+                            <strong>
+                              Consejo Comunitario {data[0]?.nombre_concejo_comunitario}
+                              </strong>
+                              <div className="small text-medium-emphasis">
+                                <span> Autoridad tradicional  { data[0]?.nombres } { data[0]?.apellidos }</span>
+                              </div>
+                            </>
+                          }
+                        </div>
+                      </div>
+                    </CCol>
+                  </CRow>
+            </CCardTitle>
+          )}
+          </CCardTitle>
+        </CCardBody>
           <CCardBody>
             <CForm key={0}>
               <CTable align="middle" className="mb-0 border" hover responsive>
@@ -181,7 +239,7 @@ const WidgetBarChart = () => {
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">Barrio/Vereda/Corregimiento</div>
                           <span>
-                            {item.Veredas_Barrios}</span> | <span>{item.direccion} | <span>{item.Corregimiento}</span>
+                            {item.barrio_vereda}</span> | <span>{item.direccion} | <span>{item.Corregimiento}</span>
                           </span>
                         </CTableDataCell>
                         <CTableDataCell>
