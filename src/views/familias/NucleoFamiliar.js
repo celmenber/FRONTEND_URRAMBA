@@ -42,7 +42,7 @@ const NucleoFamiliar = () => {
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [nuevaListaHogar, setNuevaListaHogar] = useState([])
   const [valueJH, setValueJH] = useState(0)
- const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false)
   const {
     jefeHogarByID,
     jefeHogarById

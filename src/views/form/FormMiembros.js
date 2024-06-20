@@ -79,14 +79,17 @@ const WidgetBarChart = () => {
   }, [valueCC]);
 
     const lstMiembro = userDetails?.USER_ROL === 'Administrador'
-                      ? miembro
-                      : miembro?.filter(U => U.id_usuario === userDetails?.ID_USER)
+                      ? miembro?.filter(X => parseInt(X.id_conncejo_comunitario) === parseInt(idConcejoC))
+                      : miembro?.filter(U => parseInt(U.id_usuario) === parseInt(userDetails?.ID_USER))
 
-    let data
+
+
+
+  let data
   if(userDetails.USER_ROL === 'Administrador') {
      data = consejos?.map(
         item => ({
-              label: 'Consejo Comunitario: '+ item.nombre_concejo_comunitario.toUpperCase(),
+              label: 'CONCEJO COMUNITARIO '+ item.nombre_concejo_comunitario.toUpperCase(),
               value: item.ID.toString()
         })
     );
@@ -94,7 +97,7 @@ const WidgetBarChart = () => {
      data = consejos?.filter(U => U.id_usuario === userDetails.ID_USER)
   }
 
-  console.log(data);
+ // console.log(data);
 
   return (
     <CRow>

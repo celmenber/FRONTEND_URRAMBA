@@ -89,7 +89,7 @@ const administrador_nav = [
   {
     component: CNavItem,
     name: 'REPORTES',
-    to: '/concejos',
+    to: '/reportes',
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
   },
 ]

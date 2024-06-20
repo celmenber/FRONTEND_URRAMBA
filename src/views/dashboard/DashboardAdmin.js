@@ -173,9 +173,8 @@ const DashboardAdmin = () => {
           <CRow>
             <CCol sm={8}>
               <h4 id="traffic" className="card-title mb-0">
-                Tablero de graficos AFROURRAMBA
+                Grafica por Corregimientos
               </h4>
-              <div className="small text-medium-emphasis">{FormatoHoy()}</div>
             </CCol>
             <CCol sm={4} className="d-none d-md-block">
               <CDropdown className="float-end">
@@ -183,15 +182,46 @@ const DashboardAdmin = () => {
                   <CIcon icon={cilBarChart} />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                  <CDropdownItem to="#">Grafica uno</CDropdownItem>
-                  <CDropdownItem to="#">Grafica dos</CDropdownItem>
-                  <CDropdownItem to="#">Grafica tres</CDropdownItem>
-                  <CDropdownItem to="#">Grafica cuatro</CDropdownItem>
-                  <CDropdownItem to="#">Grafica cinco</CDropdownItem>
+                  <CDropdownItem
+                    href="/#/dashboard/dashboard"
+                    //onClick={handleLogout}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Grafica por corregimientos
+                  </CDropdownItem>
+                  <CDropdownItem
+                    href="/#/dashboard/dashboard"
+                    // onClick={handleLogout}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Nucleo Familiar
+                  </CDropdownItem>
+                  <CDropdownItem
+                    href="/#/dashboard/dashboard"
+                    //onClick={handleLogout}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Familias Caracterizadas
+                  </CDropdownItem>
+                  <CDropdownItem
+                    href="/#/dashboard/dashboard"
+                    //onClick={handleLogout}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Distribucion Etaria
+                  </CDropdownItem>
+                  <CDropdownItem
+                    href="/#/dashboard/dashboard"
+                    //onClick={handleLogout}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Consejos comunitario.
+                  </CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
             </CCol>
           </CRow>
+          <hr className="mt-2" />
           <CRow>
             <CCol sm={12}></CCol>
             <Charttodos />

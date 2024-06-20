@@ -27,13 +27,9 @@ import { EmpleadoForm } from 'src/hooks'
 import CIcon from '@coreui/icons-react'
 import avatar from 'src/assets/images/avatars/profile-default.jpg'
 import {
-    cilLockLocked,
-    cilLockUnlocked,
     cilPeople,
     cilTrash,
 } from '@coreui/icons'
-import { CLoadingButton } from '@coreui/react-pro'
-import { useState } from 'react'
 
 const AdminConvenios = () => {
     const {
