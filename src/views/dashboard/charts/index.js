@@ -1,1 +1,5 @@
 export * from './useCharttodos'
+export * from './useCaracterizados'
+export * from './useNucleofamiliar'
+export * from './useDistribucionEtaria'
+export * from './useConsejoscomunitario'

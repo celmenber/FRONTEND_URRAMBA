@@ -2,13 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { JefeHogarForm, NucleoFamiliarForm, CaracterizacionForm, ConcejoForm } from 'src/hooks'
 
 import {
-  CAvatar,
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
   CCardFooter,
-  CCardHeader,
   CCol,
   CDropdown,
   CDropdownItem,
@@ -16,24 +12,18 @@ import {
   CDropdownToggle,
   CProgress,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
 } from '@coreui/react'
-
-import { CChartLine } from '@coreui/react-chartjs'
-import { getStyle, hexToRgba } from '@coreui/utils'
 
 import CIcon from '@coreui/icons-react'
 import { cilBarChart, cilUser, cilUserFemale } from '@coreui/icons'
 
-//import avatar1 from 'src/assets/images/avatars/profile-default.jpg'
-
-import { FormatoHoy } from 'src/helper'
-import { Charttodos } from './charts'
+import {
+  Charttodos,
+  Nucleofamiliar,
+  Caracterizados,
+  DistribucionEtaria,
+  Consejoscomunitario,
+} from './charts'
 
 const DashboardAdmin = () => {
   const { obtenerJefeHogar, jefeHogar } = JefeHogarForm()
@@ -44,7 +34,7 @@ const DashboardAdmin = () => {
 
   const { obtenerConcejo, Concejo } = ConcejoForm()
 
-  const [activeKey, setActiveKey] = useState(1)
+  const [activeKey, setActiveKey] = useState(0)
 
   useEffect(() => {
     obtenerJefeHogar()
@@ -165,6 +155,10 @@ const DashboardAdmin = () => {
     },
   ]
 
+  const handlecharts = (opt) => {
+    setActiveKey(opt)
+  }
+
   return (
     <>
       {/*    <WidgetsDropdown /> */}
@@ -173,7 +167,11 @@ const DashboardAdmin = () => {
           <CRow>
             <CCol sm={8}>
               <h4 id="traffic" className="card-title mb-0">
-                Grafica por Corregimientos
+                {activeKey === 0 && 'Grafica por Corregimientos'}
+                {activeKey === 1 && 'Nucleo Familiar'}
+                {activeKey === 2 && 'Familias caracterizadas'}
+                {activeKey === 3 && ' Distribucion Etaria'}
+                {activeKey === 4 && 'Consejos comunitarios.'}
               </h4>
             </CCol>
             <CCol sm={4} className="d-none d-md-block">
@@ -184,35 +182,35 @@ const DashboardAdmin = () => {
                 <CDropdownMenu>
                   <CDropdownItem
                     href="/#/dashboard/dashboard"
-                    //onClick={handleLogout}
+                    onClick={() => handlecharts(0)}
                     style={{ textDecoration: 'none' }}
                   >
                     Grafica por corregimientos
                   </CDropdownItem>
                   <CDropdownItem
                     href="/#/dashboard/dashboard"
-                    // onClick={handleLogout}
+                    onClick={() => handlecharts(1)}
                     style={{ textDecoration: 'none' }}
                   >
                     Nucleo Familiar
                   </CDropdownItem>
                   <CDropdownItem
                     href="/#/dashboard/dashboard"
-                    //onClick={handleLogout}
+                    onClick={() => handlecharts(2)}
                     style={{ textDecoration: 'none' }}
                   >
                     Familias Caracterizadas
                   </CDropdownItem>
                   <CDropdownItem
                     href="/#/dashboard/dashboard"
-                    //onClick={handleLogout}
+                    onClick={() => handlecharts(3)}
                     style={{ textDecoration: 'none' }}
                   >
                     Distribucion Etaria
                   </CDropdownItem>
                   <CDropdownItem
                     href="/#/dashboard/dashboard"
-                    //onClick={handleLogout}
+                    onClick={() => handlecharts(4)}
                     style={{ textDecoration: 'none' }}
                   >
                     Consejos comunitario.
@@ -224,7 +222,11 @@ const DashboardAdmin = () => {
           <hr className="mt-2" />
           <CRow>
             <CCol sm={12}></CCol>
-            <Charttodos />
+            {activeKey === 0 && <Charttodos />}
+            {activeKey === 1 && <Nucleofamiliar />}
+            {activeKey === 2 && <Caracterizados />}
+            {activeKey === 3 && <DistribucionEtaria />}
+            {activeKey === 4 && <Consejoscomunitario />}
           </CRow>
         </CCardBody>
         <CCardFooter>
