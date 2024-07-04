@@ -170,7 +170,7 @@ const DashboardAdmin = () => {
                 {activeKey === 0 && 'Grafica por Corregimientos'}
                 {activeKey === 1 && 'Nucleo Familiar'}
                 {activeKey === 2 && 'Familias caracterizadas'}
-                {activeKey === 3 && ' Distribucion Etaria'}
+                {activeKey === 3 && 'Distribucion Etaria'}
                 {activeKey === 4 && 'Consejos comunitarios.'}
               </h4>
             </CCol>
