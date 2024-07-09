@@ -8,9 +8,9 @@ import {
   editarUsuarioAction,
   editarEstadoUsuarioAction,
   editarClaveUsuarioAction,
+  cambiarClaveUsuarioAction,
   obtenerUsuarioAction,
   obtenerPerfilAction,
-  //obtenerUsuarioEditar,
   borrarUsuarioAction,
 } from '../action/UsuarioAction'
 
@@ -24,6 +24,7 @@ export const Usuarios = () => {
   const obtenerUsuario = () => dispatch(obtenerUsuarioAction())
   const crearNuevoUsuario = (Dataform) => dispatch(crearNuevoUsuarioAction(Dataform))
   const editarUsuario = (Dataform) => dispatch(editarUsuarioAction(Dataform))
+  const cambiarClaveUsuario = (Dataform) => dispatch(cambiarClaveUsuarioAction(Dataform))
 
   // ejecutando los selectores para ontener los estados del store
   const User = useSelector((state) => state.Auth)
@@ -42,11 +43,16 @@ export const Usuarios = () => {
   const [visibleNUS, setVisibleNUS] = useState(false)
   const [visibleUS, setVisibleUS] = useState(false)
   const [visiblePSW, setVisiblePSW] = useState(false)
+  const [validated, setValidated] = useState(false)
+
 
   // nuevo state de Tenerencuenta
   const [datoUsuario, setDatoUsuario] = useState({
-    USERNAME: '',
-    ID_ROLL: '',
+     USERNAME: '',
+     ID_ROLL: '',
+     PASS_ACTUAL: '',
+     PASS_NUEVO: '',
+     PASS_ACTUAL_REPET: '',
   })
 
   // Leer los datos del formulario
@@ -56,6 +62,45 @@ export const Usuarios = () => {
       [e.target.name]: e.target.value,
     })
   }
+
+  const handleReset = () => {
+    setDatoUsuario({
+       PASS_ACTUAL: '',
+       PASS_NUEVO: '',
+       PASS_ACTUAL_REPET: '',
+    })
+  }
+
+   const handleSubmit = (event) => {
+    event.preventDefault();
+    setValidated(true)
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    } else {
+
+         if (datoUsuario.PASS_NUEVO === datoUsuario.PASS_ACTUAL_REPET) {
+              const formularioDatos = {
+                ID : User.userDetails.ID_USER,
+                PASS_ACTUAL:datoUsuario.PASS_ACTUAL,
+                PASS_NUEVO:datoUsuario.PASS_NUEVO,
+                VALFORM:1
+              }
+
+              if (Object.values(formularioDatos).some(value => !value)) {
+                setValidated(true)
+              }else{
+                setValidated(false)
+                cambiarClaveUsuario({formularioDatos,handleReset})
+              }
+            }else {
+                 Swal.fire('Atención',
+                           'Las contraseñas no coinciden',
+                           'warning')
+         }
+      }
+   }
 
   // función que redirige Editaparques
   const EditaUsuarios = (ID) => {
@@ -91,7 +136,8 @@ export const Usuarios = () => {
       editarClaveUsuarioAction({
         Id,
         setSelectActivarREC,
-        DOCUMENTO: datos[0].emp_documento !== null ? datos[0].emp_documento  : datos[0].aut_documentos,
+        PASS_NUEVO: datos[0].emp_documento !== null ? datos[0].emp_documento  : datos[0].aut_documentos,
+        VALFORM:0
       }),
     )
   }
@@ -116,6 +162,7 @@ export const Usuarios = () => {
 
   return {
     User,
+    handleSubmit,
     onChangeFormulario,
     crearNuevoUsuario,
     UpdateUserEstado,
@@ -144,6 +191,7 @@ export const Usuarios = () => {
     setVisibleUS,
     visiblePSW,
     setVisiblePSW,
+    validated,
     cargando,
     cargandoLista,
     loadingactivar,

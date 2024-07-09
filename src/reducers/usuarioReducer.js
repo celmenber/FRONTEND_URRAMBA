@@ -16,6 +16,7 @@ const {
     ACTIVAR_USUARIO_SUCCESS,
     CAMBIO_CLAVE_USUARIO,
     CAMBIO_CLAVE_USUARIO_SUCCESS,
+    CAMBIO_CLAVE_USUARIO_ERROR,
     DELETE_USUARIO,
     DELETE_USUARIO_SUCCESS,
     DELETE_USUARIO_ERROR,
@@ -75,20 +76,20 @@ export const UsuarioReducer = (state = initialState, action) => {
       case ACTIVAR_USUARIO_SUCCESS:
           return {
               ...state,
-              // usuariolista: action.payload,
                usuariolista: state.usuariolista.map(U =>
                   U.ID_USER === action.payload.ID_USER ? U = action.payload : U)
           }
       case CAMBIO_CLAVE_USUARIO:
           return {
               ...state,
-              loadingactivar: action.payload,
+              loading: action.payload,
           }
       case CAMBIO_CLAVE_USUARIO_SUCCESS:
           return {
               ...state,
-               usuariolista: state.usuariolista.map(U =>
-                  U.ID_USER === action.payload.ID_USER ? U = action.payload : U)
+              loading: action.payload,
+              /*  usuariolista: state.usuariolista.map(U =>
+                  U.ID_USER === action.payload.ID_USER ? U = action.payload : U) */
           }
       case OBTENER_USUARIO:
           return {
@@ -126,6 +127,7 @@ export const UsuarioReducer = (state = initialState, action) => {
           }
       case ADD_USUARIO_ERROR:
       case EDITAR_USUARIO_ERROR:
+      case CAMBIO_CLAVE_USUARIO_ERROR:
       case OBTENER_USUARIO_ERROR:
       case OBTENER_PERFIL_ERROR:
       case DELETE_USUARIO_ERROR:

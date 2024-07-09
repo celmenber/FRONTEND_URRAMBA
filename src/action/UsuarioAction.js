@@ -17,6 +17,7 @@ const {
   ACTIVAR_USUARIO_SUCCESS,
   CAMBIO_CLAVE_USUARIO,
   CAMBIO_CLAVE_USUARIO_SUCCESS,
+  CAMBIO_CLAVE_USUARIO_ERROR,
   DELETE_USUARIO,
   DELETE_USUARIO_SUCCESS,
   DELETE_USUARIO_ERROR,
@@ -163,13 +164,58 @@ const editarEstadoUsuarioExito = (datos) => ({
 })
 
 
-// ***************** Seleccion editar el editarEstado Usuario //****************/
+// ***************** cambiar ClaveUsuarioAction Usuario //****************/
+export const cambiarClaveUsuarioAction = ({formularioDatos, handleReset}) => {
+  return async (dispatch) => {
+    dispatch(cambiarClaveUsuario())
+    console.log(formularioDatos)
+    const { PASS_NUEVO, PASS_ACTUAL, VALFORM, ID } = formularioDatos
+    try {
+      const { data } = await Axios.patch(`/users/edit-usercambioclave/${ID}`,
+        { PASS_NUEVO, PASS_ACTUAL, VALFORM })
+      //console.log(data)
+     dispatch(cambiarClaveUsuarioExito())
+      if (data.code === 200) {
+        handleReset()
+        Swal.fire('Correcto', 'La contraseña del Usuario se cambio correctamente', 'success')
+      }
+    } catch (error) {
+      const { data } = error?.response
+    //  console.log(error.response)
+            if(data?.response === '101'){
+                 Swal.fire('Error',
+                           'Las contraseñas actual no pertenece a este Usuario',
+                           'error')
+          }
+        dispatch(cambiarClaveUsuariosrror(true))
+    }
+  }
+}
+
+const cambiarClaveUsuario = () => ({
+  type: CAMBIO_CLAVE_USUARIO,
+  payload: true,
+})
+
+const cambiarClaveUsuarioExito = () => ({
+  type: CAMBIO_CLAVE_USUARIO_SUCCESS,
+  payload: false,
+})
+
+const cambiarClaveUsuariosrror = () => ({
+  type: CAMBIO_CLAVE_USUARIO_ERROR,
+  payload: true,
+})
+
+
+// ***************** Seleccion editar ClaveUsuarioAction Usuario //****************/
 export const editarClaveUsuarioAction = (Datos) => {
   return async (dispatch) => {
     dispatch(editarClaveUsuario())
-    const { setSelectActivarREC, DOCUMENTO, Id } = Datos
+    const { setSelectActivarREC, PASS_NUEVO, VALFORM, Id } = Datos
     try {
-      const { data } = await Axios.patch(`/users/edit-usercambioclave/${Id}`, { DOCUMENTO })
+      const { data } = await Axios.patch(`/users/edit-usercambioclave/${Id}`, { PASS_NUEVO,VALFORM })
+      console.log(data)
       dispatch(editarClaveUsuarioExito(data.data))
       if (data.code === 200) {
         setSelectActivarREC(false)
