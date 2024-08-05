@@ -121,11 +121,11 @@ const autoridades_nav = [
     to: '/dashboard/admin',
     icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
     items: [
-      {
+     /*  {
         component: CNavItem,
         name: 'Admin Concejos',
         to: '/admin/concejos',
-      },
+      }, */
       {
         component: CNavItem,
         name: 'Miembros Consejo',
