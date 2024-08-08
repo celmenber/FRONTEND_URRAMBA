@@ -17,6 +17,9 @@ const {
     OBTENER_JEFE_HOGAR_BY_ID,
     OBTENER_JEFE_HOGAR_BY_ID_SUCCESS,
     OBTENER_JEFE_HOGAR_BY_ID_ERROR,
+    TRASLADO_JEFE_HOGAR,
+    TRASLADO_JEFE_HOGAR_SUCCESS,
+    TRASLADO_JEFE_HOGAR_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
@@ -192,9 +195,6 @@ export const editarJefeHogarAction = (Datos) => {
   };
 };
 
-
-
-
   const editarJefeHogar = () => ({
     type: EDITAR_JEFE_HOGAR,
     payload: true,
@@ -207,6 +207,42 @@ export const editarJefeHogarAction = (Datos) => {
 
   const editarJefeHogarError = () => ({
     type: EDITAR_JEFE_HOGAR_ERROR,
+    payload: true,
+  });
+
+  export const trasladoJefeHogarAction = (Dataform) => {
+  return async (dispatch) => {
+    dispatch(trasladoJefeHogar());
+    try {
+      //console.log(Dataform);
+      const {data} = await Axios.put(`/jefehogar/traslado-jefehogar/${Dataform.Id}`, Dataform);
+      console.log(data);
+      dispatch(trasladoJefeHogarExito(data.data));
+      const msg = Dataform.check === 0 ?  'Traslado': 'Desafilio'
+      if (data.code === 200) {
+        Swal.fire('Correcto',
+         'El jefe de hogar se '+msg+' correctamente',
+         'success')
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(trasladoJefeHogarError());
+    }
+  };
+};
+
+  const trasladoJefeHogar = () => ({
+    type: TRASLADO_JEFE_HOGAR,
+    payload: true,
+  });
+
+  const trasladoJefeHogarExito = (datos) => ({
+    type: TRASLADO_JEFE_HOGAR_SUCCESS,
+    payload: datos,
+  });
+
+  const trasladoJefeHogarError = () => ({
+    type: TRASLADO_JEFE_HOGAR_ERROR,
     payload: true,
   });
 

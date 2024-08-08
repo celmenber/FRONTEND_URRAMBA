@@ -19,6 +19,14 @@ import {
   CTableBody,
   CTableDataCell,
   CAvatar,
+  CInputGroup,
+  CFormInput,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownMenu,
+  CDropdownItem,
+  CFormCheck,
+  CButtonGroup,
 } from '@coreui/react'
 //import { CLoadingButton } from '@coreui/react-pro'
 
@@ -28,6 +36,8 @@ import {
   cilPeople,
   cilTrash,
   cilArrowThickFromLeft,
+  cilHighlighter,
+  cilList,
 } from '@coreui/icons'
 import JefeHogarNuevo from './modal/JefeHogarNuevo'
 import JefeHogarAct from './modal/JefeHogarAct'
@@ -35,6 +45,7 @@ import { JefeHogarForm } from 'src/hooks/useJefeHogarForm'
 
 
 const JefeHogar = () => {
+   const [check, setCheck] = useState(0)
   const history = useHistory();
 
   const {
@@ -72,14 +83,27 @@ const JefeHogar = () => {
    // eslint-disable-next-line
   },[])
 
+console.log(jefeHogar);
+ const  JefeHogar = check === 0 ? jefeHogar?.filter(X => X.id_concejo_comunitario !== 0)
+                                      : jefeHogar?.filter(U => U.id_concejo_comunitario === 0)
 
   const lstJefeHogar = userDetails.USER_ROL === 'Administrador'
-                      ? jefeHogar
-                      : jefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
+                      ? JefeHogar
+                      : JefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
 
 
 const idJefeHogar = (id) => {
     history.push(`/familias/nucleos/${id}`);
+  }
+
+  const handleDesafiliarJH = (id) => {
+    console.log(id);
+    history.push(`/familias/trasladojefehogar/${id}`);
+  }
+
+  const handleCertificadoJH = (id) => {
+     console.log(id);
+    history.push(`/certificados/${id}`);
   }
 
   return (
@@ -105,6 +129,41 @@ const idJefeHogar = (id) => {
               </CCol>
             </CForm>
           </CCardBody>
+
+           <CCardBody>
+            <CRow>
+             <CCol xs={7}>
+               <CInputGroup className="mb-0">
+                 <CFormInput placeholder="Escriba numero documento o nombres " aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                 <CButton type="button" color="primary" variant="outline" id="button-addon2">Buscar...</CButton>
+               </CInputGroup>
+               </CCol>
+               <CCol xs={5}>
+              <CButtonGroup role="group" style={{width: '100%'}} aria-label="checkbox toggle button group">
+                <CFormCheck
+                  type="radio"
+                  defaultChecked={check === 0 ? true : false}
+                  button={{ color: 'primary', variant: 'outline' }}
+                  name="btnradio"
+                  id="btnradio11"
+                  autoComplete="off"
+                  label="Afiliados concejos comunitario"
+                  onChange={() => setCheck(0)}
+                />
+                <CFormCheck
+                  type="radio"
+                  defaultChecked={check === 1 ? true : false}
+                  button={{ color: 'primary', variant: 'outline' }}
+                  name="btnradio"
+                  id="btnradio12"
+                  autoComplete="off"
+                  label="Desafiliados concejos comunitario"
+                  onChange={() => setCheck(1)}
+                />
+              </CButtonGroup>
+             </CCol>
+          </CRow>
+           </CCardBody>
           {/* proceso de listar archovos de las normativas */}
           <CCardBody>
             <CForm key={0}>
@@ -147,8 +206,8 @@ const idJefeHogar = (id) => {
                             <span> <strong>
                               {item.nombres} {item.apellidos}
                             </strong></span><br></br>
-                            <small style={{ marginLeft: '5px' }}>
-                              {item.Tipo_documento}: {item.documentos}
+                            <small style={{ marginLeft: '0px' }}>
+                            {item.Codigo}: {item.documentos}
                             </small>
                           </div>
                           <div className="small text-medium-emphasis">
@@ -180,19 +239,27 @@ const idJefeHogar = (id) => {
                         </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
-                            <CTooltip
-                              content="Actulizar Jefe hogar"
-                              placement="bottom"
-                            >
-                              <CButton style={{ 'width': '100%' }}
-                                color="info"
+                              <CDropdown>
+                                <CDropdownToggle href="javascript:void(0);"
+                                color="warning"
                                 variant="outline"
                                 size="lg"
-                                onClick={() => EditarJefeHogar(item.ID)}
-                              >
-                                {'Corregir'}
-                              </CButton>
-                              </CTooltip>
+                                style={{ textDecoration: 'none' }}>
+                                 <CIcon icon={cilList} className="text-warning" size="lg" />
+                                </CDropdownToggle>
+                                <CDropdownMenu>
+                                  <CDropdownItem href="javascript:void(0);"
+                                  style={{ textDecoration: 'none' }}
+                                  onClick={() => handleDesafiliarJH(item.ID)}>
+                                     Trasladar o Desafiliar
+                                    </CDropdownItem>
+                                  <CDropdownItem href="javascript:void(0);"
+                                     style={{ textDecoration: 'none' }}
+                                     onClick={() => handleCertificadoJH(item.ID)}>
+                                      Generar Certificado
+                                    </CDropdownItem>
+                                </CDropdownMenu>
+                              </CDropdown>
                           </div>
                         </CTableDataCell>
                           <CTableDataCell>
@@ -211,6 +278,23 @@ const idJefeHogar = (id) => {
                                 </CButton></CTooltip>
                             </div>
                           </CTableDataCell>
+                                                 <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Actulizar Jefe hogar"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="info"
+                                variant="outline"
+                                size="lg"
+                                onClick={() => EditarJefeHogar(item.ID)}
+                              >
+                              <CIcon icon={cilHighlighter} size="lg" />
+                              </CButton>
+                              </CTooltip>
+                          </div>
+                        </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip

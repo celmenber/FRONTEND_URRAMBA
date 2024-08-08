@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { borrarJefeHogarAction,
      crearNuevoJefeHogarAction,
      editarJefeHogarAction,
+     trasladoJefeHogarAction,
      obtenerJefeHogarAction,
      obtenerJefeHogarByIdAction} from 'src/action/JefeHogarAction';
 
@@ -52,6 +53,8 @@ export const JefeHogarForm = () => {
     const [selectActivar, setSelectActivar] = useState(false);
     const [visibleM, setVisibleM] = useState(false)
     const [visibleMI, setVisibleMI] = useState(false)
+    const [idConcejoC, setIdConcejoC] = useState(0)
+    const [check, setCheck] = useState(0)
 
      const ObjJefeHogar = {
               Id_concejo_comunitario:'',
@@ -181,8 +184,32 @@ export const JefeHogarForm = () => {
                 dispatch(borrarJefeHogarAction(Id));
             }
         });
-
     }
+
+ const handletrasladaJH = (id) => {
+        const datos = jefeHogar.filter((X) => Number(X.ID) === Number(id));
+        const  Nombres =  datos[0]?.nombres + ' '+ datos[0]?.apellidos;
+        const msg = check === 0 ?  'Trasladar!': 'Desafiliar!'
+          Swal.fire({
+                  title: '¿Estas seguro desea '+msg+' al jefe de hogar '+ Nombres +'?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: check === 0 ?  'Si, trasladar!': 'Si, Desafiliar!',
+                  cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                  if (result.value) {
+                      dispatch(trasladoJefeHogarAction({
+                          Id_Concejo: idConcejoC,
+                          Id: datos[0]?.ID,
+                          Chk: check,
+                          }));
+                  }
+                });
+         // }
+    }
+
     return {
      //   handleSubmit,
         crearJefeHogar,
@@ -199,6 +226,7 @@ export const JefeHogarForm = () => {
         obtenerOrientacionSexual,
         eliminarJefeHogar,
         EditarJefeHogar,
+        handletrasladaJH,
         asociacion,
         tipodocumento,
         corregimiento,
@@ -216,6 +244,8 @@ export const JefeHogarForm = () => {
         selectActivar, setSelectActivar,
         visibleM, setVisibleM,
         visibleMI, setVisibleMI,
+        setIdConcejoC,
+        check, setCheck,
         cargandolista,
         jefeHogarById,
         cargando

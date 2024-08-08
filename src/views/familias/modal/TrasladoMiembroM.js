@@ -84,7 +84,7 @@ useEffect(() => {
         })
     );
 
- console.log(JefeHogar)
+ //console.log(JefeHogar)
 
   return (
     <>

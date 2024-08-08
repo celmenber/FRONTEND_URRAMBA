@@ -34,7 +34,7 @@ import {
 } from '@coreui/react'
 import { NucleoFamiliarForm } from 'src/hooks/useNucleoFamiliarForm'
 import CIcon from '@coreui/icons-react'
-import { cilPeople, cilTrash,cilArrowThickFromRight } from '@coreui/icons'
+import { cilPeople, cilTrash,cilArrowThickFromRight, cilHighlighter } from '@coreui/icons'
 import { SelectPicker } from 'rsuite';
 import '../../../node_modules/rsuite/dist/rsuite.css';
 const NucleoFamiliar = () => {
@@ -523,23 +523,6 @@ const NucleoFamiliar = () => {
                             {item.sexo}</span> | <span>{item.genero} | <span>{item.Orientacion_sexual}</span>
                           </span>
                         </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="small text-medium-emphasis">
-                            <CTooltip
-                              content="Actulizar Miembro"
-                              placement="bottom"
-                            >
-                              <CButton style={{ 'width': '100%' }}
-                                color="info"
-                                variant="outline"
-                                size="lg"
-                                onClick={(event) => EditarFamiliar(event, item)}
-                              >
-                                {'Corregir'}
-                              </CButton>
-                              </CTooltip>
-                          </div>
-                        </CTableDataCell>
                         {userDetails.USER_ROL === 'Administrador' && (
                         <CTableDataCell>
                            <div className="small text-medium-emphasis">
@@ -558,6 +541,23 @@ const NucleoFamiliar = () => {
                             </CTooltip>
                           </div>
                         </CTableDataCell>)}
+                          <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content="Actulizar Miembro"
+                              placement="bottom"
+                            >
+                              <CButton style={{ 'width': '100%' }}
+                                color="info"
+                                variant="outline"
+                                size="lg"
+                                onClick={(event) => EditarFamiliar(event, item)}
+                              >
+                               <CIcon icon={cilHighlighter} size="lg" />
+                              </CButton>
+                              </CTooltip>
+                          </div>
+                        </CTableDataCell>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip

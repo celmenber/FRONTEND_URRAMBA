@@ -39,6 +39,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^1.8.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "axios": "^0.27.2",

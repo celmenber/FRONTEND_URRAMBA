@@ -9,7 +9,7 @@ const AppFooter = () => {
         <a href="http://www.afrourramba.com.co" target="_blank" rel="noopener noreferrer">
          URRAMBA
         </a>
-        <span className="ms-1">&copy; 2023 Derechos reservados.</span>
+        <span className="ms-1">&copy; 2024 Derechos reservados.</span>
       </div>
       <div className="ms-auto">
         <span className="me-1">Powered by</span>
