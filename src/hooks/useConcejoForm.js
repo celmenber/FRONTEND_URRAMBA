@@ -74,7 +74,7 @@ export const ConcejoForm = () => {
         Id_autoridad_tradicional: datoConcejo.id_autoridad_tradicional,
         Id_municipio: datoConcejo.idMunicipio,
         Nit: datoConcejo.nitConcejo,
-        Nombre_concejo_comunitario: datoConcejo.nitConcejo,
+        Nombre_concejo_comunitario: datoConcejo.nombreAsociacion,
       };
 
       // Verificar si hay campos vacíos antes de intentar guardar

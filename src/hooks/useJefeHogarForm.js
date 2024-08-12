@@ -17,7 +17,9 @@ import { borrarJefeHogarAction,
      editarJefeHogarAction,
      trasladoJefeHogarAction,
      obtenerJefeHogarAction,
+     buscarJefeHogarAction,
      obtenerJefeHogarByIdAction} from 'src/action/JefeHogarAction';
+import Parametros from 'src/views/parametros/Parametros';
 
 
 export const JefeHogarForm = () => {
@@ -34,6 +36,7 @@ export const JefeHogarForm = () => {
     const obtenerOrientacionSexual = () => dispatch(obtenerOrientacionSexualAction());
     const crearJefeHogar = (Dataform) => dispatch(crearNuevoJefeHogarAction(Dataform));
     const actulizarJefeHogar = (Dataform) => dispatch(editarJefeHogarAction(Dataform));
+    const buscarJefeHogar = (Dataform) => dispatch(buscarJefeHogarAction(Dataform));
 
     const { userDetails } = useSelector((state) => state.Auth);
     const cargando = useSelector(state => state.JefeHogar.loading);
@@ -56,6 +59,7 @@ export const JefeHogarForm = () => {
     const [idConcejoC, setIdConcejoC] = useState(0)
     const [idConcejoCUser, setIdConcejoCUser] = useState(0)
     const [check, setCheck] = useState(0)
+    const [valedaBsq, setValedaBsq] = useState(false)
 
      const ObjJefeHogar = {
               Id_concejo_comunitario:'',
@@ -75,7 +79,8 @@ export const JefeHogarForm = () => {
               Estado: '',
               Fecha_nacimiento: '',
               Fecha_ingreso: '',
-              Correo: 'Jefe@correo.com'
+              Correo: '',
+              Parametros: '',
           }
     const [datoJefeHogar, setDatoJefeHogar] = useState(ObjJefeHogar)
 
@@ -88,6 +93,18 @@ export const JefeHogarForm = () => {
         setDatoJefeHogar(ObjJefeHogar)
         setValedita(false)
     };
+   const handleSubmitBuscar = () => {
+        if (datoJefeHogar.Parametros === '') {
+             Swal.fire('Atención', 'Por favor escriba el número de documento, nombres o apellidos del Jefe de hogar', 'warning')
+        } else {
+         setValedaBsq(true)
+         buscarJefeHogar({
+          Parametros:datoJefeHogar.Parametros
+         })
+
+         handleReset()
+        }
+  };
 
     const handleSubmitAct = (event) => {
         event.preventDefault();
@@ -216,6 +233,7 @@ export const JefeHogarForm = () => {
      //   handleSubmit,
         crearJefeHogar,
         handleSubmitAct,
+        handleSubmitBuscar,
         onChangeFormulario,
         handleReset,
         obtenerJefeHogar,
@@ -249,6 +267,7 @@ export const JefeHogarForm = () => {
         setIdConcejoC,
         setIdConcejoCUser,
         check, setCheck,
+        valedaBsq,setValedaBsq,
         cargandolista,
         jefeHogarById,
         cargando

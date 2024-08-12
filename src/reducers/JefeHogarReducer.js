@@ -21,6 +21,9 @@ const {
     TRASLADO_JEFE_HOGAR,
     TRASLADO_JEFE_HOGAR_SUCCESS,
     TRASLADO_JEFE_HOGAR_ERROR,
+    BUSQUEDA_JEFE_HOGAR,
+    BUSQUEDA_JEFE_HOGAR_SUCCESS,
+    BUSQUEDA_JEFE_HOGAR_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
@@ -61,6 +64,19 @@ export const JefeHogarReducer = (state = initialState, action) => {
                 loadinglista: false,
                 listaJefeHogar: action.payload
             }
+
+        case BUSQUEDA_JEFE_HOGAR:
+            return {
+                ...state,
+                loadinglista: action.payload,
+            }
+        case BUSQUEDA_JEFE_HOGAR_SUCCESS:
+            return {
+                ...state,
+                loadinglista: false,
+                listaJefeHogar: action.payload
+            }
+
          case OBTENER_JEFE_HOGAR_BY_ID:
             return {
                 ...state,
@@ -115,6 +131,7 @@ export const JefeHogarReducer = (state = initialState, action) => {
         case EDITAR_JEFE_HOGAR_ERROR:
         case DELETE_JEFE_HOGAR_ERROR:
         case OBTENER_JEFE_HOGAR_BY_ID_ERROR:
+        case BUSQUEDA_JEFE_HOGAR_ERROR:
         case TRASLADO_JEFE_HOGAR_ERROR:
             return {
                 ...state,

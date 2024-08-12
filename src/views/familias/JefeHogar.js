@@ -51,6 +51,7 @@ const JefeHogar = () => {
   const {
     onChangeFormulario,
     handleSubmitAct,
+    handleSubmitBuscar,
     obtenerJefeHogar,
     obtenerConcejo,
     eliminarJefeHogar,
@@ -63,6 +64,8 @@ const JefeHogar = () => {
     visibleMI,
     setVisibleMI,
     setValidated,
+    valedaBsq,
+    setValedaBsq,
     cargandolista,
     validated,
   } = JefeHogarForm()
@@ -106,6 +109,11 @@ const idJefeHogar = (id) => {
     history.push(`/certificados/${id}`);
   }
 
+  const handleBuscarAll = () => {
+     setValedaBsq(false);
+     obtenerJefeHogar();
+  }
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -134,9 +142,18 @@ const idJefeHogar = (id) => {
             <CRow>
              <CCol xs={7}>
                <CInputGroup className="mb-0">
-                 <CFormInput placeholder="Escriba numero documento o nombres " aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                 <CButton type="button" color="primary" variant="outline" id="button-addon2">Buscar...</CButton>
-               </CInputGroup>
+                 <CFormInput placeholder="Escriba numero documento o nombres "
+                 name='Parametros'
+                 value={datoJefeHogar.Parametros}
+                 onChange={onChangeFormulario}
+                 aria-label="Recipient's username"
+                 aria-describedby="button-addon2"
+                 />
+                 {valedaBsq === false
+                   ?<CButton type="button" color="primary" variant="outline" id="button-addon2" onClick={handleSubmitBuscar}>Buscar...</CButton>
+                   :<CButton type="button" color="success" variant="outline" id="button-addon2" onClick={handleBuscarAll}>Todos...</CButton>
+                  }
+                 </CInputGroup>
                </CCol>
                <CCol xs={5}>
                 {userDetails.USER_ROL === 'Administrador' && (

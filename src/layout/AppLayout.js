@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 
-const DefaultLayout = () => {
+const AppLayout = () => {
   return (
     <>
       <AppSidebar />
@@ -15,4 +15,4 @@ const DefaultLayout = () => {
     </>
   )
 }
-export default DefaultLayout
+export default AppLayout

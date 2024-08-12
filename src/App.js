@@ -14,7 +14,7 @@ const loading = (
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 
 // Containers
-const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+const AppLayout = React.lazy(() => import('./layout/AppLayout'))
 
 
 class App extends Component {
@@ -32,7 +32,7 @@ class App extends Component {
               <Route
                path="/"
                name="Home"
-               render={(props) => <DefaultLayout {...props} />}
+               render={(props) => <AppLayout {...props} />}
                 />
             </Switch>
           </Suspense>

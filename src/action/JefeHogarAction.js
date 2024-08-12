@@ -20,12 +20,15 @@ const {
     TRASLADO_JEFE_HOGAR,
     TRASLADO_JEFE_HOGAR_SUCCESS,
     TRASLADO_JEFE_HOGAR_ERROR,
+    BUSQUEDA_JEFE_HOGAR,
+    BUSQUEDA_JEFE_HOGAR_SUCCESS,
+    BUSQUEDA_JEFE_HOGAR_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
 } = TYPES
 
-// Crear nuevos Empleado
+// Crear nuevos JEFE HOGAR
 
 export const crearNuevoJefeHogarAction = (Dataform) => {
   return async (dispatch) => {
@@ -97,7 +100,6 @@ export const obtenerJefeHogarAction = () => {
           const { data } = await Axios.get('/jefehogar/view-jefehogar');
             if (data.code === 200) {
                 dispatch(obtenerJefeHogarExitosa(data.data))
-
             }
         } catch (error) {
             console.log(error);
@@ -245,6 +247,47 @@ export const editarJefeHogarAction = (Datos) => {
     type: TRASLADO_JEFE_HOGAR_ERROR,
     payload: true,
   });
+
+
+export const buscarJefeHogarAction = (Dataform) => {
+  return async (dispatch) => {
+    dispatch(buscarJefeHogar())
+   // const { formularioDatos, handleReset } = Dataform
+    try {
+      // insertar en la API
+      console.log(Dataform)
+      const { data } = await Axios.post('/jefehogar/view-jefehogar-filtro', Dataform)
+      // Si todo sale bien, actualizar el state
+        console.log(data)
+       if (data.code === 200) {
+         dispatch(buscarJefeHogarExito(data.data))
+        }
+    } catch (error) {
+      console.log(error)
+      dispatch(buscarJefeHogarError(true))
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al intenar buscar el registro, intenta nuevamente',
+      })
+    }
+  }
+}
+
+const buscarJefeHogar = () => ({
+  type: BUSQUEDA_JEFE_HOGAR,
+  payload: true
+});
+
+const buscarJefeHogarExito = (datos) => ({
+  type: BUSQUEDA_JEFE_HOGAR_SUCCESS,
+   payload: datos
+});
+
+const buscarJefeHogarError = () => ({
+  type: BUSQUEDA_JEFE_HOGAR_ERROR,
+  payload: true
+});
 
 
 
