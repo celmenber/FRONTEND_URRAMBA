@@ -8,6 +8,8 @@ const {
     EDITAR_NUCLEO_FAMILIAR,
     EDITAR_NUCLEO_FAMILIAR_SUCCESS,
     EDITAR_NUCLEO_FAMILIAR_ERROR,
+    ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR,
+    ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR_SUCCESS,
     OBTENER_NUCLEO_FAMILIAR,
     OBTENER_NUCLEO_FAMILIAR_SUCCESS,
     OBTENER_NUCLEO_FAMILIAR_ERROR,
@@ -24,6 +26,7 @@ const initialState = {
     listarNucleoFamiliar: [],
     loading: false,
     loadinglista: false,
+    loadingactivar: false,
     nucleofamiliareditar: null,
     nucleofamiliareliminar: null,
     error: null,
@@ -67,7 +70,20 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                 listarNucleoFamiliar: state.listarNucleoFamiliar.map(NF =>
                     NF.ID === action.payload.ID ? NF = action.payload : NF
                 )
-            };
+            }
+        case ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR:
+          return {
+              ...state,
+              loadingactivar: action.payload,
+          }
+        case ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR_SUCCESS:
+          return {
+                ...state,
+                 loadingactivar: false,
+                listarNucleoFamiliar: state.listarNucleoFamiliar.map(NF =>
+                    NF.ID === action.payload.ID ? NF = action.payload : NF
+                )
+          }
          case TRASLADO_NUCLEO_FAMILIAR:
             return {
                 ...state,
@@ -78,8 +94,7 @@ export const NucleoFamiliarReducer = (state = initialState, action) => {
                   ...state,
                 loadinglista: false,
                 listarNucleoFamiliar: action.payload
-            };
-
+            }
         case DELETE_NUCLEO_FAMILIAR:
             return {
                 ...state,

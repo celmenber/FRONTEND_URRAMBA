@@ -37,12 +37,14 @@ import CIcon from '@coreui/icons-react'
 import { cilPeople, cilTrash,cilArrowThickFromRight, cilHighlighter } from '@coreui/icons'
 import { SelectPicker } from 'rsuite';
 import '../../../node_modules/rsuite/dist/rsuite.css';
+import { CLoadingButton } from '@coreui/react-pro'
 const NucleoFamiliar = () => {
   const history = useHistory();
   const [mostrarJefeHByID, setMostrarJefeHByID] = useState(false)
   const [nuevaListaHogar, setNuevaListaHogar] = useState([])
   const [valueJH, setValueJH] = useState(0)
   const [visible, setVisible] = useState(false)
+  const [selectServicio, setSelectServicio] = useState(1);
   const {
     jefeHogarByID,
     jefeHogarById
@@ -58,6 +60,7 @@ const NucleoFamiliar = () => {
     obtenerEscolaridad,
     obtenerOrientacionSexual,
     obtenerJefeHogar,
+    UpdateMiembroEstado,
     JefeHogar,
     userDetails,
     tipodocumento,
@@ -72,20 +75,21 @@ const NucleoFamiliar = () => {
     idJefeHogar,
     setNombreBotoGuardarActulizar,
     handleActualizarNucleoFamiliar,
+    setSelectActivar,
+    selectActivar,
     nombreBotoGuardarActulizar,
     validated,
+    getEdad,
   } = NucleoFamiliarForm();
 
   const { id } = useParams()
 
   useEffect(() => {
-    // Consultar la api listar parques
     obtenerNucleoFamiliar()
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    // Consultar la api listar parques
     obtenerJefeHogar();
     // eslint-disable-next-line
   }, []);
@@ -165,6 +169,12 @@ const NucleoFamiliar = () => {
             value: item.ID.toString()
         })
     );
+  }
+
+  const handleSelectEst = (id) => {
+    setSelectActivar(true)
+    setSelectServicio(id)
+    UpdateMiembroEstado(id)
   }
 
   return (
@@ -486,12 +496,46 @@ const NucleoFamiliar = () => {
                   ) : (
                     nucleoFamiliar?.filter(item => item?.ID_jefehogar === parseInt(nuevaListaHogar)).map((item, index) => (
                       <CTableRow v-for="item in tableItems" key={index}>
-                        <CTableDataCell className="text-center">
-                          <CAvatar size="md"
-                            key={index}
-                            src={avatar}
-                            status={item.estado === '1' ? 'success' : 'secondary'}
-                          />
+                        <CTableDataCell>
+                          <div className="small text-medium-emphasis">
+                            <CTooltip
+                              content={item.estado === '1' ? 'Desactivar' : 'Activar'}
+                              placement="bottom"
+                            >
+                                {selectServicio === item.ID && selectActivar === true ? (
+                                <CLoadingButton
+                                  variant="outline"
+                                  size="lg"
+                                  color={item.estado === '1' ? 'secondary' : 'success'}
+                                  style={{ width: '100%' }}
+                                  timeout={2000}
+                                ></CLoadingButton>
+                              ) : (
+                                <CButton
+                                  size="lg"
+                                  color={parseInt(item.estado) === 1 ? 'success' : 'secondary'}
+                                  style={{ width: '100%' }}
+                                      id={`estadoM${item.ID}`}
+                                      key={`M${item.ID}`}
+                                      onClick={() => handleSelectEst(item.ID)}
+                                >
+                                    {parseInt(item.estado) === 1 ? (
+                                      <CAvatar size="xs"
+                                        key={index}
+                                        src={avatar}
+                                        status={parseInt(item.estado) === 1 ? 'success' : 'secondary'}
+                                      />
+                                  ) : (
+                                    <CAvatar size="xs"
+                                             key={index}
+                                             src={avatar}
+                                             status={parseInt(item.estado)=== 1 ? 'success' : 'secondary'}
+                                  />
+                                  )}
+                                </CButton>
+                              )}
+                            </CTooltip>
+                          </div>
                         </CTableDataCell>
                         <CTableDataCell>
                           <div>
@@ -502,11 +546,9 @@ const NucleoFamiliar = () => {
                               {item.Tipo_documento}: {item.documentos}
                             </small>
                           </div>
-                          {/* <div className="small text-medium-emphasis">
-                            <span>
-                              {item.correo}</span> | <span> TEL: {item.telefono}
-                            </span>
-                          </div> */}
+                          <div className="small text-medium-emphasis">
+                            <span>Edad: {getEdad(item.fecha_nacimiento)} Años</span>
+                          </div>
                         </CTableDataCell>
                         <CTableDataCell className="text-center">
                            <span>

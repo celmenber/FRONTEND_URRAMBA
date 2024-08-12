@@ -40,7 +40,6 @@ const AdminUsuarios = () => {
     EditaUsuarios,
     UpdateUserEstado,
     CambioUserClave,
-    EliminarUsuarios,
     datoUsuario,
     setDatoUsuario,
     setSelectActivarEST,

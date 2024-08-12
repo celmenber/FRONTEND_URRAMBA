@@ -83,7 +83,7 @@ const JefeHogar = () => {
    // eslint-disable-next-line
   },[])
 
-console.log(jefeHogar);
+//console.log(jefeHogar);
  const  JefeHogar = check === 0 ? jefeHogar?.filter(X => X.id_concejo_comunitario !== 0)
                                       : jefeHogar?.filter(U => U.id_concejo_comunitario === 0)
 
@@ -139,28 +139,30 @@ const idJefeHogar = (id) => {
                </CInputGroup>
                </CCol>
                <CCol xs={5}>
-              <CButtonGroup role="group" style={{width: '100%'}} aria-label="checkbox toggle button group">
-                <CFormCheck
-                  type="radio"
-                  defaultChecked={check === 0 ? true : false}
-                  button={{ color: 'primary', variant: 'outline' }}
-                  name="btnradio"
-                  id="btnradio11"
-                  autoComplete="off"
-                  label="Afiliados concejos comunitario"
-                  onChange={() => setCheck(0)}
-                />
-                <CFormCheck
-                  type="radio"
-                  defaultChecked={check === 1 ? true : false}
-                  button={{ color: 'primary', variant: 'outline' }}
-                  name="btnradio"
-                  id="btnradio12"
-                  autoComplete="off"
-                  label="Desafiliados concejos comunitario"
-                  onChange={() => setCheck(1)}
-                />
-              </CButtonGroup>
+                {userDetails.USER_ROL === 'Administrador' && (
+                  <CButtonGroup role="group" style={{width: '100%'}} aria-label="checkbox toggle button group">
+                    <CFormCheck
+                      type="radio"
+                      defaultChecked={check === 0 ? true : false}
+                      button={{ color: 'primary', variant: 'outline' }}
+                      name="btnradio"
+                      id="btnradio11"
+                      autoComplete="off"
+                      label="Afiliados concejos comunitario"
+                      onChange={() => setCheck(0)}
+                    />
+                    <CFormCheck
+                      type="radio"
+                      defaultChecked={check === 1 ? true : false}
+                      button={{ color: 'primary', variant: 'outline' }}
+                      name="btnradio"
+                      id="btnradio12"
+                      autoComplete="off"
+                      label="Desafiliados concejos comunitario"
+                      onChange={() => setCheck(1)}
+                    />
+                  </CButtonGroup>
+               )}
              </CCol>
           </CRow>
            </CCardBody>
@@ -237,6 +239,7 @@ const idJefeHogar = (id) => {
                             {item.barrio_vereda}</span> | <span> Dir: {item.direccion} | <span>Corrg: {item.Corregimiento}</span>
                           </span>
                         </CTableDataCell>
+                        {userDetails.USER_ROL === 'Administrador' && (
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                               <CDropdown>
@@ -262,6 +265,7 @@ const idJefeHogar = (id) => {
                               </CDropdown>
                           </div>
                         </CTableDataCell>
+                        )}
                           <CTableDataCell>
                             <div className="small text-medium-emphasis">
                               <CTooltip

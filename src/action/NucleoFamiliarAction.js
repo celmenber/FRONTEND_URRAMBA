@@ -9,6 +9,8 @@ const {
     EDITAR_NUCLEO_FAMILIAR,
     EDITAR_NUCLEO_FAMILIAR_SUCCESS,
     EDITAR_NUCLEO_FAMILIAR_ERROR,
+    ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR,
+    ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR_SUCCESS,
     OBTENER_NUCLEO_FAMILIAR,
     OBTENER_NUCLEO_FAMILIAR_SUCCESS,
     OBTENER_NUCLEO_FAMILIAR_ERROR,
@@ -167,6 +169,42 @@ export const editarNucleoFamiliarAction = (Dataform) => {
     type: EDITAR_NUCLEO_FAMILIAR_ERROR,
     payload: true,
   });
+
+  // ***************** Seleccion editar el editarEstado Usuario //****************/
+export const editarEstadoMiembroAction = (Datos) => {
+  return async (dispatch) => {
+    dispatch(editarEstadoMiembro())
+    const { obtenerNucleoFamiliar, setSelectActivar, estadoDatos, Id } = Datos
+    try {
+      const { data } = await Axios.patch(`/nucleofamiliar/estado-nucleofamiliar/${Id}`, {
+        ESTADO: estadoDatos,
+      })
+      dispatch(editarEstadoMiembroExito(data.data))
+      console.log(data.data[0].estado)
+      const msgestado = data.data[0].estado === '1' ? 'activo' : 'desactivo'
+      if (data.code === 200) {
+         obtenerNucleoFamiliar()
+        Swal.fire('Correcto',
+         'El miembro del nucleo familiar se '+msgestado+' correctamente',
+         'success')
+      }
+
+      setSelectActivar(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+const editarEstadoMiembro = () => ({
+  type: ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR,
+  payload: true,
+})
+
+const editarEstadoMiembroExito = (datos) => ({
+  type: ACTIVAR_MIEMBRO_NUCLEO_FAMILIAR_SUCCESS,
+  payload: datos,
+})
 
 
   export const trasladoMiembroFamiliarAction = (Dataform) => {

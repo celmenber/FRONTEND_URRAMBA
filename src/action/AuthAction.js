@@ -25,12 +25,12 @@ export const loginUser = (Loginform) => {
         },
       });
       if (data.success === true) {
-       
+
         const { access_token, access_data } = data.data
         window.localStorage.setItem('token', access_token)
         window.localStorage.setItem('currentUser', JSON.stringify(access_data))
         dispatch(AuthLoginExito(data.data));
-        console.log(access_token)
+        //console.log(access_token)
         return data
       }
     } catch (error) {

@@ -32,6 +32,7 @@ const TrasladoJefehohar = () => {
     check,
     setCheck,
     setIdConcejoC,
+    setIdConcejoCUser,
     jefeHogar,
   } = JefeHogarForm();
 
@@ -58,8 +59,10 @@ const handleregresar = () => {
 
 
 useEffect(() => {
+  const data = consejos?.filter((x) => Number(x.ID) === Number(valueCC));
      if(valueCC !== 0){
        setIdConcejoC(valueCC)
+       setIdConcejoCUser(data[0].id_usuario)
      }
     // eslint-disable-next-line
   }, [valueCC]);
@@ -128,6 +131,7 @@ useEffect(() => {
                    onChange={setValueCC}
                    size="lg"
                    block
+                   disabled={check === 0 ? false : true}
                    />
                </div>
             </CCardTitle></CCol>

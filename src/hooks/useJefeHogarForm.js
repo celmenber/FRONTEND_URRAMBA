@@ -54,6 +54,7 @@ export const JefeHogarForm = () => {
     const [visibleM, setVisibleM] = useState(false)
     const [visibleMI, setVisibleMI] = useState(false)
     const [idConcejoC, setIdConcejoC] = useState(0)
+    const [idConcejoCUser, setIdConcejoCUser] = useState(0)
     const [check, setCheck] = useState(0)
 
      const ObjJefeHogar = {
@@ -190,6 +191,7 @@ export const JefeHogarForm = () => {
         const datos = jefeHogar.filter((X) => Number(X.ID) === Number(id));
         const  Nombres =  datos[0]?.nombres + ' '+ datos[0]?.apellidos;
         const msg = check === 0 ?  'Trasladar!': 'Desafiliar!'
+
           Swal.fire({
                   title: '¿Estas seguro desea '+msg+' al jefe de hogar '+ Nombres +'?',
                   icon: 'warning',
@@ -201,13 +203,13 @@ export const JefeHogarForm = () => {
                 }).then((result) => {
                   if (result.value) {
                       dispatch(trasladoJefeHogarAction({
+                          Id_usuario: check === 0 ? idConcejoCUser : userDetails.ID_USER,
                           Id_Concejo: idConcejoC,
                           Id: datos[0]?.ID,
                           Chk: check,
                           }));
                   }
                 });
-         // }
     }
 
     return {
@@ -245,6 +247,7 @@ export const JefeHogarForm = () => {
         visibleM, setVisibleM,
         visibleMI, setVisibleMI,
         setIdConcejoC,
+        setIdConcejoCUser,
         check, setCheck,
         cargandolista,
         jefeHogarById,

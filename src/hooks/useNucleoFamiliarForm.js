@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { obtenerConcejoAction } from 'src/action/ConsejoAction';
-import { obtenerAsociacionAction } from '../action/AsociacionAction'
+//import { obtenerConcejoAction } from 'src/action/ConsejoAction';
+//import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerJefeHogarAction } from '../action/JefeHogarAction'
 import {
-    obtenerBarrioVeredaAction,
     obtenerEscolaridadAction,
     obtenerOrientacionSexualAction,
     obtenerParentescoAction,
@@ -14,9 +13,11 @@ import {
 }
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
-import { borrarNucleoFamiliarAction,
+import {
+   borrarNucleoFamiliarAction,
     crearNuevoNucleoFamiliarAction,
     editarNucleoFamiliarAction,
+    editarEstadoMiembroAction,
     obtenerNucleoFamiliarAction,
     trasladoMiembroFamiliarAction
   } from 'src/action/NucleoFamiliarAction';
@@ -226,6 +227,21 @@ export const NucleoFamiliarForm = () => {
                 });
           }
     }
+
+  // función que redirige Editaservicio
+  const UpdateMiembroEstado = (Id) => {
+    const datos = nucleoFamiliar?.filter((M) => M.ID === Id)
+     dispatch(
+      editarEstadoMiembroAction({
+        Id,
+        setSelectActivar,
+        obtenerNucleoFamiliar,
+        estadoDatos: datos[0].estado === '0' ? '1' : '0',
+      }),
+    )
+  }
+
+
     const handleliminarMiembro = (Id) => {
          const datos = nucleoFamiliar.filter((C) => C.ID === Id);
          const  Nombres =  datos[0].nombres + ' '+ datos[0].apellidos;
@@ -273,6 +289,7 @@ export const NucleoFamiliarForm = () => {
         obtenerJefeHogar,
         handleliminarMiembro,
         handletrasladamiembro,
+        UpdateMiembroEstado,
         userDetails,
         JefeHogar,
         asociacion,

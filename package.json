@@ -39,9 +39,10 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^1.8.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
+    "@react-pdf/renderer":" 2.1.0",
+    "@react-pdf/font": "2.2.0",
     "axios": "^0.27.2",
     "chart.js": "^3.6.0",
     "classnames": "^2.3.1",
@@ -65,6 +66,9 @@
     "rsuite": "^5.15.0",
     "simplebar-react": "^2.3.6",
     "sweetalert2": "^11.4.33"
+  },
+  "resolutions": {
+    "@react-pdf/font": "2.2.0"
   },
   "devDependencies": {
     "auto-changelog": "~2.3.0",

@@ -18,6 +18,9 @@ const {
     OBTENER_JEFE_HOGAR_BY_ID,
     OBTENER_JEFE_HOGAR_BY_ID_SUCCESS,
     OBTENER_JEFE_HOGAR_BY_ID_ERROR,
+    TRASLADO_JEFE_HOGAR,
+    TRASLADO_JEFE_HOGAR_SUCCESS,
+    TRASLADO_JEFE_HOGAR_ERROR,
     DELETE_JEFE_HOGAR,
     DELETE_JEFE_HOGAR_SUCCESS,
     DELETE_JEFE_HOGAR_ERROR,
@@ -84,6 +87,17 @@ export const JefeHogarReducer = (state = initialState, action) => {
                       JF.ID === action.payload.ID ? JF = action.payload : JF
                   )
               };
+        case TRASLADO_JEFE_HOGAR:
+            return {
+                ...state,
+                loading: action.payload,
+            }
+        case TRASLADO_JEFE_HOGAR_SUCCESS:
+             return {
+                  ...state,
+                loadinglista: false,
+                listaJefeHogar: action.payload
+            };
         case DELETE_JEFE_HOGAR:
             return {
                 ...state,
@@ -101,6 +115,7 @@ export const JefeHogarReducer = (state = initialState, action) => {
         case EDITAR_JEFE_HOGAR_ERROR:
         case DELETE_JEFE_HOGAR_ERROR:
         case OBTENER_JEFE_HOGAR_BY_ID_ERROR:
+        case TRASLADO_JEFE_HOGAR_ERROR:
             return {
                 ...state,
                 loading: false,
