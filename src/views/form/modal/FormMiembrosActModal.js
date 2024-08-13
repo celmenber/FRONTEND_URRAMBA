@@ -35,6 +35,7 @@ const FormMiembrosActModal = (Props) => {
     } = Props
 
   const {
+    userDetails,
     actulizarMiembro,
     handleReset,
     obtenerConcejo,
@@ -137,6 +138,10 @@ const FormMiembrosActModal = (Props) => {
         setValidated(true)
     };
 
+      const lstConsejos = userDetails.USER_ROL === 'Administrador'
+                      ? consejos
+                      : consejos?.filter(C => C.id_autoridad_tradicional === userDetails.ID_AUT)
+
     return (
         <>
         <CModal size="xl" visible={visibleMI} onClose={handleClose}>
@@ -162,7 +167,7 @@ const FormMiembrosActModal = (Props) => {
                   {consejos?.length === 0
                     ? <option key={'0'} value={0}>Seleccione...</option>
                     : (
-                      consejos?.map(item => (
+                      lstConsejos?.map(item => (
                         <option
                           key={item.ID}
                           value={item.ID}

@@ -35,6 +35,7 @@ const {
   validated,
 } = Props
 const {
+  userDetails,
   handleReset,
   obtenerAsociacion,
   obtenerEscolaridad,
@@ -43,7 +44,6 @@ const {
   obtenertipodocumento,
   obtenercorregimiento,
   obtenerBarrioVereda,
-  barrios,
   consejos,
   tipodocumento,
   corregimiento,
@@ -85,7 +85,9 @@ useEffect(() => {
   // eslint-disable-next-line
 }, []);
 
-//console.log({validated})
+  const lstConsejos = userDetails.USER_ROL === 'Administrador'
+                      ? consejos
+                      : consejos?.filter(C => C.id_autoridad_tradicional === userDetails.ID_AUT)
 
 return (
   <>
@@ -112,7 +114,7 @@ return (
             {consejos?.length === 0
               ? <option key={'0'} value={0}>Seleccione...</option>
               : (
-                consejos?.map(item => (
+                lstConsejos?.map(item => (
                   <option
                     key={item.ID}
                     value={item.ID}

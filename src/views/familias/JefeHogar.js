@@ -299,7 +299,7 @@ const idJefeHogar = (id) => {
                                 </CButton></CTooltip>
                             </div>
                           </CTableDataCell>
-                                                 <CTableDataCell>
+                          <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
                               content="Actulizar Jefe hogar"

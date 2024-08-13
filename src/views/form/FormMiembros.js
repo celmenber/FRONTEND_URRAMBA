@@ -94,10 +94,10 @@ const WidgetBarChart = () => {
         })
     );
   }else{
-     data = consejos?.filter(U => U.id_usuario === userDetails.ID_USER)
+     data = consejos?.filter(U => parseInt(U.id_usuario) === parseInt(userDetails.ID_USER))
   }
 
- // console.log(data);
+  console.log(consejos);
 
   return (
     <CRow>
@@ -157,7 +157,7 @@ const WidgetBarChart = () => {
                               Consejo Comunitario {data[0]?.nombre_concejo_comunitario}
                               </strong>
                               <div className="small text-medium-emphasis">
-                                <span> Autoridad tradicional  { data[0]?.nombres } { data[0]?.apellidos }</span>
+                                <span> Autoridad Afro  { data[0]?.nombres } { data[0]?.apellidos }</span>
                               </div>
                             </>
                           }

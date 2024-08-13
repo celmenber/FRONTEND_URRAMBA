@@ -37,7 +37,6 @@ const JefeHogarNuevo = (Props) => {
         obtenertipodocumento,
         obtenercorregimiento,
         obtenerBarrioVereda,
-        barrios,
         consejos,
         tipodocumento,
         corregimiento,
@@ -126,6 +125,10 @@ const JefeHogarNuevo = (Props) => {
         }
     }
 
+    const lstConsejos = userDetails.USER_ROL === 'Administrador'
+                      ? consejos
+                      : consejos?.filter(C => C.id_autoridad_tradicional === userDetails.ID_AUT)
+
     return (
         <>
             <CModal size="xl" visible={visibleM} onClose={handleClose}>
@@ -151,7 +154,7 @@ const JefeHogarNuevo = (Props) => {
                                     {consejos?.length === 0
                                         ? <option key={'0'} value={0}>Seleccione...</option>
                                         : (
-                                            consejos?.map(item => (
+                                            lstConsejos?.map(item => (
                                                 <option
                                                     key={item.ID}
                                                     value={item.ID}

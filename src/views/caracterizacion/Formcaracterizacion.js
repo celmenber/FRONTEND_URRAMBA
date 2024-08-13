@@ -93,6 +93,7 @@ const Caracterizacion = () => {
               <CNavItem>
                 <CNavLink
                   href="javascript:void(0)"
+                  style={{ textDecoration: 'none' }}
                   active={activeKey === 1}
                   onClick={() => setActiveKey(1)}
                 >
@@ -102,6 +103,7 @@ const Caracterizacion = () => {
               <CNavItem>
                 <CNavLink
                   href="javascript:void(0)"
+                  style={{ textDecoration: 'none' }}
                   active={activeKey === 2}
                   onClick={() => setActiveKey(2)}
                 >
@@ -111,6 +113,7 @@ const Caracterizacion = () => {
               <CNavItem>
                 <CNavLink
                   href="javascript:void(0)"
+                  style={{ textDecoration: 'none' }}
                   active={activeKey === 3}
                   onClick={() => setActiveKey(3)}
                 >
@@ -120,6 +123,7 @@ const Caracterizacion = () => {
               <CNavItem>
                 <CNavLink
                   href="javascript:void(0)"
+                  style={{ textDecoration: 'none' }}
                   active={activeKey === 4}
                   onClick={() => setActiveKey(4)}
                 >
@@ -129,6 +133,7 @@ const Caracterizacion = () => {
               <CNavItem>
                 <CNavLink
                   href="javascript:void(0)"
+                  style={{ textDecoration: 'none' }}
                   active={activeKey === 5}
                   onClick={() => setActiveKey(5)}
                 >

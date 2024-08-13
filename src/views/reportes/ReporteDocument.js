@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable no-array-constructor */
+import React from 'react'
 import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer'
 import avatar from 'src/assets/images/avatars/logo.png'
+import barrapie from 'src/assets/images/avatars/barrapie1.jpg'
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -16,19 +18,20 @@ const styles = StyleSheet.create({
     height: window.innerHeight,
   },
   title: {
-    fontSize: 24,
+    fontSize: 14,
     textAlign: 'center',
-    fontFamily: 'Oswald',
-  },
-  author: {
-    fontSize: 12,
-    textAlign: 'center',
+    fontFamily: 'Times-Roman',
     marginBottom: 40,
   },
   subtitle: {
-    fontSize: 18,
-    margin: 12,
-    fontFamily: 'Oswald',
+    fontSize: 14,
+    marginLeft: 12,
+    fontFamily: 'Times-Roman',
+  },
+  subtitle2: {
+    fontSize: 10,
+    marginLeft: 12,
+    color: 'grey',
   },
   text: {
     margin: 12,
@@ -36,25 +39,65 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     fontFamily: 'Times-Roman',
   },
+  text2: {
+    fontSize: 14,
+    marginTop: 80,
+    textAlign: 'justify',
+    fontFamily: 'Times-Roman',
+  },
   image: {
     marginVertical: 1,
     marginHorizontal: 1,
-    width: 524,
+    width: 500,
+    textAlign: 'center',
+  },
+  footerimage: {
+    marginVertical: 1,
+    marginHorizontal: 1,
+    width: 450,
+    height: 250,
+    textAlign: 'center',
   },
   headerImage: {
-    marginTop: -15,
-    textAlign: 'left',
-    fontSize: 24,
+    textAlign: 'center',
+    fontSize: 64,
+    marginLeft: 100,
   },
   header: {
-    fontSize: 14,
+    fontSize: 12,
+    marginTop: -12,
     textAlign: 'center',
     color: 'grey',
+  },
+  footer: {
+    position: 'absolute',
+    marginBottom: -80,
+    fontSize: 12,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    textAlign: 'center',
+    color: 'grey',
+  },
+  footerImage: {
+    marginVertical: 1,
+    marginHorizontal: 1,
+    width: 540,
+    height: 250,
+    textAlign: 'center',
+  },
+  footerImg: {
+    position: 'absolute',
+    marginBottom: -300,
+    marginLeft: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    textAlign: 'center',
   },
 })
 
 const ReporteDocument = (Props) => {
-  //const [datos, setDatos] = useState([])
   const { DataJH, DataMH, Item, ID } = Props
 
   const Dato =
@@ -64,6 +107,23 @@ const ReporteDocument = (Props) => {
 
   //console.log(Dato)
 
+  var meses = new Array(
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  )
+  var f = new Date()
+  var fechoy = f.getDate() + ' del mes de ' + meses[f.getMonth()] + ' del año ' + f.getFullYear()
+
   return (
     <PDFViewer style={styles.viewer}>
       {/* Start of the document*/}
@@ -71,30 +131,46 @@ const ReporteDocument = (Props) => {
         {/*render a single page*/}
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
-            <Text style={styles.header}>Certificado comunidades Afro</Text>
             <Text style={styles.headerImage}>
               <Image style={styles.image} src={avatar} />
             </Text>
-
-            <Text>Hello {`${Dato[0]?.nombres} ${Dato[0]?.apellidos}`}</Text>
+            <Text style={styles.header}>900812074-4</Text>
           </View>
           <View style={[styles.section, styles.text]}>
+            <Text style={styles.title}>LA ASOCIACION DE AFRODESCENDIENTES URRAMBA</Text>
+            <Text style={styles.title}> CERTIFICA</Text>
             <Text style={styles.text}>
-              En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que
-              vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo
-              corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y
-              quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los
-              domingos, consumían las tres partes de su hacienda. El resto della concluían sayo de
-              velarte, calzas de velludo para las fiestas con sus pantuflos de lo mismo, los días de
-              entre semana se honraba con su vellori de lo más fino. Tenía en su casa una ama que
-              pasaba de los cuarenta, y una sobrina que no llegaba a los veinte, y un mozo de campo
-              y plaza, que así ensillaba el rocín como tomaba la podadera. Frisaba la edad de
-              nuestro hidalgo con los cincuenta años, era de complexión recia, seco de carnes,
-              enjuto de rostro; gran madrugador y amigo de la caza. Quieren decir que tenía el
-              sobrenombre de Quijada o Quesada (que en esto hay alguna diferencia en los autores que
-              deste caso escriben), aunque por conjeturas verosímiles se deja entender que se llama
-              Quijana; pero esto importa poco a nuestro cuento; basta que en la narración dél no se
-              salga un punto de la verdad
+              Que: {`${Dato[0]?.nombres.toUpperCase()} ${Dato[0]?.apellidos.toUpperCase()}`}{' '}
+              identificado con la {`${Dato[0]?.Tipo_documento}`} No.{`${Dato[0]?.documentos}`} de la
+              ciudad de Riohacha, se auto reconoce como afrocolombiano y es miembro activo de la
+              ASOCIACION DE AFRODESCENDIENTE URRAMBA “AFROURRAMBA” con una trayectoria de trabajo
+              bastante amplia en todo el territorio por inscripción y auto reconocimiento en esta
+              entidad con el cumplimiento de los principios éticos, morales y civiles.
+            </Text>
+
+            <Text style={styles.text}>
+              {' '}
+              La presente se expide a solicitud del interesado para fines personales el dia{' '}
+              {`${fechoy}`} en, Dibulla - La Guajira.
+            </Text>
+          </View>
+          <View style={[styles.section, styles.text]}>
+            <Text style={styles.subtitle}>Atentamente.</Text>
+            <Text style={styles.subtitle}>Representante Legal</Text>
+          </View>
+          <View style={[styles.section, styles.text2]}>
+            <Text style={styles.subtitle}>__________________________________</Text>
+            <Text style={styles.subtitle}>Ninfa Juliet Camacho Santos</Text>
+            <Text style={styles.subtitle2}>C.C. 1001871229</Text>
+          </View>
+          <View style={[styles.section]}>
+            {/* <Text style={styles.footer}>
+              <Text style={styles.subtitle}>Atentamente.</Text>
+              <Text style={styles.subtitle}>Representante Legal</Text>
+            </Text> */}
+            <Text style={styles.footerImg}>
+              {' '}
+              <Image style={styles.footerImage} src={barrapie} />
             </Text>
           </View>
         </Page>

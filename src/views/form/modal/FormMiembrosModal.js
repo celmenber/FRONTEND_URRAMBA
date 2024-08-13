@@ -31,6 +31,7 @@ const FormMiembrosModal = (Props) => {
 
 
   const {
+    userDetails,
     handleSubmit,
     onChangeFormulario,
     setValidated,
@@ -44,7 +45,6 @@ const FormMiembrosModal = (Props) => {
     obtenerBarrioVereda,
     obtenerEscolaridad,
     obtenerOrientacionSexual,
-    barrios,
     consejos,
     tipodocumento,
     corregimiento,
@@ -91,8 +91,10 @@ const FormMiembrosModal = (Props) => {
     obtenercorregimiento();
     obtenerBarrioVereda();
     // eslint-disable-next-line
-  }, []);
-
+  }, [])
+  const lstConsejos = userDetails.USER_ROL === 'Administrador'
+                      ? consejos
+                      : consejos?.filter(C => C.id_autoridad_tradicional === userDetails.ID_AUT)
 
   return (
     <>
@@ -119,7 +121,7 @@ const FormMiembrosModal = (Props) => {
                   {consejos?.length === 0
                     ? <option key={'0'} value={0}>Seleccione...</option>
                     : (
-                      consejos?.map(item => (
+                      lstConsejos?.map(item => (
                         <option
                           key={item.ID}
                           value={item.ID}
