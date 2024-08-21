@@ -149,7 +149,7 @@ const JefeHogarNuevo = (Props) => {
                                     name='Id_concejo_comunitario'
                                     value={Id_concejo_comunitario}
                                     onChange={onChangeFormulario}
-                                    required>
+                                    >
                                     <option key={'0'} value={''}>Seleccione...</option>
                                     {consejos?.length === 0
                                         ? <option key={'0'} value={0}>Seleccione...</option>
@@ -164,7 +164,7 @@ const JefeHogarNuevo = (Props) => {
                                             ))
                                         )}
                                 </CFormSelect>
-                                <CFormFeedback invalid>El Concejo comunitario es Requerido!</CFormFeedback>
+                              {/*   <CFormFeedback invalid>El Concejo comunitario es Requerido!</CFormFeedback> */}
                             </CCol>
                             <CCol md={2} style={{ marginTop: '15px' }}>
                                 <CFormLabel htmlFor="validationCustom02">Estado*</CFormLabel>

@@ -87,12 +87,12 @@ const JefeHogar = () => {
   },[])
 
 //console.log(jefeHogar);
- const  JefeHogar = check === 0 ? jefeHogar?.filter(X => X.id_concejo_comunitario !== 0)
-                                      : jefeHogar?.filter(U => U.id_concejo_comunitario === 0)
+ const  JefeHogar = check === 0 ? jefeHogar?.filter(X => parseInt(X.id_concejo_comunitario) !== 0)
+                                      : jefeHogar?.filter(U => parseInt(U.id_concejo_comunitario) === 0)
 
   const lstJefeHogar = userDetails.USER_ROL === 'Administrador'
                       ? JefeHogar
-                      : JefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER)
+                      : JefeHogar?.filter(U => parseInt(U.id_usuario) === parseInt(userDetails.ID_USER))
 
 
 const idJefeHogar = (id) => {

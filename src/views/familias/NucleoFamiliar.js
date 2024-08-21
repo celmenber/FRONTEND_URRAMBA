@@ -163,7 +163,7 @@ const NucleoFamiliar = () => {
         })
     );
   }else{
-     data = JefeHogar?.filter(U => U.id_usuario === userDetails.ID_USER).map(
+     data = JefeHogar?.filter(U => parseInt(U.id_usuario) === parseInt(userDetails.ID_USER)).map(
         item => ({
             label: item.documentos+' '+ item.nombres.toUpperCase() +' '+item.apellidos.toUpperCase(),
             value: item.ID.toString()
@@ -494,19 +494,19 @@ const NucleoFamiliar = () => {
                       </CTableHeaderCell>
                     </CTableRow>
                   ) : (
-                    nucleoFamiliar?.filter(item => item?.ID_jefehogar === parseInt(nuevaListaHogar)).map((item, index) => (
+                    nucleoFamiliar?.filter(item => parseInt(item?.ID_jefehogar) === parseInt(nuevaListaHogar)).map((item, index) => (
                       <CTableRow v-for="item in tableItems" key={index}>
                         <CTableDataCell>
                           <div className="small text-medium-emphasis">
                             <CTooltip
-                              content={item.estado === '1' ? 'Desactivar' : 'Activar'}
+                              content={parseInt(item.estado) === 1 ? 'Desactivar' : 'Activar'}
                               placement="bottom"
                             >
                                 {selectServicio === item.ID && selectActivar === true ? (
                                 <CLoadingButton
                                   variant="outline"
                                   size="lg"
-                                  color={item.estado === '1' ? 'secondary' : 'success'}
+                                  color={parseInt(item.estado) === 1 ? 'secondary' : 'success'}
                                   style={{ width: '100%' }}
                                   timeout={2000}
                                 ></CLoadingButton>

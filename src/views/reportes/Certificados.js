@@ -64,7 +64,7 @@ const Certificados = () => {
 
   const DatoJefeHogar = jefeHogar.filter((X) => parseInt(X.ID) === parseInt(id))
   const DatoNucleoFamiliar = nucleoFamiliar?.filter(
-    (item) => item?.ID_jefehogar === parseInt(nuevaListaHogar),
+    (item) => parseInt(item?.ID_jefehogar) === parseInt(nuevaListaHogar),
   )
 
   return (
