@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-//import { obtenerConcejoAction } from 'src/action/ConsejoAction';
-//import { obtenerAsociacionAction } from '../action/AsociacionAction'
+import { obtenerAsociacionAction } from '../action/AsociacionAction'
 import { obtenerJefeHogarAction } from '../action/JefeHogarAction'
 import {
     obtenerEscolaridadAction,
@@ -14,7 +13,7 @@ import {
     from '../action/ParametrosAction'
 import Swal from 'sweetalert2';
 import {
-   borrarNucleoFamiliarAction,
+    borrarNucleoFamiliarAction,
     crearNuevoNucleoFamiliarAction,
     editarNucleoFamiliarAction,
     editarEstadoMiembroAction,
@@ -23,10 +22,12 @@ import {
   } from 'src/action/NucleoFamiliarAction';
 
 
+
 export const NucleoFamiliarForm = () => {
 
     const dispatch = useDispatch()
 
+    const obtenerAsociacion = () => dispatch(obtenerAsociacionAction())
     const obtenerJefeHogar = () => dispatch(obtenerJefeHogarAction())
     const obtenertipodocumento = () => dispatch(obtenertipodocumentoAction())
     const obtenerParentesco = () => dispatch(obtenerParentescoAction())
@@ -287,6 +288,7 @@ export const NucleoFamiliarForm = () => {
         obtenerEscolaridad,
         obtenerOrientacionSexual,
         obtenerJefeHogar,
+        obtenerAsociacion,
         handleliminarMiembro,
         handletrasladamiembro,
         UpdateMiembroEstado,

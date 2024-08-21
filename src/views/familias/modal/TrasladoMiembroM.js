@@ -116,28 +116,6 @@ useEffect(() => {
                     block
                    />
                </div>
-                {/* <CFormSelect
-                  key={'validationCustom06'}
-                  name='ID_ROLL'
-                  id="ID_ROLL"
-                  value={ID_ROLL}
-                  onChange={onChangeFormulario}
-                  required
-                >
-                  <option key={'validationCustom001'} value={''}>Seleccione...</option>
-                  {Perfil?.length === 0
-                    ? <option key={'validationCustom002'} value={0}>Seleccione...</option>
-                    : (
-                      Perfil?.map(item => (
-                        <option
-                          key={item.ID}
-                          value={item.ID}
-                        >
-                          {item.NOMBRE}
-                        </option>
-                      ))
-                    )}
-                </CFormSelect> */}
                 <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
               </CCol>
             </CRow>

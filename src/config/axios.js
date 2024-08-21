@@ -7,11 +7,11 @@ const Login = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  baseURL: `${API_URL}/servicio/api`,
+  baseURL: `${API_URL}/api`,
 })
 
 const Axios = axios.create({
-  baseURL: `${API_URL}/servicio/api`,
+  baseURL: `${API_URL}/api`,
 })
 
 Axios.interceptors.request.use(

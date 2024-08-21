@@ -19,7 +19,7 @@ const administrador_nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Admin Usuarios',
+        name: 'Usuarios',
         to: '/admin/usuarios',
       },
       {
@@ -29,7 +29,7 @@ const administrador_nav = [
       },
       {
         component: CNavItem,
-        name: 'Admin Asociacion',
+        name: 'Asociaciones',
         to: '/admin/asociaciones',
       },
      /*  {
@@ -47,17 +47,17 @@ const administrador_nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Admin Concejos',
+        name: 'Comunitarios',
         to: '/admin/concejos',
       },
       {
         component: CNavItem,
-        name: 'Autoridad Afro',
+        name: 'Autoridades',
         to: '/admin/autoridadT',
       },
       {
         component: CNavItem,
-        name: 'Miembros Consejo',
+        name: 'Miembros',
         to: '/admin/Miembros',
       },
     ],
@@ -75,7 +75,7 @@ const administrador_nav = [
       },
       {
         component: CNavItem,
-        name: 'Nucleo Familiar',
+        name: 'Miembros Familia',
         to: '/familias/nucleos',
       },
     ],

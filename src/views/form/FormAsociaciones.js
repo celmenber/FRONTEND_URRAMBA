@@ -23,6 +23,7 @@ import {
   CTooltip,
   CCardTitle,
   CCollapse,
+  CInputGroup,
 } from '@coreui/react'
 import { CLoadingButton } from '@coreui/react-pro';
 import CIcon from '@coreui/icons-react';
@@ -61,12 +62,14 @@ import { cilTrash } from '@coreui/icons'
      const EditaAsociacion = (event, item) => {
       event.preventDefault();
       setNombreBotoGuardarActulizar('Actualizar asociación');
-
+       console.log(item);
       setDatoAsociacion({
         ID: item.ID,
         idMunicipio: item.id_municipio,
         nitAsociacion: item.nit,
         nombreAsociacion: item.nombre,
+        documento: item.documento,
+        nombrereprlegal: item.nom_rep_leg,
         correoAsociacion: item.correo,
         direccionAsociacion:item.direccion,
         telefonoAsociacion: item.telefono,
@@ -107,7 +110,7 @@ import { cilTrash } from '@coreui/icons'
                 />
                 <CFormFeedback invalid>El campo Nit Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={6}>
+              <CCol md={4}>
                 <CFormLabel htmlFor="validationCustom02">Nombre Asociacion </CFormLabel>
                 <CFormInput
                   type="text"
@@ -120,22 +123,38 @@ import { cilTrash } from '@coreui/icons'
                 />
                 <CFormFeedback invalid>El campo Nombre Asociacion Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={4}>
-                <CFormLabel htmlFor="validationCustom05">Correo Electronico </CFormLabel>
-                <CFormInput
+              <CCol md={6}><CFormLabel htmlFor="basic-url">Represente Legal</CFormLabel>
+              <CInputGroup className="mb-3">
+                  <CFormInput
                   type="text"
-                  id="validationCustom05"
+                  id="validationCustom011"
+                  placeholder="Documento"
                   defaultValue=""
-                  name='correoAsociacion'
-                  value={datoAsociacion.correoAsociacion}
+                  name='documento'
+                  value={datoAsociacion.documento}
                   onChange={onChangeFormulario}
                   required
                 />
-                <CFormFeedback invalid>El Correo Electronico Requerido!</CFormFeedback>
+                <CFormInput
+                  style={{
+                  width: '50%',
+                  borderTopRightRadius:'5px',
+                  borderBottomRightRadius:'5px'
+                   }}
+                  type="text"
+                  id="validationCustom012"
+                  defaultValue=""
+                  name='nombrereprlegal'
+                  placeholder="nombres completos"
+                  value={datoAsociacion.nombrereprlegal}
+                  onChange={onChangeFormulario}
+                  required
+                />
+              </CInputGroup>
               </CCol>
               </CRow>
             <CRow>
-              <CCol xs={5}>
+              <CCol xs={3}>
                 <CFormLabel htmlFor="validationCustom06" value={''}>Municipio</CFormLabel>
                 <CFormSelect
                   key={'validationCustom06'}
@@ -161,7 +180,7 @@ import { cilTrash } from '@coreui/icons'
                 </CFormSelect>
                 <CFormFeedback invalid>Seleccione un Municipio por favor.</CFormFeedback>
               </CCol>
-               <CCol md={4}>
+               <CCol md={3}>
                 <CFormLabel htmlFor="validationCustom03">Dirección </CFormLabel>
                 <CFormInput
                   type="text"
@@ -174,7 +193,7 @@ import { cilTrash } from '@coreui/icons'
                 />
                 <CFormFeedback invalid>El campo Dirección Requerido!</CFormFeedback>
               </CCol>
-              <CCol md={3}>
+              <CCol md={2}>
                 <CFormLabel htmlFor="validationCustom04">Telefono </CFormLabel>
                 <CFormInput
                   type="text"
@@ -186,6 +205,19 @@ import { cilTrash } from '@coreui/icons'
                   required
                 />
                 <CFormFeedback invalid>El Telefono es Requerido!</CFormFeedback>
+              </CCol>
+                <CCol md={4}>
+                <CFormLabel htmlFor="validationCustom05">Correo Electronico </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="validationCustom05"
+                  defaultValue=""
+                  name='correoAsociacion'
+                  value={datoAsociacion.correoAsociacion}
+                  onChange={onChangeFormulario}
+                  required
+                />
+                <CFormFeedback invalid>El Correo Electronico Requerido!</CFormFeedback>
               </CCol>
               </CRow>
                <br />
@@ -263,8 +295,11 @@ import { cilTrash } from '@coreui/icons'
                               <CTableDataCell>
                                     <div><b>{item.nombre}</b></div>
                                      <div className="small text-medium-emphasis">
-                                    <span>{item.correo}</span>
-                                </div>
+                                    <span>Representante legal: {'C.C:'}<span>{item.documento} {item.nom_rep_leg}</span></span>
+                                  </div>
+                                  <div className="small text-medium-emphasis">
+                                   Correo:{' '} {item.correo}
+                                  </div>
                                   <div className="small text-medium-emphasis">
                                    Telefono: {' '}  {item.telefono} | Dir: {' '} <span>{item.direccion}</span>
                                   </div>

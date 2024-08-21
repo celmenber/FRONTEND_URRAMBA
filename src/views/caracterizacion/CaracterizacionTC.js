@@ -434,7 +434,7 @@ const CaracterizacionTC = ({ID}) => {
                                 id="medicinaTEFormCheck6"
                                 label="Otro"
                                 value="Otro"
-                                 checked={datoradioTC.qejeterritorioTC === "Otro" ? true : false}
+                                checked={datoradioTC.qejeterritorioTC === "Otro" ? true : false}
                                 onChange={onChangeTC}
                                 required
                               />
@@ -447,6 +447,8 @@ const CaracterizacionTC = ({ID}) => {
                                 name="otroQEJ"
                                 value={otroQEJ}
                                 onChange={(e) => setOtrosQEJE(e.target.value)}
+                                required = {datoradioTC.qejeterritorioTC === "Otro" ? true : false}
+                                disabled = {datoradioTC.qejeterritorioTC === "Otro" ? false : true}
                                 />
                                 </CCol>
                         </CRow>
@@ -936,6 +938,8 @@ const CaracterizacionTC = ({ID}) => {
                                 name="otrosTC"
                                 value={otrosTC}
                                 onChange={(e) => setOtrosTC(e.target.value)}
+                                required = {datoradioTC.UsoDanzas === "Otro" ? true : false}
+                                disabled = {datoradioTC.UsoDanzas === "Otro" ? false : true}
                                 /></CCol>
                         </CRow>
                          <CRow className="mb-2 mt-4">

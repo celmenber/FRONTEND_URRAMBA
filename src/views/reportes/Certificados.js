@@ -23,8 +23,14 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowThickFromRight } from '@coreui/icons'
 
 const Certificados = () => {
-  const { obtenerNucleoFamiliar, nucleoFamiliar, setIdJefeHogar, idJefeHogar } =
-    NucleoFamiliarForm()
+  const {
+    obtenerNucleoFamiliar,
+    obtenerAsociacion,
+    nucleoFamiliar,
+    asociacion,
+    setIdJefeHogar,
+    idJefeHogar,
+  } = NucleoFamiliarForm()
   const { obtenerJefeHogar, jefeHogar, jefeHogarByID, jefeHogarById } = JefeHogarForm()
 
   const history = useHistory()
@@ -45,6 +51,11 @@ const Certificados = () => {
 
   useEffect(() => {
     obtenerNucleoFamiliar()
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    obtenerAsociacion()
     // eslint-disable-next-line
   }, []);
 
@@ -149,6 +160,7 @@ const Certificados = () => {
             <DocumentoPdf
               DataJH={jefeHogar}
               DataMH={DatoNucleoFamiliar}
+              DataAS={asociacion}
               ID={id}
               Item={selectServicio}
             />

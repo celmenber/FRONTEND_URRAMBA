@@ -350,26 +350,6 @@ return (
             value={Barrio_vereda}
             onChange={onChangeFormulario}
             required />
-          {/* <CFormSelect
-            id="validationCustom13"
-            name='Id_barrio_vereda'
-            value={Id_barrio_vereda}
-            onChange={onChangeFormulario}
-            required>
-            <option key={'0'} value={''}>Seleccione...</option>
-            {barrios?.length === 0
-              ? <option key={'0'} value={0}>Seleccione...</option>
-              : (
-                barrios?.map(item => (
-                  <option
-                    key={item.ID}
-                    value={item.ID}
-                  >
-                    {item.Nombre}
-                  </option>
-                ))
-              )}
-          </CFormSelect> */}
           <CFormFeedback invalid>El Barrio o Vereda es Requerido!</CFormFeedback>
         </CCol>
       <CCol md={3} style={{ marginTop: '15px' }}>
@@ -424,7 +404,6 @@ return (
 
         <CRow>
           <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
-
               <CButton
                 type="submit"
                 color={'primary'}

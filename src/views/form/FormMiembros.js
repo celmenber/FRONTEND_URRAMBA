@@ -97,7 +97,7 @@ const WidgetBarChart = () => {
      data = consejos?.filter(U => parseInt(U.id_usuario) === parseInt(userDetails.ID_USER))
   }
 
-  console.log(consejos);
+ // console.log(consejos);
 
   return (
     <CRow>

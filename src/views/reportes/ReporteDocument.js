@@ -98,14 +98,12 @@ const styles = StyleSheet.create({
 })
 
 const ReporteDocument = (Props) => {
-  const { DataJH, DataMH, Item, ID } = Props
+  const { DataJH, DataMH, DataAS, Item, ID } = Props
 
   const Dato =
     Item !== 0
       ? DataMH.filter((X) => parseInt(X.ID) === parseInt(Item))
       : DataJH.filter((X) => parseInt(X.ID) === parseInt(ID))
-
-  //console.log(Dato)
 
   var meses = new Array(
     'Enero',
@@ -141,11 +139,11 @@ const ReporteDocument = (Props) => {
             <Text style={styles.title}> CERTIFICA</Text>
             <Text style={styles.text}>
               Que: {`${Dato[0]?.nombres.toUpperCase()} ${Dato[0]?.apellidos.toUpperCase()}`}{' '}
-              identificado con la {`${Dato[0]?.Tipo_documento}`} No.{`${Dato[0]?.documentos}`} de la
-              ciudad de Riohacha, se auto reconoce como afrocolombiano y es miembro activo de la
-              ASOCIACION DE AFRODESCENDIENTE URRAMBA “AFROURRAMBA” con una trayectoria de trabajo
-              bastante amplia en todo el territorio por inscripción y auto reconocimiento en esta
-              entidad con el cumplimiento de los principios éticos, morales y civiles.
+              identificado con la {`${Dato[0]?.Tipo_documento}`} No.{`${Dato[0]?.documentos}`}, se
+              auto reconoce como afrocolombiano y es miembro activo de la ASOCIACION DE
+              AFRODESCENDIENTE URRAMBA “AFROURRAMBA” con una trayectoria de trabajo bastante amplia
+              en todo el territorio por inscripción y auto reconocimiento en esta entidad con el
+              cumplimiento de los principios éticos, morales y civiles.
             </Text>
 
             <Text style={styles.text}>
@@ -160,14 +158,10 @@ const ReporteDocument = (Props) => {
           </View>
           <View style={[styles.section, styles.text2]}>
             <Text style={styles.subtitle}>__________________________________</Text>
-            <Text style={styles.subtitle}>Ninfa Juliet Camacho Santos</Text>
-            <Text style={styles.subtitle2}>C.C. 1001871229</Text>
+            <Text style={styles.subtitle}>{DataAS[0]?.nom_rep_leg}</Text>
+            <Text style={styles.subtitle2}>C.C.{DataAS[0]?.documento}</Text>
           </View>
           <View style={[styles.section]}>
-            {/* <Text style={styles.footer}>
-              <Text style={styles.subtitle}>Atentamente.</Text>
-              <Text style={styles.subtitle}>Representante Legal</Text>
-            </Text> */}
             <Text style={styles.footerImg}>
               {' '}
               <Image style={styles.footerImage} src={barrapie} />

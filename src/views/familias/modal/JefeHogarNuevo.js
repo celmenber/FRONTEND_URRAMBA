@@ -94,7 +94,7 @@ const JefeHogarNuevo = (Props) => {
             const formularioDatos = {
                 Id_usuario:userDetails.ID_USER,
                 Id_concejo_comunitario: datoJefeHogar.Id_concejo_comunitario,
-                Id_barrio_vereda: datoJefeHogar.Id_barrio_vereda,
+                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
                 Id_corregimiento: datoJefeHogar.Id_corregimiento,
                 Id_tipo_documento: datoJefeHogar.Id_tipo_documento,
                 Documentos: datoJefeHogar.Documentos,
@@ -104,7 +104,7 @@ const JefeHogarNuevo = (Props) => {
                 Id_escolaridad: datoJefeHogar.Id_escolaridad,
                 Estado_escolaridad: datoJefeHogar.Estado_escolaridad,
                 Genero: datoJefeHogar.Genero,
-                Id_orientacion_sexual: datoJefeHogar.Id_orientacion_sexual,
+                Barrio_vereda: datoJefeHogar.Barrio_vereda,
                 Direccion: datoJefeHogar.Direccion,
                 Telefono: datoJefeHogar.Telefono,
                 Correo: datoJefeHogar.Correo,
@@ -443,7 +443,28 @@ const JefeHogarNuevo = (Props) => {
                         </CRow>
                         <CRow>
                             <CCol md={10} style={{ marginTop: '20px', marginBottom: '20px' }}>
-                                    <CButton
+                              {cargando === true ? (
+                                  <CLoadingButton
+                                    color="success"
+                                    variant="outline"
+                                    style={{ width: '100%' }}
+                                    timeout={2000}
+                                  >
+                                    {' '}
+                                    {'Enviando Datos Jefe Hogar'}
+                                  </CLoadingButton>
+                                ) : (
+                                  <CButton
+                                    type="submit"
+                                    color={'success'}
+                                    className="px-4"
+                                    style={{ width: '100%' }}
+                                  >
+                                    {' '}
+                                    {'Enviar Datos Jefe Hogar'}
+                                  </CButton>
+                                )}
+                                    {/* <CButton
                                         type="submit"
                                         color={'success'}
                                         className="px-4"
@@ -451,7 +472,7 @@ const JefeHogarNuevo = (Props) => {
                                     >
                                         {' '}
                                         {'Enviar Datos Jefe Hogar'}
-                                    </CButton>
+                                    </CButton> */}
                             </CCol>
                             <CCol xs={2} style={{ marginTop: '20px', marginBottom: '20px' }}>
                                 <CButton

@@ -174,8 +174,8 @@ const datoEP = {
           validated={validated}
           onSubmit={handleSubmit}>
                      <CRow className="mb-4">
-                         <CCol sm="auto">Cuantas personas habitan la vivienda:</CCol>
-                        <CCol>
+                        <CCol sm="auto">Cuantas personas habitan la vivienda:</CCol>
+                        <CCol md={3}>
                           <CFormInput type="text" sm="auto"
                                 size="sm"
                                 id="personasHV"
@@ -257,10 +257,14 @@ const datoEP = {
                               />
                               </CCol>
                               <CCol sm="auto" style={{marginLeft:"-25px"}}>
-                                <CFormInput type="text" size="sm" placeholder="Otro tipo vivienda"
+                                <CFormInput type="text" size="sm"
+                                  aria-label="Otro tipo vivienda"
+                                  placeholder="Otro tipo vivienda"
                                   value={otrosTV}
                                   onChange={(e) => setOtrosTV(e.target.value)}
-                                  aria-label="Otro tipo vivienda"/>
+                                  required = {datoradio.viviendaTI === "Otro" ? true : false}
+                                  disabled = {datoradio.viviendaTI === "Otro" ? false : true}
+                                  />
                               </CCol>
                         </CRow>
                         <CRow className="mb-2">

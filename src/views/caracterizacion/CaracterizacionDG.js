@@ -14,6 +14,7 @@ import { CForm } from '@coreui/react-pro';
 
 const CaracterizacionDG = ({ setActiveKey }) => {
    const [validated, setValidated] = useState(false)
+   const [validaChkbox, setValidaChkbox] = useState(false)
    const [otrosV, setOtrosV] = useState("");
    const [datogeneral, setDatogeneral] = useState({
     regimenS: "",
@@ -30,6 +31,14 @@ const CaracterizacionDG = ({ setActiveKey }) => {
     });
   };
 
+  const handleChangeDiscap = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked
+     });
+    setValidaChkbox(true);
+  };
+
   const [state, setState] = useState({
     discapacidadA: false,
     discapacidadB: false,
@@ -38,7 +47,15 @@ const CaracterizacionDG = ({ setActiveKey }) => {
     discapacidadE: false,
   });
 
-  const datoD = {
+/*   const validareq = {
+    validaA: state.discapacidadA === true ?  true : false,
+    validaB: state.discapacidadB === true ?  true : false,
+    validaC: state.discapacidadC === true ?  true : false,
+    validaD: state.discapacidadD === true ?  true : false,
+    validaE: state.discapacidadE === true ?  true : false,
+  }; */
+
+    const datoD = {
     discapacidadA: state.discapacidadA === true ? "Dificultad física y/o de movilidad" : "",
     discapacidadB: state.discapacidadB === true ? "Mudez o dificultad en el habla" : "",
     discapacidadC: state.discapacidadC === true ? "Sordera o dificultad auditiva incluso usando audífonos" : "",
@@ -47,20 +64,34 @@ const CaracterizacionDG = ({ setActiveKey }) => {
   };
 
 
-  const handleChangeDiscap = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+/*      const [checkedState, setCheckedState] = useState(
+    new Array(2).fill(false)
+  );
+
+   const handleChangeDiscap = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+    setCheckedState(updatedCheckedState);
+  }
+ */
+  //console.log(validareq);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-     setValidated(true)
+   event.preventDefault();
+    setValidated(true)
   const form = event.currentTarget
-  console.log(event)
   if (form.checkValidity() === false) {
-      event.preventDefault()
       event.stopPropagation()
     return false;
   }
+
+  if (validaChkbox === false) {
+      event.stopPropagation()
+      setValidated(false)
+       return false;
+  }
+
   const DataForm = {
       datoD,
       datogeneral,
@@ -68,8 +99,10 @@ const CaracterizacionDG = ({ setActiveKey }) => {
     };
     // console.log(DataForm);
     localStorage.setItem("DataDG", JSON.stringify(DataForm));
-    console.log(localStorage.getItem("DataDG"));
+    //console.log(localStorage.getItem("DataDG"));
     setActiveKey(2)
+    setValidated(false)
+    setValidaChkbox(false);
 }
 
   return <>
@@ -149,6 +182,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                                label="Ninguno"
                                checked={datogeneral.vinculadoA === "Ninguno" ? true : false}
                                onChange={onChangeGeneral}
+                               required
                                />
                             <CFormCheck inline
                                type="radio"
@@ -169,7 +203,10 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                           name="otrosV"
                           value={otrosV}
                           onChange={(e) => setOtrosV(e.target.value)}
-                          aria-label="vinculado"/>
+                          aria-label="vinculado"
+                          required = {datogeneral.vinculadoA === "Otro" ? true : false}
+                          disabled = {datogeneral.vinculadoA === "Otro" ? false : true}
+                          />
                         </CCol>
                     </CRow>
                     <CRow className="mb-4">
@@ -255,6 +292,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                         <CRow className="mb-4">
                          <CCol sm="auto">
                             <CFormCheck
+                              text={{ color: 'danger' }}
                               className="mb-3"
                               type="checkbox"
                               name="discapacidadA"
@@ -262,6 +300,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                               label="Dificultad física y/o de movilidad"
                               checked={state.discapacidadA}
                               onChange={handleChangeDiscap}
+                              //required = {validareq.discapacidadA === false ? true : false}
                             />
                              <CFormCheck
                               className="mb-3"
@@ -271,8 +310,9 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                               label="Mudez o dificultad en el habla"
                               checked={state.discapacidadB}
                               onChange={handleChangeDiscap}
+                              //required = {validareq.discapacidadB === false ? true : false}
                             />
-                            <CFormCheck
+                           <CFormCheck
                               className="mb-3"
                               type="checkbox"
                               name="discapacidadC"
@@ -280,6 +320,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                               label="Sordera o dificultad auditiva incluso usando audífonos"
                               checked={state.discapacidadC}
                               onChange={handleChangeDiscap}
+                             // required = {state.discapacidadC !== true ? true : false}
                             />
                             </CCol>
                             <CCol sm="auto">
@@ -291,6 +332,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                               label="Ceguera o dificultad para ver incluso usando lentes"
                               checked={state.discapacidadD}
                               onChange={handleChangeDiscap}
+                              //required = {state.discapacidadD !== true ? true : false}
                             />
                             <CFormCheck
                               className="mb-3"
@@ -300,6 +342,7 @@ const CaracterizacionDG = ({ setActiveKey }) => {
                               label="Ninguna de la anteriores"
                               checked={state.discapacidadE}
                               onChange={handleChangeDiscap}
+                              //required = {state.discapacidadE !== true ? true : false}
                             />
                             </CCol>
                         </CRow>
